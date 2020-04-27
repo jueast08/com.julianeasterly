@@ -1,25 +1,20 @@
 <template>
   
-  <div class="base-logo">
+  <div class="the-header-logo">
     <span>JULIAN</span>
-    <main-logo/>
+    <base-logo/>
     <span>EASTERLY</span>
   </div>
 
 </template>
 
 <script>
-import MainLogo from 'Icons/MainLogo';
+import BaseLogo from 'Icons/BaseLogo';
 
 export default {
-  name: 'BaseLogo',
-  data() {
-    return {
-      logoClassName: 'base'
-    }
-  },
+  name: 'TheHeaderLogo',
   components: {
-    MainLogo
+    BaseLogo
   }
 }
 </script>
@@ -27,7 +22,7 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
    
-  .base-logo {
+  .the-header-logo {
     display: flex;
     align-items: center;
     height: 100%;
