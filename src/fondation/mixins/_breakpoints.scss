@@ -22,6 +22,11 @@ $breakpoints    : (
     }
 };
 
+/*for mobile phones*/
+[class*="col-"] {
+    width: 100%;
+  }
+
 @each $key, $value in $breakpoints {
 
     @media only screen and #{inspect(map-get($breakpoints, $key))} {
