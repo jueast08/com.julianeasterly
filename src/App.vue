@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <the-header/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header';
+import TheHeader from './components/TheHeader';
 
 export default {
   name: 'App',
-  components: {Header}
+  components: {TheHeader}
 }
 </script>
 
