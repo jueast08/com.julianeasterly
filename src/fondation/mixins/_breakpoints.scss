@@ -9,15 +9,17 @@ $breakpoints    : (
     'xl'        : (min-width: 1200px)
 ) !default;
 
-@mixin adapt-to-screen($breakpoint) {
 
-    @if map-has-key($map:$breakpoints , $key:$breakpoints) {
+@mixin adapt-to-screen($breakpoint) {
+    
+    @if map-has-key($breakpoints , $breakpoint) {
+        
         @media only screen and #{inspect(map-get($breakpoints, $breakpoint))} {
             @content
         }
     }
     @else {
-        @warn "There is no breakpoint that corresponds with this variable."
+        @warn "There is no breakpoint that corresponds with the variable #{$breakpoint}."
         + "Please use one of the following: #{map-keys($breakpoints)}."
     }
 };
