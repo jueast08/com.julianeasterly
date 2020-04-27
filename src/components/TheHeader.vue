@@ -3,7 +3,6 @@
     <!-- Refactor logo -->
     <div class="header__container col-12">
 
-
       <div class="header__container__logo col-xl-2">
         <base-logo/>
       </div>
@@ -47,6 +46,7 @@ export default {
     width: 100%; // possibly not a mobile attribute
     height: 80px; //must be moved to desktop
     padding: 0 85px;
+    @include global.border-box;
   
     background: global.$primary-black; // @todo remove. First The background should be transparent by default
 
@@ -56,10 +56,9 @@ export default {
 
     &__container {
       display: flex;
-
       height: 100%;
       padding: 25px 0;
-      
+      @include global.border-box;
 
       &__link-group {
         display: flex;
