@@ -1,21 +1,17 @@
 <template>
   <header class="header col-12">
-    <!-- Refactor logo -->
     <div class="header__container col-12">
 
-
-      <div class="header__container__logo col-xl-2">
-        <base-logo/>
+      <div class="col-xl-2">
+        <the-header-logo/>
       </div>
 
-        <!-- link components -->
-      <div class="header__container__link-group col-xl-8">
-        <span class="active">Home</span>
-        <span>About</span>
-        <span>Skills</span>
-        <span>Experience</span>
-        <span>Education</span>
-        <span>Projects</span>
+      <div class="col-xl-8">
+        <the-header-link-list>
+          <span v-for="(link, index) in links" 
+                :key="link+index"
+                :class="link === activeLink? 'active': ''">{{ link}}</span>
+        </the-header-link-list>       
       </div>
 
     </div>
@@ -24,15 +20,20 @@
 </template>
 
 <script>
-import BaseLogo from 'Components/BaseLogo';
+import TheHeaderLogo from 'Components/TheHeaderLogo';
+import TheHeaderLinkList from 'Components/TheHeaderLinkList';
 
 export default {
   name: 'TheHeader',
   data() {
-    return {}
+    return {
+      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
+      activeLink: 'Home',
+    }
   },
   components: {
-    BaseLogo
+    TheHeaderLogo,
+    TheHeaderLinkList,
   }
 }
 </script>
@@ -47,47 +48,28 @@ export default {
     width: 100%; // possibly not a mobile attribute
     height: 80px; //must be moved to desktop
     padding: 0 85px;
+    @include global.border-box;
   
     background: global.$primary-black; // @todo remove. First The background should be transparent by default
 
     &--light {
+      -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+      -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
       background: global.$primary-white;
     }
 
     &__container {
       display: flex;
-
       height: 100%;
       padding: 25px 0;
-      
-
-      &__link-group {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        span {
-          margin: 0 10px;
-          font-family: 'Poppins', sans-serif;
-          font-size: 14px;
-          font-weight: 700;
-          color: global.$primary-white;
-          
-          &:hover {
-            cursor: pointer;
-          }
-          
-          &.active {
-            font-size: 20px;
-          }
-        }
-      }
+      @include global.border-box;
     }  
     
     
   }
 
-@include global.adapt-to-screen('xl') {
+// @include global.adapt-to-screen('xl') {
 
-}
+// }
 </style>
