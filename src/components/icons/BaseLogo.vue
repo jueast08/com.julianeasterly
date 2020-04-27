@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'MainLogo',
+  name: 'BaseLogo',
   props: {
     compassClassName: {
       type: String,
