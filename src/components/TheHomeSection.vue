@@ -56,7 +56,7 @@ export default {
       padding: 0 30px;
       padding-top: calc(30px + #{global.$xs-header-height});
       @include global.border-box;
-
+      
       &__titles {
         text-align: left;        
         &__title {

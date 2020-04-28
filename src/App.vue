@@ -2,6 +2,8 @@
   <div id="app">
     <the-header/>
     <the-home-section/>
+        <the-home-section/>
+
   </div>
 </template>
 
