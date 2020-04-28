@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <the-header/>
-    <the-header-link-list links="[{'name': 'link1'}]"/>
-
   </div>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader';
-import TheHeaderLinkList from './components/TheHeaderLinkList';
 
 
 export default {
   name: 'App',
-  components: {TheHeader, TheHeaderLinkList}
+  components: {TheHeader,}
 }
 </script>
 
