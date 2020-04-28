@@ -94,13 +94,14 @@ export default {
     }
 
     &__mobile-menu {
-      padding: 10px 0;
-      background: global.$primary-color;
       max-height: 0;
+      overflow: hidden;
       transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-    
+      background: global.$primary-color;
+      
       &__link {
         height: 35px;
+        margin: 10px 0;
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
         text-align: center;
@@ -108,8 +109,10 @@ export default {
       }
 
       &--open {
-        transition: max-height 1s ease-in-out;
+    
+        transition: all 1s ease-in-out;
         max-height: 1000px;
+        
       }
     }
   }
