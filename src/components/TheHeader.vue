@@ -64,8 +64,8 @@ export default {
       width: 100vw;
       
     &__bar {
-      width: 100%; // possibly not a mobile attribute
-      height: 70px; //must be moved to desktop
+      width: 100%; 
+      height: global.$xs-header-height;
       padding: 0 30px;
       overflow: hidden;
       @include global.border-box;
@@ -101,8 +101,7 @@ export default {
       &__link {
         height: 35px;
         margin: 10px 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 400;
+        @include global.link-font($weight: 400);
         text-align: center;
         color: global.$primary-white;
       }
@@ -120,11 +119,9 @@ export default {
     .header {
 
       &__bar {
-        height: 80px; //must be moved to desktop
+        height: global.$xl-header-height;
         margin-top: 0px;
         padding: 0 85px;
-      
-        background: global.$primary-black; // @todo remove. First The background should be transparent by default
 
         &--light {
           -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
@@ -143,9 +140,7 @@ export default {
             justify-content: center;
             &__link {
               margin: 0 10px;
-              font-family: 'Poppins', sans-serif;
-              font-size: 14px;
-              font-weight: 700;
+              @include global.link-font;
               color: global.$primary-white;
               cursor: pointer;
               
