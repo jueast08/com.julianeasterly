@@ -60,6 +60,7 @@ export default {
       position: fixed;
       top: 30px;
       left: 0;
+      z-index: 100;
       width: 100vw;
       
     &__bar {
