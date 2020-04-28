@@ -1,3 +1,0 @@
-@mixin smooth-transition($property: all, $duration: 0.5s, $timingFunction: ease-in , $delay: 0s) {
-    transition: $property $duration $timingFunction $delay;
-}
