@@ -22,25 +22,19 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
    
-   //@todo mobile first
   .the-header-logo {
     display: flex;
     align-items: center;
     height: 100%;
 
     span {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 14px; 
-      line-height: 14px; 
-      color: global.$primary-white;  
+      @include global.logo-font;
     }
 
     svg {
       height: 25px;
       min-width: 25px;
       margin: 0 2px;
-      fill: global.$primary-white;
     }
   } 
 
@@ -48,8 +42,7 @@ export default {
     .the-header-logo {
 
       span {
-        font-size: 25px; 
-        line-height: 25px; 
+        @include global.logo-font;
       }
 
       svg {
