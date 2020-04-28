@@ -1,16 +1,18 @@
 <template>
   <div id="app">
     <the-header/>
+    <the-home-section/>
   </div>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader';
+import TheHomeSection from './components/TheHomeSection';
 
 
 export default {
   name: 'App',
-  components: {TheHeader,}
+  components: {TheHeader, TheHomeSection}
 }
 </script>
 
@@ -22,6 +24,7 @@ export default {
     margin: 0;
 
     #app {
+      position: relative;
       height: 100%;
       width: 100%;
     }
