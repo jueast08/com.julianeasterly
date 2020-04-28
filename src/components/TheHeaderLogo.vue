@@ -22,7 +22,6 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
    
-   //@todo mobile first
   .the-header-logo {
     display: flex;
     align-items: center;
@@ -30,14 +29,12 @@ export default {
 
     span {
       @include global.logo-font;
-      color: global.$primary-white;  
     }
 
     svg {
       height: 25px;
       min-width: 25px;
       margin: 0 2px;
-      fill: global.$primary-white;
     }
   } 
 

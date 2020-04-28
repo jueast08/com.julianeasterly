@@ -3,7 +3,7 @@
     <div class="header__bar col-12">
       <div class="header__bar__container col-12">
         <div class="col-xl-2">
-          <the-header-logo/>
+          <the-header-logo class="header__bar__container__logo"/>
         </div>
         <div class="col-xl-8">
             <div class="header__bar__container__menu">
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="header__mobile-menu"
+    <div class="header__mobile-menu col-12"
           :class="this.mobileMenuOpen ? 'header__mobile-menu--open' :''">
       <div class="header__mobile-menu__link"
             v-for="(link, index) in links" 
@@ -52,7 +52,6 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
   @use 'global';
   
@@ -64,7 +63,6 @@ export default {
       width: 100vw;
       
     &__bar {
-      width: 100%; 
       height: global.$xs-header-height;
       padding: 0 30px;
       overflow: hidden;
@@ -78,6 +76,11 @@ export default {
         display: flex;
         height: 100%;
         @include global.border-box;
+
+        &__logo {
+          color: global.$primary-white;
+          fill: global.$primary-white;
+        }
 
         &__menu {
           display: none;
