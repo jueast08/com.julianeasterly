@@ -39,7 +39,7 @@ export default {
       margin: 6px 0;
       background: global.$primary-color;
       transform-origin: center;
-      @include global.smooth-transition($duration: 0.4s);
+      transition: all 0.5s ease-in;
     }
 
     &--open {

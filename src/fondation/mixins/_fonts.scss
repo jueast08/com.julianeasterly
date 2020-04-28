@@ -1,0 +1,30 @@
+@use 'breakpoints';
+
+@mixin _font($size, $weight){
+    font-family: 'Poppins', sans-serif;
+    font-size: $size;
+    font-weight: $weight;
+}
+
+@mixin h1-font($size-s: 47px, $size-xl: 25px, $weight: 700) {
+    @include _font($size-s, $weight); 
+    line-height: $size-s; 
+
+}
+
+@mixin subtitle-font($size-s: 14px, $size-xl: 25px, $weight: 700) {
+    @include _font($size-s, $weight); 
+}
+
+@mixin link-font($size-s: 14px, $size-xl: 25px, $weight: 700)  {
+    @include _font($size-s, $weight); 
+}
+
+@mixin logo-font($size-s: 14px, $size-xl: 25px, $weight: 300)  {
+    @include _font($size-s, $weight); 
+    line-height: $size-s; 
+    @include breakpoints.adapt-to-screen('xl') {
+        @include _font($size-xl, $weight);
+        line-height: $size-xl;  
+    }
+}
