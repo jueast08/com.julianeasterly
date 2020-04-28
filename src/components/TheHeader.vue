@@ -1,28 +1,30 @@
 <template>
-  <div>
-    <header class="header col-12">
-      <div class="header__container col-12">
+  <header id="header" class="header">
+    <div class="header__bar col-12">
+      <div class="header__bar__container col-12">
         <div class="col-xl-2">
           <the-header-logo/>
         </div>
         <div class="col-xl-8">
-            <div class="header__container__menu">
-                <span v-for="(link, index) in links" 
+            <div class="header__bar__container__menu">
+                <span class="header__bar__container__menu__link"
+                  v-for="(link, index) in links" 
                   :key="link+index"
                   :class="link === activeLink? 'active': ''">{{ link }}</span>
             </div>
-          <div class="header__container__burger">
+          <div class="header__bar__container__burger">
             <base-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
           </div>
         </div>
       </div>
-    </header>
-    <div class="mobile-menu"
-          :class="this.mobileMenuOpen ? 'mobile-menu--open' :''">
-      <div v-for="(link, index) in links" 
+    </div>
+    <div class="header__mobile-menu"
+          :class="this.mobileMenuOpen ? 'header__mobile-menu--open' :''">
+      <div class="header__mobile-menu__link"
+            v-for="(link, index) in links" 
             :key="link+index">{{ link }}</div>    
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -56,132 +58,110 @@ export default {
   
   //@todo reorganize to take into account dark and light colors
   .header {
-    width: 100%; // possibly not a mobile attribute
-    height: 70px; //must be moved to desktop
-    margin-top: 30px;
-    padding: 0 30px;
-    overflow: hidden;
-    @include global.border-box;
-  
-    background: global.$primary-black; // @todo remove. First The background should be transparent by default
-
-    &--light {
-      background: global.$primary-white;
-    }
-
-    &__container {
-      display: flex;
-      height: 100%;
+      position: fixed;
+      top: 30px;
+      left: 0;
+      width: 100vw;
+      background: green;
+    &__bar {
+      width: 100%; // possibly not a mobile attribute
+      height: 70px; //must be moved to desktop
+      margin-top: 30px;
+      padding: 0 30px;
+      overflow: hidden;
       @include global.border-box;
-
-      &__menu {
-        display: none;
-      }
-
-      &__burger {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        height: 100%;
-        
-        &__button {  
-          display: inline-block;
-          width: 20px;
-
-          div {
-            height: 2px;
-            width: 100%;
-            margin: 6px 0;
-            background: global.$primary-color;
-            transform-origin: center;
-            @include global.smooth-transition($duration: 0.4s);
-          }
-
-          &--open {
-            div:nth-child(2){
-              transform: translate(-25px);
-              opacity: 0;
-            }
-
-            div:nth-child(1) {
-              transform: translateY(8px) rotate(-45deg);
-            }
-            
-            div:nth-child(3) {
-              transform: translateY(-8px) rotate(45deg);
-            }
-          }
-        }
-      }
-      
-
-    }  
-  }
-
-  .mobile-menu {
-    padding: 10px 0;
-    background: global.$primary-color;
-    transform: scaleY(0);
-    transform-origin: left top;
-    @include global.smooth-transition($duration: 0.25s);
-  
-    div {
-      height: 35px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      text-align: center;
-      color: global.$primary-white;
-    }
-
-    &--open {
-      transform: scaleY(1);
-    }
-  }
-
-  @include global.adapt-to-screen('xl') {
-    .header {
-      height: 80px; //must be moved to desktop
-      margin-top: 0px;
-      padding: 0 85px;
     
-      background: global.$primary-black; // @todo remove. First The background should be transparent by default
-
       &--light {
-        -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
-        -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
-        box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+        background: global.$primary-white;
       }
 
       &__container {
         display: flex;
         height: 100%;
-        padding: 25px 0;
-        
+        @include global.border-box;
+
         &__menu {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          span {
-            margin: 0 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            color: global.$primary-white;
-            cursor: pointer;
-            
-            &.active {
-              font-size: 20px;
-            }
-          }
+          display: none;
         }
 
         &__burger {
-          display: none;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          height: 100%;
         }
       }  
     }
-    .mobile-menu {
-      display: none;
+
+    &__mobile-menu {
+      padding: 10px 0;
+      background: global.$primary-color;
+      max-height: 0;
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    
+      &__link {
+        height: 35px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        text-align: center;
+        color: global.$primary-white;
+      }
+
+      &--open {
+        transition: max-height 1s ease-in-out;
+        max-height: 1000px;
+      }
     }
+  }
+
+  @include global.adapt-to-screen('xl') {
+    .header {
+
+      &__bar {
+        height: 80px; //must be moved to desktop
+        margin-top: 0px;
+        padding: 0 85px;
+      
+        background: global.$primary-black; // @todo remove. First The background should be transparent by default
+
+        &--light {
+          -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+          -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+          box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+        }
+
+        &__container {
+          display: flex;
+          height: 100%;
+          padding: 25px 0;
+          
+          &__menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &__link {
+              margin: 0 10px;
+              font-family: 'Poppins', sans-serif;
+              font-size: 14px;
+              font-weight: 700;
+              color: global.$primary-white;
+              cursor: pointer;
+              
+              &.active {
+                font-size: 20px;
+              }
+            }
+          }
+
+          &__burger {
+            display: none;
+          }
+        }  
+      }
+      &__mobile-menu {
+        display: none;
+      }
+    }
+
   }
 </style>
