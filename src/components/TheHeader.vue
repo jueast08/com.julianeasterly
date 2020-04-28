@@ -40,15 +40,24 @@ export default {
       mobileMenuOpen: false,
     }
   },
-  methods: {
-    onBurgerClick() {
-      this.mobileMenuOpen = !this.mobileMenuOpen;
-    }
-  },
+
   components: {
     TheHeaderLogo,
     BaseBurger,
+  },
+  methods: {
+    onBurgerClick() {
+      this.mobileMenuOpen = !this.mobileMenuOpen;
+    },
+    //handleScroll() {},
   }
+  // ,
+  // created () {
+  //   window.addEventListener('scroll', this.handleScroll);
+  // },
+  // destroyed () {
+  //   window.removeEventListener('scroll', this.handleScroll);
+  // }
 }
 </script>
 
@@ -68,6 +77,7 @@ export default {
       padding: 0 30px;
       overflow: hidden;
       @include global.border-box;
+      background: green;
     
       &--light {
         background: global.$primary-white;
@@ -120,13 +130,14 @@ export default {
   }
 
   @include global.adapt-to-screen('xl') {
+    
     .header {
 
       &__bar {
         height: global.$xl-header-height;
         margin-top: 0px;
         padding: 0 85px;
-
+        
         &--light {
           -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
           -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
@@ -159,10 +170,11 @@ export default {
           }
         }  
       }
+    
       &__mobile-menu {
-        display: none;
+          display: none;
+        }
       }
-    }
 
   }
 </style>
