@@ -29,10 +29,7 @@ export default {
     height: 100%;
 
     span {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 14px; 
-      line-height: 14px; 
+      @include global.logo-font;
       color: global.$primary-white;  
     }
 
@@ -48,8 +45,7 @@ export default {
     .the-header-logo {
 
       span {
-        font-size: 25px; 
-        line-height: 25px; 
+        @include global.logo-font;
       }
 
       svg {
