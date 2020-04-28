@@ -62,11 +62,10 @@ export default {
       top: 30px;
       left: 0;
       width: 100vw;
-      background: green;
+      
     &__bar {
       width: 100%; // possibly not a mobile attribute
       height: 70px; //must be moved to desktop
-      margin-top: 30px;
       padding: 0 30px;
       overflow: hidden;
       @include global.border-box;
