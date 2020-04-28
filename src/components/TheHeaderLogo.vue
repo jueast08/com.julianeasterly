@@ -22,6 +22,7 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
    
+   //@todo mobile first
   .the-header-logo {
     display: flex;
     align-items: center;
@@ -30,16 +31,31 @@ export default {
     span {
       font-family: 'Poppins', sans-serif;
       font-weight: 300;
-      font-size: 25px; 
-      line-height: 25px; 
+      font-size: 14px; 
+      line-height: 14px; 
       color: global.$primary-white;  
     }
 
     svg {
-      height: 100%;
-      margin: 0 5px;
+      height: 25px;
+      min-width: 25px;
+      margin: 0 2px;
       fill: global.$primary-white;
     }
   } 
-  
+
+  @include global.adapt-to-screen('xl') {
+    .the-header-logo {
+
+      span {
+        font-size: 25px; 
+        line-height: 25px; 
+      }
+
+      svg {
+        height: 100%;
+        margin: 0 5px;
+      }
+    } 
+  }  
 </style>
