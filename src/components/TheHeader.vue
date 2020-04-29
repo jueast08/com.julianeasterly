@@ -24,6 +24,7 @@
             v-for="(link, index) in links" 
             :key="link+index">{{ link }}</div>    
     </div>
+    
   </header>
 </template>
 
@@ -38,6 +39,7 @@ export default {
       links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
       activeLink: 'Home',
       mobileMenuOpen: false,
+      scrollObserver: null,
     }
   },
 
@@ -49,15 +51,29 @@ export default {
     onBurgerClick() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
     },
-    //handleScroll() {},
+    handleScroll(element) {
+      if(this.isHeaderOutOfViewport(element)) {
+        document.body.classList.add("header--fixed");
+      }
+      else {
+        document.body.classList.remove("header--fixed");
+      }
+    },
+    isHeaderOutOfViewport(element) {
+      return element.boundingClientRect.y < 0;
+    }
   }
-  // ,
-  // created () {
-  //   window.addEventListener('scroll', this.handleScroll);
-  // },
-  // destroyed () {
-  //   window.removeEventListener('scroll', this.handleScroll);
-  // }
+  ,
+  mounted() {
+    this.scrollObserver = new IntersectionObserver(entries => {
+      this.handleScroll(entries[0]);
+    });
+
+    this.scrollObserver.observe(document.querySelector('#top-anchor-pixel'));
+  },
+   beforeDestroy() {
+    if(this.scrollObserver) this.scrollObserver.disconnect();
+  },
 }
 </script>
 
@@ -65,23 +81,25 @@ export default {
   @use 'global';
   
   //@todo reorganize to take into account dark and light colors
+
+
   .header {
-      position: fixed;
-      top: 30px;
-      left: 0;
-      z-index: 100;
-      width: 100vw;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
       
+    body.header--fixed & {
+      position: fixed;
+      top: 0px;
+    }
+
     &__bar {
       height: global.$xs-header-height;
       padding: 0 30px;
       overflow: hidden;
       @include global.border-box;
-      background: green;
-    
-      &--light {
-        background: global.$primary-white;
-      }
 
       &__container {
         display: flex;

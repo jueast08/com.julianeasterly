@@ -1,9 +1,9 @@
 <template>
   <div id="app">
+    <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
     <the-header/>
     <the-home-section/>
-        <the-home-section/>
-
+    <the-home-section/>
   </div>
 </template>
 
