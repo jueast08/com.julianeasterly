@@ -1,16 +1,16 @@
 <template>
   <header id="header" class="header">
-    <div id="header__bar" class="header__bar col-12">
+    <div id="header__bar" class="header__bar col-12" :class="headerBarClass">
       <div class="header__bar__container col-12">
         <div class="col-xl-2">
-          <the-header-logo class="header__bar__container__logo"/>
+          <the-header-logo class="header__bar__container__logo" :class="headerLogoClass"/>
         </div>
         <div class="col-xl-8">
             <div class="header__bar__container__menu">
                 <span class="header__bar__container__menu__link"
                   v-for="(link, index) in links" 
                   :key="link+index"
-                  :class="link === activeLink? 'active': ''">{{ link }}</span>
+                  :class="desktopLinkClasses">{{ link }}</span>
             </div>
           <div class="header__bar__container__burger">
             <base-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
@@ -38,6 +38,7 @@ export default {
     return {
       activeLink: 'Home',
       classesWithLightTheme: ['header__bar', 'header__bar__container__logo'],
+      lightThemeOn: false,
       links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
       mobileMenuOpen: false,
       scrollObserver: null,
@@ -59,20 +60,6 @@ export default {
       this.mobileMenuOpen = false;
       window.removeEventListener('scroll', this.closeMenuRemoveListener);
     },
-    addLightTheme() {
-      this.classesWithLightTheme.forEach(className => {
-        document.getElementsByClassName(className)[0]
-                .classList
-                .add(className+'--light');
-      });
-    },
-    removeLightTheme() {
-      this.classesWithLightTheme.forEach(className => {
-        document.getElementsByClassName(className)[0]
-                .classList
-                .remove(className+'--light');
-      });
-    },
     fixHeader() {
         document.getElementById('header').classList.add("header--fixed");
     },
@@ -81,11 +68,11 @@ export default {
     },
     handleScroll(element) {
       if(this.isHeaderOutOfViewport(element)) {
-        this.addLightTheme();
+        this.lightThemeOn = true;
         this.fixHeader();
       }
       else {
-        this.removeLightTheme();
+        this.lightThemeOn = false;
         this.unfixHeader();
       }
     },
@@ -98,6 +85,16 @@ export default {
       return "IntersectionObserver" in window &&
       "IntersectionObserverEntry" in window &&
       "intersectionRatio" in window.IntersectionObserverEntry.prototype;
+    },
+    desktopLinkClasses(link) {
+      let root = 'header__bar__container__menu__link';
+      return [(link === this.activeLink) && root+'--active', this.lightThemeOn && root+'--light'];
+    },
+    headerBarClass(){
+      return this.lightThemeOn && 'header__bar'+'--light';
+    },
+    headerLogoClass(){
+      return this.lightThemeOn && 'header__bar__container__logo'+'--light';
     }
   },
   mounted() {
@@ -109,11 +106,11 @@ export default {
       this.scrollObserver.observe(document.querySelector('#top-anchor-pixel'));
     }
     else {
-      this.addLightTheme();
+      this.lightThemeOn = true;
       this.fixHeader();
     }
   },
-   beforeDestroy() {
+  beforeDestroy() {
     window.removeEventListener('scroll', this.toggleMobileMenu);
     if(this.scrollObserver) {
       this.scrollObserver.disconnect();
@@ -232,7 +229,10 @@ export default {
               color: global.$primary-white;
               cursor: pointer;
               
-              &.active {
+              &--light {
+                color: global.$primary-black;
+              }
+              &--active {
                 font-size: 20px;
               }
             }

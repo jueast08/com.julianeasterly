@@ -1,6 +1,6 @@
 <template>
   <section class="home col-12">
-    <div class="home__container">
+    <div class="home__container col-12 col-xl-6">
       <div class="home__container__titles col-12">
         <h1 class="home__container__titles__title">JULIAN</h1>
         <h1 class="home__container__titles__title">EASTERLY</h1>
@@ -10,10 +10,15 @@
           FUNCTIONAL PROJECT LEADER - DEVELOPER
         </p>
       </div>
+      <div class="home__container__button-group col-12">
+        <base-round-button class="home__container__button-group__about">
+          ABOUT ME
+        </base-round-button>
+      </div>   
     </div>
-    <div class="home__background col-12">
-        <div class="home__background__buttons col-12">
-          <base-round-button class="home__background__buttons__about">
+    <div class="home__background col-12 col-xl-6">
+        <div class="home__background__stripe col-12">
+          <base-round-button class="home__background__stripe__about">
             ABOUT ME
           </base-round-button>
       </div>        
@@ -59,6 +64,7 @@ export default {
       
       &__titles {
         text-align: left;        
+        
         &__title {
           margin: 0;
           @include global.h1-font;
@@ -75,17 +81,21 @@ export default {
 
       &__subtitles {
         text-align: left;
+        
         &__subtitle {
           @include global.subtitle-font;
           color: global.$primary-white;
         }
+      }
+
+      &__button-group {
+        display: none;  
       }
     }
 
     &__background {
       position: relative;
       height: 50%;
-      width: 100%;
 
       &:before {
         content: ' ';
@@ -104,10 +114,9 @@ export default {
         background-position: center;
       }
       
-      &__buttons {
+      &__stripe {
         position: relative;
         height: 105px;
-        width: 100%;
         padding: 0 30px;
         z-index: 2;
         background-color: rgba(global.$primary-color, 0.6);
@@ -123,4 +132,67 @@ export default {
     }
   }
 
+  @include global.adapt-to-screen('xl') {
+    .home {
+      display: flex;
+      
+      &__container {
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+
+        &__titles {
+          text-align: right;        
+        }
+
+        &__subtitles {
+          text-align: right;                  
+        }
+        
+        &__button-group {
+          display: initial;
+          &__about {
+            float: right;
+            border-color: global.$primary-white;
+            color: global.$primary-white;
+          }
+        }
+      }
+
+      &__background {
+        clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+        height: 100vh;
+          
+          &:before{
+            content: ' ';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.46;
+            background-image: url('~Assets/portrait_bridge_saint-entienne.jpg');
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: cover ;
+            background-position: right;
+          }
+          
+          &__stripe {
+            width: 50%;
+            height: 100%;
+            clip-path: polygon(25% 0, 100% 0, 50% 100%, 0% 100%);
+          
+          &__about {
+              display: none;
+            }
+          }
+      
+  
+      }
+    }
+
+  }
 </style>

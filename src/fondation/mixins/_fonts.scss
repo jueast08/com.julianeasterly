@@ -6,14 +6,21 @@
     font-weight: $weight;
 }
 
-@mixin h1-font($size-s: 47px, $size-xl: 25px, $weight: 700) {
+@mixin h1-font($size-s: 47px, $size-xl: 92px, $weight: 700) {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
-
+    @include breakpoints.adapt-to-screen('xl') {
+        @include _font($size-xl, $weight);
+        line-height: $size-xl;  
+    }
 }
 
-@mixin subtitle-font($size-s: 14px, $size-xl: 25px, $weight: 700) {
+@mixin subtitle-font($size-s: 14px, $size-xl: 20px, $weight: 700) {
     @include _font($size-s, $weight); 
+    @include breakpoints.adapt-to-screen('xl') {
+        @include _font($size-xl, $weight);
+        line-height: $size-xl;  
+    }
 }
 
 @mixin link-font($size-s: 14px, $size-xl: 25px, $weight: 700)  {
