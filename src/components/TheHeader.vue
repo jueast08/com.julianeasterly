@@ -1,6 +1,6 @@
 <template>
   <header id="header" class="header">
-    <div class="header__bar col-12">
+    <div id="header__bar" class="header__bar col-12">
       <div class="header__bar__container col-12">
         <div class="col-xl-2">
           <the-header-logo class="header__bar__container__logo"/>
@@ -36,13 +36,13 @@ export default {
   name: 'TheHeader',
   data() {
     return {
-      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
       activeLink: 'Home',
+      classesWithLightTheme: ['header__bar', 'header__bar__container__logo'],
+      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
       mobileMenuOpen: false,
       scrollObserver: null,
     }
   },
-
   components: {
     TheHeaderLogo,
     BaseBurger,
@@ -50,29 +50,74 @@ export default {
   methods: {
     onBurgerClick() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
+      if(this.mobileMenuOpen) {
+        window.addEventListener('scroll', this.closeMobileMenu);
+      }
+      
+    },
+    closeMobileMenu() {
+      this.mobileMenuOpen = false;
+      window.removeEventListener('scroll', this.closeMenuRemoveListener);
+    },
+    addLightTheme() {
+      this.classesWithLightTheme.forEach(className => {
+        document.getElementsByClassName(className)[0]
+                .classList
+                .add(className+'--light');
+      });
+    },
+    removeLightTheme() {
+      this.classesWithLightTheme.forEach(className => {
+        document.getElementsByClassName(className)[0]
+                .classList
+                .remove(className+'--light');
+      });
+    },
+    fixHeader() {
+        document.getElementById('header').classList.add("header--fixed");
+    },
+    unfixHeader() {
+        document.getElementById('header').classList.remove("header--fixed");
     },
     handleScroll(element) {
       if(this.isHeaderOutOfViewport(element)) {
-        document.body.classList.add("header--fixed");
+        this.addLightTheme();
+        this.fixHeader();
       }
       else {
-        document.body.classList.remove("header--fixed");
+        this.removeLightTheme();
+        this.unfixHeader();
       }
     },
     isHeaderOutOfViewport(element) {
       return element.boundingClientRect.y < 0;
+    },
+  },
+  computed: {
+    isIntersectionObserverAvailable() {
+      return "IntersectionObserver" in window &&
+      "IntersectionObserverEntry" in window &&
+      "intersectionRatio" in window.IntersectionObserverEntry.prototype;
     }
-  }
-  ,
+  },
   mounted() {
-    this.scrollObserver = new IntersectionObserver(entries => {
-      this.handleScroll(entries[0]);
-    });
-
-    this.scrollObserver.observe(document.querySelector('#top-anchor-pixel'));
+    if (this.isIntersectionObserverAvailable) {
+      this.scrollObserver = new IntersectionObserver(entries => {
+        this.handleScroll(entries[0]);
+      });
+  
+      this.scrollObserver.observe(document.querySelector('#top-anchor-pixel'));
+    }
+    else {
+      this.addLightTheme();
+      this.fixHeader();
+    }
   },
    beforeDestroy() {
-    if(this.scrollObserver) this.scrollObserver.disconnect();
+    window.removeEventListener('scroll', this.toggleMobileMenu);
+    if(this.scrollObserver) {
+      this.scrollObserver.disconnect();
+    } 
   },
 }
 </script>
@@ -81,19 +126,14 @@ export default {
   @use 'global';
   
   //@todo reorganize to take into account dark and light colors
-
-
   .header {
     position: absolute;
     top: 30px;
     left: 0;
     z-index: 100;
     width: 100vw;
-      
-    body.header--fixed & {
-      position: fixed;
-      top: 0px;
-    }
+    
+ 
 
     &__bar {
       height: global.$xs-header-height;
@@ -105,10 +145,15 @@ export default {
         display: flex;
         height: 100%;
         @include global.border-box;
-
+        
         &__logo {
           color: global.$primary-white;
           fill: global.$primary-white;
+
+          &--light {
+            color: global.$primary-black;
+            fill: global.$primary-color;
+          }
         }
 
         &__menu {
@@ -122,6 +167,10 @@ export default {
           height: 100%;
         }
       }  
+      
+      &--light {
+        background: global.$primary-white;
+      }
     }
 
     &__mobile-menu {
@@ -145,6 +194,12 @@ export default {
         
       }
     }
+
+    &--fixed {
+      position: fixed;
+      top: 0px;
+    }
+
   }
 
   @include global.adapt-to-screen('xl') {
