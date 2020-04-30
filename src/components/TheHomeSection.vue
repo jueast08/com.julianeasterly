@@ -109,7 +109,7 @@ export default {
         &__title {
           margin: 0;
           @include global.h1-font;
-          transition: transform ease-in-out 0.75s;
+          
           
           &:nth-child(1) {
             transform: translateX(200px);
