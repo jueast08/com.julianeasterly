@@ -108,6 +108,7 @@ export default {
         
         &__title {
           margin: 0;
+          transition: transform ease-in-out 0.75s;
           @include global.h1-font;
           
           
