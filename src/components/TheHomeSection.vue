@@ -1,6 +1,6 @@
 <template>
   <section class="home col-12">
-    <div class="home__container col-12 col-xl-6">
+    <div class="home__container col-12 col-l-6">
       <div class="home__container__titles col-12">
         <h1 class="home__container__titles__title">JULIAN</h1>
         <h1 class="home__container__titles__title">EASTERLY</h1>
