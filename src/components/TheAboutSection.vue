@@ -23,6 +23,7 @@
         </base-round-button>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -82,17 +83,25 @@ export default {
   @use 'global';
   
   .about {
+    position: relative;
     display: flex;
     justify-content: center;
     min-height: 100vh;
+    background: global.$background-gray;
+
     
     &__container {
       min-height: 100%;
       padding: 100px 25px 25px 25px;
-      background: global.$background-gray;
       opacity: 0;
       transition: opacity ease-in 0.6s;
       
+      background-image: url('~Assets/background.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+
       &--in-view {
         opacity: 1;
       }
@@ -124,6 +133,8 @@ export default {
         }
       }
     }
+
+
   }
  
 </style>
