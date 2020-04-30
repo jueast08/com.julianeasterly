@@ -2,6 +2,7 @@
   <div id="app">
     <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
     <the-header/>
+    <the-social-network-bar/>
     <the-home-section/>
     <!-- TODO delete -->
     <div style="width: 100%; height: 100000px"></div>
@@ -10,12 +11,13 @@
 
 <script>
 import TheHeader from './components/TheHeader';
+import TheSocialNetworkBar from './components/TheSocialNetworkBar';
 import TheHomeSection from './components/TheHomeSection';
 
 
 export default {
   name: 'App',
-  components: {TheHeader, TheHomeSection}
+  components: {TheHeader, TheSocialNetworkBar, TheHomeSection}
 }
 </script>
 
