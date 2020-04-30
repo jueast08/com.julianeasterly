@@ -49,7 +49,6 @@ export default {
   .home {
     position: relative;
     height: 100vh;
-    width: 100vw;
     background: global.$primary-black;
     overflow: hidden;
     

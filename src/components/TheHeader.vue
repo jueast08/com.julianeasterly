@@ -1,5 +1,5 @@
 <template>
-  <header id="header" class="header">
+  <header id="header" class="header col-12">
     <div id="header__bar" class="header__bar col-12" :class="headerBarClass">
       <div class="header__bar__container col-12">
         <div class="col-xl-2">
@@ -128,9 +128,6 @@ export default {
     top: 30px;
     left: 0;
     z-index: 100;
-    width: 100vw;
-    
- 
 
     &__bar {
       height: global.$xs-header-height;
