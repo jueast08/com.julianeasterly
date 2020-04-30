@@ -1,0 +1,92 @@
+<template>
+   <div class="sn-bar">
+     <div class="sn-bar__container">
+      <base-social-network-button>
+        <email-icon></email-icon>
+      </base-social-network-button>
+      <base-social-network-button href="https://www.linkedin.com/in/julianeasterly/">
+        <img :src="linkedinLogo" alt="linkedin">
+      </base-social-network-button>
+      <base-social-network-button href="https://github.com/jueast08">
+        <img :src="gitHubImage" alt="github">
+      </base-social-network-button>
+     </div>
+   </div>
+</template>
+
+<script>
+import BaseSocialNetworkButton from 'Components/BaseSocialNetworkButton';
+import EmailIcon from 'Icons/EmailIcon';
+import github from 'Assets/GitHub-Mark-64px.png';
+import linkedin from 'Assets/linkein-logo-64px.png';
+
+export default {
+  name: 'TheSocialNetworkBar',
+  data() {
+    return {
+      gitHubImage: github,
+      linkedinLogo: linkedin,
+    }
+  },
+  components: {
+    BaseSocialNetworkButton, EmailIcon,
+  }
+}
+</script>
+
+
+<style lang="scss" scoped>
+  @use 'global';
+
+  .sn-bar {
+    display: none;
+  }
+
+  @include global.adapt-to-screen('m') {
+    .sn-bar {
+      display: initial;
+      position: fixed;
+      z-index: 100;
+      top: 40%;
+      right: 30px;
+      
+      &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50px;
+        padding: 10px 0;
+        
+        border-radius: 3px;
+        background: global.$primary-white;
+        -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
+
+      }
+    }
+  }
+
+  @include global.adapt-to-screen('l') {
+    .sn-bar {
+      right: 84px;
+      &__container {
+        width: 40px;
+        padding: 10px 0;
+      }
+    }
+  }
+
+  @include global.adapt-to-screen('xl') {
+    .sn-bar {
+      right: initial;
+      top: 30%;
+      left: 84px;
+
+      &__container {
+        width: 50px;
+        padding: 10px 0;
+      }
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 <template>
   <section class="home col-12">
-    <div class="home__container col-12 col-xl-6">
+    <div class="home__container col-12 col-l-6">
       <div class="home__container__titles col-12">
         <h1 class="home__container__titles__title">JULIAN</h1>
         <h1 class="home__container__titles__title">EASTERLY</h1>
@@ -29,17 +29,53 @@
 <script>
 import BaseRoundButton from 'Components/BaseRoundButton';
 import ProfileImage from 'Assets/portrait_bridge_saint-entienne.jpg';
+import isIntersectionObserverAvailable from 'Source/utility';
 
 export default {
   name: 'TheHomeSection',
   data() {
     return {
       profileImage: ProfileImage,
+      elementsToAnimateByClassName: ['home__container', 'home__container__titles__title'],
     }
   },
   components: {
     BaseRoundButton,
-  }
+  },
+  methods: {
+    addAnimationClasses() {
+      this.elementsToAnimateByClassName.forEach(className => {
+        document.getElementsByClassName(className).forEach(element => element.classList.add(className+'--in-view'));
+      });
+    },
+    removeAnimationClasses() {
+      this.elementsToAnimateByClassName.forEach(className => {
+        document.getElementsByClassName(className).forEach(element => element.classList.remove(className+'--in-view'));
+      });
+    },
+    handleOnScroll(entry) {
+      if(entry.isIntersecting) {
+        this.addAnimationClasses();
+      }else {
+        this.removeAnimationClasses();
+      }
+    }
+  },
+  mounted() {
+    if (isIntersectionObserverAvailable()) {
+      this.scrollObserver = new IntersectionObserver(entries => {
+        this.handleOnScroll(entries[0]);
+      });
+  
+      this.scrollObserver.observe(document.querySelector('.home__container'));
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.toggleMobileMenu);
+    if(this.scrollObserver) {
+      this.scrollObserver.disconnect();
+    } 
+  },
 }
 </script>
 
@@ -49,7 +85,6 @@ export default {
   .home {
     position: relative;
     height: 100vh;
-    width: 100vw;
     background: global.$primary-black;
     overflow: hidden;
     
@@ -61,21 +96,41 @@ export default {
       padding: 0 30px;
       padding-top: calc(30px + #{global.$xs-header-height});
       @include global.border-box;
-      
+      opacity: 0;
+      transition: opacity ease-in 0.6s;
+
+      &--in-view {
+        opacity: 1;
+      }
+
       &__titles {
         text-align: left;        
         
         &__title {
           margin: 0;
           @include global.h1-font;
-
+          transition: transform ease-in-out 0.75s;
+          
           &:nth-child(1) {
+            transform: translateX(200px);
             color: global.$primary-white;
           }
 
           &:nth-child(2) {
+            transform: translateX(400px);
             color: global.$primary-color;
           }
+
+          &--in-view {
+            transform: translateX(0);
+            &:nth-child(1) {
+              transform: translateX(0px);
+            }
+            &:nth-child(2) {
+              transform: translateX(0px);
+            }
+          }
+
         }
       }
 
@@ -142,7 +197,8 @@ export default {
         height: 100%;
 
         &__titles {
-          text-align: right;        
+          text-align: right;
+          transition: transform ease-in-out 0.5s;
         }
 
         &__subtitles {
@@ -185,9 +241,9 @@ export default {
             height: 100%;
             clip-path: polygon(25% 0, 100% 0, 50% 100%, 0% 100%);
           
-          &__about {
-              display: none;
-            }
+            &__about {
+                display: none;
+              }
           }
       
   
