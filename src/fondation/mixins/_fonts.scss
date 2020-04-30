@@ -6,30 +6,71 @@
     font-weight: $weight;
 }
 
-@mixin h1-font($size-s: 47px, $size-xl: 92px, $weight: 700) {
+@mixin h1-font($size-s: 47px, $size-m: 75px, $size-l: 75px, $size-xl: 92px, $weight: 700) {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
+    @include breakpoints.adapt-to-screen('m') {
+        @include _font($size-m, $weight);
+        line-height: $size-m;  
+    }
+    @include breakpoints.adapt-to-screen('l') {
+        @include _font($size-l, $weight);
+        line-height: $size-l;  
+    }
     @include breakpoints.adapt-to-screen('xl') {
         @include _font($size-xl, $weight);
         line-height: $size-xl;  
     }
 }
 
-@mixin subtitle-font($size-s: 14px, $size-xl: 20px, $weight: 700) {
-    @include _font($size-s, $weight); 
+@mixin subtitle-font($size-s: 14px, $size-m: 17px, $size-l: 17px, $size-xl: 20px, $weight: 700) {
+    @include _font($size-s, $weight);
+    line-height: $size-s; 
+
+    @include breakpoints.adapt-to-screen('m') {
+        @include _font($size-m, $weight);
+        line-height: $size-m;  
+    }
+    @include breakpoints.adapt-to-screen('l') {
+        @include _font($size-l, $weight);
+        line-height: $size-l;  
+    }
     @include breakpoints.adapt-to-screen('xl') {
         @include _font($size-xl, $weight);
         line-height: $size-xl;  
     }
 }
 
-@mixin link-font($size-s: 14px, $size-xl: 25px, $weight: 700)  {
-    @include _font($size-s, $weight); 
-}
-
-@mixin logo-font($size-s: 14px, $size-xl: 25px, $weight: 300)  {
+@mixin link-font($size-s: 14px, $size-m: 14px, $size-l: 14px, $size-xl: 14px,$weight: 700)  {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
+
+    @include breakpoints.adapt-to-screen('m') {
+        @include _font($size-m, $weight);
+        line-height: $size-m;  
+    }
+    @include breakpoints.adapt-to-screen('l') {
+        @include _font($size-l, $weight);
+        line-height: $size-l;  
+    }
+    @include breakpoints.adapt-to-screen('xl') {
+        @include _font($size-xl, $weight);
+        line-height: $size-xl;  
+    }
+}
+
+@mixin logo-font($size-s: 14px, $size-m: 18.5px, $size-l: 25px, $size-xl: 25px, $weight: 300)  {
+    @include _font($size-s, $weight); 
+    line-height: $size-s; 
+
+    @include breakpoints.adapt-to-screen('m') {
+        @include _font($size-m, $weight);
+        line-height: $size-m;  
+    }
+    @include breakpoints.adapt-to-screen('l') {
+        @include _font($size-l, $weight);
+        line-height: $size-l;  
+    }
     @include breakpoints.adapt-to-screen('xl') {
         @include _font($size-xl, $weight);
         line-height: $size-xl;  

@@ -5,7 +5,7 @@
         <div class="col-xl-2">
           <the-header-logo class="header__bar__container__logo"/>
         </div>
-        <div class="col-xl-8">
+        <div class="col-l-8">
             <div class="header__bar__container__menu">
                 <span class="header__bar__container__menu__link"
                   v-for="(link, index) in links" 
@@ -192,7 +192,7 @@ export default {
 
   }
 
-  @include global.adapt-to-screen('xl') {
+  @include global.adapt-to-screen('l') {
     
     .header {
 
@@ -243,4 +243,5 @@ export default {
       }
 
   }
+  
 </style>
