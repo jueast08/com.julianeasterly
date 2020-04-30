@@ -2,13 +2,13 @@
    <div class="sn-bar">
      <div class="sn-bar__container">
       <base-social-network-button>
-        <img :src="gitHubImage" alt="github">
+        <email-icon></email-icon>
       </base-social-network-button>
-      <base-social-network-button>
+      <base-social-network-button href="https://www.linkedin.com/in/julianeasterly/">
         <img :src="linkedinLogo" alt="linkedin">
       </base-social-network-button>
-      <base-social-network-button>
-        <email-icon></email-icon>
+      <base-social-network-button href="https://github.com/jueast08">
+        <img :src="gitHubImage" alt="github">
       </base-social-network-button>
      </div>
    </div>
@@ -82,7 +82,7 @@ export default {
       right: initial;
       top: 30%;
       left: 84px;
-      
+
       &__container {
         width: 50px;
         padding: 10px 0;

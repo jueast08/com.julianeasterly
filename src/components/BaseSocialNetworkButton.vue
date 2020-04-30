@@ -1,5 +1,5 @@
 <template>
-   <button>
+   <button @click="goToLink">
      <slot>
      </slot>
    </button>
@@ -14,6 +14,11 @@ export default {
         type: String,
         required: true,
       }
+  },
+  methods: {
+    goToLink() {
+      window.location.href = this.href;
+    }
   }
 }
 </script>
