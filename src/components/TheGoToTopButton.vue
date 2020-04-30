@@ -26,9 +26,9 @@ export default {
     justify-content: center;
     border-radius: 100%;
     background: global.$primary-white;
-    -webkit-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
-    box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.1);
+    box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: (background ease-in-out 0.25s), (bottom ease-in-out 0.25s);
 
@@ -37,7 +37,7 @@ export default {
       width: 10px;
       transform-origin: center;
       transform: translateY(20px) rotate(45deg);
-      border-color: global.$primary-black;
+      border-color: rgba(global.$primary-black,0.6);
       border-style: solid;
       border-width: 3px 0 0 3px;
     }
