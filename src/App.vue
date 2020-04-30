@@ -3,7 +3,8 @@
     <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
     <the-header/>
     <the-home-section/>
-    <the-home-section/>
+    <!-- TODO delete -->
+    <div style="width: 100%; height: 100000px"></div>
   </div>
 </template>
 
@@ -21,14 +22,14 @@ export default {
 <style lang="scss">
   body {
     height: 100vh;
-    width: 100vw;
+    max-width: 100%;
     padding: 0;
     margin: 0;
 
     #app {
       position: relative;
       height: 100%;
-      width: 100%;
+      max-width: 100%;
     }
   }
 
