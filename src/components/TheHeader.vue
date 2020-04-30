@@ -1,16 +1,16 @@
 <template>
-  <header id="header" class="header">
-    <div id="header__bar" class="header__bar col-12" :class="headerBarClass">
+  <header id="header" class="header col-12">
+    <div id="header__bar" class="header__bar col-12">
       <div class="header__bar__container col-12">
         <div class="col-xl-2">
-          <the-header-logo class="header__bar__container__logo" :class="headerLogoClass"/>
+          <the-header-logo class="header__bar__container__logo"/>
         </div>
-        <div class="col-xl-8">
+        <div class="col-l-8">
             <div class="header__bar__container__menu">
                 <span class="header__bar__container__menu__link"
                   v-for="(link, index) in links" 
                   :key="link+index"
-                  :class="desktopLinkClasses">{{ link }}</span>
+                  :class="(link === activeLink) && 'header__bar__container__menu__link--active'">{{ link }}</span>
             </div>
           <div class="header__bar__container__burger">
             <base-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
@@ -31,13 +31,14 @@
 <script>
 import TheHeaderLogo from 'Components/TheHeaderLogo';
 import BaseBurger from 'Components/BaseBurger';
+import isIntersectionObserverAvailable from 'Source/utility';
 
 export default {
   name: 'TheHeader',
   data() {
     return {
       activeLink: 'Home',
-      classesWithLightTheme: ['header__bar', 'header__bar__container__logo'],
+      elementsWithALightThemeByClassName: ['header__bar', 'header__bar__container__logo', 'header__bar__container__menu__link'],
       lightThemeOn: false,
       links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
       mobileMenuOpen: false,
@@ -60,6 +61,18 @@ export default {
       this.mobileMenuOpen = false;
       window.removeEventListener('scroll', this.closeMenuRemoveListener);
     },
+    addLightTheme() {
+      this.elementsWithALightThemeByClassName.forEach(className => {
+        document.getElementsByClassName(className).forEach(element => element.classList.add(className+'--light'))
+      });
+
+    },
+    removeLightTheme() {
+      this.elementsWithALightThemeByClassName.forEach(className => {
+        document.getElementsByClassName(className).forEach(element => element.classList.remove(className+'--light'))
+      });
+
+    },
     fixHeader() {
         document.getElementById('header').classList.add("header--fixed");
     },
@@ -68,11 +81,11 @@ export default {
     },
     handleScroll(element) {
       if(this.isHeaderOutOfViewport(element)) {
-        this.lightThemeOn = true;
+        this.addLightTheme();
         this.fixHeader();
       }
       else {
-        this.lightThemeOn = false;
+        this.removeLightTheme();
         this.unfixHeader();
       }
     },
@@ -80,25 +93,8 @@ export default {
       return element.boundingClientRect.y < 0;
     },
   },
-  computed: {
-    isIntersectionObserverAvailable() {
-      return "IntersectionObserver" in window &&
-      "IntersectionObserverEntry" in window &&
-      "intersectionRatio" in window.IntersectionObserverEntry.prototype;
-    },
-    desktopLinkClasses(link) {
-      let root = 'header__bar__container__menu__link';
-      return [(link === this.activeLink) && root+'--active', this.lightThemeOn && root+'--light'];
-    },
-    headerBarClass(){
-      return this.lightThemeOn && 'header__bar'+'--light';
-    },
-    headerLogoClass(){
-      return this.lightThemeOn && 'header__bar__container__logo'+'--light';
-    }
-  },
   mounted() {
-    if (this.isIntersectionObserverAvailable) {
+    if (isIntersectionObserverAvailable()) {
       this.scrollObserver = new IntersectionObserver(entries => {
         this.handleScroll(entries[0]);
       });
@@ -128,9 +124,6 @@ export default {
     top: 30px;
     left: 0;
     z-index: 100;
-    width: 100vw;
-    
- 
 
     &__bar {
       height: global.$xs-header-height;
@@ -199,7 +192,7 @@ export default {
 
   }
 
-  @include global.adapt-to-screen('xl') {
+  @include global.adapt-to-screen('l') {
     
     .header {
 
@@ -250,4 +243,5 @@ export default {
       }
 
   }
+  
 </style>
