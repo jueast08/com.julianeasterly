@@ -1,62 +1,84 @@
 <template>
-  <section id="about" class="about col-12">
-    <div class="about__animation-trigger"></div>
-    <div class="about__container col-12 col-m-10 col-l-8">
-      <div class="about__container__titles">
-        <h3 class="about__container__titles__subtitle">
-          ESTABLISHED 1990 • ENJOYED IN FRANCE AND MADE IN THE U.S.A
+  <section id="skills" class="skills col-12">
+    <div class="skills__animation-trigger"></div>
+    <div class="skills__container ">
+      <div class="skills__container__titles col-12 col-m-10 col-l-8">
+        <h3 class="skills__container__titles__subtitle">
+          SUPERPOWERS
         </h3>
-        <h2 class="about__container__titles__title">
-          Who am I?
+        <h2 class="skills__container__titles__title">
+          My Skills
         </h2>
       </div>
-      <div class="about__container__content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-          Phasellus a feugiat dolor. 
-          Vivamus ligula tortor, maximus id bibendum sit amet, tincidunt a turpis. 
-          Proin pulvinar dictum dolor, quis interdum orci porttitor ut. 
-          Cras congue purus ante, nec ornare enim venenatis sit amet.
-        </p>
-        <base-round-button class="about__container__content__skills-button">
-          MY SKILLS
-        </base-round-button>
+      <div class="skills__container__content">
+        <div class="skills__container__content__my-skills">
+          <base-content-icon class="skills__container__content__my-skills__skill">
+              <template v-slot:icon><base-logo/></template>
+              <template v-slot:title>Languages</template>
+              <template v-slot:description>
+                <skill-gauge percentage="100%" skill-title="English" goal-label="Native"/>
+                <skill-gauge percentage="75%" skill-title="French" goal-label="Fluent"/>
+              </template>
+          </base-content-icon>
+          <base-content-icon class="skills__container__content__my-skills__skill">
+              <template v-slot:icon><base-logo/></template>
+              <template v-slot:title>Product & Project Management</template>
+              <template v-slot:description>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
+                Phasellus a feugiat dolor. 
+              </template>
+          </base-content-icon>
+                    <base-content-icon class="skills__container__content__my-skills__skill">
+              <template v-slot:icon><base-logo/></template>
+              <template v-slot:title>Product & Project Management</template>
+              <template v-slot:description>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
+                Phasellus a feugiat dolor. 
+              </template>
+          </base-content-icon>
+                    <base-content-icon class="skills__container__content__my-skills__skill">
+              <template v-slot:icon><base-logo/></template>
+              <template v-slot:title>Product & Project Management</template>
+              <template v-slot:description>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
+                Phasellus a feugiat dolor. 
+              </template>
+          </base-content-icon>
+        </div>
+
       </div>
-      
-      <!-- @TODO another component -->
-      <div class="about__slider">
-        <slide-show>
-          <!-- @TODO finish creating component -->
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">1</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">2</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2);  height: 100%;">3</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">4</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">5</div></slide-show-item>
-        </slide-show>
-      </div>
-      
+    </div>
+    <div class="skills__wanted-skills">
+      <base-content-icon class="skills__container__content__my-skills__skill">
+          <template v-slot:icon><base-logo/></template>
+          <template v-slot:description>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
+            Phasellus a feugiat dolor. 
+          </template>
+      </base-content-icon>
     </div>
   </section>
 </template>
 
 <script>
-import BaseRoundButton from 'Components/BaseRoundButton'
-import SlideShow from 'Components/SlideShow';
-import SlideShowItem from 'Components/SlideShowItem';
+import BaseContentIcon from 'Components/BaseContentIcon';
+import BaseLogo from 'Icons/BaseLogo';
+import SkillGauge from 'Components/SkillGauge';
 
 import isIntersectionObserverAvailable from 'Source/utility';
 
 export default {
-  name: 'TheAboutSection',
+  name: 'TheSkillsSection',
   data() {
     return {
-      elementsToAnimateByClassName: ['about__container',],
+      elementsToAnimateByClassName: ['skills__container',],
     }
   },
-  components: {
-    BaseRoundButton, SlideShow, SlideShowItem,
-  },
+  components: {BaseContentIcon,BaseLogo,SkillGauge},
   methods: {
     //@TODO this ode is repeated in multiple sections. This should be refactored. Maybe a BaseSection class
     addAnimationClasses() {
@@ -71,12 +93,9 @@ export default {
     },
    handleOnScroll(entry) {
       if(entry.isIntersecting) {
-        console.log('inview')
         this.addAnimationClasses();
       }else {
         this.removeAnimationClasses();
-                console.log('outview')
-
       }
     }
   },
@@ -86,7 +105,7 @@ export default {
         this.handleOnScroll(entries[0]);
       });
   
-      this.scrollObserver.observe(document.querySelector('.about__animation-trigger'));
+      this.scrollObserver.observe(document.querySelector('.skills__animation-trigger'));
     }
   },
   beforeDestroy() {
@@ -101,15 +120,14 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
   
-  .about {
+  $container-padding: 100px 25px 25px 25px;
+
+  .skills {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background: global.$background-gray url('~Assets/background.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+    background: global.$primary-white;
     
     &__animation-trigger {
       position: absolute; 
@@ -118,19 +136,18 @@ export default {
     }
     &__container {
       min-height: 100%;
-      padding: 100px 25px 25px 25px;
+      padding: $container-padding;
       opacity: 0;
       transform: translateY(300px);
       transition: opacity ease-in 0.75s, transform ease-in 0.6s;
       
-
-
       &--in-view {
         display: inital;
         opacity: 1;
         transform: translateY(0px);
 
       }
+
       &__titles {
         text-align: center;
         &__title {
@@ -139,33 +156,39 @@ export default {
         }
         &__subtitle {
           @include global.subtitle-font;
-          color: global.$primary-black;
+          color: global.$primary-gray;
         }
       }
 
       &__content {
-        p {
-          @include global.p-font;
-          text-align: center;
-          color: global.$primary-black;
-        }
-
-        &__skills-button {
-          position: relative;
-          left: 50%;
-          transform: translateX(-50%);
-          border-color: global.$primary-color;
-          color: global.$primary-color;
+        display: flex;
+        flex-direction: column;
+        
+        &__my-skills  {
+          
+          &__skill {
+            margin: 25px 0;
+            color: global.$primary-black;  
+            
+            svg {
+              fill: global.$primary-color;
+            }
+            
+          }
         }
       }
     }
 
-    &__slider {
-      
-      height: 250px;
-      width: 100%;
-      margin-top: 25px;
+    &__wanted-skills {
+      background: global.$primary-color;
+      height: 100vh;
+      padding: $container-padding;
 
+      color: global.$primary-white;
+      
+      svg {
+        fill: global.$primary-white;
+      }
     }
 
   }
