@@ -1,8 +1,8 @@
 <template>
    <div class="sn-bar">
      <div class="sn-bar__container">
-      <base-social-network-button>
-        <email-icon></email-icon>
+      <base-social-network-button href="#contact">
+        <email-icon/>
       </base-social-network-button>
       <base-social-network-button href="https://www.linkedin.com/in/julianeasterly/">
         <img :src="linkedinLogo" alt="linkedin">
@@ -47,9 +47,10 @@ export default {
       display: initial;
       position: fixed;
       z-index: 100;
-      top: 40%;
+      top: 50%;
       right: 30px;
-      
+      transform: translateY(-50%);
+
       &__container {
         display: flex;
         flex-direction: column;
@@ -59,9 +60,9 @@ export default {
         
         border-radius: 3px;
         background: global.$primary-white;
-        -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
-        -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
-        box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
+        -webkit-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
+        -moz-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
+        box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
 
       }
     }
@@ -79,10 +80,6 @@ export default {
 
   @include global.adapt-to-screen('xl') {
     .sn-bar {
-      right: initial;
-      top: 30%;
-      left: 84px;
-
       &__container {
         width: 50px;
         padding: 10px 0;
