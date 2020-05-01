@@ -25,4 +25,18 @@ export default {
     padding: 0 10px;
     @include global.border-box;
   }
+
+  @include global.adapt-to-screen('m') {
+    .slider-item {
+      min-width: 50%;
+      width: 50%;
+    }
+  }
+
+  @include global.adapt-to-screen('l') {
+    .slider-item {
+      min-width: calc(100% / 3);
+      width: calc(100% / 3);
+    }
+  }
 </style>

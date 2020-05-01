@@ -23,7 +23,7 @@
     }
 }
 
-@mixin h2-font($size-s: 30px, $size-m: 75px, $size-l: 75px, $size-xl: 92px, $weight: 700) {
+@mixin h2-font($size-s: 30px, $size-m: 30px, $size-l: 45px, $size-xl: 50px, $weight: 700) {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
     @include breakpoints.adapt-to-screen('m') {
@@ -40,7 +40,7 @@
     }
 }
 
-@mixin h3-font($size-s: 16px, $size-m: 75px, $size-l: 75px, $size-xl: 92px, $weight: 700) {
+@mixin h3-font($size-s: 16px, $size-m: 16px, $size-l: 18px, $size-xl: 25px, $weight: 700) {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
     @include breakpoints.adapt-to-screen('m') {
@@ -57,7 +57,7 @@
     }
 }
 
-@mixin p-font($size-s: 16px, $size-m: 75px, $size-l: 75px, $size-xl: 92px, $weight: 400) {
+@mixin p-font($size-s: 16px, $size-m: 16px, $size-l: 16px, $size-xl: 16px, $weight: 400) {
     @include _font($size-s, $weight); 
     line-height: 1.75 * $size-s; 
     @include breakpoints.adapt-to-screen('m') {
