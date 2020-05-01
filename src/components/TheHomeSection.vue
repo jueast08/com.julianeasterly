@@ -1,5 +1,5 @@
 <template>
-  <section class="home col-12">
+  <section id="home" class="home col-12">
     <div class="home__container col-12 col-l-6">
       <div class="home__container__titles col-12">
         <h1 class="home__container__titles__title">JULIAN</h1>
@@ -18,7 +18,7 @@
     </div>
     <div class="home__background col-12 col-xl-6">
         <div class="home__background__stripe col-12">
-          <base-round-button class="home__background__stripe__about">
+          <base-round-button class="home__background__stripe__about" @handle-click="goToAbout">
             ABOUT ME
           </base-round-button>
       </div>        
@@ -59,6 +59,14 @@ export default {
       }else {
         this.removeAnimationClasses();
       }
+    },
+    goToAbout(){
+      let target = document.getElementById('about');
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'center',
+      });
     }
   },
   mounted() {
@@ -108,8 +116,9 @@ export default {
         
         &__title {
           margin: 0;
-          @include global.h1-font;
           transition: transform ease-in-out 0.75s;
+          @include global.h1-font;
+          
           
           &:nth-child(1) {
             transform: translateX(200px);

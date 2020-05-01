@@ -10,7 +10,8 @@
                 <span class="header__bar__container__menu__link"
                   v-for="(link, index) in links" 
                   :key="link+index"
-                  :class="(link === activeLink) && 'header__bar__container__menu__link--active'">{{ link }}</span>
+                  :class="(link === activeLink) && 'header__bar__container__menu__link--active'"
+                  @click="goToSection(link)">{{ link }}</span>
             </div>
           <div class="header__bar__container__burger">
             <base-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
@@ -22,7 +23,8 @@
           :class="this.mobileMenuOpen ? 'header__mobile-menu--open' :''">
       <div class="header__mobile-menu__link"
             v-for="(link, index) in links" 
-            :key="link+index">{{ link }}</div>    
+            :key="link+index"
+            @click="goToSection(link)">{{ link }}</div>    
     </div>
     
   </header>
@@ -92,8 +94,23 @@ export default {
     isHeaderOutOfViewport(element) {
       return element.boundingClientRect.y < 0;
     },
+    goToSection(idName) {
+      let target = document.getElementById(idName.toLowerCase());
+      if(target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'center',
+        });
+        this.activeLink = idName;
+      }
+      else {
+        console.warn('There is no element with the id '+idName.toLowerCase());
+      }   
+    },
   },
   mounted() {
+    //@TODO take into account user scroll. The active link should change when to home when, for example, the user scrolls back to the home section
     if (isIntersectionObserverAvailable()) {
       this.scrollObserver = new IntersectionObserver(entries => {
         this.handleScroll(entries[0]);
@@ -118,7 +135,6 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
   
-  //@todo reorganize to take into account dark and light colors
   .header {
     position: absolute;
     top: 30px;

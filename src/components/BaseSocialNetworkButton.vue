@@ -17,7 +17,31 @@ export default {
   },
   methods: {
     goToLink() {
-      window.location.href = this.href;
+      if(this.isInternalPageElementWithId) {
+        this.scrollToElement(this.href)
+      }
+      else{
+        window.location.href = this.href;
+      }
+    },
+    scrollToElement() {
+        let id = this.href.substring(1);
+        let target = document.getElementById(id);
+        if(target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'center',
+          });
+        }
+        else {
+          console.warn('There is no element with the id '+id);
+        }  
+    }
+  },
+  computed: {
+    isInternalPageElementWithId() {
+      return this.href.indexOf('#') === 0;
     }
   }
 }
