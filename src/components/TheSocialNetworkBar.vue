@@ -1,8 +1,8 @@
 <template>
    <div class="sn-bar">
      <div class="sn-bar__container">
-      <base-social-network-button>
-        <email-icon></email-icon>
+      <base-social-network-button href="#contact">
+        <email-icon/>
       </base-social-network-button>
       <base-social-network-button href="https://www.linkedin.com/in/julianeasterly/">
         <img :src="linkedinLogo" alt="linkedin">
