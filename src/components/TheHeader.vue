@@ -110,6 +110,7 @@ export default {
     },
   },
   mounted() {
+    //@TODO take into account user scroll. The active link should change when to home when, for example, the user scrolls back to the home section
     if (isIntersectionObserverAvailable()) {
       this.scrollObserver = new IntersectionObserver(entries => {
         this.handleScroll(entries[0]);
@@ -134,7 +135,6 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
   
-  //@todo reorganize to take into account dark and light colors
   .header {
     position: absolute;
     top: 30px;

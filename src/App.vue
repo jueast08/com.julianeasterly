@@ -6,21 +6,30 @@
     <the-go-to-top-button/>
     <the-home-section/>
     <the-about-section/>
+    <the-skills-section/>
   </div>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader';
 import TheSocialNetworkBar from './components/TheSocialNetworkBar';
+import TheGoToTopButton from './components/TheGoToTopButton';
 import TheHomeSection from './components/TheHomeSection';
 import TheAboutSection from './components/TheAboutSection';
-import TheGoToTopButton from './components/TheGoToTopButton';
+import TheSkillsSection from './components/TheSkillsSection';
+
 
 
 
 export default {
   name: 'App',
-  components: {TheHeader, TheSocialNetworkBar, TheGoToTopButton, TheHomeSection, TheAboutSection}
+  components: {
+    TheHeader, 
+    TheSocialNetworkBar, 
+    TheGoToTopButton, 
+    TheHomeSection, 
+    TheAboutSection,
+    TheSkillsSection}
 }
 </script>
 

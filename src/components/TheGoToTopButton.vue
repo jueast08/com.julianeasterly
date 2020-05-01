@@ -19,7 +19,6 @@ export default {
       });
     }
   }
-  //@TODO code the scroll up action
 }
 </script>
 
