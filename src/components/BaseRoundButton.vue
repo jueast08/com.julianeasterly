@@ -1,5 +1,5 @@
 <template>
-   <button>
+   <button @click="handleClick">
      <slot></slot>
    </button>
 </template>
@@ -8,6 +8,11 @@
 
 export default {
   name: 'BaseRoundButton',
+  methods: {
+    handleClick() {
+      this.$emit('handle-click');
+    }
+  }
 }
 </script>
 
