@@ -6,6 +6,12 @@
     font-weight: $weight;
 }
 
+@mixin _font-p($size, $weight){
+    font-family: 'Montserrat', sans-serif;
+    font-size: $size;
+    font-weight: $weight;
+}
+
 @mixin h1-font($size-s: 47px, $size-m: 75px, $size-l: 75px, $size-xl: 92px, $weight: 700) {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
@@ -58,18 +64,18 @@
 }
 
 @mixin p-font($size-s: 16px, $size-m: 16px, $size-l: 16px, $size-xl: 16px, $weight: 400) {
-    @include _font($size-s, $weight); 
+    @include _font-p($size-s, $weight); 
     line-height: 1.75 * $size-s; 
     @include breakpoints.adapt-to-screen('m') {
-        @include _font($size-m, $weight);
+        @include _font-p($size-m, $weight);
         line-height: calc(#{$size-m} * 175%); 
     }
     @include breakpoints.adapt-to-screen('l') {
-        @include _font($size-l, $weight);
+        @include _font-p($size-l, $weight);
         line-height: calc(#{$size-l} * 175%); 
     }
     @include breakpoints.adapt-to-screen('xl') {
-        @include _font($size-xl, $weight);
+        @include _font-p($size-xl, $weight);
         line-height: calc(#{$size-xl} * 175%); 
     }
 }

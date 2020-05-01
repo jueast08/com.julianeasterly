@@ -24,8 +24,8 @@ export default {
 
   },
   mounted() {
-      //if I know the number of children and their size, i should be able to do a scroll
-      console.log(this.$children);
+      //@TODO if I know the number of children and their size, i should be able to do a scroll
+      //console.log(this.$children);
   }
 
 }

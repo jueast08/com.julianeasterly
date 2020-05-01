@@ -19,6 +19,7 @@
           Proin pulvinar dictum dolor, quis interdum orci porttitor ut. 
           Cras congue purus ante, nec ornare enim venenatis sit amet.
         </p>
+        <!-- @TODO connect to skills sections -->
         <base-round-button class="about__container__content__skills-button">
           MY SKILLS
         </base-round-button>
@@ -26,6 +27,7 @@
       
       <!-- @TODO another component -->
       <div class="about__slider">
+        <div class="about__slider__title">WHAT I DO IN MY FREE TIME</div>
         <slide-show>
           <!-- @TODO finish creating component -->
           <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">1</div></slide-show-item>
@@ -71,12 +73,9 @@ export default {
     },
    handleOnScroll(entry) {
       if(entry.isIntersecting) {
-        console.log('inview')
         this.addAnimationClasses();
       }else {
         this.removeAnimationClasses();
-                console.log('outview')
-
       }
     }
   },
@@ -139,7 +138,7 @@ export default {
         }
         &__subtitle {
           @include global.subtitle-font;
-          color: global.$primary-black;
+          color: global.$primary-gray;
         }
       }
 
@@ -162,6 +161,12 @@ export default {
 
     &__slider {
       
+      &__title {
+        text-align: center;
+        margin: 25px 0;
+        @include global.h3-font;
+      }
+
       height: 250px;
       width: 100%;
       margin-top: 25px;
