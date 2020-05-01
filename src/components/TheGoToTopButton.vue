@@ -1,5 +1,6 @@
 <template>
-  <div class="go-to-top">
+  <div class="go-to-top" 
+      @click="scrollToTop">
     <div class="go-to-top__arrow"></div>
   </div>
 </template>
@@ -8,6 +9,16 @@
 
 export default {
   name: 'TheGoToTopButton',
+  methods: {
+    scrollToTop() {
+      let target = document.getElementById('home');
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'center',
+      });
+    }
+  }
   //@TODO code the scroll up action
 }
 </script>
