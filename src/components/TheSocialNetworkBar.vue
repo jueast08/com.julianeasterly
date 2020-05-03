@@ -64,6 +64,9 @@ export default {
         -moz-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
         box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
 
+        ::v-deep button {
+          width: 50%;
+        }
       }
     }
   }
