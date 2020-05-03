@@ -23,7 +23,15 @@ export default {
   methods: {
 
   },
+  computed: {
+      showArrows() {
+          //let n = this.$children;
+        return true;
+      },
+  },
   mounted() {
+      console.log(this.$children);
+      console.log(this.$el.childNodes[0].clientWidth);
       //@TODO if I know the number of children and their size, i should be able to do a scroll
       //console.log(this.$children);
   }
@@ -60,6 +68,20 @@ export default {
                 }
             }
             $arrow-border-thickness: 5px;
+
+            // &--no_arrows &{
+            //     &__right-arrow {
+            //         div {
+            //             display: hidden;
+            //         }
+            //     }
+            //     &__left-arrow {
+            //         div {
+            //             display: hidden;
+            //         }
+            //     }
+            // }
+
             &__right-arrow {
                 @include arrows;
                 div {
@@ -83,9 +105,11 @@ export default {
                 //overflow-y: hidden;
                 &__container {
                     display: flex;
+                    // justify-content: center;
+                    // align-items: center;
                     max-height: 100%;
                     height: 100%;
-                    min-width: 100%;                    
+                    min-width: 100%;  
                 }
             }
         }

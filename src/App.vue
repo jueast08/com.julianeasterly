@@ -7,6 +7,7 @@
     <the-home-section/>
     <the-about-section/>
     <the-skills-section/>
+    <the-footer/>
   </div>
 </template>
 
@@ -17,9 +18,7 @@ import TheGoToTopButton from './components/TheGoToTopButton';
 import TheHomeSection from './components/TheHomeSection';
 import TheAboutSection from './components/TheAboutSection';
 import TheSkillsSection from './components/TheSkillsSection';
-
-
-
+import TheFooter from './components/TheFooter';
 
 export default {
   name: 'App',
@@ -29,7 +28,8 @@ export default {
     TheGoToTopButton, 
     TheHomeSection, 
     TheAboutSection,
-    TheSkillsSection}
+    TheSkillsSection,
+    TheFooter}
 }
 </script>
 

@@ -1,51 +1,70 @@
 <template>
   <section id="about" class="about col-12">
     <div class="about__animation-trigger"></div>
-    <div class="about__container col-12 col-m-10 col-l-8">
+    <div class="about__container col-12 col-m-10 col-l-6">
       <div class="about__container__titles">
         <h3 class="about__container__titles__subtitle">
-          ESTABLISHED 1990 • ENJOYED IN FRANCE AND MADE IN THE U.S.A
+          ESTABLISHED 1990 IN THE USA • CURRENTLY ENJOYING LIFE IN STRASBOURG, FRANCE
         </h3>
         <h2 class="about__container__titles__title">
-          Who am I?
+          Code & Consulting
         </h2>
       </div>
       <div class="about__container__content">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-          Phasellus a feugiat dolor. 
-          Vivamus ligula tortor, maximus id bibendum sit amet, tincidunt a turpis. 
-          Proin pulvinar dictum dolor, quis interdum orci porttitor ut. 
-          Cras congue purus ante, nec ornare enim venenatis sit amet.
+          Born in Paducah, Kentucky, USA, I moved to France in 2013 with  B.A. in English. I have yet to look back.
         </p>
-        <!-- @TODO connect to skills sections -->
+        <p>
+          Since embarking in IT back in 2014, I've sought to help companies, first as as a developer and then as an IT 
+          consultant and Business Analyst. While I no longer code at work, I develop personal projects in my freetime in 
+          order to ensure that I stay up-to-date.
+        </p>
+        <!-- @TODO program button-->
         <base-round-button class="about__container__content__skills-button">
-          MY SKILLS
+          SEE MORE
         </base-round-button>
       </div>
       
-      <!-- @TODO another component -->
-      <div class="about__slider">
-        <div class="about__slider__title">WHAT I DO IN MY FREE TIME</div>
-        <slide-show>
-          <!-- @TODO finish creating component -->
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">1</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">2</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2);  height: 100%;">3</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">4</div></slide-show-item>
-          <slide-show-item><div style="background: rgba(0,0,0,0.2); height: 100%;">5</div></slide-show-item>
-        </slide-show>
+      <div class="about__hobbies col-12">
+        <div class="about__hobbies__title">WHAT I DO IN MY FREE TIME</div>
+        <div class="about__hobbies__hobby">
+          <base-content-icon class="about__slider__item">
+                <template v-slot:icon><img :src="devDesignIcon"/></template>
+                <template v-slot:title>Code and Design</template>
+          </base-content-icon>
+        </div>
+        <div class="about__hobbies__hobby">
+          <base-content-icon class="about__slider__item">
+                <template v-slot:icon><img :src="sportsIcon"/></template>
+                <template v-slot:title>Sports</template>
+          </base-content-icon>
+        </div>
+        <div class="about__hobbies__hobby">
+          <base-content-icon class="about__slider__item">
+                <template v-slot:icon><img :src="toolsIcon"/></template>
+                <template v-slot:title>DIY & Gardening</template>
+          </base-content-icon>
+        </div>
+        <div class="about__hobbies__hobby">
+          <base-content-icon class="about__slider__item">
+                <template v-slot:icon><img :src="cookingIcon"/></template>
+                <template v-slot:title>Cooking</template>
+          </base-content-icon>
+        </div>
+         
       </div>
-      
     </div>
   </section>
 </template>
 
 <script>
 import BaseRoundButton from 'Components/BaseRoundButton'
-import SlideShow from 'Components/SlideShow';
-import SlideShowItem from 'Components/SlideShowItem';
+import BaseContentIcon from 'Components/BaseContentIcon';
+import cookingIcon from 'Assets/cooking.png';
+import sportsIcon from 'Assets/sport.png';
+import toolsIcon from 'Assets/tools.png';
+import devDesignIcon from 'Assets/dev-design.png';
+
 
 import isIntersectionObserverAvailable from 'Source/utility';
 
@@ -54,10 +73,14 @@ export default {
   data() {
     return {
       elementsToAnimateByClassName: ['about__container',],
+      sportsIcon: sportsIcon,
+      cookingIcon: cookingIcon,
+      toolsIcon: toolsIcon,
+      devDesignIcon: devDesignIcon,
     }
   },
   components: {
-    BaseRoundButton, SlideShow, SlideShowItem,
+    BaseRoundButton, BaseContentIcon, 
   },
   methods: {
     //@TODO this ode is repeated in multiple sections. This should be refactored. Maybe a BaseSection class
@@ -117,7 +140,7 @@ export default {
     }
     &__container {
       min-height: 100%;
-      padding: 100px 25px 25px 25px;
+      padding: 100px 25px;
       opacity: 0;
       transform: translateY(300px);
       transition: opacity ease-in 0.75s, transform ease-in 0.6s;
@@ -160,19 +183,42 @@ export default {
     }
 
     &__slider {
-      
+      margin: 0 auto;
       &__title {
         text-align: center;
         margin: 25px 0;
-        @include global.h3-font;
+        @include global.subtitle-font;
       }
 
-      height: 250px;
-      width: 100%;
-      margin-top: 25px;
+      &__item {
+        @include global.subtitle-font($weight: 300);
 
+        svg {
+          fill: global.$primary-color;
+        }
+      }
     }
 
+    &__hobbies {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 25px auto;
+      &__title {
+        width: 100%; 
+        margin: 25px auto 50px auto;
+        text-align: center;
+        @include global.subtitle-font;
+      }
+      &__hobby {
+        margin: 10px;
+        width: 200px;
+        * {
+            @include global.p-font($size-s: 14px, $size-m: 14px, $size-l: 14px, $size-xl: 14px);
+          }
+        //
+      }
+    }
   }
  
 </style>

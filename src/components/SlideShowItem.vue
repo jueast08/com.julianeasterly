@@ -17,7 +17,9 @@ export default {
   @use 'global';
   
   .slider-item {
-    display:  inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 100%;
     width: 100%;
     max-height: 100%;
@@ -26,17 +28,17 @@ export default {
     @include global.border-box;
   }
 
-  @include global.adapt-to-screen('m') {
-    .slider-item {
-      min-width: 50%;
-      width: 50%;
-    }
-  }
+  // @include global.adapt-to-screen('m') {
+  //   .slider-item {
+  //     min-width: 50%;
+  //     width: 50%;
+  //   }
+  // }
 
-  @include global.adapt-to-screen('l') {
-    .slider-item {
-      min-width: calc(100% / 3);
-      width: calc(100% / 3);
-    }
-  }
+  // @include global.adapt-to-screen('l') {
+  //   .slider-item {
+  //     max-width: calc(100% / 3);
+  //     width: calc(100% / 3);
+  //   }
+  // }
 </style>
