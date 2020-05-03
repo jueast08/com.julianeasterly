@@ -52,8 +52,8 @@ export default {
   @use 'global';
   
   button {
-    width: 20px;
-    height: 20px;
+    // width: 20px;
+    // height: 20px;
     margin: 5px 0;
     padding: 0;
     border: none;

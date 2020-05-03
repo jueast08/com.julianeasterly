@@ -140,7 +140,7 @@ export default {
     }
     &__container {
       min-height: 100%;
-      padding: 100px 25px;
+      padding: 100px 25px; //@TODO maybe consider a global variable to handle the padding for all the different sections;
       opacity: 0;
       transform: translateY(300px);
       transition: opacity ease-in 0.75s, transform ease-in 0.6s;
