@@ -120,7 +120,7 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
   
-  $container-padding: 100px 25px 25px 25px;
+  $container-padding: 100px 25px;
 
   .skills {
     position: relative;

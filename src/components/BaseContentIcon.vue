@@ -39,13 +39,13 @@ export default {
     }
 
     &__title {
-      @include global.h3-font;
+      //@include global.h3-font;
       text-align: center;
       margin: 0 0 10px 0;
     }
 
     &__description {
-      @include global.p-font;
+      //@include global.p-font;
       text-align: center;
     }
   }
