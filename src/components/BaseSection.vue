@@ -36,12 +36,16 @@ export default {
   @use 'global';
   
   .section {
-    padding: 50px 0;
+    position: relative;
+    min-height: 100vh;
+    padding: 100px 0 50px;
+    @include global.border-box;
     &__title {
       position: relative;
       @include global.h2-font;
       text-align: center;
       z-index: 2;
+      width: 100%;
 
       &:before {
         content: attr(data-content);
@@ -52,7 +56,8 @@ export default {
         transform: translateX(-50%);
         z-index: 1;
         opacity: 0.15;
-        width: 100vw;
+        width: 100%;
+        overflow: hidden;
         text-overflow: clip;
         white-space: nowrap;
       }
