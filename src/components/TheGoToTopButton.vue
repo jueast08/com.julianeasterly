@@ -29,7 +29,7 @@ export default {
   },
     mounted() {
       try {
-        this.homeScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible',  {threshold: 1});
+        this.homeScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible',  {threshold: 0.8});
         this.aboutScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible', {threshold: 0.25});
         this.aboutScrollObserver.observe(document.querySelector('#about'), true, false);
         this.homeScrollObserver.observe(document.querySelector('#home'), false, true);
@@ -84,20 +84,21 @@ export default {
       border-width: 3px 0 0 3px;
     }
 
-    &:hover {
-      background: global.$primary-color;
-      bottom: 32px;
-    }
-    &:hover & {
-      &__arrow {
-        border-color: global.$primary-white;
-      }
-    }
+
   }
 
   @include global.adapt-to-screen('l') {
     .go-to-top-button {
       right: 84px;
+      &:hover {
+        background: global.$primary-color;
+        bottom: 32px;
+      }
+      &:hover & {
+        &__arrow {
+          border-color: global.$primary-white;
+        }
+      }
     }
   }
  
