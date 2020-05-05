@@ -1,13 +1,13 @@
 <template>
    <div class="base-content-icon">
      <div class="base-content-icon__icon">
-        <slot name="icon"></slot>
+        <slot name="icon"/>
      </div>
      <div class="base-content-icon__title">
-       <slot name="title"></slot>
+       <slot name="title"/>
      </div>
      <div class="base-content-icon__description">
-        <slot name="description"></slot>
+        <slot name="description"/>
      </div>
    </div>
 </template>
@@ -39,13 +39,11 @@ export default {
     }
 
     &__title {
-      //@include global.h3-font;
       text-align: center;
       margin: 0 0 10px 0;
     }
 
     &__description {
-      //@include global.p-font;
       text-align: center;
     }
   }

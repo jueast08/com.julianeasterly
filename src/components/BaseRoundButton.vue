@@ -1,6 +1,6 @@
 <template>
    <button @click="handleClick">
-     <slot></slot>
+     <slot/>
    </button>
 </template>
 
@@ -29,6 +29,7 @@ export default {
     border-width: 2px; 
     border-style: solid;
     @include global.link-font;
+    text-transform: uppercase;
     cursor: pointer;
   }
 

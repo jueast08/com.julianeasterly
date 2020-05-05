@@ -1,14 +1,22 @@
 <template>
-  <div class="go-to-top" 
+  <div id="go-to-top-button" 
+      class="go-to-top-button" 
       @click="scrollToTop">
-    <div class="go-to-top__arrow"></div>
+    <div class="go-to-top-button__arrow"></div>
   </div>
 </template>
 
 <script>
+import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
 
 export default {
   name: 'TheGoToTopButton',
+  data() {
+    return {
+      aboutScrollObserver : null,
+      homeScrollObserver: null,
+    }
+  },
   methods: {
     scrollToTop() {
       let target = document.getElementById('home');
@@ -18,18 +26,37 @@ export default {
         inline: 'center',
       });
     }
-  }
+  },
+    mounted() {
+      try {
+        this.homeScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible',  {threshold: 0.8});
+        this.aboutScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible', {threshold: 0.25});
+        this.aboutScrollObserver.observe(document.querySelector('#about'), true, false);
+        this.homeScrollObserver.observe(document.querySelector('#home'), false, true);
+      }
+      catch(error) {
+        console.error(error);
+      }
+  },
+  beforeDestroy() {
+    if(this.homeScrollObserver) {
+      this.homeScrollObserver.disconnect();
+    } 
+    if(this.aboutScrollObserver) {
+      this.aboutScrollObserver.disconnect();
+    } 
+  },
 }
 </script>
 
 <style lang="scss" scoped>
   @use 'global';
   
-  .go-to-top {
+  .go-to-top-button {
     position: fixed;
-    bottom: 30px;
     right: 30px;
     z-index: 100;
+    bottom: -50px;
     height: 50px;
     width: 50px;
     display: flex;
@@ -41,6 +68,11 @@ export default {
     box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: (background ease-in-out 0.25s), (bottom ease-in-out 0.25s);
+    // opacity: 0;
+
+    &--visible {
+      bottom: 30px;
+    }
 
     &__arrow {
       height: 10px;
@@ -52,20 +84,21 @@ export default {
       border-width: 3px 0 0 3px;
     }
 
-    &:hover {
-      background: global.$primary-color;
-      bottom: 32px;
-    }
-    &:hover & {
-      &__arrow {
-        border-color: global.$primary-white;
-      }
-    }
+
   }
 
   @include global.adapt-to-screen('l') {
-    .go-to-top {
+    .go-to-top-button {
       right: 84px;
+      &:hover {
+        background: global.$primary-color;
+        bottom: 32px;
+      }
+      &:hover & {
+        &__arrow {
+          border-color: global.$primary-white;
+        }
+      }
     }
   }
  

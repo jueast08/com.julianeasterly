@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'BaseBurger',
+  name: 'TheHeaderBurger',
   props: {
     open: {
       type: Boolean,

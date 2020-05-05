@@ -1,9 +1,9 @@
 <template>
-  <section id="footer" class="footer  col-12">
+  <footer id="footer" class="footer col-12">
     <div class="footer__container col-12 col-m-10 col-l-6">
       <div class="footer__container__logo-group col-12">
         <div class="footer__container__logo-group__logo">
-          <base-logo/>
+          <logo-icon/>
         </div>
         <div class="footer__container__logo-group__text">JULIAN EASTERLY</div>
       </div>
@@ -31,12 +31,12 @@
         Made with <span>&#10084;</span> in Strasbourg, France during the 2020 Coronavirus lockdown
      </div>
     </div>
-  </section>
+  </footer>
 </template>
 
 <script>
 import BaseSocialNetworkButton from 'Components/BaseSocialNetworkButton';
-import BaseLogo from 'Icons/BaseLogo';
+import LogoIcon from 'Icons/LogoIcon';
 import EmailIcon from 'Icons/EmailIcon';
 import github from 'Assets/GitHub-Mark-64px.png';
 import linkedin from 'Assets/linkein-logo-64px.png';
@@ -45,12 +45,12 @@ export default {
   name: 'TheFooter',
   data() {
     return {
-      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'], //@TODO refactor. this data is repeated in the header
+      links: ['Home', 'About', 'Skills', 'Experience', 'Education'], //@TODO refactor. this data is repeated in the header
       gitHubImage: github,
       linkedinLogo: linkedin,
     }
   },
-  components: {BaseLogo, EmailIcon, BaseSocialNetworkButton},
+  components: {LogoIcon, EmailIcon, BaseSocialNetworkButton},
   methods: {},
 }
 </script>
@@ -83,7 +83,7 @@ export default {
         &__logo {
           margin: 0 auto 10px;
           width: 75px;
-          ::v-deep base-logo {
+          ::v-deep logo-icon {
             width: 100%;
           }
           

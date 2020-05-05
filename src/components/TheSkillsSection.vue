@@ -1,196 +1,106 @@
 <template>
-  <section id="skills" class="skills col-12">
-    <div class="skills__animation-trigger"></div>
-    <div class="skills__container ">
-      <div class="skills__container__titles col-12 col-m-10 col-l-8">
-        <h3 class="skills__container__titles__subtitle">
-          SUPERPOWERS
-        </h3>
-        <h2 class="skills__container__titles__title">
-          My Skills
-        </h2>
+  <base-section id="skills" title="What I Offer" subtitle="My Skills">
+    <div class="skills">
+      <div class="skills__list">
+        <base-content-icon class="skills__list__skill">
+            <template v-slot:icon><logo-icon/></template>
+            <template v-slot:title>Development and Tech</template>
+            <template v-slot:description>
+              I have educational with Java, C and C++, as
+              well as professional experience in Git/Git-flow
+              Python, PHP, and Javascript.
+              I've worked with various tools such as Travis
+              CI, Sonarqube, Docker and Kubernetes.
+            </template>
+        </base-content-icon>
+        <base-content-icon class="skills__list__skill">
+            <template v-slot:icon><logo-icon/></template>
+            <template v-slot:title>Project and Product Management</template>
+            <template v-slot:description>
+              I have educational with Java, C and C++, as
+              well as professional experience in Git/Git-flow
+              Python, PHP, and Javascript.
+              I've worked with various tools such as Travis
+              CI, Sonarqube, Docker and Kubernetes.
+            </template>          
+        </base-content-icon>
+        <base-content-icon class="skills__list__skill">
+            <template v-slot:icon><logo-icon/></template>
+            <template v-slot:title>Do-It-Yourself</template>
+            <template v-slot:description>
+              I have educational with Java, C and C++, as
+              well as professional experience in Git/Git-flow
+              Python, PHP, and Javascript.
+              I've worked with various tools such as Travis
+              CI, Sonarqube, Docker and Kubernetes.
+            </template>   
+        </base-content-icon>
       </div>
-      <div class="skills__container__content">
-        <div class="skills__container__content__my-skills">
-          <base-content-icon class="skills__container__content__my-skills__skill">
-              <template v-slot:icon><base-logo/></template>
-              <template v-slot:title>Languages</template>
-              <template v-slot:description>
-                <skill-gauge percentage="100%" skill-title="English" goal-label="Native"/>
-                <skill-gauge percentage="75%" skill-title="French" goal-label="Fluent"/>
-              </template>
-          </base-content-icon>
-          <base-content-icon class="skills__container__content__my-skills__skill">
-              <template v-slot:icon><base-logo/></template>
-              <template v-slot:title>Product & Project Management</template>
-              <template v-slot:description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-                Phasellus a feugiat dolor. 
-              </template>
-          </base-content-icon>
-                    <base-content-icon class="skills__container__content__my-skills__skill">
-              <template v-slot:icon><base-logo/></template>
-              <template v-slot:title>Product & Project Management</template>
-              <template v-slot:description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-                Phasellus a feugiat dolor. 
-              </template>
-          </base-content-icon>
-                    <base-content-icon class="skills__container__content__my-skills__skill">
-              <template v-slot:icon><base-logo/></template>
-              <template v-slot:title>Product & Project Management</template>
-              <template v-slot:description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-                Phasellus a feugiat dolor. 
-              </template>
-          </base-content-icon>
-        </div>
-
+      <div class="skills__contact-me">
+        <div>Want to work together on a project or opportunity?</div>
+        <div class="skills__contact-me__button"><base-round-button>contact me</base-round-button></div>
       </div>
     </div>
-    <div class="skills__wanted-skills">
-      <base-content-icon class="skills__container__content__my-skills__skill">
-          <template v-slot:icon><base-logo/></template>
-          <template v-slot:description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-            Phasellus a feugiat dolor. 
-          </template>
-      </base-content-icon>
-    </div>
-  </section>
+  </base-section>
 </template>
 
 <script>
+import BaseSection from 'Components/BaseSection';
 import BaseContentIcon from 'Components/BaseContentIcon';
-import BaseLogo from 'Icons/BaseLogo';
-import SkillGauge from 'Components/SkillGauge';
-
-import isIntersectionObserverAvailable from 'Source/utility';
+import LogoIcon from 'Icons/LogoIcon';
+import BaseRoundButton from 'Components/BaseRoundButton';
 
 export default {
   name: 'TheSkillsSection',
-  data() {
-    return {
-      elementsToAnimateByClassName: ['skills__container',],
-    }
-  },
-  components: {BaseContentIcon,BaseLogo,SkillGauge},
-  methods: {
-    //@TODO this ode is repeated in multiple sections. This should be refactored. Maybe a BaseSection class
-    addAnimationClasses() {
-      this.elementsToAnimateByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.add(className+'--in-view'));
-      });
-    },
-    removeAnimationClasses() {
-      this.elementsToAnimateByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.remove(className+'--in-view'));
-      });
-    },
-   handleOnScroll(entry) {
-      if(entry.isIntersecting) {
-        this.addAnimationClasses();
-      }else {
-        this.removeAnimationClasses();
-      }
-    }
-  },
-  mounted() {
-    if (isIntersectionObserverAvailable()) {
-      this.scrollObserver = new IntersectionObserver(entries => {
-        this.handleOnScroll(entries[0]);
-      });
-  
-      this.scrollObserver.observe(document.querySelector('.skills__animation-trigger'));
-    }
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.toggleMobileMenu);
-    if(this.scrollObserver) {
-      this.scrollObserver.disconnect();
-    } 
-  },
+  components: {BaseSection, BaseContentIcon,LogoIcon, BaseRoundButton},
 }
 </script>
 
 <style lang="scss" scoped>
   @use 'global';
   
-  $container-padding: 100px 25px;
-
-  .skills {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: global.$primary-white;
-    
-    &__animation-trigger {
-      position: absolute; 
-      top:70px;
-      height: 100%;
+  #skills {
+    background-color: global.$primary-color;
+    ::v-deep .section__title, ::v-deep .section__subtitle {
+      color: global.$primary-white;
     }
-    &__container {
-      min-height: 100%;
-      padding: $container-padding;
-      opacity: 0;
-      transform: translateY(300px);
-      transition: opacity ease-in 0.75s, transform ease-in 0.6s;
+    .skills {
+      margin-top: 40px;
       
-      &--in-view {
-        display: inital;
-        opacity: 1;
-        transform: translateY(0px);
-
-      }
-
-      &__titles {
-        text-align: center;
-        &__title {
-          @include global.h2-font;
-          color: global.$primary-black;
-        }
-        &__subtitle {
-          @include global.subtitle-font;
-          color: global.$primary-gray;
-        }
-      }
-
-      &__content {
-        display: flex;
-        flex-direction: column;
+      &__list {
         
-        &__my-skills  {
-          
-          &__skill {
-            margin: 25px 0;
-            color: global.$primary-black;  
-            
-            svg {
-              fill: global.$primary-color;
+        &__skill{
+          margin-top: 60px;
+          ::v-deep .base-content-icon {
+            &__icon {
+              fill: global.$primary-white;
             }
-            
+            &__title {
+              @include global.h4-font;
+              color: global.$primary-white;
+            }
+            &__description {
+              @include global.p-font;
+              color: global.$primary-white;
+            }  
           }
         }
       }
-    }
 
-    &__wanted-skills {
-      background: global.$primary-color;
-      height: 100vh;
-      padding: $container-padding;
+      &__contact-me {
+        margin-top: 50px;
+        text-align: center;
+        @include global.subtitle-font;
+        color: global.$primary-white;
 
-      color: global.$primary-white;
-      
-      svg {
-        fill: global.$primary-white;
+        &__button{
+          margin-top: 25px;
+          button {
+            color: global.$primary-white;
+          }  
+        }
       }
     }
-
   }
  
 </style>
