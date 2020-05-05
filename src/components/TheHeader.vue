@@ -6,26 +6,26 @@
           <the-header-logo class="header__bar__container__logo"/>
         </div>
         <div class="col-l-8">
-            <div class="header__bar__container__menu">
+            <nav class="header__bar__container__menu">
                 <span class="header__bar__container__menu__link"
                   v-for="(link, index) in links" 
                   :key="link+index"
                   :class="(link === activeLink) && 'header__bar__container__menu__link--active'"
                   @click="goToSection(link)">{{ link }}</span>
-            </div>
+            </nav>
           <div class="header__bar__container__burger">
             <base-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
           </div>
         </div>
       </div>
     </div>
-    <div class="header__mobile-menu col-12"
+    <nav class="header__mobile-menu col-12"
           :class="this.mobileMenuOpen ? 'header__mobile-menu--open' :''">
       <div class="header__mobile-menu__link"
             v-for="(link, index) in links" 
             :key="link+index"
             @click="goToSection(link)">{{ link }}</div>    
-    </div>
+    </nav>
     
   </header>
 </template>

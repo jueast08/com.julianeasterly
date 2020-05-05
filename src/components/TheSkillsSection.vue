@@ -14,14 +14,6 @@
         <div class="skills__container__content__my-skills">
           <base-content-icon class="skills__container__content__my-skills__skill">
               <template v-slot:icon><base-logo/></template>
-              <template v-slot:title>Languages</template>
-              <template v-slot:description>
-                <skill-gauge percentage="100%" skill-title="English" goal-label="Native"/>
-                <skill-gauge percentage="75%" skill-title="French" goal-label="Fluent"/>
-              </template>
-          </base-content-icon>
-          <base-content-icon class="skills__container__content__my-skills__skill">
-              <template v-slot:icon><base-logo/></template>
               <template v-slot:title>Product & Project Management</template>
               <template v-slot:description>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -50,16 +42,7 @@
         </div>
 
       </div>
-    </div>
-    <div class="skills__wanted-skills">
-      <base-content-icon class="skills__container__content__my-skills__skill">
-          <template v-slot:icon><base-logo/></template>
-          <template v-slot:description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras sodales consequat odio, et porttitor sapien sagittis sit amet. 
-            Phasellus a feugiat dolor. 
-          </template>
-      </base-content-icon>
+      <div class="skills__container__see-more"><a href="">SEE MY SKILLS IN DETAIL</a></div>
     </div>
   </section>
 </template>
@@ -67,7 +50,6 @@
 <script>
 import BaseContentIcon from 'Components/BaseContentIcon';
 import BaseLogo from 'Icons/BaseLogo';
-import SkillGauge from 'Components/SkillGauge';
 
 import isIntersectionObserverAvailable from 'Source/utility';
 
@@ -78,7 +60,7 @@ export default {
       elementsToAnimateByClassName: ['skills__container',],
     }
   },
-  components: {BaseContentIcon,BaseLogo,SkillGauge},
+  components: {BaseContentIcon,BaseLogo,},
   methods: {
     //@TODO this ode is repeated in multiple sections. This should be refactored. Maybe a BaseSection class
     addAnimationClasses() {
@@ -170,24 +152,35 @@ export default {
             margin: 25px 0;
             color: global.$primary-black;  
             
-            svg {
-              fill: global.$primary-color;
+            ::v-deep .base-content-icon__icon {
+              svg {
+                fill: global.$primary-color;
+              }
+            }
+
+            ::v-deep .base-content-icon__title {
+              @include global.subtitle-font;
             }
             
+            ::v-deep .base-content-icon__description {
+              @include global.p-font;
+            }
           }
         }
       }
-    }
 
-    &__wanted-skills {
-      background: global.$primary-color;
-      height: 100vh;
-      padding: $container-padding;
-
-      color: global.$primary-white;
-      
-      svg {
-        fill: global.$primary-white;
+      &__see-more {
+        text-align: center;
+        color: global.$primary-color;
+        margin-top: 50px;
+        @include global.link-font($size-s: 16px);
+        a {
+          text-decoration: none;
+          &:active, &:visited {
+            text-decoration: none;
+            color: global.$primary-color;
+          }
+        }
       }
     }
 
