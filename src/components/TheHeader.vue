@@ -14,7 +14,7 @@
                   @click="goToSection(link)">{{ link }}</span>
             </nav>
           <div class="header__bar__container__burger">
-            <base-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
+            <the-header-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()"/>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
 
 <script>
 import TheHeaderLogo from 'Components/TheHeaderLogo';
-import BaseBurger from 'Components/BaseBurger';
+import TheHeaderBurger from 'Components/TheHeaderBurger';
 import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
 
 export default {
@@ -49,7 +49,7 @@ export default {
   },
   components: {
     TheHeaderLogo,
-    BaseBurger,
+    TheHeaderBurger,
   },
   methods: {
     onBurgerClick() {
