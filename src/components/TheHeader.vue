@@ -42,7 +42,7 @@ export default {
       activeLink: 'Home',
       elementsWithALightThemeByClassName: ['header__bar', 'header__bar__container__logo', 'header__bar__container__menu__link'],
       lightThemeOn: false,
-      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'],
+      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Contact'],
       mobileMenuOpen: false,
       scrollObserver: null,
     }
