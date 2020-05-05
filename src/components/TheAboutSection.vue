@@ -1,14 +1,23 @@
 <template>
   <section id="about" class="about col-12">
     <div class="about__animation-trigger"></div>
+    <div class="about__container__titles">
+      <h2 class="about__title">
+        Hi. I'm Julian.
+        <span class="about__title__shadow">
+          Hi. I'm Julian.
+        </span>
+      </h2>
+      </div>
     <div class="about__container col-12 col-m-10 col-l-6">
       <div class="about__container__titles">
-        <h3 class="about__container__titles__subtitle">
-          ESTABLISHED 1990 IN THE USA • CURRENTLY ENJOYING LIFE IN STRASBOURG, FRANCE
-        </h3>
         <h2 class="about__container__titles__title">
-          Code & Consulting
+          Hi. I'm Julian.
+          <div class="about__container__titles__title__shadow">
+            Hi. I'm Julian.
+          </div>
         </h2>
+
       </div>
       <div class="about__container__content">
         <p>
@@ -64,9 +73,7 @@ import cookingIcon from 'Assets/cooking.png';
 import sportsIcon from 'Assets/sport.png';
 import toolsIcon from 'Assets/tools.png';
 import devDesignIcon from 'Assets/dev-design.png';
-
-
-import isIntersectionObserverAvailable from 'Source/utility';
+import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
 
 export default {
   name: 'TheAboutSection',
@@ -82,37 +89,17 @@ export default {
   components: {
     BaseRoundButton, BaseContentIcon, 
   },
-  methods: {
-    //@TODO this ode is repeated in multiple sections. This should be refactored. Maybe a BaseSection class
-    addAnimationClasses() {
-      this.elementsToAnimateByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.add(className+'--in-view'));
-      });
-    },
-    removeAnimationClasses() {
-      this.elementsToAnimateByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.remove(className+'--in-view'));
-      });
-    },
-   handleOnScroll(entry) {
-      if(entry.isIntersecting) {
-        this.addAnimationClasses();
-      }else {
-        this.removeAnimationClasses();
-      }
-    }
-  },
   mounted() {
-    if (isIntersectionObserverAvailable()) {
-      this.scrollObserver = new IntersectionObserver(entries => {
-        this.handleOnScroll(entries[0]);
-      });
-  
+    try {
+      this.scrollObserver = new ScrollIntoViewObserver(this.elementsToAnimateByClassName, '--in-view');
       this.scrollObserver.observe(document.querySelector('.about__animation-trigger'));
     }
+    catch(error) {
+      console.error(error);
+    }
+    
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.toggleMobileMenu);
     if(this.scrollObserver) {
       this.scrollObserver.disconnect();
     } 
@@ -125,40 +112,74 @@ export default {
   
   .about {
     position: relative;
-    display: flex;
-    justify-content: center;
-    background: global.$background-gray url('~Assets/background.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+    //display: flex;
+    //justify-content: center;
+    background-color: global.$background-gray;
     
     &__animation-trigger {
       position: absolute; 
       top:70px;
       height: 100%;
     }
+
+    &__title {
+      position: relative;
+      @include global.h2-font;
+      color: global.$primary-black;
+      //background: green;
+      z-index: 2;
+      &__shadow {
+        @include global.h2-font-shadow;
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        z-index: 1;
+        opacity: 0.15;
+        transform-origin: center;
+        transform: translateX(-50%);
+        //background: red;
+        width: 100vw;
+        text-overflow: clip;
+        white-space: nowrap;
+        //background:red;
+      }
+    }
+    /*@TODO containers are a pretty common thing and should have the same padding throughout. 
+    Consider a @mixin where you can pass the section name in as a param and then have some default parameters that can be overriden*/
     &__container {
       min-height: 100%;
-      padding: 100px 25px; //@TODO maybe consider a global variable to handle the padding for all the different sections;
+      padding: 50px 25px; //@this should be universal
       opacity: 0;
       transform: translateY(300px);
       transition: opacity ease-in 0.75s, transform ease-in 0.6s;
       
-
-
       &--in-view {
         display: inital;
         opacity: 1;
         transform: translateY(0px);
-
       }
+      
       &__titles {
         text-align: center;
         &__title {
+          position: relative;
           @include global.h2-font;
           color: global.$primary-black;
+          background: green;
+          z-index: 2;
+          &__shadow {
+            @include global.h2-font-shadow;
+                position: absolute;
+            top: -100%;
+            left: 50%;
+            z-index: 1;
+            opacity: 0.15;
+            transform: translateX(-50%);
+            //background: red;
+            width: 100%;
+          }
         }
+
         &__subtitle {
           @include global.subtitle-font;
           color: global.$primary-gray;
