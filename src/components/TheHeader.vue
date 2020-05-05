@@ -33,18 +33,18 @@
 <script>
 import TheHeaderLogo from 'Components/TheHeaderLogo';
 import BaseBurger from 'Components/BaseBurger';
-import isIntersectionObserverAvailable from 'Source/utility';
+import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
 
 export default {
   name: 'TheHeader',
   data() {
     return {
       activeLink: 'Home',
-      elementsWithALightThemeByClassName: ['header__bar', 'header__bar__container__logo', 'header__bar__container__menu__link'],
-      lightThemeOn: false,
+      elementsWithALightThemeByClassName: ['header__bar',],
       links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Contact'],
       mobileMenuOpen: false,
-      scrollObserver: null,
+      themeObserver: null,
+      fixedPositionObserver: null,
     }
   },
   components: {
@@ -63,37 +63,6 @@ export default {
       this.mobileMenuOpen = false;
       window.removeEventListener('scroll', this.closeMenuRemoveListener);
     },
-    addLightTheme() {
-      this.elementsWithALightThemeByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.add(className+'--light'))
-      });
-
-    },
-    removeLightTheme() {
-      this.elementsWithALightThemeByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.remove(className+'--light'))
-      });
-
-    },
-    fixHeader() {
-        document.getElementById('header').classList.add("header--fixed");
-    },
-    unfixHeader() {
-        document.getElementById('header').classList.remove("header--fixed");
-    },
-    handleScroll(element) {
-      if(this.isHeaderOutOfViewport(element)) {
-        this.addLightTheme();
-        this.fixHeader();
-      }
-      else {
-        this.removeLightTheme();
-        this.unfixHeader();
-      }
-    },
-    isHeaderOutOfViewport(element) {
-      return element.boundingClientRect.y < 0;
-    },
     goToSection(idName) {
       let target = document.getElementById(idName.toLowerCase());
       if(target) {
@@ -110,23 +79,34 @@ export default {
     },
   },
   mounted() {
-    //@TODO take into account user scroll. The active link should change when to home when, for example, the user scrolls back to the home section
-    if (isIntersectionObserverAvailable()) {
-      this.scrollObserver = new IntersectionObserver(entries => {
-        this.handleScroll(entries[0]);
-      });
-  
-      this.scrollObserver.observe(document.querySelector('#top-anchor-pixel'));
+    try {
+      this.themeObserver = new ScrollIntoViewObserver(this.elementsWithALightThemeByClassName, '--light');
+      this.themeObserver.triggerCritera = (entry) => { return entry.boundingClientRect.y < 0};
+      this.themeObserver.observe(document.querySelector('#top-anchor-pixel'));
+      this.fixedPositionObserver = new ScrollIntoViewObserver(['header'], '--fixed');
+      this.fixedPositionObserver.triggerCritera = (entry) => {return entry.boundingClientRect.y < 0};
+      this.fixedPositionObserver.observe(document.querySelector('#top-anchor-pixel'));
     }
-    else {
-      this.lightThemeOn = true;
-      this.fixHeader();
+    catch(error) {
+      console.error(error);
+      if(this.themeObserver) {
+        this.themeObserver.disconnect();
+      }
+
+      if(this.fixedPositionObserver) {
+        this.fixedPositionObserver.disconnect();
+      }
+      document.getElementById('header').classList.add("header--fixed");
+      document.getElementById('header').classList.add("header__bar--light");
+
     }
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.toggleMobileMenu);
-    if(this.scrollObserver) {
-      this.scrollObserver.disconnect();
+    if(this.themeObserver) {
+      this.themeObserver.disconnect();
+    } 
+    if(this.fixedPositionObserver) {
+      this.fixedPositionObserver.disconnect();
     } 
   },
 }
@@ -155,11 +135,6 @@ export default {
         &__logo {
           color: global.$primary-white;
           fill: global.$primary-white;
-
-          &--light {
-            color: global.$primary-black;
-            fill: global.$primary-color;
-          }
         }
 
         &__menu {
@@ -176,6 +151,17 @@ export default {
       
       &--light {
         background: global.$primary-white;
+      }
+
+      &--light & {
+        background: global.$primary-white;
+        &__container {
+   
+          &__logo {
+              color: global.$primary-black;
+              fill: global.$primary-color;
+          }
+        }
       }
     }
 
@@ -217,12 +203,6 @@ export default {
         margin-top: 0px;
         padding: 0 85px;
         
-        &--light {
-          -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
-          -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
-          box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
-        }
-
         &__container {
           display: flex;
           height: 100%;
@@ -250,6 +230,26 @@ export default {
           &__burger {
             display: none;
           }
+        }
+        
+        &--light {
+          -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+          -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+          box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+        }
+
+        &--light & {
+          &__container {
+            &__menu {
+              &__link {
+                color: global.$primary-black;
+              }
+            }
+
+            &__burger {
+              display: none;
+            }
+          }          
         }  
       }
     

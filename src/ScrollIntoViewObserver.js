@@ -14,6 +14,7 @@ export default class ScrollIntoViewObserver {
     this._intersectionObserverOptions = intersectionObserverOptions;
     this._observer = null;
     this._actionArray = [];
+    this._triggerCritera = null;
     this._createObserver();
   }
 
@@ -35,7 +36,7 @@ export default class ScrollIntoViewObserver {
   /**
    * Destroy the observer. This should be done in the destroy section of the component
    */
-  destroy() {
+  disconnect() {
     this._observer.disconnect();
   }
 
@@ -54,11 +55,20 @@ export default class ScrollIntoViewObserver {
   }
 
   _handleOnScroll(entry, index) {
-    if(entry.isIntersecting && this._actionArray[index].addOnInView) {
+    if(this._triggerEvent(entry) && this._actionArray[index].addOnInView) {
       this._addAnimationClasses();
     }
     else if(this._actionArray[index].removeOnOutOfView) {
       this._removeAnimationClasses();
+    }
+  }
+
+  _triggerEvent(entry) {
+    if(this._triggerCritera !== null) {
+      return this._triggerCritera(entry);
+    }
+    else {
+      return entry.isIntersecting;
     }
   }
 
@@ -91,6 +101,20 @@ export default class ScrollIntoViewObserver {
     else {
       this._intersectionObserverOptions = intersectionObserverOptions;
     }
+  }
+
+  
+  /**
+   * This sets the condition that will trigger the modification of classes. 
+   * By default, this is entries[0].isIntersecting function from the Intersection Observer API
+   * https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+   * @param {Function} booleanTriggerFunction : A boolean function that will be tested entry value. The parameter entry[n] from the Intersection Observer API
+   */
+  set triggerCritera(booleanTriggerFunction) {
+    if (typeof booleanTriggerFunction !== 'function') {
+      throw 'booleanTriggerFunction must be a function that takes a entry and returns a boolean';
+    }
+    this._triggerCritera = booleanTriggerFunction;
   }
 
 }

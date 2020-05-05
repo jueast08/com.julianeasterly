@@ -7,10 +7,16 @@
 </template>
 
 <script>
-import isIntersectionObserverAvailable from 'Source/utility';
+import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
 
 export default {
   name: 'TheGoToTopButton',
+  data() {
+    return {
+      aboutScrollObserver : null,
+      homeScrollObserver: null,
+    }
+  },
   methods: {
     scrollToTop() {
       let target = document.getElementById('home');
@@ -22,28 +28,22 @@ export default {
     }
   },
     mounted() {
-    if (isIntersectionObserverAvailable()) {
-      this.aboutObserver = new IntersectionObserver(entries => {
-        if(entries[0].isIntersecting){
-          console.log('about enter');
-          document.getElementById('go-to-top-button').classList.add('go-to-top-button--visible');
-        }
-      }, {threshold: 0.25});
-  
-      this.homeObserver = new IntersectionObserver(entries => {
-        if(entries[0].isIntersecting){
-          console.log('about leave');
-          document.getElementById('go-to-top-button').classList.remove('go-to-top-button--visible');
-        }
-      }, {threshold: 1});
-
-      this.aboutObserver.observe(document.querySelector('#about'));
-      this.homeObserver.observe(document.querySelector('#home'));
-    }
+      try {
+        this.homeScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible',  {threshold: 1});
+        this.aboutScrollObserver = new ScrollIntoViewObserver(['go-to-top-button'], '--visible', {threshold: 0.25});
+        this.aboutScrollObserver.observe(document.querySelector('#about'), true, false);
+        this.homeScrollObserver.observe(document.querySelector('#home'), false, true);
+      }
+      catch(error) {
+        console.error(error);
+      }
   },
   beforeDestroy() {
-    if(this.scrollObserver) {
-      this.scrollObserver.disconnect();
+    if(this.homeScrollObserver) {
+      this.homeScrollObserver.disconnect();
+    } 
+    if(this.aboutScrollObserver) {
+      this.aboutScrollObserver.disconnect();
     } 
   },
 }
