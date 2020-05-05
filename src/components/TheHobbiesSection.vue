@@ -2,23 +2,23 @@
   <base-section id="hobbies" title="A Few of My Hobbies">
     <div class="hobbies">
       <base-content-icon class="hobbies__hobby">
-          <template v-slot:icon><base-logo/></template>
+          <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Coding and Design</template>
       </base-content-icon>
       <base-content-icon class="hobbies__hobby">
-          <template v-slot:icon><base-logo/></template>
+          <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Sports</template>
       </base-content-icon>
       <base-content-icon class="hobbies__hobby">
-          <template v-slot:icon><base-logo/></template>
+          <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Do-It-Yourself</template>
       </base-content-icon>
       <base-content-icon class="hobbies__hobby">
-          <template v-slot:icon><base-logo/></template>
+          <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Gardening</template>
       </base-content-icon>
       <base-content-icon class="hobbies__hobby">
-          <template v-slot:icon><base-logo/></template>
+          <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Cooking</template>
       </base-content-icon>
     </div>
@@ -29,11 +29,11 @@
 <script>
 import BaseSection from 'Components/BaseSection';
 import BaseContentIcon from 'Components/BaseContentIcon';
-import BaseLogo from 'Icons/BaseLogo';
+import LogoIcon from 'Icons/LogoIcon';
 
 export default {
   name: 'TheHobbiesSection',
-  components: {BaseSection, BaseContentIcon, BaseLogo,},
+  components: {BaseSection, BaseContentIcon, LogoIcon,},
 
 }
 </script>

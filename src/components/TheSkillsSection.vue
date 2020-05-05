@@ -3,7 +3,7 @@
     <div class="skills">
       <div class="skills__list">
         <base-content-icon class="skills__list__skill">
-            <template v-slot:icon><base-logo/></template>
+            <template v-slot:icon><logo-icon/></template>
             <template v-slot:title>Development and Tech</template>
             <template v-slot:description>
               I have educational with Java, C and C++, as
@@ -14,7 +14,7 @@
             </template>
         </base-content-icon>
         <base-content-icon class="skills__list__skill">
-            <template v-slot:icon><base-logo/></template>
+            <template v-slot:icon><logo-icon/></template>
             <template v-slot:title>Project and Product Management</template>
             <template v-slot:description>
               I have educational with Java, C and C++, as
@@ -25,7 +25,7 @@
             </template>          
         </base-content-icon>
         <base-content-icon class="skills__list__skill">
-            <template v-slot:icon><base-logo/></template>
+            <template v-slot:icon><logo-icon/></template>
             <template v-slot:title>Do-It-Yourself</template>
             <template v-slot:description>
               I have educational with Java, C and C++, as
@@ -47,12 +47,12 @@
 <script>
 import BaseSection from 'Components/BaseSection';
 import BaseContentIcon from 'Components/BaseContentIcon';
-import BaseLogo from 'Icons/BaseLogo';
+import LogoIcon from 'Icons/LogoIcon';
 import BaseRoundButton from 'Components/BaseRoundButton';
 
 export default {
   name: 'TheSkillsSection',
-  components: {BaseSection, BaseContentIcon,BaseLogo, BaseRoundButton},
+  components: {BaseSection, BaseContentIcon,LogoIcon, BaseRoundButton},
 }
 </script>
 

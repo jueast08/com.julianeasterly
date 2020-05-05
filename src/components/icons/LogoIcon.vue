@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="base-logo" 
+    class="logo-icon" 
     viewBox="0 0 50.609 50" enable-background="new 0 0 50.609 50">
   <g class="secondary">
       <path class="compass-class" d="M11.978,38.469c-7.358-7.359-7.358-19.288,0-26.646c6.404-6.406,16.275-7.235,23.576-2.487l4.43-4.43
@@ -18,6 +18,6 @@
 
 <script>
 export default {
-  name: 'BaseLogo',
+  name: 'LogoIcon',
 }
 </script>
