@@ -46,6 +46,10 @@
     }
 }
 
+@mixin h2-font-shadow($size-s: 30px, $size-m: 30px, $size-l: 45px, $size-xl: 50px, $weight: 700) {
+    @include h2-font($size-s * 2, $size-m * 2, $size-l * 2, $size-xl * 2, $weight: 700);
+}
+
 @mixin h3-font($size-s: 16px, $size-m: 16px, $size-l: 18px, $size-xl: 25px, $weight: 700) {
     @include _font($size-s, $weight); 
     line-height: $size-s; 

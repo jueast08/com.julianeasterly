@@ -1,7 +1,7 @@
 <template>
    <button @click="goToLink">
-     <slot>
-     </slot>
+     <slot/>
+     
    </button>
 </template>
 
