@@ -1,33 +1,23 @@
 <template>
-  <section id="home" class="home col-12">
+  <div id="home" class="home col-12">
     <div class="home__container col-12 col-l-6">
-      <div class="home__container__titles col-12">
+      <section class="home__container__titles col-12">
         <h1 class="home__container__titles__title">JULIAN</h1>
         <h1 class="home__container__titles__title">EASTERLY</h1>
-      </div>
-      <div class="home__container__subtitles col-12">
+      </section>
+      <section class="home__container__subtitles col-12">
         <p class="home__container__subtitles__subtitle">
-          FUNCTIONAL PROJECT LEADER - DEVELOPER
+          COLLABORATE. LEARN. EVOLVE.
         </p>
-      </div>
-      <div class="home__container__button-group col-12">
-        <base-round-button class="home__container__button-group__about">
-          ABOUT ME
-        </base-round-button>
-      </div>   
+      </section>
     </div>
-    <div class="home__background col-12 col-xl-6">
-        <div class="home__background__stripe col-12">
-          <base-round-button class="home__background__stripe__about" @handle-click="goToAbout">
-            ABOUT ME
-          </base-round-button>
-      </div>        
-    </div>
-  </section>
+    <div class="home__background col-12 col-xl-6"></div>
+    <div class="home__down-arrow"
+      @click="goToAbout"></div>
+  </div>
 </template>
 
 <script>
-import BaseRoundButton from 'Components/BaseRoundButton';
 import ProfileImage from 'Assets/portrait_bridge_saint-entienne.jpg';
 import isIntersectionObserverAvailable from 'Source/utility';
 
@@ -38,9 +28,6 @@ export default {
       profileImage: ProfileImage,
       elementsToAnimateByClassName: ['home__container', 'home__container__titles__title'],
     }
-  },
-  components: {
-    BaseRoundButton,
   },
   methods: {
     addAnimationClasses() {
@@ -101,11 +88,13 @@ export default {
       flex-direction: column;
       justify-content: flex-end;
       height: 50%;
+      margin-bottom: 25px;
       padding: 0 30px;
       padding-top: calc(30px + #{global.$xs-header-height});
       @include global.border-box;
       opacity: 0;
       transition: opacity ease-in 0.6s;
+      
 
       &--in-view {
         opacity: 1;
@@ -151,10 +140,6 @@ export default {
           color: global.$primary-white;
         }
       }
-
-      &__button-group {
-        display: none;  
-      }
     }
 
     &__background {
@@ -177,23 +162,27 @@ export default {
         background-size: cover;
         background-position: center;
       }
-      
-      &__stripe {
-        position: relative;
-        height: 105px;
-        padding: 0 30px;
-        z-index: 2;
-        background-color: rgba(global.$primary-color, 0.6);
-        
-        &__about {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            border-color: global.$primary-white;
-            color: global.$primary-white;
-        }
-      }
     }
+
+    &__down-arrow {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+
+      z-index: 100;
+      height: 15px;
+      width: 15px;
+      border-width: 0px 10px 10px 0;
+      border-style: solid;
+      border-color: global.$primary-white;
+      animation: moveArrow 1s infinite alternate;
+
+    }
+    @include global.keyframes(moveArrow) {
+        from {bottom: 50px;}
+        to {bottom: 40px;}
+      }
   }
 
   @include global.adapt-to-screen('xl') {
@@ -213,49 +202,35 @@ export default {
         &__subtitles {
           text-align: right;                  
         }
-        
-        &__button-group {
-          display: initial;
-          &__about {
-            float: right;
-            border-color: global.$primary-white;
-            color: global.$primary-white;
-          }
-        }
       }
 
       &__background {
         clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
         height: 100vh;
           
-          &:before{
-            content: ' ';
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.46;
-            background-image: url('~Assets/portrait_bridge_saint-entienne.jpg');
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover ;
-            background-position: right;
-          }
-          
-          &__stripe {
-            width: 50%;
-            height: 100%;
-            clip-path: polygon(25% 0, 100% 0, 50% 100%, 0% 100%);
-          
-            &__about {
-                display: none;
-              }
-          }
+        &:before{
+          content: ' ';
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          opacity: 0.46;
+          background-image: url('~Assets/portrait_bridge_saint-entienne.jpg');
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+          background-size: cover ;
+          background-position: right;
+        }
+      }
       
-  
+      &__down-arrow {
+        
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
