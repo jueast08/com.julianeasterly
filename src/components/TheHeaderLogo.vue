@@ -2,19 +2,19 @@
   
   <div class="the-header-logo">
     <span>JULIAN</span>
-    <base-logo/>
+    <logo-icon/>
     <span>EASTERLY</span>
   </div>
 
 </template>
 
 <script>
-import BaseLogo from 'Icons/BaseLogo';
+import LogoIcon from 'Icons/LogoIcon';
 
 export default {
   name: 'TheHeaderLogo',
   components: {
-    BaseLogo
+    LogoIcon
   }
 }
 </script>

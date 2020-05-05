@@ -3,7 +3,7 @@
     <div class="footer__container col-12 col-m-10 col-l-6">
       <div class="footer__container__logo-group col-12">
         <div class="footer__container__logo-group__logo">
-          <base-logo/>
+          <logo-icon/>
         </div>
         <div class="footer__container__logo-group__text">JULIAN EASTERLY</div>
       </div>
@@ -36,7 +36,7 @@
 
 <script>
 import BaseSocialNetworkButton from 'Components/BaseSocialNetworkButton';
-import BaseLogo from 'Icons/BaseLogo';
+import LogoIcon from 'Icons/LogoIcon';
 import EmailIcon from 'Icons/EmailIcon';
 import github from 'Assets/GitHub-Mark-64px.png';
 import linkedin from 'Assets/linkein-logo-64px.png';
@@ -50,7 +50,7 @@ export default {
       linkedinLogo: linkedin,
     }
   },
-  components: {BaseLogo, EmailIcon, BaseSocialNetworkButton},
+  components: {LogoIcon, EmailIcon, BaseSocialNetworkButton},
   methods: {},
 }
 </script>
@@ -83,7 +83,7 @@ export default {
         &__logo {
           margin: 0 auto 10px;
           width: 75px;
-          ::v-deep base-logo {
+          ::v-deep logo-icon {
             width: 100%;
           }
           
