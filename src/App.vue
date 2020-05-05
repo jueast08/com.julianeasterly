@@ -6,6 +6,7 @@
     <the-go-to-top-button/>
     <the-home-section/>
     <the-about-section/>
+    <the-hobbies-section/>
     <the-skills-section/>
     <the-footer/>
   </div>
@@ -17,6 +18,7 @@ import TheSocialNetworkBar from './components/TheSocialNetworkBar';
 import TheGoToTopButton from './components/TheGoToTopButton';
 import TheHomeSection from './components/TheHomeSection';
 import TheAboutSection from './components/TheAboutSection';
+import TheHobbiesSection from './components/TheHobbiesSection';
 import TheSkillsSection from './components/TheSkillsSection';
 import TheFooter from './components/TheFooter';
 
@@ -28,6 +30,7 @@ export default {
     TheGoToTopButton, 
     TheHomeSection, 
     TheAboutSection,
+    TheHobbiesSection,
     TheSkillsSection,
     TheFooter}
 }
