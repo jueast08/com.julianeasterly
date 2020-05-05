@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       profileImage: ProfileImage,
-      elementsToAnimateByClassName: ['home__container', 'home__container__titles__title'],
+      elementsToAnimateByClassName: ['home__container',],
     }
   },
   methods: {
@@ -39,8 +39,14 @@ export default {
     }
   },
   mounted() {
-    this.scrollObserver = new ScrollIntoViewObserver(this.elementsToAnimateByClassName, '--in-view');
-    this.scrollObserver.observe(document.querySelector('.home__container'));
+    try {
+      this.scrollObserver = new ScrollIntoViewObserver(this.elementsToAnimateByClassName, '--in-view');
+      this.scrollObserver.observe(document.querySelector('.home__container'));
+    }
+    catch(error) {
+      console.error(error);
+    }
+    
   },
   beforeDestroy() {
     if(this.scrollObserver) {
@@ -70,11 +76,6 @@ export default {
       @include global.border-box;
       opacity: 0;
       transition: opacity ease-in 0.6s;
-      
-
-      &--in-view {
-        opacity: 1;
-      }
 
       &__titles {
         text-align: left;        
@@ -94,17 +95,6 @@ export default {
             transform: translateX(400px);
             color: global.$primary-color;
           }
-
-          &--in-view {
-            transform: translateX(0);
-            &:nth-child(1) {
-              transform: translateX(0px);
-            }
-            &:nth-child(2) {
-              transform: translateX(0px);
-            }
-          }
-
         }
       }
 
@@ -114,6 +104,18 @@ export default {
         &__subtitle {
           @include global.subtitle-font;
           color: global.$primary-white;
+        }
+      }
+
+      &--in-view {
+        opacity: 1; 
+      }
+
+      &--in-view & {
+        &__titles {
+          &__title {
+            transform: translateX(0);
+          }
         }
       }
     }
