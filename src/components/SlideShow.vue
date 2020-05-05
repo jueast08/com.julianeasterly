@@ -6,7 +6,7 @@
         </div>
         <div class="slider__container__content">
             <div class="slider__container__content__container">
-                <slot></slot>
+                <slot/>
             </div>
         </div>
         <div class="slider__container__right-arrow">

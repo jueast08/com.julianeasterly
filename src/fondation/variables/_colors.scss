@@ -5,3 +5,7 @@ $primary-black : #2A2A2E;
 $primary-gray: lighten(#2A2A2E, 30%);
 
 $background-gray: #E9E9E9;
+
+.primary-font-color {
+    color: $primary-color;
+}

@@ -1,6 +1,13 @@
 const path = require('path');
 
 module.exports = {
+    pages: {
+        index: {
+            entry: 'src/main.js',
+            title: 'Julian EASTERLY - IT Business Analyst and Developer',
+            description: 'Julian EASTERLY - IT Business Analyst and Developer', //@TODO add a description for SEO optimisation 120 à 140 caractères
+        }
+    },
     chainWebpack: config => {
         let alias = config.resolve.alias;
 
