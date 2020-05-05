@@ -1,51 +1,64 @@
+/**
+ * @brief This class is envolopes the IntersectionObserver for the project which primarily uses this tool to animate imtems once a root has come into view
+ */
 export default class ScrollIntoViewObserver {
 
-  constructor(classesToModify, classBEMModifier = '--in-view', addOnInView = true, removeOnOutOfView = true, intercectionObserverOptions) {
-    this.classesToModify = classesToModify;
-    this.classModifier = classBEMModifier;
-    this.addOnInView = addOnInView;
-    this.removeOnOutOfView = removeOnOutOfView;
-    this.observer = null;
-    this.intercectionObserverOptions = intercectionObserverOptions;
+  constructor(classesToModify, classBEMModifier = '--in-view', addOnInView = true, removeOnOutOfView = true, intersectionObserverOptions = {}) {
+    this._classesToModify = classesToModify;
+    this._classModifier = classBEMModifier;
+    this._addOnInView = addOnInView;
+    this._removeOnOutOfView = removeOnOutOfView;
+    this._observer = null;
+    this._intersectionObserverOptions = intersectionObserverOptions;
+    this._createObserver();
   }
 
-  handleOnScroll(entry) {
-    if(entry.isIntersecting && this.addOnInView) {
-      this.addAnimationClasses();
-    }
-    else if(this.removeOnOutOfView) {
-      this.removeAnimationClasses();
-    }
-  }
-
-  addAnimationClasses() {
-    this.classesToModify.forEach(className => {
-      document.getElementsByClassName(className).forEach(element => element.classList.add(className+this.classModifier));
-    });
-  }
-
-  removeAnimationClasses() {
-    this.classesToModify.forEach(className => {
-      document.getElementsByClassName(className).forEach(element => element.classList.remove(className+this.classModifier));
-    });
-  }
-
-  destroy() {
-    this.observer.disconnect();
-  }
-
-  get observer() {
+  _createObserver() {
     if(!this.isIntersectionObserverAvailable) {
       throw 'Intersection Observer is not available in this browers.';
     }
 
-    if(this.observer === null) {
-      this.observer = new IntersectionObserver(entries => {
+    if(this._observer === null) {
+      this._observer = new IntersectionObserver(entries => {
         entries.forEach(entry => this.handleOnScroll(entry))
-      },this.intercectionObserverOptions);
+      },this._intersectionObserverOptions);
     }
-    return this.observer;
+    return this._observer;
   }
+
+  _handleOnScroll(entry) {
+    if(entry.isIntersecting && this._addOnInView) {
+      this.addAnimationClasses();
+    }
+    else if(this._removeOnOutOfView) {
+      this.removeAnimationClasses();
+    }
+  }
+
+  _addAnimationClasses() {
+    this._classesToModify.forEach(className => {
+      document.getElementsByClassName(className).forEach(element => element.classList.add(className+this._classModifier));
+    });
+  }
+
+  _removeAnimationClasses() {
+    this._classesToModify.forEach(className => {
+      document.getElementsByClassName(className).forEach(element => element.classList.remove(className+this._classModifier));
+    });
+  }
+
+  observe(querySelector) {
+    if(this._observer === null) {
+      throw 'Observer has not been initiated';
+    }
+    this._observer.observe(document.querySelector(querySelector));
+  }
+
+  destroy() {
+    this._observer.disconnect();
+  }
+
+
 
   get isIntersectionObserverAvailable() {
     return "IntersectionObserver" in window &&
@@ -54,15 +67,15 @@ export default class ScrollIntoViewObserver {
   }
   
   get interSectionObserverOptions() {
-    return this.interSectionObserverOptions;
+    return this._interSectionObserverOptions;
   }
 
-  set intercectionObserverOptions(intercectionObserverOptions) {
-    if(typeof this.intercectionObserverOptions  !== 'object') {
-      throw 'intercectionObserverOptions must be an object'
+  set intersectionObserverOptions(intersectionObserverOptions) {
+    if(typeof this._intersectionObserverOptions  !== 'object') {
+      throw 'intersectionObserverOptions must be an object'
     }
     else {
-      this.intercectionObserverOptions = intercectionObserverOptions;
+      this._intersectionObserverOptions = intersectionObserverOptions;
     }
   }
 
