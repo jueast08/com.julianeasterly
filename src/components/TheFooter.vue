@@ -1,5 +1,5 @@
 <template>
-  <section id="footer" class="footer  col-12">
+  <footer id="footer" class="footer col-12">
     <div class="footer__container col-12 col-m-10 col-l-6">
       <div class="footer__container__logo-group col-12">
         <div class="footer__container__logo-group__logo">
@@ -31,7 +31,7 @@
         Made with <span>&#10084;</span> in Strasbourg, France during the 2020 Coronavirus lockdown
      </div>
     </div>
-  </section>
+  </footer>
 </template>
 
 <script>
@@ -45,7 +45,7 @@ export default {
   name: 'TheFooter',
   data() {
     return {
-      links: ['Home', 'About', 'Skills', 'Experience', 'Education', 'Projects'], //@TODO refactor. this data is repeated in the header
+      links: ['Home', 'About', 'Skills', 'Experience', 'Education'], //@TODO refactor. this data is repeated in the header
       gitHubImage: github,
       linkedinLogo: linkedin,
     }

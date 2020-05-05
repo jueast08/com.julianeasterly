@@ -24,7 +24,7 @@ export default {
     title: {
       type: String,
       required: false,
-      default: 'Section',
+      default: '',
     },
     subtitle: {
       type: String,
@@ -76,7 +76,7 @@ export default {
 
     &__container {
       min-height: 100%;
-      padding: 0 25px; //@this should be universal
+      padding: 0 25px; 
     }
   }
  
