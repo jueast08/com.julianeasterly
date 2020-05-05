@@ -128,6 +128,7 @@
 @mixin link-font($size-s: 14px, $size-m: 14px, $size-l: 14px, $size-xl: 14px,$weight: 700)  {
     @include _font($size-s, $weight); 
     line-height: $size-s; 
+    
 
     @include breakpoints.adapt-to-screen('m') {
         @include _font($size-m, $weight);
