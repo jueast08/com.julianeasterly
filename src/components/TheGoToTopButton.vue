@@ -1,11 +1,13 @@
 <template>
-  <div class="go-to-top" 
+  <div id="go-to-top-button" 
+      class="go-to-top-button" 
       @click="scrollToTop">
-    <div class="go-to-top__arrow"></div>
+    <div class="go-to-top-button__arrow"></div>
   </div>
 </template>
 
 <script>
+import isIntersectionObserverAvailable from 'Source/utility';
 
 export default {
   name: 'TheGoToTopButton',
@@ -18,18 +20,43 @@ export default {
         inline: 'center',
       });
     }
-  }
+  },
+    mounted() {
+    if (isIntersectionObserverAvailable()) {
+      this.aboutObserver = new IntersectionObserver(entries => {
+        if(entries[0].isIntersecting){
+          console.log('about enter');
+          document.getElementById('go-to-top-button').classList.add('go-to-top-button--visible');
+        }
+      }, {threshold: 0.25});
+  
+      this.homeObserver = new IntersectionObserver(entries => {
+        if(entries[0].isIntersecting){
+          console.log('about leave');
+          document.getElementById('go-to-top-button').classList.remove('go-to-top-button--visible');
+        }
+      }, {threshold: 1});
+
+      this.aboutObserver.observe(document.querySelector('#about'));
+      this.homeObserver.observe(document.querySelector('#home'));
+    }
+  },
+  beforeDestroy() {
+    if(this.scrollObserver) {
+      this.scrollObserver.disconnect();
+    } 
+  },
 }
 </script>
 
 <style lang="scss" scoped>
   @use 'global';
   
-  .go-to-top {
+  .go-to-top-button {
     position: fixed;
-    bottom: 30px;
     right: 30px;
     z-index: 100;
+    bottom: -50px;
     height: 50px;
     width: 50px;
     display: flex;
@@ -41,6 +68,11 @@ export default {
     box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: (background ease-in-out 0.25s), (bottom ease-in-out 0.25s);
+    // opacity: 0;
+
+    &--visible {
+      bottom: 30px;
+    }
 
     &__arrow {
       height: 10px;
@@ -64,7 +96,7 @@ export default {
   }
 
   @include global.adapt-to-screen('l') {
-    .go-to-top {
+    .go-to-top-button {
       right: 84px;
     }
   }
