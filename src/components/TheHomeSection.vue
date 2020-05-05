@@ -19,7 +19,7 @@
 
 <script>
 import ProfileImage from 'Assets/portrait_bridge_saint-entienne.jpg';
-import isIntersectionObserverAvailable from 'Source/utility';
+import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
 
 export default {
   name: 'TheHomeSection',
@@ -30,26 +30,8 @@ export default {
     }
   },
   methods: {
-    addAnimationClasses() {
-      this.elementsToAnimateByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.add(className+'--in-view'));
-      });
-    },
-    removeAnimationClasses() {
-      this.elementsToAnimateByClassName.forEach(className => {
-        document.getElementsByClassName(className).forEach(element => element.classList.remove(className+'--in-view'));
-      });
-    },
-    handleOnScroll(entry) {
-      if(entry.isIntersecting) {
-        this.addAnimationClasses();
-      }else {
-        this.removeAnimationClasses();
-      }
-    },
     goToAbout(){
-      let target = document.getElementById('about');
-      target.scrollIntoView({
+      document.getElementById('about').scrollIntoView({
         behavior: 'smooth',
         block: 'start',
         inline: 'center',
@@ -57,16 +39,10 @@ export default {
     }
   },
   mounted() {
-    if (isIntersectionObserverAvailable()) {
-      this.scrollObserver = new IntersectionObserver(entries => {
-        this.handleOnScroll(entries[0]);
-      });
-  
-      this.scrollObserver.observe(document.querySelector('.home__container'));
-    }
+    this.scrollObserver = new ScrollIntoViewObserver(this.elementsToAnimateByClassName, '--in-view');
+    this.scrollObserver.observe(document.querySelector('.home__container'));
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.toggleMobileMenu);
     if(this.scrollObserver) {
       this.scrollObserver.disconnect();
     } 
