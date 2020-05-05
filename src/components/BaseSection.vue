@@ -1,6 +1,7 @@
 <template>
   <div :id="id" 
     class="section col-12">
+    <div class="section__subtitle">{{ subtitle }}</div>
     <h2 class="section__title">
       {{ title }}
     </h2>
@@ -24,6 +25,11 @@ export default {
       type: String,
       required: false,
       default: 'Section',
+    },
+    subtitle: {
+      type: String,
+      required: false,
+      default: '',
     }
   },
   mounted() {
@@ -40,12 +46,17 @@ export default {
     min-height: 100vh;
     padding: 100px 0 50px;
     @include global.border-box;
+    
+    &__subtitle {
+      @include global.subtitle-font;
+      text-align: center;
+    }
+
     &__title {
       position: relative;
       @include global.h2-font;
       text-align: center;
       z-index: 2;
-      width: 100%;
 
       &:before {
         content: attr(data-content);
