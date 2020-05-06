@@ -4,7 +4,8 @@
       <section class="about__section">
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">
-            Made in the <span class="primary-font-color"><b>U.S.A </b></span>&#8226; Living in  <span class="primary-font-color"><b>Alsace, France</b></span>
+            Made in the <span class="bold-primary"> U.S.A </span>
+            &#8226; Living in <span class="bold-primary"> Alsace, France </span>
             </div>
           <h3 class="about__section__titles__title">From Detroit to Strasbourg</h3>
           <p>
@@ -27,7 +28,9 @@
       <section class="about__section">
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">
-            <span class="primary-font-color"><b>Books</b></span> and <span class="primary-font-color"><b>Computers</b></span>
+            <span class="bold-primary"> Books </span>
+            and
+            <span class="bold-primary"> Computers </span>
           </div>
           <h3 class="about__section__titles__title">From Literature Student to Software Engineer</h3>
           <p>
