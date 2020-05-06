@@ -16,14 +16,7 @@
           </section>          
           <input type="email" name="email" v-model="email" required/>
         </section>
-        <section class="contact__form__section">
-          <section class="contact__form__section__label">
-            <label for="subject">Subject</label>
-            <logo-icon/>
-          </section>          
-          <input type="text" name="subject" v-model="subject"/>
-        </section>
-        <div class="contact__form__section">
+        <div class="contact__form__section textarea">
           <section class="contact__form__section__label">
             <label for="message">Message</label>
             <logo-icon/>
@@ -51,23 +44,18 @@ export default {
     return {
       name: '',
       email: '',
-      subject: '',
       message: '',
     }
   },
   components: {BaseSection, PrimaryColorRoundButton, LogoIcon},
   methods: {
     onSubmit() {
-      let message = {
-          name: this.name,
-          email: this.email,
-          subject: this.subject,
-          message: this.message,
-      };
+      // let message = {
+      //     name: this.name,
+      //     email: this.email,
+      //     message: this.message,
+      // };
 
-      if (message.subject === '') {
-        message.subject = 'Message sent from julianeasterly.com'
-      }
       //@TODO send to a php script
     },
   },
@@ -136,10 +124,11 @@ export default {
       @include global.border-box;
 
       &__form {
-        // display: flex;
-        // flex-direction: column;
-        //justify-content: space-around;
-        &__section {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-height: 100%;
+       &__section {
           margin: 25px 0;
 
           &__label {
@@ -182,8 +171,17 @@ export default {
             height: 30px;
           }
 
+
+        }
+        
+        .textarea {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          max-height: 175px;
           textarea {
-            height: 150px;
+            flex-grow: 1;
+            max-height: 150px;
           }
         }
         &__send {
