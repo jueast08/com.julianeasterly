@@ -1,17 +1,17 @@
 <template>
-  <base-content-icon>
+  <base-content-with-icon>
     <template v-slot:icon><slot name="icon"/></template>
     <template v-slot:title><slot name="title"/></template>
     <template v-slot:description><slot name="description"/></template>
-  </base-content-icon>
+  </base-content-with-icon>
 </template>
 
 <script>
-import BaseContentIcon from 'Components/BaseContentIcon';
+import BaseContentWithIcon from 'Components/BaseContentWithIcon';
 
 export default {
-  name: 'SkillContentIcon',
-  components: {BaseContentIcon,}
+  name: 'SkillContentWithIcon',
+  components: {BaseContentWithIcon,}
 }
 </script>
 
@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
 
-  ::v-deep .base-content-icon {
+  ::v-deep .base-content-with-icon {
     
     &__icon {
       svg, img {
