@@ -2,7 +2,7 @@
   <base-section id="skills" title="What I Offer" subtitle="My Skills">
     <div class="skills">
       <div class="skills__list">
-        <base-content-icon class="skills__list__skill">
+        <skill-content-with-icon class="skills__list__skill">
             <template v-slot:icon><logo-icon/></template>
             <template v-slot:title>Development and Tech</template>
             <template v-slot:description>
@@ -12,8 +12,8 @@
               I've worked with various tools such as Travis
               CI, Sonarqube, Docker and Kubernetes.
             </template>
-        </base-content-icon>
-        <base-content-icon class="skills__list__skill">
+        </skill-content-with-icon>
+        <skill-content-with-icon class="skills__list__skill">
             <template v-slot:icon><logo-icon/></template>
             <template v-slot:title>Project and Product Management</template>
             <template v-slot:description>
@@ -23,8 +23,8 @@
               I've worked with various tools such as Travis
               CI, Sonarqube, Docker and Kubernetes.
             </template>          
-        </base-content-icon>
-        <base-content-icon class="skills__list__skill">
+        </skill-content-with-icon>
+        <skill-content-with-icon class="skills__list__skill">
             <template v-slot:icon><logo-icon/></template>
             <template v-slot:title>Do-It-Yourself</template>
             <template v-slot:description>
@@ -34,11 +34,13 @@
               I've worked with various tools such as Travis
               CI, Sonarqube, Docker and Kubernetes.
             </template>   
-        </base-content-icon>
+        </skill-content-with-icon>
       </div>
       <div class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
-        <div class="skills__contact-me__button"><base-round-button>contact me</base-round-button></div>
+        <div class="skills__contact-me__button">
+          <white-round-button>contact me</white-round-button>
+        </div>
       </div>
     </div>
   </base-section>
@@ -46,13 +48,13 @@
 
 <script>
 import BaseSection from 'Components/BaseSection';
-import BaseContentIcon from 'Components/BaseContentIcon';
+import SkillContentWithIcon from 'Components/SkillContentWithIcon';
 import LogoIcon from 'Icons/LogoIcon';
-import BaseRoundButton from 'Components/BaseRoundButton';
+import WhiteRoundButton from 'Components/WhiteRoundButton';
 
 export default {
   name: 'TheSkillsSection',
-  components: {BaseSection, BaseContentIcon,LogoIcon, BaseRoundButton},
+  components: {BaseSection, SkillContentWithIcon,LogoIcon, WhiteRoundButton},
 }
 </script>
 
@@ -69,19 +71,6 @@ export default {
         
         &__skill{
           margin-top: 60px;
-          ::v-deep .base-content-icon {
-            &__icon {
-              fill: global.$primary-white;
-            }
-            &__title {
-              @include global.h4-font;
-              color: global.$primary-white;
-            }
-            &__description {
-              @include global.p-font;
-              color: global.$primary-white;
-            }  
-          }
         }
       }
 
@@ -93,9 +82,6 @@ export default {
 
         &__button{
           margin-top: 25px;
-          button {
-            color: global.$primary-white;
-          }  
         }
       }
     }
