@@ -47,10 +47,10 @@
 </template>
 
 <script>
-import BaseSection from 'Components/BaseSection';
-import SkillContentWithIcon from 'Components/SkillContentWithIcon';
+import BaseSection from 'Bases/BaseSection';
+import SkillContentWithIcon from './SkillContentWithIcon';
 import LogoIcon from 'Icons/LogoIcon';
-import WhiteRoundButton from 'Components/WhiteRoundButton';
+import WhiteRoundButton from 'UI/WhiteRoundButton';
 
 export default {
   name: 'TheSkillsSection',

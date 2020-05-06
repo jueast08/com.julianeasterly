@@ -2,9 +2,10 @@
   <div>
     <base-experience>
       <template v-slot:img><slot name="img"/></template>
-      <template v-slot:title><slot name="job-title"/></template>
-      <template v-slot:subtitle><slot name="company-name"/></template>
-      <template v-slot:dates><slot name="work-dates"/></template>
+      <template v-slot:title><slot name="title"/></template>
+      <template v-slot:subtitle><slot name="rank"/></template>
+      <template v-slot:subtitle-2><slot name="school-name"/></template>
+      <template v-slot:dates><slot name="dates"/></template>
       <template v-slot:location><slot name="location"/></template>
       <template v-slot:details></template>
     </base-experience>
@@ -12,10 +13,10 @@
 </template>
 
 <script>
-import BaseExperience from 'Components/BaseExperience';
+import BaseExperience from 'Bases/BaseExperience';
 
 export default {
-  name: 'ProfessionalExperienceItem',
+  name: 'EducationExperienceItem',
   components: {BaseExperience,},
 }
 </script>
@@ -28,10 +29,10 @@ export default {
     margin: 60px 0;
     
     &__vital-info {
-      
+
       &__text {
         &__title {
-          color: global.$primary-white;
+          color: global.$primary-black;
         }
 
         &__subtitle {
@@ -39,14 +40,14 @@ export default {
         }
 
         &__subtitle-2 {
-          color: global.$primary-white;
+          color: global.$primary-black;
         }
         &__dates {
-          color: global.$primary-white;
+          color: global.$primary-black;
         }
 
         &__location {
-          color: global.$primary-color;
+          color: global.$primary-black;
           svg {
             fill: global.$primary-color;
           }

@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import BaseRoundButton from 'Components/BaseRoundButton';
+import BaseRoundButton from 'Bases/BaseRoundButton';
 
 export default {
-  name: 'PrimaryColorRoundButton',
+  name: 'WhiteRoundButton',
   components: {BaseRoundButton,}
 }
 </script>
@@ -16,8 +16,8 @@ export default {
   @use 'global';
   
   button {
-    color: global.$primary-color;
-    border-color: global.$primary-color;
+    color: global.$primary-white;
+    border-color: global.$primary-white;
   }
 
 </style>

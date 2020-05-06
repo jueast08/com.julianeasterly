@@ -2,46 +2,22 @@
   <div id="app">
     <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
     <the-header/>
-    <the-social-network-bar/>
-    <the-go-to-top-button/>
-    <the-home-section/>
-    <the-about-section/>
-    <the-hobbies-section/>
-    <the-skills-section/>
-    <the-experience-section/>
-    <the-education-section/>
-    <the-contact-section/>
-    <the-footer/>
+>
+    <the-Landing-Page/>
   </div>
 </template>
 
 <script>
-import TheHeader from 'Components/TheHeader';
-import TheSocialNetworkBar from 'Components/TheSocialNetworkBar';
-import TheGoToTopButton from 'Components/TheGoToTopButton';
-import TheHomeSection from 'Components/TheHomeSection';
-import TheAboutSection from 'Components/TheAboutSection';
-import TheHobbiesSection from 'Components/TheHobbiesSection';
-import TheSkillsSection from 'Components/TheSkillsSection';
-import TheExperienceSection from 'Components/TheExperienceSection';
-import TheEducationSection from 'Components/TheEducationSection';
-import TheContactSection from 'Components/TheContactSection';
-import TheFooter from 'Components/TheFooter';
+import TheHeader from 'Layout/Header/index';
+import TheLandingPage from 'Pages/LandingPage/index';
+
 
 export default {
   name: 'App',
   components: {
     TheHeader, 
-    TheSocialNetworkBar, 
-    TheGoToTopButton, 
-    TheHomeSection, 
-    TheAboutSection,
-    TheHobbiesSection,
-    TheSkillsSection,
-    TheExperienceSection,
-    TheEducationSection,
-    TheContactSection,
-    TheFooter}
+    TheLandingPage,
+  }
 }
 </script>
 

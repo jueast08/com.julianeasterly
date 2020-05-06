@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import SocialNetworkButton from 'Components/SocialNetworkButton';
+import SocialNetworkButton from 'Bases/BaseSocialNetworkButton';
 import EmailIcon from 'Icons/EmailIcon';
 import github from 'Assets/GitHub-Mark-64px.png';
 import linkedin from 'Assets/linkein-logo-64px.png';

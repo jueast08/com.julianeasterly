@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import BaseSection from 'Components/BaseSection';
-import HobbyContentWithIcon from 'Components/HobbyContentWithIcon';
+import BaseSection from 'Bases/BaseSection';
+import HobbyContentWithIcon from './HobbyContentWithIcon';
 import LogoIcon from 'Icons/LogoIcon';
 
 export default {
