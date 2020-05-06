@@ -59,6 +59,7 @@ export default {
       text-align: center;
       z-index: 2;
       padding: 0 25px; 
+      margin-bottom: 50px;
 
       &:before {
         content: attr(data-content);

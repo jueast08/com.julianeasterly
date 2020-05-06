@@ -36,35 +36,41 @@ export default {
   
   
   .base-exp {
-    background: blue;
     display: flex;
+    
     &__vital-info {
+    
       &__icon {
-        background: green;
-        width: 30px;
+        width: 50px;
         svg, img {
           width: 100%;
         }
       }
 
       &__text {
-        background: red;
+        margin-left: 40px;
         &__title {
-  
+          margin: 10px 0;
+          @include global.xp-title-font;
         }
         &__subtitle {
-          
+          margin: 10px 0;
+          @include global.xp-subtitle-font($weight: 700);
         }
         &__subtitle-2 {
-          
+          margin: 10px 0;
+          @include global.xp-subtitle-font;
         }
         &__dates {
-          
+          margin: 10px 0;
+          @include global.xp-subtitle-font;
         }
         &__location {
           display: flex;
+          @include global.xp-subtitle-font;
           svg {
             width: 16px;
+            margin-right: 10px;
           }
         }
       }
