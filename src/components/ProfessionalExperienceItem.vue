@@ -62,10 +62,5 @@ export default {
         }
       }
     }
-
-    &__details{
-
-    }
-
   } 
 </style>

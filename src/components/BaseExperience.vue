@@ -77,7 +77,7 @@ export default {
     }
 
     &__details{
-
+      display: none;
     }
   }
  
