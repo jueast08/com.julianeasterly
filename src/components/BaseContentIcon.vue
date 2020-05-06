@@ -39,12 +39,14 @@ export default {
     }
 
     &__title {
-      text-align: center;
       margin: 0 0 10px 0;
+      text-align: center;
+      @include global.h4-font;
     }
 
     &__description {
       text-align: center;
+      @include global.p-font;
     }
   }
 </style>
