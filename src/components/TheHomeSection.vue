@@ -155,12 +155,27 @@ export default {
       border-style: solid;
       border-color: global.$primary-white;
       animation: moveArrow 1s infinite alternate;
-
-    }
-    @include global.keyframes(moveArrow) {
+      @include global.keyframes(moveArrow) {
         from {bottom: 50px;}
         to {bottom: 40px;}
       }
+    }
+
+  }
+
+  @include global.adapt-to-screen('xs-rotated') {
+    .home {
+
+      &__container {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+      }
+
+      &__background {
+        display: none;
+      }
+    }
   }
 
   @include global.adapt-to-screen('xl') {
