@@ -9,20 +9,22 @@
     <the-hobbies-section/>
     <the-skills-section/>
     <the-experience-section/>
+    <the-education-section/>
     <the-footer/>
   </div>
 </template>
 
 <script>
-import TheHeader from './components/TheHeader';
-import TheSocialNetworkBar from './components/TheSocialNetworkBar';
-import TheGoToTopButton from './components/TheGoToTopButton';
-import TheHomeSection from './components/TheHomeSection';
-import TheAboutSection from './components/TheAboutSection';
-import TheHobbiesSection from './components/TheHobbiesSection';
-import TheSkillsSection from './components/TheSkillsSection';
-import TheExperienceSection from './components/TheExperienceSection';
-import TheFooter from './components/TheFooter';
+import TheHeader from 'Components/TheHeader';
+import TheSocialNetworkBar from 'Components/TheSocialNetworkBar';
+import TheGoToTopButton from 'Components/TheGoToTopButton';
+import TheHomeSection from 'Components/TheHomeSection';
+import TheAboutSection from 'Components/TheAboutSection';
+import TheHobbiesSection from 'Components/TheHobbiesSection';
+import TheSkillsSection from 'Components/TheSkillsSection';
+import TheExperienceSection from 'Components/TheExperienceSection';
+import TheEducationSection from 'Components/TheExperienceSection';
+import TheFooter from 'Components/TheFooter';
 
 export default {
   name: 'App',
@@ -35,6 +37,7 @@ export default {
     TheHobbiesSection,
     TheSkillsSection,
     TheExperienceSection,
+    TheEducationSection,
     TheFooter}
 }
 </script>
