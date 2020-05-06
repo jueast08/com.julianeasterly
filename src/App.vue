@@ -10,6 +10,7 @@
     <the-skills-section/>
     <the-experience-section/>
     <the-education-section/>
+    <the-contact-section/>
     <the-footer/>
   </div>
 </template>
@@ -24,6 +25,7 @@ import TheHobbiesSection from 'Components/TheHobbiesSection';
 import TheSkillsSection from 'Components/TheSkillsSection';
 import TheExperienceSection from 'Components/TheExperienceSection';
 import TheEducationSection from 'Components/TheEducationSection';
+import TheContactSection from 'Components/TheContactSection';
 import TheFooter from 'Components/TheFooter';
 
 export default {
@@ -38,6 +40,7 @@ export default {
     TheSkillsSection,
     TheExperienceSection,
     TheEducationSection,
+    TheContactSection,
     TheFooter}
 }
 </script>
