@@ -2,10 +2,9 @@
   <div>
     <base-experience>
       <template v-slot:img><slot name="img"/></template>
-      <template v-slot:title><slot name="title"/></template>
-      <template v-slot:subtitle><slot name="subtitle"/></template>
-      <template v-slot:subtitle-2><slot name="subtitle-2"/></template>
-      <template v-slot:dates><slot name="dates"/></template>
+      <template v-slot:title><slot name="job-title"/></template>
+      <template v-slot:subtitle><slot name="company-name"/></template>
+      <template v-slot:dates><slot name="work-dates"/></template>
       <template v-slot:location><slot name="location"/></template>
       <template v-slot:details></template>
     </base-experience>
