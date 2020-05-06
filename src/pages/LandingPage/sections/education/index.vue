@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import BaseSection from 'Components/BaseSection';
-import EducationExperienceItem from 'Components/EducationExperienceItem';
+import BaseSection from 'Bases/BaseSection';
+import EducationExperienceItem from './EducationExperienceItem';
 import LogoIcon from 'Icons/LogoIcon';
 
 

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import SocialNetworkButton from 'Components/SocialNetworkButton';
+import SocialNetworkButton from 'Bases/BaseSocialNetworkButton';
 import LogoIcon from 'Icons/LogoIcon';
 import EmailIcon from 'Icons/EmailIcon';
 import github from 'Assets/GitHub-Mark-64px.png';

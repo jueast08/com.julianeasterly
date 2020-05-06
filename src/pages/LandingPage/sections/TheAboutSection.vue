@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import BaseSection from 'Components/BaseSection';
+import BaseSection from 'Bases/BaseSection';
 
 
 export default {

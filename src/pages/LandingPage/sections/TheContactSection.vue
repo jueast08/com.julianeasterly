@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import BaseSection from 'Components/BaseSection';
-import PrimaryColorRoundButton from 'Components/PrimaryColorRoundButton';
+import BaseSection from 'Bases/BaseSection';
+import PrimaryColorRoundButton from 'UI/PrimaryColorRoundButton';
 import LogoIcon from 'Icons/LogoIcon'; //@TODO replace with a checkmark icon
 
 

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BaseContentWithIcon from 'Components/BaseContentWithIcon';
+import BaseContentWithIcon from 'Bases/BaseContentWithIcon';
 
 export default {
   name: 'HobbyContentWithIcon',

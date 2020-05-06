@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import TheHeaderLogo from 'Components/TheHeaderLogo';
-import TheHeaderBurger from 'Components/TheHeaderBurger';
+import TheHeaderLogo from './TheHeaderLogo';
+import TheHeaderBurger from './TheHeaderBurger';
 import ScrollIntoViewObserver from 'Utility/ScrollIntoViewObserver';
 
 export default {

@@ -71,8 +71,8 @@
 </template>
 
 <script>
-import BaseSection from 'Components/BaseSection';
-import ProfessionalExperienceItem from 'Components/ProfessionalExperienceItem';
+import BaseSection from 'Bases/BaseSection';
+import ProfessionalExperienceItem from './ProfessionalExperienceItem';
 import LogoIcon from 'Icons/LogoIcon';
 
 
