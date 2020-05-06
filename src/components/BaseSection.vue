@@ -5,7 +5,7 @@
     <h2 class="section__title">
       {{ title }}
     </h2>
-    <div class="section__container">
+    <div class="section__container col-12">
       <slot/>
     </div>
   </div>
@@ -79,7 +79,8 @@ export default {
 
     &__container {
       min-height: 100%;
-      padding: 0 25px; 
+      padding: 0 25px;
+      @include global.border-box;
     }
   }
  
