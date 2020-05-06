@@ -1,27 +1,32 @@
 <template>
   <base-section id="contact" title="Send Me a Message" subtitle="Opportunity, idea for a project, or just want to say hi?">
     <div class="contact">
-      <div class="contact__form">
+      <form class="contact__form" @submit.prevent="onSubmit"> <!-- @TODO change to a verification functionto be changed -->
         <section class="contact__form__section">
-          <label for="name">Name</label>
-          <input type="text" name="name"/>
+          <section class="contact__form__section__label">
+            <label for="name">Name</label>
+            <logo-icon/>
+          </section>
+          <input type="text" name="name" v-model="name" required/>
         </section>
         <section class="contact__form__section">
+          <section class="contact__form__section__label">
           <label for="email">Email</label>
-          <input type="text" name="email"/>
+            <logo-icon/>
+          </section>          
+          <input type="email" name="email" v-model="email" required/>
         </section>
-        <section class="contact__form__section">
-          <label for="subject">Subject</label>
-          <input type="text" name="subject"/>
-        </section>
-        <div class="contact__form__section">
-          <label for="message">Message</label>
-          <textarea name="message"/>
+        <div class="contact__form__section textarea">
+          <section class="contact__form__section__label">
+            <label for="message">Message</label>
+            <logo-icon/>
+          </section>          
+          <textarea name="message" v-model="message" required/>
         </div>
         <div class="contact__form__send">
           <primary-color-round-button>Send</primary-color-round-button>
         </div>
-      </div>
+      </form>
     </div>
   </base-section>
 
@@ -30,11 +35,30 @@
 <script>
 import BaseSection from 'Components/BaseSection';
 import PrimaryColorRoundButton from 'Components/PrimaryColorRoundButton';
+import LogoIcon from 'Icons/LogoIcon'; //@TODO replace with a checkmark icon
 
 
 export default {
   name: 'TheContactSection',
-  components: {BaseSection, PrimaryColorRoundButton},
+  data() {
+    return {
+      name: '',
+      email: '',
+      message: '',
+    }
+  },
+  components: {BaseSection, PrimaryColorRoundButton, LogoIcon},
+  methods: {
+    onSubmit() {
+      // let message = {
+      //     name: this.name,
+      //     email: this.email,
+      //     message: this.message,
+      // };
+
+      //@TODO send to a php script
+    },
+  },
 
 }
 </script>
@@ -100,16 +124,28 @@ export default {
       @include global.border-box;
 
       &__form {
-
-        &__section {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-height: 100%;
+       &__section {
           margin: 25px 0;
-          label {
-            display: block;
-            @include global.p-font($weight: 700);
-            color: global.$primary-black;
+
+          &__label {
+            display: flex;
+            align-items: center;
+            label {
+              @include global.p-font($weight: 700);
+              color: global.$primary-black;
+              margin-right: 5px;
+            }
+            svg {
+              fill: rgba(global.$primary-black, 0.25);
+              height: 15px;
+            }
           }
   
-          input[type='text'], textarea {
+          input, textarea {
             //resize: none;
             width: 100%;
             max-width: 100%;
@@ -131,12 +167,21 @@ export default {
 
           }
 
-          input[type='text'] {
+          input {
             height: 30px;
           }
 
+
+        }
+        
+        .textarea {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          max-height: 175px;
           textarea {
-            height: 150px;
+            flex-grow: 1;
+            max-height: 150px;
           }
         }
         &__send {
