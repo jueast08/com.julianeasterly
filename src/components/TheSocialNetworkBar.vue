@@ -1,21 +1,21 @@
 <template>
    <div class="sn-bar">
      <div class="sn-bar__container">
-      <base-social-network-button href="#contact">
+      <social-network-button href="#contact">
         <email-icon/>
-      </base-social-network-button>
-      <base-social-network-button href="https://www.linkedin.com/in/julianeasterly/">
+      </social-network-button>
+      <social-network-button href="https://www.linkedin.com/in/julianeasterly/">
         <img :src="linkedinLogo" alt="linkedin">
-      </base-social-network-button>
-      <base-social-network-button href="https://github.com/jueast08">
+      </social-network-button>
+      <social-network-button href="https://github.com/jueast08">
         <img :src="gitHubImage" alt="github">
-      </base-social-network-button>
+      </social-network-button>
      </div>
    </div>
 </template>
 
 <script>
-import BaseSocialNetworkButton from 'Components/BaseSocialNetworkButton';
+import SocialNetworkButton from 'Components/SocialNetworkButton';
 import EmailIcon from 'Icons/EmailIcon';
 import github from 'Assets/GitHub-Mark-64px.png';
 import linkedin from 'Assets/linkein-logo-64px.png';
@@ -29,7 +29,7 @@ export default {
     }
   },
   components: {
-    BaseSocialNetworkButton, EmailIcon,
+    SocialNetworkButton, EmailIcon,
   }
 }
 </script>
