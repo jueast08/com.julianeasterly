@@ -38,6 +38,8 @@ export default {
     }
   } 
 
+
+  
   @include global.adapt-to-screen('xl') {
     .the-header-logo {
 
