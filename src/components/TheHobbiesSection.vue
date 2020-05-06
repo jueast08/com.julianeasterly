@@ -1,26 +1,26 @@
 <template>
   <base-section id="hobbies" title="A Few of My Hobbies">
     <div class="hobbies">
-      <base-content-icon class="hobbies__hobby">
+      <hobby-content-with-icon class="hobbies__hobby">
           <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Coding and Design</template>
-      </base-content-icon>
-      <base-content-icon class="hobbies__hobby">
+      </hobby-content-with-icon>
+      <hobby-content-with-icon class="hobbies__hobby">
           <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Sports</template>
-      </base-content-icon>
-      <base-content-icon class="hobbies__hobby">
+      </hobby-content-with-icon>
+      <hobby-content-with-icon class="hobbies__hobby">
           <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Do-It-Yourself</template>
-      </base-content-icon>
-      <base-content-icon class="hobbies__hobby">
+      </hobby-content-with-icon>
+      <hobby-content-with-icon class="hobbies__hobby">
           <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Gardening</template>
-      </base-content-icon>
-      <base-content-icon class="hobbies__hobby">
+      </hobby-content-with-icon>
+      <hobby-content-with-icon class="hobbies__hobby">
           <template v-slot:icon><logo-icon/></template>
           <template v-slot:title>Cooking</template>
-      </base-content-icon>
+      </hobby-content-with-icon>
     </div>
   </base-section>
 
@@ -28,12 +28,12 @@
 
 <script>
 import BaseSection from 'Components/BaseSection';
-import BaseContentIcon from 'Components/BaseContentIcon';
+import HobbyContentWithIcon from 'Components/HobbyContentWithIcon';
 import LogoIcon from 'Icons/LogoIcon';
 
 export default {
   name: 'TheHobbiesSection',
-  components: {BaseSection, BaseContentIcon, LogoIcon,},
+  components: {BaseSection, HobbyContentWithIcon, LogoIcon,},
 
 }
 </script>
@@ -56,14 +56,6 @@ export default {
     .hobbies {
       &__hobby{
         margin-top: 60px;
-        ::v-deep .base-content-icon {
-          &__icon {
-            fill: global.$primary-color;
-          }
-          &__title {
-            @include global.h4-font($weight: 300);
-          }  
-        }
       }
     
     }

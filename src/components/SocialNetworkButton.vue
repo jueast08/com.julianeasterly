@@ -8,7 +8,7 @@
 <script>
 
 export default {
-  name: 'BaseSocialNetworkButton',
+  name: 'SocialNetworkButton',
   props: {
       href: {
         type: String,
@@ -52,8 +52,7 @@ export default {
   @use 'global';
   
   button {
-    // width: 20px;
-    // height: 20px;
+
     margin: 5px 0;
     padding: 0;
     border: none;
@@ -67,14 +66,6 @@ export default {
   }
 
   @include global.adapt-to-screen('l') {
-    button {
-      width: 24px;
-      height: 24px;
-      margin: 6px 0;
-    }
-  }
-
-  @include global.adapt-to-screen('xl') {
     button {
       width: 24px;
       height: 24px;

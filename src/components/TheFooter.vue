@@ -14,15 +14,15 @@
       </div>
     </div>
     <div class="footer__social-network-group col-12">
-      <base-social-network-button href="#contact">
+      <social-network-button href="#contact">
         <email-icon/>
-      </base-social-network-button>
-      <base-social-network-button href="https://www.linkedin.com/in/julianeasterly/">
+      </social-network-button>
+      <social-network-button href="https://www.linkedin.com/in/julianeasterly/">
         <img :src="linkedinLogo" alt="linkedin">
-      </base-social-network-button>
-      <base-social-network-button href="https://github.com/jueast08">
+      </social-network-button>
+      <social-network-button href="https://github.com/jueast08">
         <img :src="gitHubImage" alt="github">
-      </base-social-network-button>
+      </social-network-button>
     </div>
     <div class="footer__container--end  col-12 col-m-10 col-l-6">
       <div class="footer__container__credit col-12">
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BaseSocialNetworkButton from 'Components/BaseSocialNetworkButton';
+import SocialNetworkButton from 'Components/SocialNetworkButton';
 import LogoIcon from 'Icons/LogoIcon';
 import EmailIcon from 'Icons/EmailIcon';
 import github from 'Assets/GitHub-Mark-64px.png';
@@ -50,7 +50,7 @@ export default {
       linkedinLogo: linkedin,
     }
   },
-  components: {LogoIcon, EmailIcon, BaseSocialNetworkButton},
+  components: {LogoIcon, EmailIcon, SocialNetworkButton},
   methods: {},
 }
 </script>
