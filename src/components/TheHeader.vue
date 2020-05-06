@@ -33,7 +33,7 @@
 <script>
 import TheHeaderLogo from 'Components/TheHeaderLogo';
 import TheHeaderBurger from 'Components/TheHeaderBurger';
-import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
+import ScrollIntoViewObserver from 'Utility/ScrollIntoViewObserver';
 
 export default {
   name: 'TheHeader',

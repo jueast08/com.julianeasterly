@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
+import ScrollIntoViewObserver from 'Utility/ScrollIntoViewObserver';
 
 export default {
   name: 'TheGoToTopButton',
