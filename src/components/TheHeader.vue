@@ -2,8 +2,8 @@
   <header id="header" class="header col-12">
     <div id="header__bar" class="header__bar col-12">
       <div class="header__bar__container col-12">
-        <div class="col-xl-2">
-          <the-header-logo class="header__bar__container__logo"/>
+        <div class="header__bar__container__logo col-xl-2">
+          <the-header-logo/>
         </div>
         <div class="col-l-8">
             <nav class="header__bar__container__menu">
@@ -192,6 +192,28 @@ export default {
       top: 0px;
     }
 
+  }
+
+  @include global.adapt-to-screen('xs-rotated') {
+    .header {
+      &__bar {
+        &__container {
+          &__logo {
+            display: none;
+            }
+           
+        } 
+      }
+      &--fixed &{
+        &__bar {
+          &__container {
+            &__logo {
+              display: inherit;
+            }
+          } 
+        }
+      } 
+    }
   }
 
   @include global.adapt-to-screen('l') {

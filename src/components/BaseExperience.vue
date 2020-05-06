@@ -44,6 +44,8 @@ export default {
         width: 50px;
         svg, img {
           width: 100%;
+          fill: global.$primary-color;
+          filter: grayscale(1);
         }
       }
 
