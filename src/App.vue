@@ -23,7 +23,7 @@ import TheAboutSection from 'Components/TheAboutSection';
 import TheHobbiesSection from 'Components/TheHobbiesSection';
 import TheSkillsSection from 'Components/TheSkillsSection';
 import TheExperienceSection from 'Components/TheExperienceSection';
-import TheEducationSection from 'Components/TheExperienceSection';
+import TheEducationSection from 'Components/TheEducationSection';
 import TheFooter from 'Components/TheFooter';
 
 export default {

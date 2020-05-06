@@ -77,7 +77,7 @@ import LogoIcon from 'Icons/LogoIcon';
 
 
 export default {
-  name: 'TheSkillsSection',
+  name: 'TheExperienceSection',
   components: {BaseSection, ProfessionalExperienceItem,LogoIcon,},
 }
 </script>
