@@ -64,9 +64,7 @@ export default {
     ::v-deep .section__title, ::v-deep .section__subtitle {
       color: global.$primary-white;
     }
-    .skills {
-      margin-top: 40px;
-      
+    .skills {      
       &__list {
         
         &__skill{

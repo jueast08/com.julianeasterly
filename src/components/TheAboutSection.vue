@@ -74,7 +74,6 @@ export default {
     .about {
       &__section {
         &__titles {
-          margin-top: 50px;
           &__subtitle {
             @include global.subtitle-font;
             color: global.$primary-black;
