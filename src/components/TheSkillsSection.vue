@@ -38,7 +38,9 @@
       </div>
       <div class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
-        <div class="skills__contact-me__button"><base-round-button>contact me</base-round-button></div>
+        <div class="skills__contact-me__button">
+          <white-round-button>contact me</white-round-button>
+        </div>
       </div>
     </div>
   </base-section>
@@ -48,11 +50,11 @@
 import BaseSection from 'Components/BaseSection';
 import BaseContentIcon from 'Components/BaseContentIcon';
 import LogoIcon from 'Icons/LogoIcon';
-import BaseRoundButton from 'Components/BaseRoundButton';
+import WhiteRoundButton from 'Components/WhiteRoundButton';
 
 export default {
   name: 'TheSkillsSection',
-  components: {BaseSection, BaseContentIcon,LogoIcon, BaseRoundButton},
+  components: {BaseSection, BaseContentIcon,LogoIcon, WhiteRoundButton},
 }
 </script>
 
@@ -93,9 +95,6 @@ export default {
 
         &__button{
           margin-top: 25px;
-          button {
-            color: global.$primary-white;
-          }  
         }
       }
     }
