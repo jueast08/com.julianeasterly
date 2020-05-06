@@ -50,6 +50,7 @@ export default {
     &__subtitle {
       @include global.subtitle-font;
       text-align: center;
+      padding: 0 25px; 
     }
 
     &__title {
@@ -57,6 +58,8 @@ export default {
       @include global.h2-font;
       text-align: center;
       z-index: 2;
+      padding: 0 25px; 
+      margin-bottom: 50px;
 
       &:before {
         content: attr(data-content);

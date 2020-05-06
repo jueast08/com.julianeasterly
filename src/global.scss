@@ -1,1 +1,11 @@
 @forward 'fondation/index';
+@use 'fondation/index';
+
+.primary-font-color {
+    color: index.$primary-color;
+}
+
+.bold-primary {
+    color: index.$primary-color;
+    font-weight: bold;
+}

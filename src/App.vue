@@ -8,6 +8,7 @@
     <the-about-section/>
     <the-hobbies-section/>
     <the-skills-section/>
+    <the-experience-section/>
     <the-footer/>
   </div>
 </template>
@@ -20,6 +21,7 @@ import TheHomeSection from './components/TheHomeSection';
 import TheAboutSection from './components/TheAboutSection';
 import TheHobbiesSection from './components/TheHobbiesSection';
 import TheSkillsSection from './components/TheSkillsSection';
+import TheExperienceSection from './components/TheExperienceSection';
 import TheFooter from './components/TheFooter';
 
 export default {
@@ -32,6 +34,7 @@ export default {
     TheAboutSection,
     TheHobbiesSection,
     TheSkillsSection,
+    TheExperienceSection,
     TheFooter}
 }
 </script>

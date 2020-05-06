@@ -54,7 +54,6 @@ export default {
     }
 
     .hobbies {
-      margin-top: 40px;
       &__hobby{
         margin-top: 60px;
         ::v-deep .base-content-icon {
