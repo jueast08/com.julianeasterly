@@ -1,12 +1,12 @@
 <template>
-   <div class="base-content-icon">
-     <div class="base-content-icon__icon">
+   <div class="base-content-with-icon">
+     <div class="base-content-with-icon__icon">
         <slot name="icon"/>
      </div>
-     <div class="base-content-icon__title">
+     <div class="base-content-with-icon__title">
        <slot name="title"/>
      </div>
-     <div class="base-content-icon__description">
+     <div class="base-content-with-icon__description">
         <slot name="description"/>
      </div>
    </div>
@@ -15,7 +15,7 @@
 <script>
 
 export default {
-  name: 'BaseContentIcon',
+  name: 'BaseContentWithIcon',
 }
 </script>
 
@@ -23,7 +23,7 @@ export default {
 <style lang="scss" scoped>
   @use 'global';
 
-  .base-content-icon {
+  .base-content-with-icon {
     
     &__icon {
       position: relative;
