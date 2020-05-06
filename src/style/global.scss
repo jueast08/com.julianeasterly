@@ -1,5 +1,5 @@
-@forward 'fondation/index';
-@use 'fondation/index';
+@forward './index';
+@use './index';
 
 .primary-font-color {
     color: index.$primary-color;

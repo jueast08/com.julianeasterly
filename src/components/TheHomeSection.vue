@@ -19,7 +19,7 @@
 
 <script>
 import ProfileImage from 'Assets/portrait_bridge_saint-entienne.jpg';
-import ScrollIntoViewObserver from 'Source/ScrollIntoViewObserver';
+import ScrollIntoViewObserver from 'Utility/ScrollIntoViewObserver';
 
 export default {
   name: 'TheHomeSection',

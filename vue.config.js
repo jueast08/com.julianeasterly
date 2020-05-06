@@ -10,11 +10,18 @@ module.exports = {
     },
     chainWebpack: config => {
         let alias = config.resolve.alias;
-
-        alias.set('Source', path.resolve(__dirname,'src'));
+        alias.set('Assets', path.resolve(__dirname, 'src/assets'));
+        alias.set('Common', path.resolve(__dirname, 'src/components/common'));
         alias.set('Components', path.resolve(__dirname, 'src/components'));
         alias.set('Icons', path.resolve(__dirname, 'src/components/icons'));
-        alias.set('Assets', path.resolve(__dirname, 'src/assets')); 
+        alias.set('Layout', path.resolve(__dirname, 'src/components/layout'));
+        alias.set('Pages', path.resolve(__dirname, 'src/pages'));
+        alias.set('Source', path.resolve(__dirname,'src'));
+        alias.set('Utility', path.resolve(__dirname, 'src/utility'));
+        alias.set('UI', path.resolve(__dirname, 'src/components/ui'));
+
+
+
     
     },
 }
