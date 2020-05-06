@@ -5,37 +5,33 @@
         <!-- @TODO export data to a json -->
         <professional-experience-item>
           <template v-slot:img><logo-icon/></template>
-          <template v-slot:title>IT Consultant - Business Analyst</template>
-          <template v-slot:subtitle>Actimage</template>
-          <template v-slot:subtitle-2></template>
-          <template v-slot:dates>Since Sept. 2019</template>
+          <template v-slot:job-title>IT Consultant - Business Analyst</template>
+          <template v-slot:company-name>Actimage</template>
+          <template v-slot:work-dates>Since Sept. 2019</template>
           <template v-slot:location>Colmar, France</template>
           <template v-slot:details></template>
         </professional-experience-item>
         <professional-experience-item>
           <template v-slot:img><logo-icon/></template>
-          <template v-slot:title>IT Consultant - Business Analyst</template>
-          <template v-slot:subtitle>Actimage</template>
-          <template v-slot:subtitle-2></template>
-          <template v-slot:dates>Since Sept. 2019</template>
+          <template v-slot:job-title>IT Consultant - Business Analyst</template>
+          <template v-slot:company-name>Actimage</template>
+          <template v-slot:work-dates>Since Sept. 2019</template>
           <template v-slot:location>Colmar, France</template>
           <template v-slot:details></template>
         </professional-experience-item>
         <professional-experience-item>
           <template v-slot:img><logo-icon/></template>
-          <template v-slot:title>IT Consultant - Business Analyst</template>
-          <template v-slot:subtitle>Actimage</template>
-          <template v-slot:subtitle-2></template>
-          <template v-slot:dates>Since Sept. 2019</template>
+          <template v-slot:job-title>IT Consultant - Business Analyst</template>
+          <template v-slot:company-name>Actimage</template>
+          <template v-slot:work-dates>Since Sept. 2019</template>
           <template v-slot:location>Colmar, France</template>
           <template v-slot:details></template>
         </professional-experience-item>
         <professional-experience-item>
           <template v-slot:img><logo-icon/></template>
-          <template v-slot:title>IT Consultant - Business Analyst</template>
-          <template v-slot:subtitle>Actimage</template>
-          <template v-slot:subtitle-2></template>
-          <template v-slot:dates>Since Sept. 2019</template>
+          <template v-slot:job-title>IT Consultant - Business Analyst</template>
+          <template v-slot:company-name>Actimage</template>
+          <template v-slot:work-dates>Since Sept. 2019</template>
           <template v-slot:location>Colmar, France</template>
           <template v-slot:details></template>
         </professional-experience-item>
@@ -81,7 +77,7 @@ import LogoIcon from 'Icons/LogoIcon';
 
 
 export default {
-  name: 'TheSkillsSection',
+  name: 'TheExperienceSection',
   components: {BaseSection, ProfessionalExperienceItem,LogoIcon,},
 }
 </script>
