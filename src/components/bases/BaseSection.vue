@@ -77,7 +77,7 @@ export default {
       transform-origin: center center;
       transform: translate(-50%, -10%);
       z-index: 1;
-      opacity: 0.15;
+      opacity: 0.1;
       text-overflow: clip;
       white-space: nowrap;
       min-width: 100%;

@@ -4,9 +4,11 @@
       <section class="about__section">
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">
-            Made in the <span class="bold-primary"> U.S.A </span>
-            &#8226; Living in <span class="bold-primary"> Alsace, France </span>
-            </div>
+            Made in the
+            <span class="bold-primary">U.S.A</span>
+            &#8226; Living in
+            <span class="bold-primary">Alsace, France</span>
+          </div>
           <h3 class="about__section__titles__title">From Detroit to Strasbourg</h3>
           <p>
             As an American, I'm often asked "Why
@@ -18,19 +20,20 @@
             took a teaching job in Normandy, France
             and six years I ended up in Strasbourg. If you
             need the long version, maybe we can
-            discuss it more in a meetup! 
+            discuss it more in a meetup!
           </p>
         </div>
       </section>
-      <div class="about__photo">
-        <div class="about__photo__wrapper"></div>
+      <div class="about__photo col-12">
+        <div class="about__photo__wrapper col-12"></div>
       </div>
+      <div class="about__spacer"></div>
       <section class="about__section">
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">
-            <span class="bold-primary"> Books </span>
+            <span class="bold-primary">Books</span>
             and
-            <span class="bold-primary"> Computers </span>
+            <span class="bold-primary">Computers</span>
           </div>
           <h3 class="about__section__titles__title">From Literature Student to Software Engineer</h3>
           <p>
@@ -50,83 +53,96 @@
 </template>
 
 <script>
-import BaseSection from 'Bases/BaseSection';
-
+import BaseSection from "Bases/BaseSection";
 
 export default {
-  name: 'TheAboutSection',
+  name: "TheAboutSection",
   components: {
-    BaseSection,
+    BaseSection
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @use 'global';
-  
-  #about {
-    background-color: global.$background-gray;
+@use 'global';
 
-    ::v-deep .section__title {
+#about {
+  background-color: global.$background-gray;
+
+  ::v-deep .section__title {
+    color: global.$primary-black;
+    &:before {
       color: global.$primary-black;
-      &:before {
-        color: global.$primary-black;
+    }
+  }
+
+  .about {
+    &__section {
+      &__titles {
+        &__subtitle {
+          @include global.subtitle-font;
+          color: global.$primary-black;
+          text-align: center;
+        }
+        &__title {
+          @include global.h3-font;
+          color: global.$primary-black;
+          text-align: center;
+        }
+        p {
+          @include global.p-font;
+          color: global.$primary-black;
+          text-align: center;
+        }
       }
     }
-    
+
+    &__spacer {
+      height: 250px;
+      width: 100%;
+    }
+
+    &__photo {
+      position: absolute;
+      left: 0;
+      height: 200px;
+
+      &__wrapper {
+        position: relative;
+        height: 100%;
+
+        &:before {  /** @TODO Don't attach this background */
+          content: " ";
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.8;
+          background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+          background-position: center;
+        }
+      }
+    }
+  }
+}
+
+@include global.adapt-to-screen("s") {
+  #about {
     .about {
-      &__section {
-        &__titles {
-          &__subtitle {
-            @include global.subtitle-font;
-            color: global.$primary-black;
-            text-align: center;
-          }
-          &__title {
-            @include global.h3-font;
-            color: global.$primary-black;
-            text-align: center;
-          }
-          p {
-            @include global.p-font;
-            color: global.$primary-black;
-            text-align: center;
-          }
-        }
-        &:nth-of-type(2) {
-          margin-top: 250px;
-        }
+      &__spacer {
+        display: none;
       }
 
       &__photo {
-        position: absolute;
-        left: 0;
-        height: 200px;
-        width: 100%;
-
-        &__wrapper {
-          position: relative;
-          width: 100%;
-          height: 100%;
-  
-          &:before {
-            content: ' ';
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-            background-image: url('~Assets/portrait_bridge_saint-entienne.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-         } 
-        }
+        position: relative;
+        margin-bottom: 50px;
       }
     }
-
   }
+}
 </style>
