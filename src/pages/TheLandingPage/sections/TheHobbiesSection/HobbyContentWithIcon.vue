@@ -34,7 +34,7 @@ export default {
   }
 
   &__title {
-    @include global.h4-font($weight: 300);
+    @include global.p-font($weight: 300);
     color: global.$primary-black;
   }
 

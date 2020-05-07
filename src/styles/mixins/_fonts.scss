@@ -72,7 +72,7 @@
     }
 }
 
-@mixin h4-font($size-s: 16px, $size-m: 16px, $size-l: 25px, $size-xl: 25px, $weight: 700) {
+@mixin h4-font($size-s: 16px, $size-m: 16px, $size-l: 17px, $size-xl: 20px, $weight: 700) {
     @include _poppins($size-s, $weight); 
     line-height: $size-s; 
     @include breakpoints.adapt-to-screen('m') {
