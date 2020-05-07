@@ -115,6 +115,7 @@
         </section>
       </div>
     </div>
+    <!-- @TODO add a download cv button -->
   </base-section>
 </template>
 

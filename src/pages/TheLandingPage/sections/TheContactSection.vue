@@ -1,27 +1,42 @@
 <template>
-  <base-section id="contact" title="Send Me a Message" subtitle="Opportunity, idea for a project, or just want to say hi?">
-    <div class="contact col-m-6 ">
-      <form class="contact__form" @submit.prevent="onSubmit"> <!-- @TODO change to a verification functionto be changed -->
+  <base-section
+    id="contact"
+    title="Send Me a Message"
+    subtitle="Opportunity, idea for a project, or just want to say hi?"
+  >
+    <div class="contact">
+      <!-- col-m-6 -->
+      <form class="contact__form" @submit.prevent="onSubmit">
+        <!-- @TODO change to a verification functionto be changed -->
         <section class="contact__form__section">
-          <div class="contact__form__section__label" :class="addClassModifierIfStringNotEmpty(name)">
+          <div
+            class="contact__form__section__label"
+            :class="addClassModifierIfStringNotEmpty(name)"
+          >
             <label for="name">Name</label>
-            <logo-icon/>
+            <logo-icon />
           </div>
-          <input type="text" name="name" v-model="name" required/>
+          <input type="text" name="name" v-model="name" required />
         </section>
         <section class="contact__form__section">
-          <div class="contact__form__section__label" :class="addClassModifierIfStringNotEmpty(email)">
-          <label for="email">Email</label>
-            <logo-icon/>
-          </div>          
-          <input type="email" name="email" v-model="email" required/>
+          <div
+            class="contact__form__section__label"
+            :class="addClassModifierIfStringNotEmpty(email)"
+          >
+            <label for="email">Email</label>
+            <logo-icon />
+          </div>
+          <input type="email" name="email" v-model="email" required />
         </section>
         <section class="contact__form__section textarea">
-          <div class="contact__form__section__label" :class="addClassModifierIfStringNotEmpty(message)">
+          <div
+            class="contact__form__section__label"
+            :class="addClassModifierIfStringNotEmpty(message)"
+          >
             <label for="message">Message</label>
-            <logo-icon/>
-          </div>          
-          <textarea name="message" v-model="message" minlength="50" required/>
+            <logo-icon />
+          </div>
+          <textarea name="message" v-model="message" minlength="50" required />
         </section>
         <div class="contact__form__send">
           <primary-color-round-button>Send</primary-color-round-button>
@@ -29,207 +44,237 @@
       </form>
     </div>
   </base-section>
-
 </template>
 
 <script>
-import BaseSection from 'Bases/BaseSection';
-import PrimaryColorRoundButton from 'UI/PrimaryColorRoundButton';
-import LogoIcon from 'Icons/LogoIcon'; //@TODO replace with a checkmark icon
-
+import BaseSection from "Bases/BaseSection";
+import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
+import LogoIcon from "Icons/LogoIcon"; //@TODO replace with a checkmark icon
 
 export default {
-  name: 'TheContactSection',
+  name: "TheContactSection",
   data() {
     return {
-      name: '',
-      email: '',
-      message: '',
-    }
+      name: "",
+      email: "",
+      message: ""
+    };
   },
-  components: {BaseSection, PrimaryColorRoundButton, LogoIcon},
+  components: { BaseSection, PrimaryColorRoundButton, LogoIcon },
   methods: {
     addClassModifierIfStringNotEmpty(string) {
-      return (string.trim() !== '') && 'contact__form__section__label--filled';
-    },   
+      return string.trim() !== "" && "contact__form__section__label--filled";
+    },
     onSubmit() {
       // let message = {
       //     name: this.name,
       //     email: this.email,
       //     message: this.message,
       // };
-
       //@TODO send to a php script
-    },
-  },
-
-}
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @use 'global';
-  
-  #contact {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 100px 0 0;
-    
-    
-    &:after {
-      content: ' ';
-      position: absolute;
-      z-index: 2;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(global.$primary-black, 0.8);
+@use 'global';
+
+#contact {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 0 0;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(global.$primary-black, 0.8);
+  }
+
+  &:before {
+    content: " ";
+    z-index: 1;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+
+  ::v-deep .section {
+    &__title,
+    &__subtitle {
+      position: relative;
+      color: global.$primary-white;
+      z-index: 3;
     }
+
+    &__container {
+      position: relative;
+      flex-grow: 1;
+      z-index: 3;
+    }
+  }
+
+  .contact {
+    flex-grow: 1;
+    background-color: global.$primary-white;
+    padding: 25px;
+    margin: 0 auto;
+    @include global.border-box;
+    height: 100%;
+
+    &__form {
+      height: 100%;
+      max-width: 100%;
+      width: 100%;
+      display: grid;
+      grid-gap: 10px;
+      grid-template-areas:
+        "name "
+        "email "
+        "message "
+        "button ";
+
+      &__section {
+        &__label {
+          display: flex;
+          align-items: center;
+          label {
+            @include global.p-font($weight: 700);
+            color: global.$primary-black;
+            margin-right: 5px;
+          }
+          svg {
+            fill: rgba(global.$primary-black, 0.25);
+            height: 15px;
+            transition: fill 0.5s ease-in-out;
+          }
+
+          &--filled {
+            svg {
+              fill: global.$primary-color;
+            }
+          }
+        }
+
+        input,
+        textarea {
+          width: 100%;
+          border-width: 1px;
+          border-radius: 2px;
+          border-style: solid;
+          border-color: rgba(global.$primary-black, 0.25);
+          padding: 10px;
+          @include global.border-box;
+          @include global.p-font(
+            $size-s: 12px,
+            $size-m: 12px,
+            $size-l: 12px,
+            $size-xl: 12px
+          );
+          color: global.$primary-gray;
+          transition: border 0.5s ease-in-out;
+
+          &:focus {
+            outline: none;
+            border-color: global.$primary-color;
+            border-width: 2px;
+          }
+        }
+
+        input {
+          height: 50px;
+        }
+
+        &:nth-child(1) {
+          grid-area: name;
+        }
+        &:nth-child(2) {
+          grid-area: email;
+        }
+        &:nth-child(3) {
+          grid-area: message;
+        }
+      }
+
+      .textarea {
+        textarea {
+          height: 150px;
+        }
+      }
+      &__send {
+        text-align: center;
+        grid-area: button;
+      }
+    }
+  }
+}
+
+@include global.adapt-to-screen("m") {
+  #contact {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
 
     &:before {
-      content: ' ';
-      z-index: 1;
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-      background-image: url('~Assets/portrait_bridge_saint-entienne.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
+      background-attachment: scroll;
     }
 
-    ::v-deep .section {
-      &__title, &__subtitle{
-        position: relative;
-        color: global.$primary-white; 
-        z-index: 3;
-      }
+    ::v-deep .section__title-box {
+      padding-top: 100px;
+      width: 60%;
+    }
 
-      &__container {
-        position: relative;
-        flex-grow: 1;
-        z-index: 3;
-      }
+    ::v-deep .section__container {
+      min-height: 100%;
+      padding: 0 50px;
     }
 
     .contact {
-      flex-grow: 1;
-      background-color: global.$primary-white;
-      padding: 25px;
-      margin: 0 auto;
-      @include global.border-box;
+      width: 100%;
 
       &__form {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        max-height: 100%;
-       &__section {
-          margin: 25px 0;
+        grid-template-areas:
+          "name name name email email email"
+          "message message message message message message"
+          "button button button button button button";
 
+        &__section {
           &__label {
-            display: flex;
-            align-items: center;
-            label {
-              @include global.p-font($weight: 700);
-              color: global.$primary-black;
-              margin-right: 5px;
-            }
-            svg {
-              fill: rgba(global.$primary-black, 0.25);
-              height: 15px;
-              transition: fill 0.5s ease-in-out;
-            }
-
-            &--filled {
-              svg {
-                fill: global.$primary-color;
-              }
-            }
           }
-  
-          input, textarea {
-            resize: none;
-            width: 100%;
-            max-width: 100%;
-            border-width: 1px;
-            border-radius: 2px;
-            border-style: solid;
-            border-color: rgba(global.$primary-black, 0.25);
-            padding: 10px;
-            @include global.border-box;
-            @include global.p-font($size-s: 12px, $size-m: 12px, $size-l: 12px,  $size-xl: 12px);
-            color: global.$primary-gray;
-            transition: border 0.5s ease-in-out;
-            
-            &:focus {
-              outline: none;
-              border-color: global.$primary-color;
-              border-width: 2px;
-            }
 
+          input,
+          textarea {
           }
 
           input {
-            height: 30px;
           }
-
-
         }
-        
+
         .textarea {
-          flex-grow: 1;
-          display: flex;
-          flex-direction: column;
-          max-height: 175px;
           textarea {
             flex-grow: 1;
             max-height: 150px;
           }
         }
         &__send {
-          text-align: center;
         }
       }
     }
   }
-
-  @include global.adapt-to-screen('m') {
-    #contact {
-
-      .contact {
-        &__form {
-          flex-direction: row;
-          flex-wrap: wrap;
-          //padding: 25px ;
-          @include global.border-box;
-
-          &__section {
-            flex-grow: 1;
-            padding: 10px;
-            margin: 10px 0;
-            @include global.border-box;
-
-          }
-          
-          .textarea {
-            height: 250px;
-            width: 100%;
-            textarea {
-              width: 100%;
-            }
-          }
-          &__send {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
+}
 </style>
