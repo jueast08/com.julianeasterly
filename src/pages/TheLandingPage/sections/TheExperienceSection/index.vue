@@ -11,7 +11,15 @@
           <template #company-name>Actimage</template>
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
-          <template #details></template>
+          <template #details>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
+            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
+            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
+            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. Donec vel mollis nulla.
+          </template>
         </professional-experience-item>
         <professional-experience-item>
           <template #img>
@@ -21,7 +29,15 @@
           <template #company-name>Actimage</template>
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
-          <template #details></template>
+          <template #details>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
+            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
+            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
+            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. Donec vel mollis nulla.
+          </template>
         </professional-experience-item>
         <professional-experience-item>
           <template #img>
@@ -31,7 +47,15 @@
           <template #company-name>Actimage</template>
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
-          <template #details></template>
+          <template #details>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
+            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
+            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
+            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. Donec vel mollis nulla.
+          </template>
         </professional-experience-item>
         <professional-experience-item>
           <template #img>
@@ -41,7 +65,15 @@
           <template #company-name>Actimage</template>
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
-          <template #details></template>
+          <template #details>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
+            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
+            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
+            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. Donec vel mollis nulla.
+          </template>
         </professional-experience-item>
       </div>
       <div class="experience__others">
@@ -58,7 +90,9 @@
             I've
             <span class="bold-primary">driven a forklift in a beer depot</span>,
             and
-            <span class="bold-primary">I've worked in a kitchen at the Detroit City Zoo</span>.
+            <span
+              class="bold-primary"
+            >I've worked in a kitchen at the Detroit City Zoo</span>.
           </p>
         </section>
         <section class="experience__others__description">
@@ -81,6 +115,7 @@
         </section>
       </div>
     </div>
+    <!-- @TODO add a download cv button -->
   </base-section>
 </template>
 
@@ -116,7 +151,7 @@ export default {
     }
 
     &__others {
-      text-align: center;
+      //text-align: center;
 
       &__title {
         @include global.h3-font;

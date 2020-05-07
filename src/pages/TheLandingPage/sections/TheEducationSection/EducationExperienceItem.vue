@@ -19,7 +19,9 @@
       <template #location>
         <slot name="location" />
       </template>
-      <template #details></template>
+      <template #details>
+        <slot name="details" />
+      </template>
     </base-experience>
   </div>
 </template>
@@ -37,30 +39,31 @@ export default {
 @use 'global';
 
 ::v-deep .base-exp {
-  display: flex;
   margin: 60px 0;
 
   &__vital-info {
-    &__text {
-      &__title {
-        color: global.$primary-black;
-      }
+    &__wrapper {
+      &__text {
+        &__title {
+          color: global.$primary-black;
+        }
 
-      &__subtitle {
-        color: global.$primary-color;
-      }
+        &__subtitle {
+          color: global.$primary-color;
+        }
 
-      &__subtitle-2 {
-        color: global.$primary-black;
-      }
-      &__dates {
-        color: global.$primary-black;
-      }
+        &__subtitle-2 {
+          color: global.$primary-black;
+        }
+        &__dates {
+          color: global.$primary-black;
+        }
 
-      &__location {
-        color: global.$primary-black;
-        svg {
-          fill: global.$primary-color;
+        &__location {
+          color: global.$primary-black;
+          svg {
+            fill: global.$primary-color;
+          }
         }
       }
     }

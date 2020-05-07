@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TheLandingPage from 'Pages/TheLandingPage/';
+import TheLandingPage from 'Pages/TheLandingPage';
 
 
 export default {
