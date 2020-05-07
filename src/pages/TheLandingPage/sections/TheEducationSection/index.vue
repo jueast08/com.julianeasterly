@@ -12,7 +12,15 @@
           <template #school-name>Ecole Nationale Supérieure d'Ingénieurs de Caen</template>
           <template #dates>2016 - 2019</template>
           <template #location>Caen, France</template>
-          <template #details></template>
+          <template #details>
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec turpis leo.
+            praesent hendrerit commodo lorem eget imperdiet. mauris consequat lacus justo,
+            at volutpat libero blandit vitae. mauris placerat quam a ultrices hendrerit.
+            fusce quis blandit arcu. nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
+            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. donec vel mollis nulla.
+          </template>
         </education-experience-item>
         <education-experience-item>
           <template #img>
@@ -23,7 +31,15 @@
           <template #school-name>Ecole Nationale Supérieure d'Ingénieurs de Caen</template>
           <template #dates>2016 - 2019</template>
           <template #location>Caen, France</template>
-          <template #details></template>
+          <template #details>
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec turpis leo.
+            praesent hendrerit commodo lorem eget imperdiet. mauris consequat lacus justo,
+            at volutpat libero blandit vitae. mauris placerat quam a ultrices hendrerit.
+            fusce quis blandit arcu. nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
+            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. donec vel mollis nulla.
+          </template>
         </education-experience-item>
         <education-experience-item>
           <template #img>
@@ -34,7 +50,15 @@
           <template #school-name>Ecole Nationale Supérieure d'Ingénieurs de Caen</template>
           <template #dates>2016 - 2019</template>
           <template #location>Caen, France</template>
-          <template #details></template>
+          <template #details>
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec turpis leo.
+            praesent hendrerit commodo lorem eget imperdiet. mauris consequat lacus justo,
+            at volutpat libero blandit vitae. mauris placerat quam a ultrices hendrerit.
+            fusce quis blandit arcu. nam pellentesque, dolor a tincidunt tincidunt, quam
+            libero suscipit libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
+            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem quis, aliquet
+            pellentesque nisl. donec vel mollis nulla.
+          </template>
         </education-experience-item>
       </div>
     </div>
