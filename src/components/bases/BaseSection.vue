@@ -1,10 +1,11 @@
 <template>
   <div :id="id" class="section col-12">
-    <div class="section__subtitle col-10 col-s-10 col-m-10 col-l-8 col-xl-6">{{ subtitle }}</div>
     <div class="section__title-box col-12">
-      <h2 class="section__title col-12 col-s-10 col-m-10 col-l-8 col-xl-6">{{ title }}</h2>
+      <!-- @TODO this title-box and the titles arent BEM. THis effects all the sections-->
+      <div class="section__subtitle col-10 col-s-10 col-m-10 col-l-8 col-xl-8">{{ subtitle }}</div>
+      <h2 class="section__title col-12 col-s-10 col-m-10 col-l-8 col-xl-8">{{ title }}</h2>
     </div>
-    <div class="section__container col-12 col-s-10 col-m-10 col-l-8 col-xl-6">
+    <div class="section__container col-12 col-s-10 col-m-10 col-l-8 col-xl-8">
       <slot />
     </div>
   </div>
@@ -77,7 +78,7 @@ export default {
       transform-origin: center center;
       transform: translate(-50%, -10%);
       z-index: 1;
-      opacity: 0.15;
+      opacity: 0.1;
       text-overflow: clip;
       white-space: nowrap;
       min-width: 100%;
