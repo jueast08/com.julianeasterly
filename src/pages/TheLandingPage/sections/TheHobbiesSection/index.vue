@@ -17,7 +17,7 @@
         <template #icon>
           <logo-icon />
         </template>
-        <template #title>Do-It-Yourself</template>
+        <template #title>DIY and Gardening</template>
       </hobby-content-with-icon>
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
@@ -67,4 +67,33 @@ export default {
     }
   }
 }
+
+@include global.adapt-to-screen('s') {
+  #hobbies {
+    .hobbies {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      &__hobby {
+        margin-top: 30px;
+        width: 33%;
+      }
+    }
+  }  
+}
+
+@include global.adapt-to-screen('xl') {
+  #hobbies {
+    .hobbies {
+      display: flex;
+      justify-content: space-between;
+
+      &__hobby {
+        margin-top: 10px;
+        width: auto;
+      }
+    }
+  }  
+}
+
 </style>
