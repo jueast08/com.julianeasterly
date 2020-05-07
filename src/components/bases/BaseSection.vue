@@ -1,8 +1,8 @@
 <template>
   <div :id="id" class="section col-12">
-    <div class="section__subtitle col-10 col-s-10 col-m-10 col-l-8 col-xl-6">{{ subtitle }}</div>
+    <div class="section__subtitle col-10 col-s-10 col-m-10 col-l-8 col-xl-8">{{ subtitle }}</div>
     <div class="section__title-box col-12">
-      <h2 class="section__title col-12 col-s-10 col-m-10 col-l-8 col-xl-6">{{ title }}</h2>
+      <h2 class="section__title col-12 col-s-10 col-m-10 col-l-8 col-xl-8">{{ title }}</h2>
     </div>
     <div class="section__container col-12 col-s-10 col-m-10 col-l-8 col-xl-8">
       <slot />
