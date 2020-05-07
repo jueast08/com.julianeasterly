@@ -1,28 +1,28 @@
 <template>
   <base-section id="contact" title="Send Me a Message" subtitle="Opportunity, idea for a project, or just want to say hi?">
-    <div class="contact">
+    <div class="contact col-m-6 ">
       <form class="contact__form" @submit.prevent="onSubmit"> <!-- @TODO change to a verification functionto be changed -->
         <section class="contact__form__section">
-          <section class="contact__form__section__label">
+          <div class="contact__form__section__label" :class="addClassModifierIfStringNotEmpty(name)">
             <label for="name">Name</label>
             <logo-icon/>
-          </section>
+          </div>
           <input type="text" name="name" v-model="name" required/>
         </section>
         <section class="contact__form__section">
-          <section class="contact__form__section__label">
+          <div class="contact__form__section__label" :class="addClassModifierIfStringNotEmpty(email)">
           <label for="email">Email</label>
             <logo-icon/>
-          </section>          
+          </div>          
           <input type="email" name="email" v-model="email" required/>
         </section>
-        <div class="contact__form__section textarea">
-          <section class="contact__form__section__label">
+        <section class="contact__form__section textarea">
+          <div class="contact__form__section__label" :class="addClassModifierIfStringNotEmpty(message)">
             <label for="message">Message</label>
             <logo-icon/>
-          </section>          
-          <textarea name="message" v-model="message" required/>
-        </div>
+          </div>          
+          <textarea name="message" v-model="message" minlength="50" required/>
+        </section>
         <div class="contact__form__send">
           <primary-color-round-button>Send</primary-color-round-button>
         </div>
@@ -49,6 +49,9 @@ export default {
   },
   components: {BaseSection, PrimaryColorRoundButton, LogoIcon},
   methods: {
+    addClassModifierIfStringNotEmpty(string) {
+      return (string.trim() !== '') && 'contact__form__section__label--filled';
+    },   
     onSubmit() {
       // let message = {
       //     name: this.name,
@@ -110,17 +113,16 @@ export default {
 
       &__container {
         position: relative;
-        display: flex;
         flex-grow: 1;
         z-index: 3;
       }
     }
 
     .contact {
-      width: 100%;
       flex-grow: 1;
       background-color: global.$primary-white;
       padding: 25px;
+      margin: 0 auto;
       @include global.border-box;
 
       &__form {
@@ -142,11 +144,18 @@ export default {
             svg {
               fill: rgba(global.$primary-black, 0.25);
               height: 15px;
+              transition: fill 0.5s ease-in-out;
+            }
+
+            &--filled {
+              svg {
+                fill: global.$primary-color;
+              }
             }
           }
   
           input, textarea {
-            //resize: none;
+            resize: none;
             width: 100%;
             max-width: 100%;
             border-width: 1px;
@@ -186,6 +195,39 @@ export default {
         }
         &__send {
           text-align: center;
+        }
+      }
+    }
+  }
+
+  @include global.adapt-to-screen('m') {
+    #contact {
+
+      .contact {
+        &__form {
+          flex-direction: row;
+          flex-wrap: wrap;
+          //padding: 25px ;
+          @include global.border-box;
+
+          &__section {
+            flex-grow: 1;
+            padding: 10px;
+            margin: 10px 0;
+            @include global.border-box;
+
+          }
+          
+          .textarea {
+            height: 250px;
+            width: 100%;
+            textarea {
+              width: 100%;
+            }
+          }
+          &__send {
+            width: 100%;
+          }
         }
       }
     }
