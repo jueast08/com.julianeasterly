@@ -12,6 +12,7 @@
     <the-education-section/>
     <the-contact-section/>
     <the-footer/>
+
   </div>
 </template>
 
