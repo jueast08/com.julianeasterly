@@ -162,7 +162,7 @@
     }
 }
 
-@mixin xp-title-font($size-s: 16px, $size-m: 18.5px, $size-l: 25px, $size-xl: 25px, $weight: 700) {
+@mixin xp-title-font($size-s: 16px, $size-m: 18px, $size-l: 18px, $size-xl: 18px, $weight: 700) {
     @include _poppins($size-s, $weight); 
     line-height: $size-s; 
 
@@ -180,7 +180,7 @@
     }  
 }
 
-@mixin xp-subtitle-font($size-s: 14px, $size-m: 18.5px, $size-l: 25px, $size-xl: 25px, $weight: 400) {
+@mixin xp-subtitle-font($size-s: 14px, $size-m: 16px, $size-l: 16px, $size-xl: 16px, $weight: 400) {
     @include _montserrat($size-s, $weight); 
     line-height: $size-s; 
 
