@@ -92,4 +92,19 @@ export default {
     }
   }
 }
+
+@include global.adapt-to-screen('l') {
+  #skills {
+    .skills {
+      &__list {
+        display: flex;
+        justify-content: space-between;
+        &__skill {
+          margin: 0 20px;
+          //width: calc(100%/3);
+        }
+      }
+    }
+  }
+}
 </style>
