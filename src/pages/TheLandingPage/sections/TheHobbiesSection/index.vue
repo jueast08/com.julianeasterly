@@ -54,7 +54,7 @@ export default {
   background-color: global.$primary-white;
   ::v-deep .section__title {
     color: global.$primary-color;
-    @include global.h4-font;
+    @include global.subtitle-font($weight: 700);
     text-transform: uppercase;
     &:before {
       content: "";
@@ -76,7 +76,7 @@ export default {
       justify-content: center;
       &__hobby {
         margin-top: 30px;
-        width: 33%;
+        width: calc(100%/3);
       }
     }
   }  
