@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-to-section-button" @click="scrollToDestination">
+  <div class="scroll-to-section-button" @click="scrollToQuerySelector(querySelectorDestination)">
     <slot name="icon">
       <div class="scroll-to-section-button__arrow"></div>
     </slot>
@@ -8,6 +8,7 @@
 
 <script>
 import ScrollIntoViewObserver from "Utility/ScrollIntoViewObserver";
+import { scrollToQuerySelector } from "Utility/ScrollHelper";
 
 export default {
   name: "ScrollToSectionButton",
@@ -51,6 +52,7 @@ export default {
     }
   },
   methods: {
+    scrollToQuerySelector,
     scrollToDestination() {
       // let target = document.querySelector(this.querySelectorDestination);
       // console.log(target);
