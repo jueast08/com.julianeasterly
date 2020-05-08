@@ -13,6 +13,7 @@ import {
   faMapMarkerAlt,
   faCheckCircle,
   faHamburger,
+  faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -30,7 +31,8 @@ library.add(
   faLaptopCode,
   faMapMarkerAlt,
   faCheckCircle,
-  faHamburger
+  faHamburger,
+  faChevronUp
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

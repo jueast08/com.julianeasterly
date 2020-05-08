@@ -1,6 +1,8 @@
 <template>
   <div class="scroll-to-section-button" @click="scrollToDestination">
-    <div class="scroll-to-section-button__arrow"></div>
+    <slot name="icon">
+      <div class="scroll-to-section-button__arrow"></div>
+    </slot>
   </div>
 </template>
 
