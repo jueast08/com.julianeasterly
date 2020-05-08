@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import LogoIcon from "Icons/LogoIcon";
+import LogoIcon from "UI/LogoIcon";
 
 export default {
   name: "BaseSection",
-  components: { LogoIcon }
+  components: { LogoIcon },
 };
 </script>
 

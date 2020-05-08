@@ -38,11 +38,11 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import HobbyContentWithIcon from "./HobbyContentWithIcon";
-import LogoIcon from "Icons/LogoIcon";
+import LogoIcon from "UI/LogoIcon";
 
 export default {
   name: "TheHobbiesSection",
-  components: { BaseSection, HobbyContentWithIcon, LogoIcon }
+  components: { BaseSection, HobbyContentWithIcon, LogoIcon },
 };
 </script>
 
@@ -68,7 +68,7 @@ export default {
   }
 }
 
-@include global.adapt-to-screen('s') {
+@include global.adapt-to-screen("s") {
   #hobbies {
     .hobbies {
       display: flex;
@@ -76,13 +76,13 @@ export default {
       justify-content: center;
       &__hobby {
         margin-top: 30px;
-        width: calc(100%/3);
+        width: calc(100% / 3);
       }
     }
-  }  
+  }
 }
 
-@include global.adapt-to-screen('xl') {
+@include global.adapt-to-screen("xl") {
   #hobbies {
     .hobbies {
       display: flex;
@@ -93,7 +93,6 @@ export default {
         width: auto;
       }
     }
-  }  
+  }
 }
-
 </style>

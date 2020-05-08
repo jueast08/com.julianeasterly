@@ -1,92 +1,76 @@
 <template>
-   <div class="sn-bar">
-     <div class="sn-bar__container">
+  <div class="sn-bar">
+    <div class="sn-bar__container">
       <social-network-button href="#contact">
-        <email-icon/>
+        <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
       </social-network-button>
       <social-network-button href="https://www.linkedin.com/in/julianeasterly/">
-        <img :src="linkedinLogo" alt="linkedin">
+        <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
       </social-network-button>
       <social-network-button href="https://github.com/jueast08">
-        <img :src="gitHubImage" alt="github">
+        <font-awesome-icon :icon="['fab', 'github']" fixed-width />
       </social-network-button>
-     </div>
-   </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import SocialNetworkButton from 'Bases/BaseSocialNetworkButton';
-import EmailIcon from 'Icons/EmailIcon';
-import github from 'Assets/GitHub-Mark-64px.png';
-import linkedin from 'Assets/linkein-logo-64px.png';
+import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
 
 export default {
-  name: 'TheSocialNetworkBar',
-  data() {
-    return {
-      gitHubImage: github,
-      linkedinLogo: linkedin,
-    }
-  },
+  name: "TheSocialNetworkBar",
   components: {
-    SocialNetworkButton, EmailIcon,
-  }
-}
+    SocialNetworkButton,
+  },
+};
 </script>
 
-
 <style lang="scss" scoped>
-  @use 'global';
+@use 'global';
 
+.sn-bar {
+  display: none;
+}
+
+@include global.adapt-to-screen("m") {
   .sn-bar {
-    display: none;
-  }
+    display: initial;
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
 
-  @include global.adapt-to-screen('m') {
-    .sn-bar {
-      display: initial;
-      position: fixed;
-      z-index: 100;
-      top: 50%;
-      right: 30px;
-      transform: translateY(-50%);
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50px;
+      padding: 10px 0;
 
-      &__container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 50px;
-        padding: 10px 0;
-        
-        border-radius: 3px;
-        background: global.$primary-white;
-        -webkit-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
-        -moz-box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
-        box-shadow: -10px 0px 20px 2px rgba(0,0,0,0.2);
+      border-radius: 3px;
+      background: global.$primary-white;
+      -webkit-box-shadow: -10px 0px 20px 2px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: -10px 0px 20px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: -10px 0px 20px 2px rgba(0, 0, 0, 0.2);
 
-        ::v-deep button {
-          width: 50%;
+      ::v-deep button {
+        width: 50%;
+        font-size: 25px;
+        color: rgba(global.$primary-black, 0.6);
+        transition: color 0.25s ease-in-out;
+
+        &:hover {
+          color: rgba(global.$primary-black, 1);
         }
       }
     }
   }
+}
 
-  @include global.adapt-to-screen('l') {
-    .sn-bar {
-      right: 84px;
-      &__container {
-        width: 40px;
-        padding: 10px 0;
-      }
-    }
+@include global.adapt-to-screen("l") {
+  .sn-bar {
+    right: 84px;
   }
-
-  @include global.adapt-to-screen('xl') {
-    .sn-bar {
-      &__container {
-        width: 50px;
-        padding: 10px 0;
-      }
-    }
-  }
+}
 </style>

@@ -12,13 +12,14 @@
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
         <professional-experience-item>
@@ -30,13 +31,14 @@
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
         <professional-experience-item>
@@ -48,13 +50,14 @@
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
         <professional-experience-item>
@@ -66,51 +69,51 @@
           <template #work-dates>Since Sept. 2019</template>
           <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
       </div>
       <div class="experience__others">
         <div class="experience__others__title">My Other Experiences</div>
         <section class="experience__others__description">
-          <div class="experience__others__description__title">From 2008 to 2012</div>
+          <div class="experience__others__description__title">
+            From 2008 to 2012
+          </div>
           <p>
-            I started working various jobs at 18 years old.
-            Between the moment that I started university classes
-            and the moment I recieved my degee, I've worked as a
-            <span
-              class="bold-primary"
-            >tutor/mentor</span>,
-            I've
+            I started working various jobs at 18 years old. Between the moment
+            that I started university classes and the moment I recieved my
+            degee, I've worked as a
+            <span class="bold-primary">tutor/mentor</span>, I've
             <span class="bold-primary">driven a forklift in a beer depot</span>,
             and
-            <span
-              class="bold-primary"
-            >I've worked in a kitchen at the Detroit City Zoo</span>.
+            <span class="bold-primary"
+              >I've worked in a kitchen at the Detroit City Zoo</span
+            >.
           </p>
         </section>
         <section class="experience__others__description">
-          <div class="experience__others__description__title">From 2012 to 2014</div>
+          <div class="experience__others__description__title">
+            From 2012 to 2014
+          </div>
           <p>
             I have
             <span class="bold-primary">2 years of teaching</span>experience:
             <span class="bold-primary">
-              1 year as a teaching assistant
-              at the American Montessori Academy in Redford, Michigan
-            </span>, and 1 year as
-            an
+              1 year as a teaching assistant at the American Montessori Academy
+              in Redford, Michigan </span
+            >, and 1 year as an
             <span class="bold-primary">
-              English assistant at the Lycée Professionnel Camille Claudel in Caen,
-              France
-            </span>.
-            These jobs helped me earn money and a visa that would allow me to make
-            France my home.
+              English assistant at the Lycée Professionnel Camille Claudel in
+              Caen, France </span
+            >. These jobs helped me earn money and a visa that would allow me to
+            make France my home.
           </p>
         </section>
       </div>
@@ -122,11 +125,11 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import ProfessionalExperienceItem from "./ProfessionalExperienceItem";
-import LogoIcon from "Icons/LogoIcon";
+import LogoIcon from "UI/LogoIcon";
 
 export default {
   name: "TheExperienceSection",
-  components: { BaseSection, ProfessionalExperienceItem, LogoIcon }
+  components: { BaseSection, ProfessionalExperienceItem, LogoIcon },
 };
 </script>
 

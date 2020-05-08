@@ -8,11 +8,10 @@
           </template>
           <template #title>Development and Tech</template>
           <template #description>
-            I have educational with Java, C and C++, as
-            well as professional experience in Git/Git-flow
-            Python, PHP, and Javascript.
-            I've worked with various tools such as Travis
-            CI, Sonarqube, Docker and Kubernetes.
+            I have educational with Java, C and C++, as well as professional
+            experience in Git/Git-flow Python, PHP, and Javascript. I've worked
+            with various tools such as Travis CI, Sonarqube, Docker and
+            Kubernetes.
           </template>
         </skill-content-with-icon>
         <skill-content-with-icon class="skills__list__skill">
@@ -21,11 +20,10 @@
           </template>
           <template #title>Project and Product Management</template>
           <template #description>
-            I have educational with Java, C and C++, as
-            well as professional experience in Git/Git-flow
-            Python, PHP, and Javascript.
-            I've worked with various tools such as Travis
-            CI, Sonarqube, Docker and Kubernetes.
+            I have educational with Java, C and C++, as well as professional
+            experience in Git/Git-flow Python, PHP, and Javascript. I've worked
+            with various tools such as Travis CI, Sonarqube, Docker and
+            Kubernetes.
           </template>
         </skill-content-with-icon>
         <skill-content-with-icon class="skills__list__skill">
@@ -34,11 +32,10 @@
           </template>
           <template #title>Do-It-Yourself</template>
           <template #description>
-            I have educational with Java, C and C++, as
-            well as professional experience in Git/Git-flow
-            Python, PHP, and Javascript.
-            I've worked with various tools such as Travis
-            CI, Sonarqube, Docker and Kubernetes.
+            I have educational with Java, C and C++, as well as professional
+            experience in Git/Git-flow Python, PHP, and Javascript. I've worked
+            with various tools such as Travis CI, Sonarqube, Docker and
+            Kubernetes.
           </template>
         </skill-content-with-icon>
       </div>
@@ -55,12 +52,12 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import SkillContentWithIcon from "./SkillContentWithIcon";
-import LogoIcon from "Icons/LogoIcon";
+import LogoIcon from "UI/LogoIcon";
 import WhiteRoundButton from "UI/WhiteRoundButton";
 
 export default {
   name: "TheSkillsSection",
-  components: { BaseSection, SkillContentWithIcon, LogoIcon, WhiteRoundButton }
+  components: { BaseSection, SkillContentWithIcon, LogoIcon, WhiteRoundButton },
 };
 </script>
 
@@ -93,7 +90,7 @@ export default {
   }
 }
 
-@include global.adapt-to-screen('l') {
+@include global.adapt-to-screen("l") {
   #skills {
     .skills {
       &__list {
