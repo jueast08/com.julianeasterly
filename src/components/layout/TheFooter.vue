@@ -4,9 +4,7 @@
       <div class="footer__container__logo-group col-12">
         <div class="footer__container__logo-group__logo">
           <logo-icon />
-          <div class="footer__container__logo-group__logo__text">
-            JULIAN EASTERLY
-          </div>
+          <div class="footer__container__logo-group__logo__text">JULIAN EASTERLY</div>
         </div>
       </div>
       <div class="footer__container__link-group col-12">
@@ -14,21 +12,16 @@
           class="footer__container__link-group__link"
           v-for="(link, index) in links"
           :key="link + index"
-        >
-          {{ link }}
-        </div>
+          @click="scrollToId(link.toLowerCase())"
+        >{{ link }}</div>
       </div>
     </div>
     <div class="footer__social-network-group col-12">
-      <div
-        class="footer__social-network-group__wrapper col-12 col-s-6 col-m-4 "
-      >
+      <div class="footer__social-network-group__wrapper col-12 col-s-6 col-m-4">
         <social-network-button href="#contact">
           <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
         </social-network-button>
-        <social-network-button
-          href="https://www.linkedin.com/in/julianeasterly/"
-        >
+        <social-network-button href="https://www.linkedin.com/in/julianeasterly/">
           <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
         </social-network-button>
         <social-network-button href="https://github.com/jueast08">
@@ -39,8 +32,8 @@
     <div class="footer__credits col-12 col-s-10 col-m-10 col-l-8 col-xl-8">
       <div class="footer__credits__credit col-12">
         Design by Julian EASTERLY
-        <br />
-        Made with <span>&#10084;</span> in Strasbourg, France during the 2020
+        <br />Made with
+        <span>&#10084;</span> in Strasbourg, France during the 2020
         Coronavirus lockdown
       </div>
     </div>
@@ -50,16 +43,19 @@
 <script>
 import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
 import LogoIcon from "UI/LogoIcon";
+import scrollToId from "Utility/ScrollHelper";
 
 export default {
   name: "TheFooter",
   data() {
     return {
-      links: ["Home", "About", "Skills", "Experience", "Education", "Contact"], //@TODO refactor. this data is repeated in the header
+      links: ["Home", "About", "Skills", "Experience", "Education", "Contact"] //@TODO refactor. this data is repeated in the header
     };
   },
   components: { LogoIcon, SocialNetworkButton },
-  methods: {},
+  methods: {
+    scrollToId
+  }
 };
 </script>
 
@@ -116,6 +112,10 @@ export default {
         margin: 15px 0;
         color: global.$primary-white;
         @include global.link-font($weight: 400);
+        cursor: pointer;
+        &:hover {
+          opacity: 0.6;
+        }
       }
     }
   }

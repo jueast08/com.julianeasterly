@@ -119,6 +119,9 @@
           </p>
         </section>
       </div>
+      <section class="experience__resume">
+        <white-round-button>Download my Resume</white-round-button>
+      </section>
     </div>
     <!-- @TODO add a download cv button -->
   </base-section>
@@ -127,6 +130,7 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import ProfessionalExperienceItem from "./ProfessionalExperienceItem";
+import WhiteRoundButton from "UI/WhiteRoundButton";
 import ActimageLogo from "Assets/actimage_logo.png";
 import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
@@ -142,7 +146,7 @@ export default {
       soyhuceLogo: SoyhuceLogo
     };
   },
-  components: { BaseSection, ProfessionalExperienceItem }
+  components: { BaseSection, ProfessionalExperienceItem, WhiteRoundButton }
 };
 </script>
 
@@ -185,6 +189,11 @@ export default {
           color: global.$primary-white;
         }
       }
+    }
+
+    &__resume {
+      text-align: center;
+      margin-top: 50px;
     }
   }
 }

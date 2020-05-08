@@ -3,7 +3,6 @@
     <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
     <the-header />
     <the-social-network-bar />
-    <the-go-to-top-button querySelectorThatTriggersShowButton="#home" />
     <the-home-section />
     <the-about-section />
     <the-hobbies-section />
@@ -12,6 +11,7 @@
     <the-education-section />
     <the-contact-section />
     <the-footer />
+    <the-go-to-top-button querySelectorThatTriggersShowButton="#home" />
   </div>
 </template>
 
