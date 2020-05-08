@@ -17,16 +17,16 @@ import BaseContentWithIcon from "Bases/BaseContentWithIcon";
 
 export default {
   name: "HobbyContentWithIcon",
-  components: { BaseContentWithIcon }
+  components: { BaseContentWithIcon },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @use 'global';
 
 ::v-deep .base-content-with-icon {
   &__icon {
+    color: global.$primary-color;
     svg,
     img {
       fill: global.$primary-color;
