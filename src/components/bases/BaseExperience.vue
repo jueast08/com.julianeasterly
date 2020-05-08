@@ -170,7 +170,7 @@ export default {
         }
 
         &__text {
-          margin-left: 10px;
+          margin-left: 20px;
         }
       }
     }

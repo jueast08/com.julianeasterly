@@ -11,7 +11,7 @@
           location="Caen, Normandy, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="ensicaenLogo" alt="Ensicaen" />
           </template>
           <template #details>
             lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
@@ -32,7 +32,7 @@
           location="Caen, Normandy, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="unicaenLogo" alt="Unicaen" />
           </template>
           <template #details>
             lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
@@ -53,7 +53,7 @@
           location="Caen, Normandy, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="isuLogo" alt="ISU" />
           </template>
           <template #details>
             lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
@@ -74,11 +74,20 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import EducationExperienceItem from "./EducationExperienceItem";
-import LogoIcon from "UI/LogoIcon";
+import EnsiLogo from "Assets/ensicaen_logo.png";
+import UnicaenLogo from "Assets/unicaen_logo.png";
+import ISULogo from "Assets/isu_logo.png";
 
 export default {
   name: "TheEducationSection",
-  components: { BaseSection, EducationExperienceItem, LogoIcon }
+  components: { BaseSection, EducationExperienceItem },
+  data() {
+    return {
+      ensicaenLogo: EnsiLogo,
+      unicaenLogo: UnicaenLogo,
+      isuLogo: ISULogo
+    };
+  }
 };
 </script>
 
