@@ -10,7 +10,7 @@
           location="Colmar, Alsace, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="actimageLogo" alt="Actimage" />
           </template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
@@ -30,7 +30,7 @@
           location="Colmar, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="sgLogo" alt="Société Générale" />
           </template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
@@ -50,7 +50,7 @@
           location="Colmar, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="canalPlusLogo" alt="Canal+" />
           </template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
@@ -70,7 +70,7 @@
           location="Colmar, France"
         >
           <template #img>
-            <logo-icon />
+            <img :src="soyhuceLogo" alt="SoyHuCe" />
           </template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
@@ -127,11 +127,22 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import ProfessionalExperienceItem from "./ProfessionalExperienceItem";
-import LogoIcon from "UI/LogoIcon";
+import ActimageLogo from "Assets/actimage_logo.png";
+import SocieteGenerale from "Assets/sg_logo.png";
+import CanalPlusLogo from "Assets/canalplus_logo.png";
+import SoyhuceLogo from "Assets/soyhuce_logo.png";
 
 export default {
   name: "TheExperienceSection",
-  components: { BaseSection, ProfessionalExperienceItem, LogoIcon }
+  data() {
+    return {
+      actimageLogo: ActimageLogo,
+      sgLogo: SocieteGenerale,
+      canalPlusLogo: CanalPlusLogo,
+      soyhuceLogo: SoyhuceLogo
+    };
+  },
+  components: { BaseSection, ProfessionalExperienceItem }
 };
 </script>
 
