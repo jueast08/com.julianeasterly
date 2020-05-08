@@ -1,11 +1,17 @@
 <template>
   <div>
-    <base-experience>
+    <base-experience
+      :title="degreeTitle"
+      :subtitle="rank"
+      :subtitle2="schoolName"
+      :dates="workDates"
+      :location="location"
+    >
       <template #img>
         <slot name="img" />
       </template>
       <template #title>
-        <slot name="title" />
+        <slot name="degree-title" />
       </template>
       <template #subtitle>
         <slot name="rank" />
@@ -31,6 +37,23 @@ import BaseExperience from "Bases/BaseExperience";
 
 export default {
   name: "EducationExperienceItem",
+  props: {
+    degreeTitle: {
+      type: String
+    },
+    rank: {
+      type: String
+    },
+    schoolName: {
+      type: String
+    },
+    dates: {
+      type: String
+    },
+    location: {
+      type: String
+    }
+  },
   components: { BaseExperience }
 };
 </script>

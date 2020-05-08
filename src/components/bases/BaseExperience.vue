@@ -7,22 +7,27 @@
         </div>
         <div class="base-exp__vital-info__wrapper__text">
           <div class="base-exp__vital-info__wrapper__text__title">
+            {{ title }}
             <slot name="title" />
           </div>
           <div class="base-exp__vital-info__wrapper__text__subtitle">
             <slot name="subtitle" />
+            {{ subtitle }}
           </div>
           <div class="base-exp__vital-info__wrapper__text__subtitle-2">
             <slot name="subtitle-2" />
+            {{ subtitle2 }}
           </div>
           <div class="base-exp__vital-info__wrapper__text__dates">
             <slot name="dates" />
+            {{ dates }}
           </div>
           <div class="base-exp__vital-info__wrapper__text__location">
             <span class="base-exp__vital-info__wrapper__text__location__icon">
               <font-awesome-icon :icon="['fas', 'map-marker-alt']" fixed-width />
             </span>
             <span>
+              {{ location }}
               <slot name="location" />
             </span>
           </div>
@@ -39,6 +44,23 @@
 <script>
 export default {
   name: "BaseSection",
+  props: {
+    title: {
+      type: String
+    },
+    subtitle: {
+      type: String
+    },
+    subtitle2: {
+      type: String
+    },
+    dates: {
+      type: String
+    },
+    location: {
+      type: String
+    }
+  },
   components: {}
 };
 </script>
