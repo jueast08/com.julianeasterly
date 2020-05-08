@@ -4,7 +4,7 @@
       :title="degreeTitle"
       :subtitle="rank"
       :subtitle2="schoolName"
-      :dates="workDates"
+      :dates="dates"
       :location="location"
     >
       <template #img>
