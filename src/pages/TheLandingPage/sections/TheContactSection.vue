@@ -49,7 +49,7 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
-import LogoIcon from "Icons/LogoIcon"; //@TODO replace with a checkmark icon
+import LogoIcon from "UI/LogoIcon"; //@TODO replace with a checkmark icon
 
 export default {
   name: "TheContactSection",
@@ -57,7 +57,7 @@ export default {
     return {
       name: "",
       email: "",
-      message: ""
+      message: "",
     };
   },
   components: { BaseSection, PrimaryColorRoundButton, LogoIcon },
@@ -72,8 +72,8 @@ export default {
       //     message: this.message,
       // };
       //@TODO send to a php script
-    }
-  }
+    },
+  },
 };
 </script>
 
