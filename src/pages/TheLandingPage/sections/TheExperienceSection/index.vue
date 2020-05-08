@@ -3,14 +3,15 @@
     <div class="experience">
       <div class="experience__list">
         <!-- @TODO export data to a json -->
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, Alsace, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
             turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
@@ -22,14 +23,15 @@
             quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
             turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
@@ -41,14 +43,15 @@
             quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
             turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
@@ -60,14 +63,15 @@
             quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
             turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris

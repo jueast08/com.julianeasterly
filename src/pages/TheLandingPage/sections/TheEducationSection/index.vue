@@ -1,23 +1,18 @@
 <template>
-  <base-section
-    id="education"
-    title="Education"
-    subtitle="The path I've Traveled"
-  >
+  <base-section id="education" title="Education" subtitle="The path I've Traveled">
     <div class="education">
       <div class="education__list">
         <!-- @TODO export data to a json -->
-        <education-experience-item>
+        <education-experience-item
+          degreeTitle="Master's in Computer Science"
+          rank="Valedictorian"
+          schoolName="Ecole Nationale Supérieure d'Ingénieurs de Caen"
+          dates="2016 - 2019"
+          location="Caen, Normandy, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #title>Master's in Computer Science</template>
-          <template #rank>Valedictorian</template>
-          <template #school-name
-            >Ecole Nationale Supérieure d'Ingénieurs de Caen</template
-          >
-          <template #dates>2016 - 2019</template>
-          <template #location>Caen, France</template>
           <template #details>
             lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
             turpis leo. praesent hendrerit commodo lorem eget imperdiet. mauris
@@ -29,17 +24,16 @@
             quis, aliquet pellentesque nisl. donec vel mollis nulla.
           </template>
         </education-experience-item>
-        <education-experience-item>
+        <education-experience-item
+          degreeTitle="Master's in Computer Science"
+          rank="Valedictorian"
+          schoolName="Ecole Nationale Supérieure d'Ingénieurs de Caen"
+          dates="2016 - 2019"
+          location="Caen, Normandy, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #title>Master's in Computer Science</template>
-          <template #rank>Valedictorian</template>
-          <template #school-name
-            >Ecole Nationale Supérieure d'Ingénieurs de Caen</template
-          >
-          <template #dates>2016 - 2019</template>
-          <template #location>Caen, France</template>
           <template #details>
             lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
             turpis leo. praesent hendrerit commodo lorem eget imperdiet. mauris
@@ -51,17 +45,16 @@
             quis, aliquet pellentesque nisl. donec vel mollis nulla.
           </template>
         </education-experience-item>
-        <education-experience-item>
+        <education-experience-item
+          degreeTitle="Master's in Computer Science"
+          rank="Valedictorian"
+          schoolName="Ecole Nationale Supérieure d'Ingénieurs de Caen"
+          dates="2016 - 2019"
+          location="Caen, Normandy, France"
+        >
           <template #img>
             <logo-icon />
           </template>
-          <template #title>Master's in Computer Science</template>
-          <template #rank>Valedictorian</template>
-          <template #school-name
-            >Ecole Nationale Supérieure d'Ingénieurs de Caen</template
-          >
-          <template #dates>2016 - 2019</template>
-          <template #location>Caen, France</template>
           <template #details>
             lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
             turpis leo. praesent hendrerit commodo lorem eget imperdiet. mauris
@@ -85,7 +78,7 @@ import LogoIcon from "UI/LogoIcon";
 
 export default {
   name: "TheEducationSection",
-  components: { BaseSection, EducationExperienceItem, LogoIcon },
+  components: { BaseSection, EducationExperienceItem, LogoIcon }
 };
 </script>
 
