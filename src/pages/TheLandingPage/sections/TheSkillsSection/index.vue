@@ -4,7 +4,7 @@
       <div class="skills__list">
         <skill-content-with-icon class="skills__list__skill">
           <template #icon>
-            <logo-icon />
+            <font-awesome-icon :icon="['fas', 'terminal']" fixed-width />
           </template>
           <template #title>Development and Tech</template>
           <template #description>
@@ -16,7 +16,7 @@
         </skill-content-with-icon>
         <skill-content-with-icon class="skills__list__skill">
           <template #icon>
-            <logo-icon />
+            <font-awesome-icon :icon="['fas', 'tasks']" fixed-width />
           </template>
           <template #title>Project and Product Management</template>
           <template #description>
@@ -28,7 +28,7 @@
         </skill-content-with-icon>
         <skill-content-with-icon class="skills__list__skill">
           <template #icon>
-            <logo-icon />
+            <font-awesome-icon :icon="['fas', 'globe-europe']" fixed-width />
           </template>
           <template #title>Do-It-Yourself</template>
           <template #description>
@@ -52,12 +52,11 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import SkillContentWithIcon from "./SkillContentWithIcon";
-import LogoIcon from "UI/LogoIcon";
 import WhiteRoundButton from "UI/WhiteRoundButton";
 
 export default {
   name: "TheSkillsSection",
-  components: { BaseSection, SkillContentWithIcon, LogoIcon, WhiteRoundButton },
+  components: { BaseSection, SkillContentWithIcon, WhiteRoundButton },
 };
 </script>
 

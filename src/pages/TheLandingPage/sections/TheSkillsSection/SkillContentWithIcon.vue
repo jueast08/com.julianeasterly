@@ -27,6 +27,7 @@ export default {
 
 ::v-deep .base-content-with-icon {
   &__icon {
+    color: global.$primary-white;
     svg,
     img {
       fill: global.$primary-white;

@@ -19,12 +19,12 @@
             <slot name="dates" />
           </div>
           <div class="base-exp__vital-info__wrapper__text__location">
-            <div>
-              <logo-icon />
-            </div>
-            <div>
+            <span class="base-exp__vital-info__wrapper__text__location__icon">
+              <font-awesome-icon :icon="['fas', 'map-marker-alt']" fixed-width />
+            </span>
+            <span>
               <slot name="location" />
-            </div>
+            </span>
           </div>
         </div>
       </div>
@@ -37,11 +37,9 @@
 </template>
 
 <script>
-import LogoIcon from "UI/LogoIcon";
-
 export default {
   name: "BaseSection",
-  components: { LogoIcon },
+  components: {}
 };
 </script>
 
@@ -83,11 +81,11 @@ export default {
           @include global.xp-subtitle-font;
         }
         &__location {
-          display: flex;
+          //display: flex;
           @include global.xp-subtitle-font;
-          svg {
-            width: 16px;
-            margin-right: 10px;
+          &__icon {
+            font-size: 16px;
+            color: global.$primary-color;
           }
         }
       }

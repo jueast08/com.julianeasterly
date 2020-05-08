@@ -3,31 +3,31 @@
     <div class="hobbies">
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
-          <logo-icon />
+          <font-awesome-icon :icon="['fas', 'laptop-code']" fixed-width />
         </template>
         <template #title>Coding and Design</template>
       </hobby-content-with-icon>
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
-          <logo-icon />
+          <font-awesome-icon :icon="['fas', 'dumbbell']" fixed-width />
         </template>
         <template #title>Sports</template>
       </hobby-content-with-icon>
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
-          <logo-icon />
+          <font-awesome-icon :icon="['fas', 'tools']" fixed-width />
         </template>
-        <template #title>DIY and Gardening</template>
+        <template #title>DIY</template>
       </hobby-content-with-icon>
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
-          <logo-icon />
+          <font-awesome-icon :icon="['fas', 'seedling']" fixed-width />
         </template>
         <template #title>Gardening</template>
       </hobby-content-with-icon>
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
-          <logo-icon />
+          <font-awesome-icon :icon="['fas', 'hamburger']" fixed-width />
         </template>
         <template #title>Cooking</template>
       </hobby-content-with-icon>
@@ -38,11 +38,10 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import HobbyContentWithIcon from "./HobbyContentWithIcon";
-import LogoIcon from "UI/LogoIcon";
 
 export default {
   name: "TheHobbiesSection",
-  components: { BaseSection, HobbyContentWithIcon, LogoIcon },
+  components: { BaseSection, HobbyContentWithIcon }
 };
 </script>
 
