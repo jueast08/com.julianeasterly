@@ -7,24 +7,29 @@
         </div>
         <div class="base-exp__vital-info__wrapper__text">
           <div class="base-exp__vital-info__wrapper__text__title">
+            {{ title }}
             <slot name="title" />
           </div>
           <div class="base-exp__vital-info__wrapper__text__subtitle">
             <slot name="subtitle" />
+            {{ subtitle }}
           </div>
           <div class="base-exp__vital-info__wrapper__text__subtitle-2">
             <slot name="subtitle-2" />
+            {{ subtitle2 }}
           </div>
           <div class="base-exp__vital-info__wrapper__text__dates">
             <slot name="dates" />
+            {{ dates }}
           </div>
           <div class="base-exp__vital-info__wrapper__text__location">
-            <div>
-              <logo-icon />
-            </div>
-            <div>
+            <span class="base-exp__vital-info__wrapper__text__location__icon">
+              <font-awesome-icon :icon="['fas', 'map-marker-alt']" fixed-width />
+            </span>
+            <span>
+              {{ location }}
               <slot name="location" />
-            </div>
+            </span>
           </div>
         </div>
       </div>
@@ -37,11 +42,26 @@
 </template>
 
 <script>
-import LogoIcon from "Icons/LogoIcon";
-
 export default {
   name: "BaseSection",
-  components: { LogoIcon }
+  props: {
+    title: {
+      type: String
+    },
+    subtitle: {
+      type: String
+    },
+    subtitle2: {
+      type: String
+    },
+    dates: {
+      type: String
+    },
+    location: {
+      type: String
+    }
+  },
+  components: {}
 };
 </script>
 
@@ -83,11 +103,11 @@ export default {
           @include global.xp-subtitle-font;
         }
         &__location {
-          display: flex;
+          //display: flex;
           @include global.xp-subtitle-font;
-          svg {
-            width: 16px;
-            margin-right: 10px;
+          &__icon {
+            font-size: 16px;
+            color: global.$primary-color;
           }
         }
       }
@@ -150,7 +170,7 @@ export default {
         }
 
         &__text {
-          margin-left: 10px;
+          margin-left: 20px;
         }
       }
     }

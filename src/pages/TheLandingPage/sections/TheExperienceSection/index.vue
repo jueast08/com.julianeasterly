@@ -3,76 +3,84 @@
     <div class="experience">
       <div class="experience__list">
         <!-- @TODO export data to a json -->
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, Alsace, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="actimageLogo" alt="Actimage" />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="sgLogo" alt="Société Générale" />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="canalPlusLogo" alt="Canal+" />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
-        <professional-experience-item>
+        <professional-experience-item
+          jobTitle="IT Consultant - Business Analyst"
+          companyName="Actimage"
+          workDates="Since Sept. 2019"
+          location="Colmar, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="soyhuceLogo" alt="SoyHuCe" />
           </template>
-          <template #job-title>IT Consultant - Business Analyst</template>
-          <template #company-name>Actimage</template>
-          <template #work-dates>Since Sept. 2019</template>
-          <template #location>Colmar, France</template>
           <template #details>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec turpis leo.
-            Praesent hendrerit commodo lorem eget imperdiet. Mauris consequat lacus justo,
-            at volutpat libero blandit vitae. Mauris placerat quam a ultrices hendrerit.
-            Fusce quis blandit arcu. Nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
-            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. Donec vel mollis nulla.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
+            turpis leo. Praesent hendrerit commodo lorem eget imperdiet. Mauris
+            consequat lacus justo, at volutpat libero blandit vitae. Mauris
+            placerat quam a ultrices hendrerit. Fusce quis blandit arcu. Nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. Morbi suscipit tristique
+            ornare. Aenean ac dictum sapien. Sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. Donec vel mollis nulla.
           </template>
         </professional-experience-item>
       </div>
@@ -81,13 +89,12 @@
         <section class="experience__others__description">
           <div class="experience__others__description__title">From 2008 to 2012</div>
           <p>
-            I started working various jobs at 18 years old.
-            Between the moment that I started university classes
-            and the moment I recieved my degee, I've worked as a
+            I started working various jobs at 18 years old. Between the moment
+            that I started university classes and the moment I recieved my
+            degee, I've worked as a
             <span
               class="bold-primary"
-            >tutor/mentor</span>,
-            I've
+            >tutor/mentor</span>, I've
             <span class="bold-primary">driven a forklift in a beer depot</span>,
             and
             <span
@@ -101,16 +108,14 @@
             I have
             <span class="bold-primary">2 years of teaching</span>experience:
             <span class="bold-primary">
-              1 year as a teaching assistant
-              at the American Montessori Academy in Redford, Michigan
-            </span>, and 1 year as
-            an
+              1 year as a teaching assistant at the American Montessori Academy
+              in Redford, Michigan
+            </span>, and 1 year as an
             <span class="bold-primary">
-              English assistant at the Lycée Professionnel Camille Claudel in Caen,
-              France
-            </span>.
-            These jobs helped me earn money and a visa that would allow me to make
-            France my home.
+              English assistant at the Lycée Professionnel Camille Claudel in
+              Caen, France
+            </span>. These jobs helped me earn money and a visa that would allow me to
+            make France my home.
           </p>
         </section>
       </div>
@@ -122,11 +127,22 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import ProfessionalExperienceItem from "./ProfessionalExperienceItem";
-import LogoIcon from "Icons/LogoIcon";
+import ActimageLogo from "Assets/actimage_logo.png";
+import SocieteGenerale from "Assets/sg_logo.png";
+import CanalPlusLogo from "Assets/canalplus_logo.png";
+import SoyhuceLogo from "Assets/soyhuce_logo.png";
 
 export default {
   name: "TheExperienceSection",
-  components: { BaseSection, ProfessionalExperienceItem, LogoIcon }
+  data() {
+    return {
+      actimageLogo: ActimageLogo,
+      sgLogo: SocieteGenerale,
+      canalPlusLogo: CanalPlusLogo,
+      soyhuceLogo: SoyhuceLogo
+    };
+  },
+  components: { BaseSection, ProfessionalExperienceItem }
 };
 </script>
 
@@ -168,6 +184,16 @@ export default {
           @include global.p-font;
           color: global.$primary-white;
         }
+      }
+    }
+  }
+}
+
+@include global.adapt-to-screen("s") {
+  #experience {
+    .experience {
+      &__others {
+        text-align: center;
       }
     }
   }

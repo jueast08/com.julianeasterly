@@ -3,61 +3,67 @@
     <div class="education">
       <div class="education__list">
         <!-- @TODO export data to a json -->
-        <education-experience-item>
+        <education-experience-item
+          degreeTitle="Master's in Computer Science"
+          rank="Valedictorian"
+          schoolName="Ecole Nationale Supérieure d'Ingénieurs de Caen"
+          dates="2016 - 2019"
+          location="Caen, Normandy, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="ensicaenLogo" alt="Ensicaen" />
           </template>
-          <template #title>Master's in Computer Science</template>
-          <template #rank>Valedictorian</template>
-          <template #school-name>Ecole Nationale Supérieure d'Ingénieurs de Caen</template>
-          <template #dates>2016 - 2019</template>
-          <template #location>Caen, France</template>
           <template #details>
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec turpis leo.
-            praesent hendrerit commodo lorem eget imperdiet. mauris consequat lacus justo,
-            at volutpat libero blandit vitae. mauris placerat quam a ultrices hendrerit.
-            fusce quis blandit arcu. nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
-            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. donec vel mollis nulla.
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
+            turpis leo. praesent hendrerit commodo lorem eget imperdiet. mauris
+            consequat lacus justo, at volutpat libero blandit vitae. mauris
+            placerat quam a ultrices hendrerit. fusce quis blandit arcu. nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
+            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. donec vel mollis nulla.
           </template>
         </education-experience-item>
-        <education-experience-item>
+        <education-experience-item
+          degreeTitle="Master's in Computer Science"
+          rank="Valedictorian"
+          schoolName="Ecole Nationale Supérieure d'Ingénieurs de Caen"
+          dates="2016 - 2019"
+          location="Caen, Normandy, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="unicaenLogo" alt="Unicaen" />
           </template>
-          <template #title>Master's in Computer Science</template>
-          <template #rank>Valedictorian</template>
-          <template #school-name>Ecole Nationale Supérieure d'Ingénieurs de Caen</template>
-          <template #dates>2016 - 2019</template>
-          <template #location>Caen, France</template>
           <template #details>
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec turpis leo.
-            praesent hendrerit commodo lorem eget imperdiet. mauris consequat lacus justo,
-            at volutpat libero blandit vitae. mauris placerat quam a ultrices hendrerit.
-            fusce quis blandit arcu. nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
-            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. donec vel mollis nulla.
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
+            turpis leo. praesent hendrerit commodo lorem eget imperdiet. mauris
+            consequat lacus justo, at volutpat libero blandit vitae. mauris
+            placerat quam a ultrices hendrerit. fusce quis blandit arcu. nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
+            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. donec vel mollis nulla.
           </template>
         </education-experience-item>
-        <education-experience-item>
+        <education-experience-item
+          degreeTitle="Master's in Computer Science"
+          rank="Valedictorian"
+          schoolName="Ecole Nationale Supérieure d'Ingénieurs de Caen"
+          dates="2016 - 2019"
+          location="Caen, Normandy, France"
+        >
           <template #img>
-            <logo-icon />
+            <img :src="isuLogo" alt="ISU" />
           </template>
-          <template #title>Master's in Computer Science</template>
-          <template #rank>Valedictorian</template>
-          <template #school-name>Ecole Nationale Supérieure d'Ingénieurs de Caen</template>
-          <template #dates>2016 - 2019</template>
-          <template #location>Caen, France</template>
           <template #details>
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec turpis leo.
-            praesent hendrerit commodo lorem eget imperdiet. mauris consequat lacus justo,
-            at volutpat libero blandit vitae. mauris placerat quam a ultrices hendrerit.
-            fusce quis blandit arcu. nam pellentesque, dolor a tincidunt tincidunt, quam
-            libero suscipit libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
-            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem quis, aliquet
-            pellentesque nisl. donec vel mollis nulla.
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. morbi nec
+            turpis leo. praesent hendrerit commodo lorem eget imperdiet. mauris
+            consequat lacus justo, at volutpat libero blandit vitae. mauris
+            placerat quam a ultrices hendrerit. fusce quis blandit arcu. nam
+            pellentesque, dolor a tincidunt tincidunt, quam libero suscipit
+            libero, eu accumsan ex sem laoreet est. morbi suscipit tristique
+            ornare. aenean ac dictum sapien. sed purus nulla, luctus sed lorem
+            quis, aliquet pellentesque nisl. donec vel mollis nulla.
           </template>
         </education-experience-item>
       </div>
@@ -68,11 +74,20 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import EducationExperienceItem from "./EducationExperienceItem";
-import LogoIcon from "Icons/LogoIcon";
+import EnsiLogo from "Assets/ensicaen_logo.png";
+import UnicaenLogo from "Assets/unicaen_logo.png";
+import ISULogo from "Assets/isu_logo.png";
 
 export default {
   name: "TheEducationSection",
-  components: { BaseSection, EducationExperienceItem, LogoIcon }
+  components: { BaseSection, EducationExperienceItem },
+  data() {
+    return {
+      ensicaenLogo: EnsiLogo,
+      unicaenLogo: UnicaenLogo,
+      isuLogo: ISULogo
+    };
+  }
 };
 </script>
 

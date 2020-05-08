@@ -14,7 +14,9 @@
             :class="addClassModifierIfStringNotEmpty(name)"
           >
             <label for="name">Name</label>
-            <logo-icon />
+            <span
+              ><font-awesome-icon :icon="['fas', 'check-circle']" fixed-width
+            /></span>
           </div>
           <input type="text" name="name" v-model="name" required />
         </section>
@@ -24,7 +26,9 @@
             :class="addClassModifierIfStringNotEmpty(email)"
           >
             <label for="email">Email</label>
-            <logo-icon />
+            <span
+              ><font-awesome-icon :icon="['fas', 'check-circle']" fixed-width
+            /></span>
           </div>
           <input type="email" name="email" v-model="email" required />
         </section>
@@ -34,7 +38,9 @@
             :class="addClassModifierIfStringNotEmpty(message)"
           >
             <label for="message">Message</label>
-            <logo-icon />
+            <span
+              ><font-awesome-icon :icon="['fas', 'check-circle']" fixed-width
+            /></span>
           </div>
           <textarea name="message" v-model="message" minlength="50" required />
         </section>
@@ -49,7 +55,6 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
-import LogoIcon from "Icons/LogoIcon"; //@TODO replace with a checkmark icon
 
 export default {
   name: "TheContactSection",
@@ -57,10 +62,10 @@ export default {
     return {
       name: "",
       email: "",
-      message: ""
+      message: "",
     };
   },
-  components: { BaseSection, PrimaryColorRoundButton, LogoIcon },
+  components: { BaseSection, PrimaryColorRoundButton },
   methods: {
     addClassModifierIfStringNotEmpty(string) {
       return string.trim() !== "" && "contact__form__section__label--filled";
@@ -72,8 +77,8 @@ export default {
       //     message: this.message,
       // };
       //@TODO send to a php script
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -158,15 +163,15 @@ export default {
             color: global.$primary-black;
             margin-right: 5px;
           }
-          svg {
-            fill: rgba(global.$primary-black, 0.25);
-            height: 15px;
-            transition: fill 0.5s ease-in-out;
+          span {
+            color: rgba(global.$primary-black, 0.25);
+            font-size: 15px;
+            transition: color 0.5s ease-in-out;
           }
 
           &--filled {
             svg {
-              fill: global.$primary-color;
+              color: global.$primary-color;
             }
           }
         }
