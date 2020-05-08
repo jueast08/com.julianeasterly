@@ -1,6 +1,11 @@
 <template>
   <div>
-    <base-experience>
+    <base-experience
+      :title="jobTitle"
+      :subtitle="companyName"
+      :dates="workDates"
+      :location="location"
+    >
       <template #img>
         <slot name="img" />
       </template>
@@ -28,6 +33,20 @@ import BaseExperience from "Bases/BaseExperience";
 
 export default {
   name: "ProfessionalExperienceItem",
+  props: {
+    jobTitle: {
+      type: String
+    },
+    companyName: {
+      type: String
+    },
+    workDates: {
+      type: String
+    },
+    location: {
+      type: String
+    }
+  },
   components: { BaseExperience }
 };
 </script>
