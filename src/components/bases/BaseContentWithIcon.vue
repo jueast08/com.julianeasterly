@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "BaseContentWithIcon",
+  name: "BaseContentWithIcon"
 };
 </script>
 
@@ -23,13 +23,14 @@ export default {
 
 .base-content-with-icon {
   &__icon {
+    $size: 45px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: 75px;
-    height: 75px;
+    width: $size;
+    height: $size;
     margin: 0 0 25px 0;
-    font-size: 75px;
+    font-size: $size;
     svg,
     img {
       width: 100%;

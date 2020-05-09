@@ -1,49 +1,80 @@
 @use 'sass:string';
 @use 'sass:map';
 
-$breakpoints    : (
-    'xs'        : (max-width: 600px),
-    'xs-rotated': (max-height: 500px),
-    's'         : (min-width: 600px),
-    'm'         : (min-width: 768px),
-    'l'         : (min-width: 992px),
-    'xl'        : (min-width: 1200px)
+$breakpoints: (
+  "xs": (
+    max-width: 600px,
+  ),
+  "xs-rotated": (
+    max-height: 500px,
+  ),
+  "s": (
+    min-width: 600px,
+  ),
+  "m": (
+    min-width: 768px,
+  ),
+  "l": (
+    min-width: 992px,
+  ),
+  "xl": (
+    min-width: 1200px,
+  ),
 ) !default;
 
-
 @mixin adapt-to-screen($breakpoint) {
-    
-    @if map-has-key($breakpoints , $breakpoint) {
-        
-        @media only screen and #{inspect(map-get($breakpoints, $breakpoint))} {
-            @content
-        }
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media only screen and #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
     }
-    @else {
-        @warn "There is no breakpoint that corresponds with the variable #{$breakpoint}."
-        + "Please use one of the following: #{map-keys($breakpoints)}."
-    }
-};
+  } @else {
+    @warn "There is no breakpoint that corresponds with the variable #{$breakpoint}."
+        + "Please use one of the following: #{map-keys($breakpoints)}.";
+  }
+}
 
 /*for mobile phones*/
 [class*="col-"] {
-    width: 100%;
-  }
+  width: 100%;
+}
 
 @each $key, $value in $breakpoints {
-
-    @media only screen and #{inspect(map-get($breakpoints, $key))} {
-        .col-#{$key}-1 {width: 8.33%;}
-        .col-#{$key}-2 {width: 16.66%;}
-        .col-#{$key}-3 {width: 25%;}
-        .col-#{$key}-4 {width: 33.33%;}
-        .col-#{$key}-5 {width: 41.66%;}
-        .col-#{$key}-6 {width: 50%;}
-        .col-#{$key}-7 {width: 58.33%;}
-        .col-#{$key}-8 {width: 66.66%;}
-        .col-#{$key}-9 {width: 75%;}
-        .col-#{$key}-10 {width: 83.33%;}
-        .col-#{$key}-11 {width: 91.66%;}
-        .col-#{$key}-12 {width: 100%;}
+  @media only screen and #{inspect(map-get($breakpoints, $key))} {
+    .col-#{$key}-1 {
+      width: 8.33%;
     }
+    .col-#{$key}-2 {
+      width: 16.66%;
+    }
+    .col-#{$key}-3 {
+      width: 25%;
+    }
+    .col-#{$key}-4 {
+      width: 33.33%;
+    }
+    .col-#{$key}-5 {
+      width: 41.66%;
+    }
+    .col-#{$key}-6 {
+      width: 50%;
+    }
+    .col-#{$key}-7 {
+      width: 58.33%;
+    }
+    .col-#{$key}-8 {
+      width: 66.66%;
+    }
+    .col-#{$key}-9 {
+      width: 75%;
+    }
+    .col-#{$key}-10 {
+      width: 83.33%;
+    }
+    .col-#{$key}-11 {
+      width: 91.66%;
+    }
+    .col-#{$key}-12 {
+      width: 100%;
+    }
+  }
 }
