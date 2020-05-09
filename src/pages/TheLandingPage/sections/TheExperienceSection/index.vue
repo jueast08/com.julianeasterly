@@ -4,9 +4,9 @@
       <div class="experience__list">
         <!-- @TODO export data to a json -->
         <professional-experience-item
-          jobTitle="IT Consultant - Business Analyst"
-          companyName="Actimage"
-          workDates="Since Sept. 2019"
+          job-title="IT Consultant - Business Analyst"
+          company-name="Actimage"
+          work-dates="Since Sept. 2019"
           location="Colmar, Alsace, France"
         >
           <template #img>
@@ -24,10 +24,11 @@
           </template>
         </professional-experience-item>
         <professional-experience-item
-          jobTitle="IT Consultant - Business Analyst"
-          companyName="Actimage"
-          workDates="Since Sept. 2019"
-          location="Colmar, France"
+          job-title="Product Owner - Business Analyst"
+          company-name="Société Générale"
+          jobType="Internship and Student Project"
+          workDates="Oct. 2018 - Sept. 2019"
+          location="Schiltigheim, Alsace, France"
         >
           <template #img>
             <img :src="sgLogo" alt="Société Générale" />
@@ -44,10 +45,11 @@
           </template>
         </professional-experience-item>
         <professional-experience-item
-          jobTitle="IT Consultant - Business Analyst"
-          companyName="Actimage"
-          workDates="Since Sept. 2019"
-          location="Colmar, France"
+          jobTitle="DevOps Engineer"
+          companyName="Canal+"
+          jobType="Internship"
+          workDates="Apr. 2018 - Aug. 2018"
+          location="Issy-les-Moulineaux, Ile-de-France, France"
         >
           <template #img>
             <img :src="canalPlusLogo" alt="Canal+" />
@@ -64,10 +66,10 @@
           </template>
         </professional-experience-item>
         <professional-experience-item
-          jobTitle="IT Consultant - Business Analyst"
-          companyName="Actimage"
-          workDates="Since Sept. 2019"
-          location="Colmar, France"
+          jobTitle="Full-Stack Web Developer"
+          companyName="SoyHuCe"
+          workDates="Mar. 2016 - Jan. 2018"
+          location="Colombelles, Lower-Normandy, France"
         >
           <template #img>
             <img :src="soyhuceLogo" alt="SoyHuCe" />
@@ -87,10 +89,11 @@
       <div class="experience__others">
         <div class="experience__others__title">My Other Experiences</div>
         <section class="experience__others__description">
+          <!-- @TODO remove this part and think of a cool way to show the 2012 - part -->
           <div class="experience__others__description__title">From 2008 to 2012</div>
           <p>
-            I started working various jobs at 18 years old. Between the moment
-            that I started university classes and the moment I recieved my
+            I believe in working hard and from the age of 18, I've worked various jobs while in school. Between the moment
+            that I started university classes and the moment I recieved my first
             degee, I've worked as a
             <span
               class="bold-primary"
@@ -117,13 +120,19 @@
             </span>. These jobs helped me earn money and a visa that would allow me to
             make France my home.
           </p>
+          <p>
+            While in school in France, I also worked as a
+            <span
+              class="bold-primary"
+            >bilingual tour guide</span> with the
+            <span class="bold-primary">Memorial de Caen</span>, a museum dedicated to WWII in Caen, France
+          </p>
         </section>
       </div>
       <section class="experience__resume">
         <white-round-button>Download my Resume</white-round-button>
       </section>
     </div>
-    <!-- @TODO add a download cv button -->
   </base-section>
 </template>
 

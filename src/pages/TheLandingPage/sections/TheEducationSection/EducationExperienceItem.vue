@@ -2,8 +2,8 @@
   <div>
     <base-experience
       :title="degreeTitle"
-      :subtitle="rank"
-      :subtitle2="schoolName"
+      :subtitle2="rank"
+      :subtitle="schoolName"
       :dates="dates"
       :location="location"
     >
