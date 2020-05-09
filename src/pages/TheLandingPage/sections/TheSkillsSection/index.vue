@@ -1,5 +1,5 @@
 <template>
-  <base-section id="skills" title="What I Offer" subtitle="My Skills">
+  <base-section id="skills" title="My Skills" subtitle="What I Offer">
     <div class="skills">
       <div class="skills__list">
         <skill-content-with-icon class="skills__list__skill">
@@ -56,7 +56,7 @@ import WhiteRoundButton from "UI/WhiteRoundButton";
 
 export default {
   name: "TheSkillsSection",
-  components: { BaseSection, SkillContentWithIcon, WhiteRoundButton },
+  components: { BaseSection, SkillContentWithIcon, WhiteRoundButton }
 };
 </script>
 

@@ -3,6 +3,7 @@
     <base-experience
       :title="jobTitle"
       :subtitle="companyName"
+      :subtitle2="jobType"
       :dates="workDates"
       :location="location"
     >
@@ -14,6 +15,9 @@
       </template>
       <template #subtitle>
         <slot name="company-name" />
+      </template>
+      <template #subtitle2>
+        <slot name="job-type" />
       </template>
       <template #dates>
         <slot name="work-dates" />
@@ -38,6 +42,9 @@ export default {
       type: String
     },
     companyName: {
+      type: String
+    },
+    jobType: {
       type: String
     },
     workDates: {
