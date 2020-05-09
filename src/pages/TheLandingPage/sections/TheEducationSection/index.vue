@@ -31,10 +31,10 @@
               <b>Professional Collaborations: &nbsp;</b>
               <span
                 class="bold-primary tabbed"
-              >Oct. 2018 - Mar. 2019 &mdash; Société Générale &mdash; E-Banking Analyst</span>
+              >Oct. 2018 - Mar. 2019 &mdash; Société Générale &mdash; E-Payment Analyst</span>
             </p>
             <p>
-              Technical courses in software engineering, network configuration, E-Banking and Security, embedded progamming, computer architecture, artificial intelligence
+              Technical courses in software engineering, network configuration, E-Payment and Security, embedded progamming, computer architecture, artificial intelligence
               as well as general courses in math and communication.
               <br />
               <b>Programing Languages:</b> Java/Java EE/Java FX/Android, C/C++, PHP, Python, GIT, SQL
