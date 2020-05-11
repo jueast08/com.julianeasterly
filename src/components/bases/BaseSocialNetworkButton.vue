@@ -5,18 +5,20 @@
 </template>
 
 <script>
+import scrollToId from "Utility/ScrollHelper";
+
 export default {
   name: "BaseSocialNetworkButton",
   props: {
     href: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     goToLink() {
       if (this.isInternalPageElementWithId) {
-        this.scrollToElement(this.href);
+        scrollToId(this.href.substring(1));
       } else {
         window.location.href = this.href;
       }
@@ -28,18 +30,18 @@ export default {
         target.scrollIntoView({
           behavior: "smooth",
           block: "start",
-          inline: "center",
+          inline: "center"
         });
       } else {
         console.warn("There is no element with the id " + id);
       }
-    },
+    }
   },
   computed: {
     isInternalPageElementWithId() {
       return this.href.indexOf("#") === 0;
-    },
-  },
+    }
+  }
 };
 </script>
 

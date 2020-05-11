@@ -96,7 +96,6 @@ export default {
   box-shadow: -10px 0px 20px 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: (background ease-in-out 0.25s), (bottom ease-in-out 0.25s);
-  // opacity: 0;
   bottom: 30px;
 
   &--hidden {
