@@ -38,10 +38,51 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import HobbyContentWithIcon from "./HobbyContentWithIcon";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheHobbiesSection",
-  components: { BaseSection, HobbyContentWithIcon }
+  data() {
+    return {
+      observerIterator: null
+    };
+  },
+  components: { BaseSection, HobbyContentWithIcon },
+  mounted() {
+    let elements = document.querySelectorAll(".hobbies__hobby");
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      elements,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.destroyAll();
+  }
+  // mounted() {
+  //   try {
+  //     let element = document.querySelector(".hobbies__hobby");
+  //     this.scrollObserver = new IntersectObserverHelpers(
+  //       element,
+  //       "contact--in-view"
+  //     );
+  //     this.scrollObserver.observe(element, true, false);
+  //   } catch (error) {
+  //     console.error(error);
+  //     document.querySelector(".contact").className(".contact--in-view");
+  //     if (this.scrollObserver) {
+  //       this.scrollObserver.disconnect();
+  //     }
+  //   }
+  // },
+  // beforeDestroy() {
+  //   if (this.scrollObserver) {
+  //     this.scrollObserver.disconnect();
+  //   }
+  // }
 };
 </script>
 
@@ -64,6 +105,9 @@ export default {
     &__hobby {
       margin-top: 30px;
     }
+  }
+  ::v-deep .base-content-with-icon {
+    @include global.fade-in-and-expand-class-modifier;
   }
 }
 
