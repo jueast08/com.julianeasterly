@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <the-Landing-Page/>
+    <the-loading-overlay />
+    <the-Landing-Page />
   </div>
 </template>
 
 <script>
-import TheLandingPage from 'Pages/TheLandingPage';
-
+import TheLandingPage from "Pages/TheLandingPage";
+import TheLoadingOverlay from "Layout/TheLoadingOverlay";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     TheLandingPage,
+    TheLoadingOverlay
   }
-}
+};
 </script>

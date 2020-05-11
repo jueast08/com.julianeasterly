@@ -1,23 +1,30 @@
 <template>
-  <base-round-button><slot/></base-round-button>
+  <base-round-button :handle-click="click">
+    <slot />
+  </base-round-button>
 </template>
 
 <script>
-import BaseRoundButton from 'Bases/BaseRoundButton';
+import BaseRoundButton from "Bases/BaseRoundButton";
 
 export default {
-  name: 'WhiteRoundButton',
-  components: {BaseRoundButton,}
-}
+  name: "WhiteRoundButton",
+  props: {
+    click: {
+      type: Function,
+      required: false
+    }
+  },
+  components: { BaseRoundButton }
+};
 </script>
 
 
 <style lang="scss" scoped>
-  @use 'global';
-  
-  button {
-    color: global.$primary-white;
-    border-color: global.$primary-white;
-  }
+@use 'global';
 
+button {
+  color: global.$primary-white;
+  border-color: global.$primary-white;
+}
 </style>

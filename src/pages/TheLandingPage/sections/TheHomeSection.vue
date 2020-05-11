@@ -10,13 +10,14 @@
       </section>
     </div>
     <div class="home__background col-12 col-xl-6"></div>
-    <div class="home__down-arrow" @click="goToAbout"></div>
+    <div class="home__down-arrow" @click="scrollToId('about')"></div>
   </div>
 </template>
 
 <script>
 import ProfileImage from "Assets/portrait_bridge_saint-entienne.jpg";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import scrollToId from "Utility/ScrollHelper";
 
 export default {
   name: "TheHomeSection",
@@ -27,13 +28,7 @@ export default {
     };
   },
   methods: {
-    goToAbout() {
-      document.getElementById("about").scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "center"
-      });
-    }
+    scrollToId
   },
   mounted() {
     let element = document.querySelector(".home__container");
