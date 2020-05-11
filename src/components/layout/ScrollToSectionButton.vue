@@ -114,8 +114,8 @@ export default {
   }
 }
 
-@include global.adapt-to-screen("l") {
-  .go-to-top-button {
+@include global.adapt-to-screen("m") {
+  .scroll-to-section-button {
     right: 84px;
     &:hover {
       background: global.$primary-color;

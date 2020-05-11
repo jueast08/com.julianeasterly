@@ -232,8 +232,6 @@ export default {
     }
 
     &__others {
-      //text-align: center;
-
       &__title {
         @include global.h3-font;
         color: global.$primary-color;

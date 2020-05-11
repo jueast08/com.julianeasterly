@@ -16,12 +16,32 @@
 
 <script>
 import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSocialNetworkBar",
-  components: {
-    SocialNetworkButton,
+  data() {
+    return {
+      observerIterator: null
+    };
   },
+  components: {
+    SocialNetworkButton
+  },
+  mounted() {
+    let element = document.querySelector(".sn-bar");
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      element,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.disconectAll();
+  }
 };
 </script>
 
@@ -41,6 +61,7 @@ export default {
     right: 30px;
     transform: translateY(-50%);
 
+    @include global.fade-in-from-bottom-class-modifier;
     &__container {
       display: flex;
       flex-direction: column;
