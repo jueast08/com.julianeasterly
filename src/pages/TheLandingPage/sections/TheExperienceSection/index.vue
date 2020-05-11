@@ -174,6 +174,7 @@ import ActimageLogo from "Assets/actimage_logo.png";
 import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
 import SoyhuceLogo from "Assets/soyhuce_logo.png";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheExperienceSection",
@@ -182,13 +183,30 @@ export default {
       actimageLogo: ActimageLogo,
       sgLogo: SocieteGenerale,
       canalPlusLogo: CanalPlusLogo,
-      soyhuceLogo: SoyhuceLogo
+      soyhuceLogo: SoyhuceLogo,
+      observerIterator: null
     };
   },
   components: {
     BaseSection,
     ProfessionalExperienceItem,
     WhiteRoundButton
+  },
+  mounted() {
+    let elements = document.querySelectorAll(
+      ".experience__others__title, .experience__others__description, .experience__others__description__content"
+    );
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      elements,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.disconectAll();
   }
 };
 </script>
@@ -219,10 +237,13 @@ export default {
       &__title {
         @include global.h3-font;
         color: global.$primary-color;
+        @include global.fade-in-class-modifier;
       }
 
       &__description {
         margin-top: 50px;
+        @include global.fade-in-class-modifier;
+
         &__title {
           @include global.subtitle-font;
           color: global.$primary-white;
@@ -234,6 +255,8 @@ export default {
 
         &__content {
           margin-top: 25px;
+          @include global.fade-in-class-modifier;
+
           &__company {
             margin: 5px 0;
             color: global.$primary-color;

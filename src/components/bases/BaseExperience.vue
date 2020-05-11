@@ -42,8 +42,16 @@
 </template>
 
 <script>
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+
 export default {
   name: "BaseSection",
+  data() {
+    return {
+      vitalInfoObserverIterator: null,
+      detailsObserver: null
+    };
+  },
   props: {
     title: {
       type: String
@@ -61,7 +69,28 @@ export default {
       type: String
     }
   },
-  components: {}
+  mounted() {
+    console.log(this.$el);
+    this.vitalInfoObserverIterator = new IntersectObserverHelpersIterator(
+      this.$el.childNodes[0],
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+    this.detailsObserver = new IntersectObserverHelpersIterator(
+      this.$el.childNodes[1],
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.disconectAll();
+  }
 };
 </script>
 
@@ -70,6 +99,7 @@ export default {
 
 .base-exp {
   &__vital-info {
+    @include global.fade-in-from-bottom-class-modifier;
     &__wrapper {
       display: flex;
 
@@ -115,6 +145,8 @@ export default {
   }
 
   &__details {
+    @include global.fade-in-from-top-class-modifier;
+
     display: none;
     @include global.p-font;
   }

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ScrollIntoViewObserver from "Utility/ScrollIntoViewObserver";
+import IntersectObserverHelpers from "Utility/IntersectObserverHelpers";
 import { scrollToQuerySelector } from "Utility/ScrollHelper";
 
 export default {
@@ -44,7 +44,6 @@ export default {
   },
   computed: {
     target() {
-      console.log(document.querySelector(this.querySelectorDestination));
       let target = document.querySelector(this.querySelectorDestination);
       target = typeof target === Array ? target[0] : target;
 
@@ -52,25 +51,14 @@ export default {
     }
   },
   methods: {
-    scrollToQuerySelector,
-    scrollToDestination() {
-      // let target = document.querySelector(this.querySelectorDestination);
-      // console.log(target);
-      // target = typeof target === Array ? target[0] : target;
-
-      this.target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "center"
-      });
-    }
+    scrollToQuerySelector
   },
   mounted() {
     if (this.querySelectorThatTriggersShowButton) {
       try {
-        this.scrollObserver = new ScrollIntoViewObserver(
-          ["scroll-to-section-button"],
-          "--hidden"
+        this.scrollObserver = new IntersectObserverHelpers(
+          document.querySelector(".scroll-to-section-button"),
+          "scroll-to-section-button--hidden"
         );
         this.scrollObserver.observe(
           document.querySelector(this.querySelectorThatTriggersShowButton),

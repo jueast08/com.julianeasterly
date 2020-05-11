@@ -13,8 +13,28 @@
 </template>
 
 <script>
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+
 export default {
-  name: "BaseContentWithIcon"
+  name: "BaseContentWithIcon",
+  data() {
+    return {
+      observerIterator: null
+    };
+  },
+  mounted() {
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      this.$el,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.disconectAll();
+  }
 };
 </script>
 
@@ -22,6 +42,7 @@ export default {
 @use 'global';
 
 .base-content-with-icon {
+  @include global.fade-in-and-expand-class-modifier;
   &__icon {
     $size: 45px;
     position: relative;

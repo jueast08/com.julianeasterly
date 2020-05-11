@@ -14,9 +14,9 @@
             :class="addClassModifierIfStringNotEmpty(name)"
           >
             <label for="name">Name</label>
-            <span
-              ><font-awesome-icon :icon="['fas', 'check-circle']" fixed-width
-            /></span>
+            <span>
+              <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+            </span>
           </div>
           <input type="text" name="name" v-model="name" required />
         </section>
@@ -26,9 +26,9 @@
             :class="addClassModifierIfStringNotEmpty(email)"
           >
             <label for="email">Email</label>
-            <span
-              ><font-awesome-icon :icon="['fas', 'check-circle']" fixed-width
-            /></span>
+            <span>
+              <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+            </span>
           </div>
           <input type="email" name="email" v-model="email" required />
         </section>
@@ -38,9 +38,9 @@
             :class="addClassModifierIfStringNotEmpty(message)"
           >
             <label for="message">Message</label>
-            <span
-              ><font-awesome-icon :icon="['fas', 'check-circle']" fixed-width
-            /></span>
+            <span>
+              <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+            </span>
           </div>
           <textarea name="message" v-model="message" minlength="50" required />
         </section>
@@ -55,6 +55,7 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheContactSection",
@@ -63,6 +64,7 @@ export default {
       name: "",
       email: "",
       message: "",
+      scrollObserver: null
     };
   },
   components: { BaseSection, PrimaryColorRoundButton },
@@ -77,8 +79,22 @@ export default {
       //     message: this.message,
       // };
       //@TODO send to a php script
-    },
+    }
   },
+  mounted() {
+    let element = document.querySelector(".contact");
+    this.observers = new IntersectObserverHelpersIterator(
+      element,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observers.disconectAll();
+  }
 };
 </script>
 
@@ -141,6 +157,7 @@ export default {
     margin: 0 auto;
     @include global.border-box;
     height: 100%;
+    @include global.fade-in-from-bottom-class-modifier;
 
     &__form {
       height: 100%;
