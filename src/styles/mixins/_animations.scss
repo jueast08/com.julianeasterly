@@ -16,7 +16,7 @@
 
 @mixin fade-in-class-modifier() {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.75s ease-in-out;
   &--in-view {
     opacity: 1;
   }
@@ -25,6 +25,16 @@
 @mixin fade-in-from-bottom-class-modifier() {
   opacity: 0;
   transform: translateY(100px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  &--in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin fade-in-from-top-class-modifier() {
+  opacity: 0;
+  transform: translateY(-100px);
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   &--in-view {
     opacity: 1;

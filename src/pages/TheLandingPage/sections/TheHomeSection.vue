@@ -47,7 +47,7 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observerIterator.destroyAll();
+    this.observerIterator.disconectAll();
   }
 };
 </script>

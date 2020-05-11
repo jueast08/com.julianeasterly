@@ -60,29 +60,8 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observerIterator.destroyAll();
+    this.observerIterator.disconectAll();
   }
-  // mounted() {
-  //   try {
-  //     let element = document.querySelector(".hobbies__hobby");
-  //     this.scrollObserver = new IntersectObserverHelpers(
-  //       element,
-  //       "contact--in-view"
-  //     );
-  //     this.scrollObserver.observe(element, true, false);
-  //   } catch (error) {
-  //     console.error(error);
-  //     document.querySelector(".contact").className(".contact--in-view");
-  //     if (this.scrollObserver) {
-  //       this.scrollObserver.disconnect();
-  //     }
-  //   }
-  // },
-  // beforeDestroy() {
-  //   if (this.scrollObserver) {
-  //     this.scrollObserver.disconnect();
-  //   }
-  // }
 };
 </script>
 
