@@ -38,10 +38,30 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import HobbyContentWithIcon from "./HobbyContentWithIcon";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheHobbiesSection",
-  components: { BaseSection, HobbyContentWithIcon }
+  data() {
+    return {
+      observerIterator: null
+    };
+  },
+  components: { BaseSection, HobbyContentWithIcon },
+  mounted() {
+    let elements = document.querySelectorAll(".hobbies__hobby");
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      elements,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.disconectAll();
+  }
 };
 </script>
 
@@ -64,6 +84,9 @@ export default {
     &__hobby {
       margin-top: 30px;
     }
+  }
+  ::v-deep .base-content-with-icon {
+    @include global.fade-in-and-expand-class-modifier;
   }
 }
 

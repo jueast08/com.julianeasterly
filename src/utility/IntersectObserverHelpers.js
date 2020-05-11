@@ -1,19 +1,15 @@
 /**
  * @brief This class is envolopes the IntersectionObserver for the project which primarily uses this tool to animate imtems once a root has come into view
  */
-export default class ScrollIntoViewObserver {
+export default class IntersectObserverHelpers {
   /**
-   * @param {Array} classesToModify : Array of classes (strings) that need to be modified
-   * @param {String} classBEMModifier: String representing the BEM modifier that will be added to each classToModify item. Defaults to --in-view
+   * @param {Array} elements : an array of DOM elements. you should be passing document.querySelector('[query]')
+   * @param {String} _classToAdd: String representing the animation class to add
    * @param {Object} intersectionObserverOptions: Objet representing options as described here : https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
    */
-  constructor(
-    classesToModify,
-    classBEMModifier = "--in-view",
-    intersectionObserverOptions = {}
-  ) {
-    this._classesToModify = classesToModify;
-    this._classModifier = classBEMModifier;
+  constructor(elements, modifierClass, intersectionObserverOptions = {}) {
+    this._elements = elements;
+    this._modifierClass = modifierClass;
     this._intersectionObserverOptions = intersectionObserverOptions;
     this._observer = null;
     this._actionArray = [];
@@ -23,15 +19,15 @@ export default class ScrollIntoViewObserver {
 
   /**
    *
-   * @param {Array} querySelector : an array of DOM elements. you should be passing document.querySelector('[query]')
+   * @param {Array, Element} elements : an array of DOM elements or a Single Element. you should be passing document.querySelectoror document.querySelctorAll
    * @param {Boolean} addOnInView : determines whether the class modifier should be added when the querySelector comes into view
    * @param {*} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
    */
-  observe(querySelector, addOnInView = true, removeOnOutOfView = true) {
+  observe(elements, addOnInView = true, removeOnOutOfView = true) {
     if (this._observer === null) {
       throw "Observer has not been initiated";
     }
-    this._observer.observe(querySelector);
+    this._observer.observe(elements);
     this._actionArray.push({
       addOnInView: addOnInView,
       removeOnOutOfView: removeOnOutOfView,
@@ -75,23 +71,23 @@ export default class ScrollIntoViewObserver {
   }
 
   _addAnimationClasses() {
-    this._classesToModify.forEach((className) => {
-      document
-        .getElementsByClassName(className)
-        .forEach((element) =>
-          element.classList.add(className + this._classModifier)
-        );
-    });
+    if (this._elements instanceof NodeList) {
+      this._elements.forEach((element) => {
+        element.classList.add(this._modifierClass);
+      });
+    } else {
+      this._elements.classList.add(this._modifierClass);
+    }
   }
 
   _removeAnimationClasses() {
-    this._classesToModify.forEach((className) => {
-      document
-        .getElementsByClassName(className)
-        .forEach((element) =>
-          element.classList.remove(className + this._classModifier)
-        );
-    });
+    if (this._elements instanceof NodeList) {
+      this._elements.forEach((element) => {
+        element.classList.remove(this._modifierClass);
+      });
+    } else {
+      this._elements.classList.remove(this._modifierClass);
+    }
   }
 
   get isIntersectionObserverAvailable() {
@@ -125,5 +121,73 @@ export default class ScrollIntoViewObserver {
       throw "booleanTriggerFunction must be a function that takes a entry and returns a boolean";
     }
     this._triggerCritera = booleanTriggerFunction;
+  }
+}
+
+export class IntersectObserverHelpersIterator {
+  constructor(
+    elements,
+    modifierBEM,
+    intersectionObserverOptions = {},
+    addOnInView = true,
+    removeOnOutOfView = false,
+    addModifierOnFail = true
+  ) {
+    this._elements = elements;
+    this._modifierBEM = modifierBEM;
+    this._options = intersectionObserverOptions;
+    this._addOnInView = addOnInView;
+    this._removeOnOutOfView = removeOnOutOfView;
+    this._addModifierOnFail = addModifierOnFail;
+    this._observers = [];
+    this._currentIndex = 0;
+    this._createObservers();
+  }
+
+  _createObservers() {
+    if (this._elements instanceof NodeList) {
+      this._elements.forEach((element) => this._createSingleObserver(element));
+    } else {
+      this._createSingleObserver(this._elements);
+    }
+  }
+
+  _createSingleObserver(element) {
+    let observer = null;
+    let scrollClass = element.classList[0] + this._modifierBEM;
+    try {
+      observer = new IntersectObserverHelpers(element, scrollClass);
+      observer.observe(element, this._addOnInView, this._removeOnOutOfView);
+      this._observers.push(observer);
+    } catch (error) {
+      console.error(error);
+
+      element.classList.add(scrollClass);
+      if (observer) {
+        observer.disconnect();
+      }
+    }
+  }
+
+  getAll() {
+    return this._observers;
+  }
+
+  next() {
+    let observer = this.observers[this._currentIndex];
+    this._currentIndex++ % this._observers.length;
+    return observer;
+  }
+
+  previous() {
+    if (this._currentIndex === 0) {
+      this._currentIndex = this._observers.length - 1;
+    }
+    let observer = this.observers[this._currentIndex];
+    return observer;
+  }
+
+  disconectAll() {
+    this._observers.forEach((observer) => observer.disconnect());
   }
 }

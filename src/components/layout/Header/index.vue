@@ -11,7 +11,7 @@
               class="header__bar__container__menu__link"
               v-for="(link, index) in links"
               :key="link+index"
-              :class="(link === activeLink) && 'header__bar__container__menu__link--active'"
+              :id="'menu-header-link__'+link"
               @click="scrollToId(link.toLowerCase())"
             >{{ link }}</span>
           </nav>
@@ -38,19 +38,18 @@
 <script>
 import TheHeaderLogo from "./TheHeaderLogo";
 import TheHeaderBurger from "./TheHeaderBurger";
-import ScrollIntoViewObserver from "Utility/ScrollIntoViewObserver";
+import IntersectObserverHelpers from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
   name: "TheHeader",
   data() {
     return {
-      activeLink: "Home",
-      elementsWithALightThemeByClassName: ["header__bar"],
       links: ["Home", "About", "Skills", "Experience", "Education", "Contact"],
       mobileMenuOpen: false,
       themeObserver: null,
-      fixedPositionObserver: null
+      fixedPositionObserver: null,
+      linkObservers: []
     };
   },
   components: {
@@ -68,40 +67,50 @@ export default {
       this.mobileMenuOpen = false;
       window.removeEventListener("scroll", this.closeMenuRemoveListener);
     },
-    scrollToId
+    scrollToId,
+    createThemeObserver() {
+      try {
+        this.themeObserver = new IntersectObserverHelpers(
+          document.querySelector(".header__bar"),
+          "header__bar--light"
+        );
+        this.themeObserver.triggerCritera = entry => {
+          return entry.boundingClientRect.y < 0;
+        };
+        this.themeObserver.observe(document.querySelector("#top-anchor-pixel"));
+      } catch (error) {
+        console.error(error);
+        if (this.themeObserver) {
+          this.themeObserver.disconnect();
+        }
+        document.getElementById("header").classList.add("header__bar--light");
+      }
+    },
+    createFixedHeaderObserver() {
+      try {
+        this.fixedPositionObserver = new IntersectObserverHelpers(
+          document.querySelector(".header"),
+          "header--fixed"
+        );
+        this.fixedPositionObserver.triggerCritera = entry => {
+          return entry.boundingClientRect.y < 0;
+        };
+        this.fixedPositionObserver.observe(
+          document.querySelector("#top-anchor-pixel")
+        );
+      } catch (error) {
+        console.error(error);
+        if (this.fixedPositionObserver) {
+          this.fixedPositionObserver.disconnect();
+        }
+        document.getElementById("header").classList.add("header--fixed");
+        document.getElementById("header").classList.add("header__bar--light");
+      }
+    }
   },
   mounted() {
-    try {
-      this.themeObserver = new ScrollIntoViewObserver(
-        this.elementsWithALightThemeByClassName,
-        "--light"
-      );
-      this.themeObserver.triggerCritera = entry => {
-        return entry.boundingClientRect.y < 0;
-      };
-      this.themeObserver.observe(document.querySelector("#top-anchor-pixel"));
-      this.fixedPositionObserver = new ScrollIntoViewObserver(
-        ["header"],
-        "--fixed"
-      );
-      this.fixedPositionObserver.triggerCritera = entry => {
-        return entry.boundingClientRect.y < 0;
-      };
-      this.fixedPositionObserver.observe(
-        document.querySelector("#top-anchor-pixel")
-      );
-    } catch (error) {
-      console.error(error);
-      if (this.themeObserver) {
-        this.themeObserver.disconnect();
-      }
-
-      if (this.fixedPositionObserver) {
-        this.fixedPositionObserver.disconnect();
-      }
-      document.getElementById("header").classList.add("header--fixed");
-      document.getElementById("header").classList.add("header__bar--light");
-    }
+    this.createThemeObserver();
+    this.createFixedHeaderObserver();
   },
   beforeDestroy() {
     if (this.themeObserver) {
@@ -236,12 +245,9 @@ export default {
             @include global.link-font;
             color: global.$primary-white;
             cursor: pointer;
-
+            transition: border 0.25s ease-in-out;
             &--light {
               color: global.$primary-black;
-            }
-            &--active {
-              //font-size: 20px;
             }
 
             &:hover {
