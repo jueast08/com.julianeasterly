@@ -16,14 +16,14 @@
 
 <script>
 import ProfileImage from "Assets/portrait_bridge_saint-entienne.jpg";
-import ScrollIntoViewObserver from "Utility/ScrollIntoViewObserver";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheHomeSection",
   data() {
     return {
       profileImage: ProfileImage,
-      elementsToAnimateByClassName: ["home__container"]
+      observerIterator: null
     };
   },
   methods: {
@@ -36,24 +36,18 @@ export default {
     }
   },
   mounted() {
-    try {
-      this.scrollObserver = new ScrollIntoViewObserver(
-        this.elementsToAnimateByClassName,
-        "--in-view"
-      );
-      this.scrollObserver.observe(
-        document.querySelector(".home__container"),
-        true,
-        false
-      );
-    } catch (error) {
-      console.error(error);
-    }
+    let element = document.querySelector(".home__container");
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      element,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
   },
   beforeDestroy() {
-    if (this.scrollObserver) {
-      this.scrollObserver.disconnect();
-    }
+    this.observerIterator.destroyAll();
   }
 };
 </script>

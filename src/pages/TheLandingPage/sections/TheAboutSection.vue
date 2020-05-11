@@ -52,11 +52,32 @@
 
 <script>
 import BaseSection from "Bases/BaseSection";
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheAboutSection",
+  data() {
+    return {
+      observerIterator: null
+    };
+  },
   components: {
     BaseSection
+  },
+  methods: {},
+  mounted() {
+    let elements = document.querySelectorAll(".about__section, .about__photo");
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      elements,
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.destroyAll();
   }
 };
 </script>
@@ -76,6 +97,8 @@ export default {
 
   .about {
     &__section {
+      @include global.fade-in-from-bottom-class-modifier;
+
       &__titles {
         &__subtitle {
           @include global.subtitle-font;
@@ -104,6 +127,7 @@ export default {
       position: absolute;
       left: 0;
       height: 200px;
+      @include global.fade-in-from-bottom-class-modifier;
 
       &__wrapper {
         position: relative;
