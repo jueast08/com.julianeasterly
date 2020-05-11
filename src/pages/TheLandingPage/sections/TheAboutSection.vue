@@ -11,16 +11,23 @@
           </div>
           <h3 class="about__section__titles__title">From Detroit to Strasbourg</h3>
           <p>
-            As an American, I'm often asked "Why
-            France?" Here's the short answer: I played
-            football for Indiana State University and my
-            team graciously paid for a study abroad
-            program in Montpellier, France in 2012. I
-            returned to the US, but it didn't last. In 2013, I
-            took a teaching job in Normandy, France
-            and six years I ended up in Strasbourg. If you
-            need the long version, maybe we can
-            discuss it more in a meetup!
+            I am an American citizen - born, raised, and,
+            for the most part, educated in the U.S.A. I
+            played (American) football at the Indiana
+            State University where I completed a degree
+            in English. My last semester of college, I
+            studied abroad in Montpellier, France. My
+            goal was to become fluent in French. I did
+            not completely achieve this goal during my
+            trip, but it inspired me to return to France
+            and establish new and more ambitious goals
+            for myself.
+          </p>
+          <p>
+            I've lived in France since 2013 and I currently reside in
+            <span
+              class="bold-primary"
+            >Strasbourg, Alsace, France.</span>
           </p>
         </div>
       </section>
@@ -36,16 +43,7 @@
             <span class="bold-primary">Computers</span>
           </div>
           <h3 class="about__section__titles__title">From Literature Student to Software Engineer</h3>
-          <p>
-            While I have a B.A. in Literature, I decided to
-            switch to Computer Science after moving to
-            France in order to challenge myself and
-            learn learn new skills.
-            Since embarking on this journey, I've worked
-            with both small and large companies as a
-            full-stack developer, a devops engineer and
-            IT Buiness Analyst.
-          </p>
+          <p>Despite a Literature degree, I decided to switch to Computer Science in France as a way to acquire new skills, discover new challenges, and rapidly improve my language skills. I've since obtained a Master's degree and have collaborated on various IT projects privately and with professionally. I have worked as a full-stack web developer, a DevOps engineer, and most recently, as an IT consultant and Business Analyst.</p>
         </div>
       </section>
     </div>
@@ -111,7 +109,8 @@ export default {
         position: relative;
         height: 100%;
 
-        &:before {  /** @TODO Don't attach this background */
+        &:before {
+          /** @TODO Don't attach this background on tarting on small screens 's' (maybe base this choice on the picture chosen*/
           content: " ";
           display: block;
           position: absolute;
