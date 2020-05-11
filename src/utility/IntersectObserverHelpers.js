@@ -145,7 +145,6 @@ export class IntersectObserverHelpersIterator {
   }
 
   _createObservers() {
-    console.log(this._elements);
     if (this._elements instanceof NodeList) {
       this._elements.forEach((element) => this._createSingleObserver(element));
     } else {

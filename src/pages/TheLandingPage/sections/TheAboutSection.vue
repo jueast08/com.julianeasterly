@@ -66,7 +66,9 @@ export default {
   },
   methods: {},
   mounted() {
-    let elements = document.querySelectorAll(".about__section, .about__photo");
+    let elements = document.querySelectorAll(
+      ".about__section, .about__photo, #about .section__title"
+    );
     this.observerIterator = new IntersectObserverHelpersIterator(
       elements,
       "--in-view",
@@ -77,7 +79,7 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observerIterator.destroyAll();
+    this.observerIterator.disconectAll();
   }
 };
 </script>
@@ -90,6 +92,7 @@ export default {
 
   ::v-deep .section__title {
     color: global.$primary-black;
+
     &:before {
       color: global.$primary-black;
     }

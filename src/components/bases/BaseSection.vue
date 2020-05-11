@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+
 export default {
   name: "BaseSection",
   props: {
@@ -34,6 +36,17 @@ export default {
     document
       .querySelector("#" + this.id + " .section__title")
       .setAttribute("data-content", this.title);
+    this.observerIterator = new IntersectObserverHelpersIterator(
+      this.$el.childNodes[0],
+      "--in-view",
+      {},
+      true,
+      false,
+      true
+    );
+  },
+  beforeDestroy() {
+    this.observerIterator.disconectAll();
   }
 };
 </script>
@@ -43,7 +56,6 @@ export default {
 
 .section {
   position: relative;
-  //min-height: 100vh;
   padding: 100px 0 50px;
   @include global.border-box;
 
@@ -57,6 +69,7 @@ export default {
 
   &__title-box {
     overflow: hidden;
+    @include global.fade-in-class-modifier;
   }
 
   &__title {
