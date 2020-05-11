@@ -96,14 +96,14 @@ export default {
         }
         &__subtitle-2 {
           margin: 10px 0;
-          @include global.xp-subtitle-font;
+          @include global.xp-subtitle-font($weight: 700);
         }
         &__dates {
           margin: 10px 0;
           @include global.xp-subtitle-font;
         }
         &__location {
-          //display: flex;
+          display: flex;
           @include global.xp-subtitle-font;
           &__icon {
             font-size: 16px;
@@ -125,7 +125,8 @@ export default {
     &__vital-info {
       &__wrapper {
         &__icon {
-          width: 50px;
+          min-width: 50px;
+          max-width: 50px;
           svg,
           img {
             width: 100%;
@@ -160,7 +161,8 @@ export default {
         display: flex;
         width: 300px;
         &__icon {
-          width: 100px;
+          min-width: 75px;
+          max-width: 75px;
           svg,
           img {
             width: 100%;

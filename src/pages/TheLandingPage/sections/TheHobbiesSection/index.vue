@@ -62,7 +62,7 @@ export default {
 
   .hobbies {
     &__hobby {
-      margin-top: 60px;
+      margin-top: 30px;
     }
   }
 }
