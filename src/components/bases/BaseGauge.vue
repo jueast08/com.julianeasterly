@@ -58,9 +58,8 @@ export default {
     }
   },
   mounted() {
-    let element = this.$el.childNodes[2].childNodes[0];
     this.observerIterator = new IntersectObserverHelpersIterator(
-      element,
+      [this.$el.childNodes[2].childNodes[0], this.$el],
       "--in-view",
       {},
       true,
@@ -80,6 +79,7 @@ export default {
 
 .base-gauge {
   width: 100%;
+  @include global.expand-from-left-class-modifier($transform-delay: 1s);
 
   &__label-group {
     text-align: right;
@@ -99,7 +99,7 @@ export default {
     &__fluid {
       height: 100%;
       border-radius: 7px;
-      @include global.expand-from-left-class-modifier($transform-delay: 1s);
+      @include global.expand-from-left-class-modifier($transform-delay: 1.5s);
     }
   }
 }
