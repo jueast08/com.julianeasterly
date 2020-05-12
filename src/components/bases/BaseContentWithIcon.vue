@@ -24,9 +24,9 @@ export default {
   },
   mounted() {
     this.observerIterator = new IntersectObserverHelpersIterator(
-      this.$el,
+      [this.$el.childNodes, this.$el.childNodes[0].childNodes],
       "--in-view",
-      {},
+      { threshold: 0 },
       true,
       false,
       true
@@ -42,7 +42,6 @@ export default {
 @use 'global';
 
 .base-content-with-icon {
-  @include global.fade-in-and-expand-class-modifier;
   &__icon {
     $size: 45px;
     position: relative;
@@ -52,6 +51,8 @@ export default {
     height: $size;
     margin: 0 0 25px 0;
     font-size: $size;
+    @include global.fade-in-class-modifier;
+
     svg,
     img {
       width: 100%;
@@ -62,11 +63,13 @@ export default {
     margin: 0 0 10px 0;
     text-align: center;
     @include global.h4-font;
+    @include global.fade-in-and-expand-class-modifier;
   }
 
   &__description {
     text-align: center;
     @include global.p-font;
+    @include global.fade-in-and-expand-class-modifier;
   }
 }
 </style>

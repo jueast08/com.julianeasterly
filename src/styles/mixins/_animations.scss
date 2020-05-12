@@ -14,59 +14,90 @@
   }
 }
 
-@mixin fade-in-class-modifier() {
+@mixin fade-in-class-modifier($delay: 0.75s, $timing-function: ease-in-out) {
   opacity: 0;
-  transition: opacity 0.75s ease-in-out;
+  transition: opacity $delay $timing-function;
   &--in-view {
     opacity: 1;
   }
 }
 
-@mixin fade-in-from-bottom-class-modifier() {
+@mixin fade-in-from-bottom-class-modifier(
+  $opacity-delay: 0.75s,
+  $opacity-timing-function: ease-in-out,
+  $transform-delay: 0.5s,
+  $transform-timing-function: ease-in-out
+) {
   opacity: 0;
   transform: translateY(100px);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity $opacity-delay $opacity-timing-function,
+    transform $transform-delay $transform-timing-function;
   &--in-view {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@mixin fade-in-from-top-class-modifier() {
+@mixin fade-in-from-top-class-modifier(
+  $opacity-delay: 0.75s,
+  $opacity-timing-function: ease-in-out,
+  $transform-delay: 0.5s,
+  $transform-timing-function: ease-in-out
+) {
   opacity: 0;
   transform: translateY(-100px);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity $opacity-delay $opacity-timing-function,
+    transform $transform-delay $transform-timing-function;
   &--in-view {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@mixin fade-in-from-left-class-modifier() {
+@mixin fade-in-from-left-class-modifier(
+  $opacity-delay: 0.75s,
+  $opacity-timing-function: ease-in-out,
+  $transform-delay: 0.5s,
+  $transform-timing-function: ease-in-out
+) {
   opacity: 0;
   transform: translateX(-100px);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity $opacity-delay $opacity-timing-function,
+    transform $transform-delay $transform-timing-function;
   &--in-view {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-@mixin fade-in-and-expand-class-modifier() {
+@mixin fade-in-and-expand-class-modifier(
+  $opacity-delay: 0.75s,
+  $opacity-timing-function: ease-in-out,
+  $transform-delay: 0.5s,
+  $transform-timing-function: ease-in-out
+) {
   opacity: 0;
   transform: scale(0);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform-origin: center center;
+  transition: opacity $opacity-delay $opacity-timing-function,
+    transform $transform-delay $transform-timing-function;
   &--in-view {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-@mixin expand-from-left-class-modifier() {
+@mixin expand-from-left-class-modifier(
+  $opacity-delay: 0.75s,
+  $opacity-timing-function: ease-in-out,
+  $transform-delay: 0.5s,
+  $transform-timing-function: ease-in-out
+) {
   opacity: 0;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: opacity 0.5s ease-in-out, transform 2s ease-in-out;
+  transition: opacity $opacity-delay $opacity-timing-function,
+    transform $transform-delay $transform-timing-function;
   &--in-view {
     opacity: 1;
     transform: scaleX(1);

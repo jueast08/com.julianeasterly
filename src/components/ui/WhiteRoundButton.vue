@@ -1,5 +1,6 @@
 <template>
   <base-round-button :handle-click="click">
+    <!-- TODO make this button work -->
     <slot />
   </base-round-button>
 </template>

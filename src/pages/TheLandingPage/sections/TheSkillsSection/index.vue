@@ -149,7 +149,8 @@
       <div class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
         <div class="skills__contact-me__button">
-          <white-round-button :handle-click="scrollToId('contact')">contact me</white-round-button>
+          <!-- TODO make the button work -->
+          <white-round-button>contact me</white-round-button>
         </div>
       </div>
     </div>
