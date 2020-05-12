@@ -160,7 +160,7 @@
         </section>
       </div>
       <section class="experience__resume">
-        <white-round-button>Download my Resume</white-round-button>
+        <white-round-button @click="openResume()">Download my Resume</white-round-button>
       </section>
     </div>
   </base-section>
@@ -175,6 +175,7 @@ import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
 import SoyhuceLogo from "Assets/soyhuce_logo.png";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import resume from "Public/julian_easterly_resume.pdf";
 
 export default {
   name: "TheExperienceSection",
@@ -191,6 +192,11 @@ export default {
     BaseSection,
     ProfessionalExperienceItem,
     WhiteRoundButton
+  },
+  methods: {
+    openResume() {
+      window.open(resume, "_blank");
+    }
   },
   mounted() {
     let elements = document.querySelectorAll(

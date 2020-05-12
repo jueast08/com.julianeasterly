@@ -16,6 +16,11 @@ import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpe
 
 export default {
   name: "BaseSection",
+  data() {
+    return {
+      observerIterator: null
+    };
+  },
   props: {
     id: {
       type: String,

@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <the-Landing-Page/>
+    <the-Landing-Page />
   </div>
 </template>
 
 <script>
-import TheLandingPage from 'Pages/TheLandingPage';
-
+import TheLandingPage from "Pages/TheLandingPage";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    TheLandingPage,
+    TheLandingPage
   }
-}
+};
 </script>
