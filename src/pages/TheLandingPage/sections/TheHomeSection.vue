@@ -138,7 +138,7 @@ export default {
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
 
-    z-index: 100;
+    z-index: 99;
     height: 15px;
     width: 15px;
     border-width: 0px 10px 10px 0;
