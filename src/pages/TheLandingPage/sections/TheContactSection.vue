@@ -93,7 +93,7 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observers.disconectAll();
+    this.observers.disconnectAll();
   }
 };
 </script>

@@ -2,6 +2,7 @@
   <base-section id="about" title="Hi. I'm Julian." subtitle="Business Analyst - IT Consultant">
     <div class="about">
       <section class="about__section">
+        <!-- @TODO add something about my MBTI tests like "I'm a Protagonist !!! with a link and another to my personality file https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwig9LXJ4q7pAhWrDmMBHcAqCggQFjAAegQIBRAB&url=https%3A%2F%2Fapp.assessfirst.com%2F_%2Fprofile%2Fhnnndvm0-julian-easterly&usg=AOvVaw3he2NfdS3npV7hKbdGTTFu" -->
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">
             Made in the
@@ -79,7 +80,7 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconectAll();
+    this.observerIterator.disconnectAll();
   }
 };
 </script>
