@@ -1,17 +1,12 @@
 <template>
-  <button @click="handleClick">
+  <button @click="$emit('click', $event)">
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: "BaseRoundButton",
-  methods: {
-    handleClick() {
-      this.$emit("handle-click");
-    }
-  }
+  name: "BaseRoundButton"
 };
 </script>
 
