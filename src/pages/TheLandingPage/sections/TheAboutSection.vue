@@ -94,6 +94,7 @@ export default {
     display: flex;
     flex-direction: column-reverse;
     margin-bottom: 50px;
+    color: global.$primary-color;
   }
 
   ::v-deep .section__title {
