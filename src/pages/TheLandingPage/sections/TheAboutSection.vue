@@ -1,5 +1,5 @@
 <template>
-  <base-section id="about" title="Hi. I'm Julian.">
+  <base-section id="about" title="Hi. I'm Julian." subtitle="Business Analyst - IT Consultant">
     <div class="about">
       <section class="about__section">
         <div class="about__section__titles">
@@ -89,6 +89,12 @@ export default {
 
 #about {
   background-color: global.$background-gray;
+
+  ::v-deep .section__title-box {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 50px;
+  }
 
   ::v-deep .section__title {
     color: global.$primary-black;
