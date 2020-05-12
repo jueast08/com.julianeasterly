@@ -1,5 +1,5 @@
 <template>
-  <base-round-button :handle-click="click">
+  <base-round-button @click="$emit('click', $event)">
     <!-- TODO make this button work -->
     <slot />
   </base-round-button>
@@ -10,12 +10,6 @@ import BaseRoundButton from "Bases/BaseRoundButton";
 
 export default {
   name: "WhiteRoundButton",
-  props: {
-    click: {
-      type: Function,
-      required: false
-    }
-  },
   components: { BaseRoundButton }
 };
 </script>
