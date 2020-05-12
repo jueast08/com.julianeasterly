@@ -175,7 +175,6 @@ import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
 import SoyhuceLogo from "Assets/soyhuce_logo.png";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-import resume from "Public/julian_easterly_resume.pdf";
 
 export default {
   name: "TheExperienceSection",
@@ -195,7 +194,10 @@ export default {
   },
   methods: {
     openResume() {
-      window.open(resume, "_blank");
+      window.open(
+        process.env.BASE_URL + "julian_easterly_resume.pdf",
+        "_blank"
+      );
     }
   },
   mounted() {
