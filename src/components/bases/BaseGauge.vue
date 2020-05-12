@@ -99,7 +99,7 @@ export default {
     &__fluid {
       height: 100%;
       border-radius: 7px;
-      @include global.expand-from-left-class-modifier;
+      @include global.expand-from-left-class-modifier($transform-delay: 1s);
     }
   }
 }
