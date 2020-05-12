@@ -70,7 +70,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$el);
     this.vitalInfoObserverIterator = new IntersectObserverHelpersIterator(
       this.$el.childNodes[0],
       "--in-view",

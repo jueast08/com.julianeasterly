@@ -1,4 +1,5 @@
 export default function scrollToId(idName, callback) {
+  console.log("here");
   scrollToQuerySelector("#" + idName, callback);
 }
 

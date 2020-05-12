@@ -21,7 +21,7 @@ export default class IntersectObserverHelpers {
    *
    * @param {Array, Element} elements : an array of DOM elements or a Single Element. you should be passing document.querySelectoror document.querySelctorAll
    * @param {Boolean} addOnInView : determines whether the class modifier should be added when the querySelector comes into view
-   * @param {*} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
+   * @param {Boolean} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
    */
   observe(elements, addOnInView = true, removeOnOutOfView = true) {
     if (this._observer === null) {
@@ -125,6 +125,15 @@ export default class IntersectObserverHelpers {
 }
 
 export class IntersectObserverHelpersIterator {
+  /**
+   *
+   * @param {Array, NodeList, DomElement} elements : This must either be a DomElement resulting from document.querySelector or a similar funciton, a NodeList resulting from document.querySelectorAll or a Array of Dom Elements and NodeLists
+   * @param {*} modifierBEM : the BEM Modifier (--modifier) that will be appended to the first class name of each element when an intersection is detected
+   * @param {Object} intersectionObserverOptions: Objet representing options as described here : https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+   * @param {Boolean} addOnInView : determines whether the class modifier should be added when the querySelector comes into view
+   * @param {Boolean} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
+   * @param {*} addModifierOnFail : Determines if the BEM modifier should be added automatically if the observer fails to be created for a reason or another
+   */
   constructor(
     elements,
     modifierBEM,
@@ -145,10 +154,20 @@ export class IntersectObserverHelpersIterator {
   }
 
   _createObservers() {
-    if (this._elements instanceof NodeList) {
-      this._elements.forEach((element) => this._createSingleObserver(element));
+    if (this._elements instanceof Array) {
+      this._elements.forEach((elements) =>
+        this._checkAndHandleNodeList(elements)
+      );
     } else {
-      this._createSingleObserver(this._elements);
+      this._checkAndHandleNodeList(this._elements);
+    }
+  }
+
+  _checkAndHandleNodeList(elements) {
+    if (elements instanceof NodeList) {
+      elements.forEach((element) => this._createSingleObserver(element));
+    } else {
+      this._createSingleObserver(elements);
     }
   }
 
