@@ -1,0 +1,11 @@
+@forward './index';
+@use './index';
+
+.primary-font-color {
+  color: index.$primary-color;
+}
+
+.bold-primary {
+  color: index.$primary-color;
+  font-weight: bold;
+}
