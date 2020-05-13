@@ -10,27 +10,33 @@
             <span
               class="header__bar__container__menu__link"
               v-for="(link, index) in links"
-              :key="link+index"
-              :id="'menu-header-link__'+link"
+              :key="link + index"
+              :id="'menu-header-link__' + link"
               @click="scrollToId(link.toLowerCase())"
-            >{{ link }}</span>
+              >{{ link }}</span
+            >
           </nav>
           <div class="header__bar__container__burger">
-            <the-header-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()" />
+            <the-header-burger
+              :open="mobileMenuOpen"
+              @onBurgerClick="onBurgerClick()"
+            />
           </div>
         </div>
       </div>
     </div>
     <nav
       class="header__mobile-menu col-12"
-      :class="this.mobileMenuOpen ? 'header__mobile-menu--open' :''"
+      :class="this.mobileMenuOpen ? 'header__mobile-menu--open' : ''"
     >
       <div
         class="header__mobile-menu__link"
         v-for="(link, index) in links"
-        :key="link+index"
+        :key="link + index"
         @click="scrollToId(link.toLowerCase())"
-      >{{ link }}</div>
+      >
+        {{ link }}
+      </div>
     </nav>
   </header>
 </template>
@@ -45,16 +51,16 @@ export default {
   name: "TheHeader",
   data() {
     return {
-      links: ["Home", "About", "Skills", "Experience", "Education", "Contact"],
+      links: ["About", "Skills", "Experience", "Education", "Contact"],
       mobileMenuOpen: false,
       themeObserver: null,
       fixedPositionObserver: null,
-      linkObservers: []
+      linkObservers: [],
     };
   },
   components: {
     TheHeaderLogo,
-    TheHeaderBurger
+    TheHeaderBurger,
   },
   methods: {
     onBurgerClick() {
@@ -74,7 +80,7 @@ export default {
           document.querySelector(".header__bar"),
           "header__bar--light"
         );
-        this.themeObserver.triggerCritera = entry => {
+        this.themeObserver.triggerCritera = (entry) => {
           return entry.boundingClientRect.y < 0;
         };
         this.themeObserver.observe(document.querySelector("#top-anchor-pixel"));
@@ -92,7 +98,7 @@ export default {
           document.querySelector(".header"),
           "header--fixed"
         );
-        this.fixedPositionObserver.triggerCritera = entry => {
+        this.fixedPositionObserver.triggerCritera = (entry) => {
           return entry.boundingClientRect.y < 0;
         };
         this.fixedPositionObserver.observe(
@@ -106,7 +112,7 @@ export default {
         document.getElementById("header").classList.add("header--fixed");
         document.getElementById("header").classList.add("header__bar--light");
       }
-    }
+    },
   },
   mounted() {
     this.createThemeObserver();
@@ -119,7 +125,7 @@ export default {
     if (this.fixedPositionObserver) {
       this.fixedPositionObserver.disconnect();
     }
-  }
+  },
 };
 </script>
 
