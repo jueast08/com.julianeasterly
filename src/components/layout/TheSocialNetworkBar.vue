@@ -16,20 +16,17 @@
 
 <script>
 import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
-import {
-  //IntersectObserverHelpersIterator,
-  ScrollIntoViewObserver
-} from "Utility/IntersectObserverHelpers";
+import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSocialNetworkBar",
   data() {
     return {
-      exitObserver: null
+      exitObserver: null,
     };
   },
   components: {
-    SocialNetworkButton
+    SocialNetworkButton,
   },
   mounted() {
     let element = document.querySelector(".sn-bar");
@@ -53,7 +50,7 @@ export default {
     if (this.exitObserver) {
       this.exitObserver.disconnect();
     }
-  }
+  },
 };
 </script>
 

@@ -6,6 +6,20 @@
   >
     <div class="contact">
       <!-- col-m-6 -->
+      <div class="contact__social-links">
+        <div class="contact__social-links__channel">
+          <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
+          <a href="mailto:contact@julianeasterly.com"
+            >contact@julianeasterly.com</a
+          >
+        </div>
+        <div class="contact__social-links__channel">
+          <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
+          <a href="https://www.linkedin.com/in/julianeasterly/"
+            >linkedin.com/in/julianeasterly/</a
+          >
+        </div>
+      </div>
       <form class="contact__form" @submit.prevent="onSubmit">
         <!-- @TODO change to a verification functionto be changed -->
         <section class="contact__form__section">
@@ -56,15 +70,19 @@
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+// @TODO clean up how I handle sending mails. this is just a quick temp solution
+import querystring from "querystring"; //@TODO don't forget to uninstall
+import axios from "axios";
 
 export default {
   name: "TheContactSection",
   data() {
     return {
-      name: "",
-      email: "",
-      message: "",
-      scrollObserver: null
+      name: "Julian",
+      email: "julianeasterly@gmail.com",
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum turpis eget eros mattis pretium. Vivamus interdum sed sem a fringilla. Quisque vel molestie libero. Curabitur in pharetra nulla, vel dapibus lorem. Phasellus posuere consequat scelerisque. Nam id lectus tortor. Nullam lacinia urna lorem, pulvinar euismod elit lobortis in. Proin ullamcorper lacus ac varius tempus. Nam vel est risus. Proin mollis suscipit augue ut tincidunt. Nunc pellentesque lorem in sem malesuada, vitae iaculis risus iaculis. Phasellus quis molestie nisl. Vivamus et ultrices metus. Etiam dolor nunc, convallis et sem quis, rhoncus dignissim eros. Integer sed volutpat ex, at iaculis quam. ",
+      scrollObserver: null,
     };
   },
   components: { BaseSection, PrimaryColorRoundButton },
@@ -73,15 +91,33 @@ export default {
       return string.trim() !== "" && "contact__form__section__label--filled";
     },
     onSubmit() {
-      // let message = {
-      //     name: this.name,
-      //     email: this.email,
-      //     message: this.message,
-      // };
-      //@TODO send to a php script
-    }
+      //@TODO finish the email portion of the mail
+      axios
+        .post("http://localhost/sendmail.php", querystring.stringify(this.form))
+        .then((res) => {
+          console.log("here", res.status);
+        })
+        .catch((error) => {
+          console.log("here", error);
+        })
+        .then(function() {
+          console.log("finally");
+        });
+    },
+    showContactFormIfAvailable() {
+      console.log(process.env.VUE_APP_SHOW_CONTACT_FORM);
+      if (process.env.VUE_APP_SHOW_CONTACT_FORM === "true") {
+        document.getElementsByClassName(
+          "contact__social-links"
+        )[0].style.display = "none";
+      } else {
+        document.getElementsByClassName("contact__form")[0].style.display =
+          "none";
+      }
+    },
   },
   mounted() {
+    this.showContactFormIfAvailable();
     let element = document.querySelector(".contact");
     this.observers = new IntersectObserverHelpersIterator(
       element,
@@ -94,7 +130,7 @@ export default {
   },
   beforeDestroy() {
     this.observers.disconnectAll();
-  }
+  },
 };
 </script>
 
@@ -128,7 +164,7 @@ export default {
     width: 100%;
     height: 100%;
     opacity: 1;
-    background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
+    background-image: url("~Assets/portrait_semaine_intensive.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -159,10 +195,31 @@ export default {
     height: 100%;
     @include global.fade-in-from-bottom-class-modifier;
 
-    &__form {
+    &__social-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
       height: 100%;
-      max-width: 100%;
-      width: 100%;
+      &__channel {
+        border-bottom: 1px solid rgba(global.$primary-black, 0.5);
+        font-size: 25px;
+        color: global.$primary-color;
+
+        a {
+          color: global.$primary-black;
+          margin-left: 10px;
+          text-decoration: none;
+          @include global.p-font(
+            $size-s: 12px,
+            $size-m: 18px,
+            $size-l: 18px,
+            $size-xl: 18px
+          );
+        }
+        line-height: 50px;
+      }
+    }
+    &__form {
       display: grid;
       grid-gap: 10px;
       grid-template-areas:
@@ -170,6 +227,9 @@ export default {
         "email "
         "message "
         "button ";
+      height: 100%;
+      max-width: 100%;
+      width: 100%;
 
       &__section {
         &__label {
@@ -278,13 +338,6 @@ export default {
         &__section {
           &__label {
           }
-
-          input,
-          textarea {
-          }
-
-          input {
-          }
         }
 
         .textarea {
@@ -292,8 +345,6 @@ export default {
             flex-grow: 1;
             max-height: 150px;
           }
-        }
-        &__send {
         }
       }
     }
