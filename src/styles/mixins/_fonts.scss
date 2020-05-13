@@ -154,7 +154,7 @@
   $size-m: 17px,
   $size-l: 17px,
   $size-xl: 20px,
-  $weight: 500
+  $weight: 400
 ) {
   @include _poppins($size-s, $weight);
   line-height: $size-s;
