@@ -68,7 +68,7 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconectAll();
+    this.observerIterator.disconnectAll();
   }
 };
 </script>

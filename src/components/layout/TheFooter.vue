@@ -18,9 +18,9 @@
     </div>
     <div class="footer__social-network-group col-12">
       <div class="footer__social-network-group__wrapper col-12 col-s-6 col-m-4">
-        <social-network-button href="#contact">
+        <!-- <social-network-button href="#contact">
           <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
-        </social-network-button>
+        </social-network-button>-->
         <social-network-button href="https://www.linkedin.com/in/julianeasterly/">
           <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
         </social-network-button>
@@ -140,7 +140,7 @@ export default {
 
     &__wrapper {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       padding: 0 25px;
       margin: 0 auto;
@@ -149,6 +149,7 @@ export default {
       ::v-deep button {
         height: 30px;
         width: 30px;
+        margin: 0 15px;
         font-size: 30px;
         color: global.$primary-black;
       }

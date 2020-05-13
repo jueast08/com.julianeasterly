@@ -16,13 +16,16 @@
 
 <script>
 import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import {
+  //IntersectObserverHelpersIterator,
+  ScrollIntoViewObserver
+} from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSocialNetworkBar",
   data() {
     return {
-      observerIterator: null
+      exitObserver: null
     };
   },
   components: {
@@ -30,17 +33,26 @@ export default {
   },
   mounted() {
     let element = document.querySelector(".sn-bar");
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      element,
-      "--in-view",
-      {},
-      true,
+    this.exitObserver = new ScrollIntoViewObserver(element, "sn-bar--in-view");
+    this.exitObserver.observe(
+      document.querySelector("#contact"),
       false,
+      false,
+      true,
+      true
+    );
+    this.exitObserver.observe(
+      document.querySelector("#footer"),
+      false,
+      false,
+      true,
       true
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconectAll();
+    if (this.exitObserver) {
+      this.exitObserver.disconnect();
+    }
   }
 };
 </script>

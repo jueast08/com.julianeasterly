@@ -1,7 +1,7 @@
 /**
  * @brief This class is envolopes the IntersectionObserver for the project which primarily uses this tool to animate imtems once a root has come into view
  */
-export default class IntersectObserverHelpers {
+export class ScrollIntoViewObserver {
   /**
    * @param {Array} elements : an array of DOM elements. you should be passing document.querySelector('[query]')
    * @param {String} _classToAdd: String representing the animation class to add
@@ -18,19 +18,30 @@ export default class IntersectObserverHelpers {
   }
 
   /**
-   *
-   * @param {Array, Element} elements : an array of DOM elements or a Single Element. you should be passing document.querySelectoror document.querySelctorAll
+   *@TODo the elements parameter is incorrect
+   * @param {DOMElement} elements : a Single DOMElement. you should be passing document.querySelector
    * @param {Boolean} addOnInView : determines whether the class modifier should be added when the querySelector comes into view
    * @param {Boolean} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
+   * @param {Boolean} addOnOutOfView : determines whether the class modifier should be added when the querySelector leaves view
+   * @param {Boolean} removeOnInView : determines whether the class modifier should be removed when the querySelector enters view
+
    */
-  observe(elements, addOnInView = true, removeOnOutOfView = true) {
+  observe(
+    elements,
+    addOnInView = true,
+    removeOnOutOfView = true,
+    removeOnInView = false,
+    addOnOutOfView = false
+  ) {
     if (this._observer === null) {
       throw "Observer has not been initiated";
     }
     this._observer.observe(elements);
     this._actionArray.push({
-      addOnInView: addOnInView,
-      removeOnOutOfView: removeOnOutOfView,
+      addOnInView,
+      removeOnOutOfView,
+      addOnOutOfView,
+      removeOnInView,
     });
   }
 
@@ -55,10 +66,22 @@ export default class IntersectObserverHelpers {
   }
 
   _handleOnScroll(entry, index) {
-    if (this._triggerEvent(entry) && this._actionArray[index].addOnInView) {
-      this._addAnimationClasses();
-    } else if (this._actionArray[index].removeOnOutOfView) {
-      this._removeAnimationClasses();
+    if (this._triggerEvent(entry)) {
+      if (this._actionArray[index].addOnInView) {
+        this._addAnimationClasses();
+      }
+
+      if (this._actionArray[index].removeOnInView) {
+        this._removeAnimationClasses();
+      }
+    } else {
+      if (this._actionArray[index].removeOnOutOfView) {
+        this._removeAnimationClasses();
+      }
+
+      if (this._actionArray[index].addOnOutOfView) {
+        this._addAnimationClasses();
+      }
     }
   }
 
@@ -140,7 +163,9 @@ export class IntersectObserverHelpersIterator {
     intersectionObserverOptions = {},
     addOnInView = true,
     removeOnOutOfView = false,
-    addModifierOnFail = true
+    addModifierOnFail = true,
+    removeOnInView = false,
+    addOnOutOfView = false
   ) {
     this._elements = elements;
     this._modifierBEM = modifierBEM;
@@ -148,6 +173,8 @@ export class IntersectObserverHelpersIterator {
     this._addOnInView = addOnInView;
     this._removeOnOutOfView = removeOnOutOfView;
     this._addModifierOnFail = addModifierOnFail;
+    this._removeOnInView = removeOnInView;
+    this._addOnOutOfView = addOnOutOfView;
     this._observers = [];
     this._currentIndex = 0;
     this._createObservers();
@@ -175,8 +202,14 @@ export class IntersectObserverHelpersIterator {
     let observer = null;
     let scrollClass = element.classList[0] + this._modifierBEM;
     try {
-      observer = new IntersectObserverHelpers(element, scrollClass);
-      observer.observe(element, this._addOnInView, this._removeOnOutOfView);
+      observer = new ScrollIntoViewObserver(element, scrollClass);
+      observer.observe(
+        element,
+        this._addOnInView,
+        this._removeOnOutOfView,
+        this._addOnOutOfView,
+        this._removeOnOutOfView
+      );
       this._observers.push(observer);
     } catch (error) {
       console.error(error);
@@ -206,7 +239,7 @@ export class IntersectObserverHelpersIterator {
     return observer;
   }
 
-  disconectAll() {
+  disconnectAll() {
     this._observers.forEach((observer) => observer.disconnect());
   }
 }
