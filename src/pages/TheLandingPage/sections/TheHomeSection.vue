@@ -6,7 +6,9 @@
         <h1 class="home__container__titles__title">Easterly</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">Collaborate. Learn. Evolve.</p>
+        <p class="home__container__subtitles__subtitle">
+          Collaborate. Learn. Evolve.
+        </p>
       </section>
     </div>
     <div class="home__background col-12 col-xl-6"></div>
@@ -15,7 +17,6 @@
 </template>
 
 <script>
-import ProfileImage from "Assets/portrait_bridge_saint-entienne.jpg";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
@@ -23,12 +24,11 @@ export default {
   name: "TheHomeSection",
   data() {
     return {
-      profileImage: ProfileImage,
-      observerIterator: null
+      observerIterator: null,
     };
   },
   methods: {
-    scrollToId
+    scrollToId,
   },
   mounted() {
     let element = document.querySelector(".home__container");
@@ -43,7 +43,7 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  }
+  },
 };
 </script>
 
