@@ -55,6 +55,7 @@ export default {
   height: 100vh;
   background: global.$primary-black;
   overflow: hidden;
+  @include global.fixed-background-overlay;
 
   &__container {
     display: flex;
