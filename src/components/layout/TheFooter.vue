@@ -128,7 +128,13 @@ export default {
       margin: 10px 0 50px 0;
       text-align: center;
       color: global.$primary-white;
-      @include global.p-font($size-s: 12px, $weight: 400);
+      @include global.p-font(
+        $size-s: 12px,
+        $size-m: 12px,
+        $size-l: 12px,
+        $size-xl: 12px,
+        $weight: 400
+      );
 
       & span {
         color: global.$primary-color;
