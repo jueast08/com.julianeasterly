@@ -111,7 +111,8 @@
           <template #description>
             <p>
               As a literature student and tour guide, I'm confident in my
-              communication and organisation skills.
+              communication and organisation skills. Check out my personality
+              and soft skills according to Assess First,
             </p>
             <div class="skills__list__skill__gauge-wrapper">
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -149,31 +150,15 @@
                   <li>Time Management</li>
                 </ul>
               </div>
-              <!-- <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="English"
-                percentage="100"
-                goal-label="Native"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="French"
-                percentage="90"
-                goal-label="Fluent"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="German (Self-Learning)"
-                percentage="10"
-                goal-label="Beginner"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Spanish (Courses Taken)"
-                percentage="20"
-                goal-label="Beginner"
-              /> -->
             </div>
+            <p>
+              Check out what Assess First has to say about my soft skills
+              <a
+                href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
+                target="__blank"
+                >here.
+              </a>
+            </p>
           </template>
         </skill-content-with-icon>
       </div>
