@@ -105,7 +105,6 @@ export default {
         });
     },
     showContactFormIfAvailable() {
-      console.log(process.env.VUE_APP_SHOW_CONTACT_FORM);
       if (process.env.VUE_APP_SHOW_CONTACT_FORM === "true") {
         document.getElementsByClassName(
           "contact__social-links"
