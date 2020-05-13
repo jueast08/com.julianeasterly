@@ -195,18 +195,7 @@ export default {
 
       &:before {
         content: " ";
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        opacity: 0.46;
-        background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
-        background-repeat: no-repeat;
         background-attachment: scroll;
-        background-size: cover;
         background-position: right;
       }
     }
