@@ -1,199 +1,271 @@
 @use 'breakpoints';
 
-@mixin _poppins($size, $weight){
-    font-family: 'Poppins', sans-serif;
-    font-size: $size;
-    font-weight: $weight;
+@mixin _poppins($size, $weight) {
+  font-family: "Poppins", sans-serif;
+  font-size: $size;
+  font-weight: $weight;
 }
 
-@mixin _montserrat($size, $weight){
-    font-family: 'Montserrat', sans-serif;
-    font-size: $size;
-    font-weight: $weight;
+@mixin _montserrat($size, $weight) {
+  font-family: "Montserrat", sans-serif;
+  font-size: $size;
+  font-weight: $weight;
 }
 
-@mixin h1-font($size-s: 47px, $size-m: 75px, $size-l: 75px, $size-xl: 92px, $weight: 700) {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
-    text-transform: uppercase;
+@mixin h1-font(
+  $size-s: 47px,
+  $size-m: 75px,
+  $size-l: 75px,
+  $size-xl: 92px,
+  $weight: 700
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
+  text-transform: uppercase;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin h2-font($size-s: 30px, $size-m: 30px, $size-l: 45px, $size-xl: 50px, $weight: 700) {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
-    margin: 10px 0;
+@mixin h2-font(
+  $size-s: 30px,
+  $size-m: 30px,
+  $size-l: 45px,
+  $size-xl: 50px,
+  $weight: 700
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
+  margin: 10px 0;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin h2-font-shadow($size-s: 30px, $size-m: 30px, $size-l: 45px, $size-xl: 50px, $weight: 700) {
-    @include h2-font($size-s * 1.5, $size-m * 1.5, $size-l * 1.5, $size-xl * 1.5, $weight: 700);
+@mixin h2-font-shadow(
+  $size-s: 30px,
+  $size-m: 30px,
+  $size-l: 45px,
+  $size-xl: 50px,
+  $weight: 700
+) {
+  @include h2-font(
+    $size-s * 1.5,
+    $size-m * 1.5,
+    $size-l * 1.5,
+    $size-xl * 1.5,
+    $weight: 700
+  );
 }
 
-@mixin h3-font($size-s: 24px, $size-m: 24px, $size-l: 30px, $size-xl: 30px, $weight: 700) {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
-    margin: 10px 0;
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+@mixin h3-font(
+  $size-s: 24px,
+  $size-m: 24px,
+  $size-l: 30px,
+  $size-xl: 30px,
+  $weight: 700
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
+  margin: 10px 0;
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin h4-font($size-s: 16px, $size-m: 16px, $size-l: 17px, $size-xl: 20px, $weight: 700) {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+@mixin h4-font(
+  $size-s: 16px,
+  $size-m: 16px,
+  $size-l: 17px,
+  $size-xl: 20px,
+  $weight: 700
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin p-font($size-s: 14px, $size-m: 14px, $size-l: 14px, $size-xl: 14px, $weight: 400) {
-    @include _montserrat($size-s, $weight); 
-    line-height: 1.75 * $size-s; 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _montserrat($size-m, $weight);
-        line-height: calc(#{$size-m} * 175%); 
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _montserrat($size-l, $weight);
-        line-height: calc(#{$size-l} * 175%); 
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _montserrat($size-xl, $weight);
-        line-height: calc(#{$size-xl} * 175%); 
-    }
+@mixin p-font(
+  $size-s: 14px,
+  $size-m: 14px,
+  $size-l: 16px,
+  $size-xl: 16px,
+  $weight: 500
+) {
+  @include _montserrat($size-s, $weight);
+  $modifier: 2;
+  line-height: $modifier * $size-s;
+  @include breakpoints.adapt-to-screen("m") {
+    @include _montserrat($size-m, $weight);
+    line-height: $modifier * $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _montserrat($size-l, $weight);
+    line-height: $modifier * $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _montserrat($size-xl, $weight);
+    line-height: $modifier * $size-xl;
+  }
 }
 
-@mixin subtitle-font($size-s: 16px, $size-m: 17px, $size-l: 17px, $size-xl: 20px, $weight: 300) {
-    @include _poppins($size-s, $weight);
-    line-height: $size-s; 
-    text-transform: uppercase;
+@mixin subtitle-font(
+  $size-s: 16px,
+  $size-m: 17px,
+  $size-l: 17px,
+  $size-xl: 20px,
+  $weight: 400
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
+  text-transform: uppercase;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin link-font($size-s: 14px, $size-m: 14px, $size-l: 14px, $size-xl: 14px,$weight: 700)  {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
-    
+@mixin link-font(
+  $size-s: 14px,
+  $size-m: 14px,
+  $size-l: 14px,
+  $size-xl: 14px,
+  $weight: 700
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin logo-font($size-s: 14px, $size-m: 18.5px, $size-l: 25px, $size-xl: 25px, $weight: 300)  {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
+@mixin logo-font(
+  $size-s: 14px,
+  $size-m: 18.5px,
+  $size-l: 25px,
+  $size-xl: 25px,
+  $weight: 300
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin xp-title-font($size-s: 16px, $size-m: 18px, $size-l: 18px, $size-xl: 18px, $weight: 700) {
-    @include _poppins($size-s, $weight); 
-    line-height: $size-s; 
+@mixin xp-title-font(
+  $size-s: 16px,
+  $size-m: 18px,
+  $size-l: 18px,
+  $size-xl: 18px,
+  $weight: 700
+) {
+  @include _poppins($size-s, $weight);
+  line-height: $size-s;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _poppins($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _poppins($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _poppins($size-xl, $weight);
-        line-height: $size-xl;  
-    }  
+  @include breakpoints.adapt-to-screen("m") {
+    @include _poppins($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _poppins($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _poppins($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }
 
-@mixin xp-subtitle-font($size-s: 14px, $size-m: 16px, $size-l: 16px, $size-xl: 16px, $weight: 400) {
-    @include _montserrat($size-s, $weight); 
-    line-height: $size-s; 
+@mixin xp-subtitle-font(
+  $size-s: 14px,
+  $size-m: 16px,
+  $size-l: 16px,
+  $size-xl: 16px,
+  $weight: 500
+) {
+  @include _montserrat($size-s, $weight);
+  line-height: $size-s;
 
-    @include breakpoints.adapt-to-screen('m') {
-        @include _montserrat($size-m, $weight);
-        line-height: $size-m;  
-    }
-    @include breakpoints.adapt-to-screen('l') {
-        @include _montserrat($size-l, $weight);
-        line-height: $size-l;  
-    }
-    @include breakpoints.adapt-to-screen('xl') {
-        @include _montserrat($size-xl, $weight);
-        line-height: $size-xl;  
-    }  
+  @include breakpoints.adapt-to-screen("m") {
+    @include _montserrat($size-m, $weight);
+    line-height: $size-m;
+  }
+  @include breakpoints.adapt-to-screen("l") {
+    @include _montserrat($size-l, $weight);
+    line-height: $size-l;
+  }
+  @include breakpoints.adapt-to-screen("xl") {
+    @include _montserrat($size-xl, $weight);
+    line-height: $size-xl;
+  }
 }

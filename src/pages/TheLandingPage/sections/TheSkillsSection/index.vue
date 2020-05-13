@@ -9,64 +9,47 @@
           <template #title>Development and Tech</template>
           <template #description>
             <p>
-              As a software engineer, I have experience in a multitude of
-              technologies shown below.
+              As a software engineer, I have techinical experience in
+              professional and education settings.
             </p>
             <div class="skills__list__skill__gauge-wrapper">
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Javascript (VueJS, ReactJS, Vanilla)"
-                percentage="70"
-                goal-label="Upper Intermediate (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="HTML/CSS/SCSS"
-                percentage="70"
-                goal-label="Upper Intermediate (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Git & Git-flow"
-                percentage="70"
-                goal-label="Upper Intermediate (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Python"
-                percentage="50"
-                goal-label="Independent. (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Docker & Kubernetes"
-                percentage="40"
-                goal-label="Independent. (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="PHP (Laravel, Vanilla)"
-                percentage="40"
-                goal-label="Independent. (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Java (Java EE, Vanilla)"
-                percentage="30"
-                goal-label="Course Experience"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="C/C++"
-                percentage="30"
-                goal-label="Course Experience"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Golang"
-                percentage="15"
-                goal-label="Beginner. (Pro Exp)"
-              />
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="100"
+                  goal-label="Comfortable ++"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Javascript (VueJS, ReactJS, Vanilla)</li>
+                  <li>HTML/CSS/SCSS</li>
+                  <li>Git & Git-flow</li>
+                </ul>
+              </div>
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="60"
+                  goal-label="Comfortable +"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Python</li>
+                  <li>Docker & Kubernetes</li>
+                  <li>Git & Git-flow</li>
+                </ul>
+              </div>
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="25"
+                  goal-label="Practice Needed"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>PHP</li>
+                  <li>Java</li>
+                  <li>C/C++</li>
+                  <li>Golang</li>
+                </ul>
+              </div>
             </div>
           </template>
         </skill-content-with-icon>
@@ -77,36 +60,46 @@
           <template #title>Project and Product Management</template>
           <template #description>
             <p>
-              For a project leader and analyst, it's critical to accurately
-              analyse and communicate a client's needs to technical teams.
-              <br />To do this efficiently, I rely on tools such as UML and
-              techical analysis of potentially interesting technology.
+              I've acquired skills to accurately assess needs and comunicate
+              them to a team.
             </p>
+
             <div class="skills__list__skill__gauge-wrapper">
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="UML & Merise"
-                percentage="70"
-                goal-label="Upper Intermediate. (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Design Patterns (Gang of Four)"
-                percentage="50"
-                goal-label="Independent. (Pro Exp)"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Agile Methods"
-                percentage="40"
-                goal-label="Theoretical Knowledge"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Project Management"
-                percentage="40"
-                goal-label="Professional Experience"
-              />
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="100"
+                  goal-label="Comfortable ++"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Functional UML Diagrams</li>
+                  <li>Database Conception techniques (Merize)</li>
+                </ul>
+              </div>
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="60"
+                  goal-label="Comfortable +"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Design patterns</li>
+                  <li>Project Management</li>
+                  <li>Customer Need Analysis</li>
+                  <li>Technical Analysis</li>
+                </ul>
+              </div>
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="25"
+                  goal-label="Practice Needed"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Agile Method Theory</li>
+                  <li>Risk Assessment</li>
+                </ul>
+              </div>
             </div>
           </template>
         </skill-content-with-icon>
@@ -117,39 +110,55 @@
           <template #title>Soft Skills</template>
           <template #description>
             <p>
-              As a ex-literature student and bilingual tour guide, I have great
-              communication skills and feel at ease addressing a diverse public.
-              These aptitudes translate into the ability to lead meetings,
-              present ideas, and exchange with individuals from various
-              backgrounds.
+              As a literature student and tour guide, I'm confident in my
+              communication and organisation skills. Check out my personality
+              and soft skills according to Assess First,
             </p>
-            <div class="skills__list__skill__title">Languages</div>
             <div class="skills__list__skill__gauge-wrapper">
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="English"
-                percentage="100"
-                goal-label="Native"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="French"
-                percentage="90"
-                goal-label="Fluent"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="German (Self-Learning)"
-                percentage="10"
-                goal-label="Beginner"
-              />
-              <skill-gauge
-                class="skills__list__skill__gauge-wrapper__gauge"
-                skill-title="Spanish (Courses Taken)"
-                percentage="20"
-                goal-label="Beginner"
-              />
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="100"
+                  goal-label="Comfortable ++"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>English (Native)</li>
+                  <li>French</li>
+                  <li>Public Speaking</li>
+                </ul>
+              </div>
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="60"
+                  goal-label="Comfortable +"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Meeting Management</li>
+                  <li>Organisation</li>
+                </ul>
+              </div>
+              <div class="skills__list__skill__gauge-wrapper__group">
+                <skill-gauge
+                  class="skills__list__skill__gauge-wrapper__gauge"
+                  percentage="25"
+                  goal-label="Practice Needed"
+                />
+                <ul class="skills__list__skill__gauge-wrapper__group__list">
+                  <li>Spanish</li>
+                  <li>German (Self-Taught)</li>
+                  <li>Time Management</li>
+                </ul>
+              </div>
             </div>
+            <p>
+              Check out what Assess First has to say about my soft skills
+              <a
+                href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
+                target="__blank"
+                >here.
+              </a>
+            </p>
           </template>
         </skill-content-with-icon>
       </div>
@@ -205,6 +214,14 @@ export default {
           font-weight: bold;
           margin: 25px 0;
         }
+
+        &__gauge-wrapper {
+          &__group {
+            &__list {
+              text-align: left;
+            }
+          }
+        }
       }
     }
 
@@ -230,10 +247,17 @@ export default {
             display: flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
-            &__gauge {
-              max-width: 45%;
-              margin: 10px 15px;
+            &__group {
+              width: 30%;
+              // max-width: 1/3;
+              &__gauge {
+                margin: 10px 15px;
+              }
             }
+            // &__gauge {
+            //   max-width: 45%;
+            //   margin: 10px 15px;
+            // }
           }
         }
       }
