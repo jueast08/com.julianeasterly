@@ -146,36 +146,30 @@ export default {
     }
 
     &__photo {
-      position: relative;
+      position: absolute;
       left: 0;
       height: 200px;
       @include global.fade-in-from-bottom-class-modifier;
-      background-image: url("~Assets/portrait_about.jpg");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
 
-      // &__wrapper {
-      //   position: relative;
-      //   height: 100%;
+      &__wrapper {
+        position: relative;
+        height: 100%;
 
-      //   &:before {
-      //     /** @TODO Don't attach this background on starting on small screens 's' (maybe base this choice on the picture chosen*/
-      //     content: " ";
-      //     display: block;
-      //     position: absolute;
-      //     left: 0;
-      //     top: 0;
-      //     width: 100%;
-      //     height: 100%;
-      //     background-image: url("~Assets/portrait_about.jpg");
-      //     background-repeat: no-repeat;
-      //     background-attachment: fixed;
-      //     background-size: cover;
-      //     background-position: center;
-      //   }
-      // }
+        &:before {
+          /** @TODO Don't attach this background on starting on small screens 's' (maybe base this choice on the picture chosen*/
+          content: " ";
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url("~Assets/portrait_about.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+      }
     }
   }
 }
