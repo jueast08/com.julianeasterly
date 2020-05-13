@@ -1,33 +1,26 @@
 <template>
-  <base-section
-    id="about"
-    title="Hi. I'm Julian."
-    subtitle="Business Analyst - IT Consultant"
-  >
+  <base-section id="about" title="Hi. I'm Julian.">
+    <!-- subtitle="Business Analyst - IT Consultant" -->
     <div class="about">
       <section class="about__section">
         <!-- @TODO add something about my MBTI tests like "I'm a Protagonist !!! with a link and another to my personality file https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwig9LXJ4q7pAhWrDmMBHcAqCggQFjAAegQIBRAB&url=https%3A%2F%2Fapp.assessfirst.com%2F_%2Fprofile%2Fhnnndvm0-julian-easterly&usg=AOvVaw3he2NfdS3npV7hKbdGTTFu" -->
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">
-            Made in the
-            <span class="bold-primary">U.S.A</span>
-            &#8226; Living in
-            <span class="bold-primary">Alsace, France</span>
+            To France from the USA
           </div>
           <h3 class="about__section__titles__title">
-            From Detroit to Strasbourg
+            Becoming a Citizen of the World
           </h3>
           <p>
-            I am an American citizen - born, raised, and, for the most part,
-            educated in the U.S.A. I played (American) football at the Indiana
-            State University where I completed a degree in English. My last
-            semester of college, I studied abroad in Montpellier, France. My
-            goal was to become fluent in French. I did not completely achieve
-            this goal during my trip, but it inspired me to return to France and
-            establish new and more ambitious goals for myself.
+            I am an American citizen, raised in Detroit, Michigan. In college, I
+            studied abroad in Montpellier, France &mdash; trying to become
+            fluent in French in under 6 months. Though I did not succeed, I was
+            inspired to return to France and establish new and more ambitious
+            goals for myself.
           </p>
           <p>
-            I've lived in France since 2013 and I currently reside in
+            I've lived in France since 2013. As a citizen of the world, I reside
+            in
             <span class="bold-primary">Strasbourg, Alsace, France.</span>
           </p>
         </div>
@@ -38,22 +31,43 @@
       <div class="about__spacer"></div>
       <section class="about__section">
         <div class="about__section__titles">
-          <div class="about__section__titles__subtitle">
-            <span class="bold-primary">Books</span>
-            and
-            <span class="bold-primary">Computers</span>
-          </div>
           <h3 class="about__section__titles__title">
-            From Literature Student to Software Engineer
+            I have English Literature and Computer Science Degrees.
           </h3>
           <p>
-            Despite a Literature degree, I decided to switch to Computer Science
-            in France as a way to acquire new skills, discover new challenges,
-            and rapidly improve my language skills. I've since obtained a
-            Master's degree and have collaborated on various IT projects
+            I recieved an Bachelor's degree in English in 2012, but decided to
+            go back to school when arriving in France. This switch was motivated
+            not only by a need for new opportunities, but also a need to
+            challenge myself and learn the language. I since earned a Master's
+            in Computer Science and have collaborated on various IT projects
             privately and with professionally. I have worked as a full-stack web
             developer, a DevOps engineer, and most recently, as an IT consultant
             and Business Analyst.
+          </p>
+        </div>
+      </section>
+      <section class="about__section">
+        <div class="about__section__titles">
+          <div class="about__section__titles__subtitle">
+            Personality Test Results
+          </div>
+          <p>
+            I'm a
+            <a
+              href="https://www.16personalities.com/enfj-personality"
+              target="__blank"
+            >
+              Protagonist (ENFJ)
+            </a>
+            according to my MTBI Results.
+          </p>
+          <p>
+            Check out my personality and soft skills according to Assess First
+            <a
+              href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
+              target="__blank"
+              >here.</a
+            >
           </p>
         </div>
       </section>
@@ -119,6 +133,7 @@ export default {
 
   .about {
     &__section {
+      margin-top: 50px;
       @include global.fade-in-from-bottom-class-modifier;
 
       &__titles {
@@ -129,7 +144,7 @@ export default {
         }
         &__title {
           @include global.h3-font;
-          color: global.$primary-black;
+          color: global.$primary-color;
           text-align: center;
         }
         p {
@@ -141,7 +156,7 @@ export default {
     }
 
     &__spacer {
-      height: 250px;
+      height: 200px;
       width: 100%;
     }
 
