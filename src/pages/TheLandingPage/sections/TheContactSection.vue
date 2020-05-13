@@ -320,7 +320,7 @@ export default {
     ::v-deep .section__title-box {
       padding-top: 100px;
       width: 60%;
-      background-image: url("~Assets/portrait_contact.jpg");
+      background-image: url("~Assets/contact_background_desktop.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
