@@ -8,7 +8,10 @@
           </template>
           <template #title>Development and Tech</template>
           <template #description>
-            <p>As a software engineer, I have experience in a multitude of technologies shown below.</p>
+            <p>
+              As a software engineer, I have experience in a multitude of
+              technologies shown below.
+            </p>
             <div class="skills__list__skill__gauge-wrapper">
               <skill-gauge
                 class="skills__list__skill__gauge-wrapper__gauge"
@@ -74,9 +77,10 @@
           <template #title>Project and Product Management</template>
           <template #description>
             <p>
-              For a project leader and analyst, it's critical to accurately analyse and communicate a client's
-              needs to technical teams.
-              <br />To do this efficiently, I rely on tools such as UML and techical analysis of potentially interesting technology.
+              For a project leader and analyst, it's critical to accurately
+              analyse and communicate a client's needs to technical teams.
+              <br />To do this efficiently, I rely on tools such as UML and
+              techical analysis of potentially interesting technology.
             </p>
             <div class="skills__list__skill__gauge-wrapper">
               <skill-gauge
@@ -113,8 +117,11 @@
           <template #title>Soft Skills</template>
           <template #description>
             <p>
-              As a ex-literature student and bilingual tour guide, I have great communication skills and feel at ease addressing a diverse public.
-              These aptitudes translate into the ability to lead meetings, present ideas, and exchange with individuals from various backgrounds.
+              As a ex-literature student and bilingual tour guide, I have great
+              communication skills and feel at ease addressing a diverse public.
+              These aptitudes translate into the ability to lead meetings,
+              present ideas, and exchange with individuals from various
+              backgrounds.
             </p>
             <div class="skills__list__skill__title">Languages</div>
             <div class="skills__list__skill__gauge-wrapper">
@@ -149,7 +156,9 @@
       <div class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
         <div class="skills__contact-me__button">
-          <white-round-button @click="scrollToId('contact')">contact me</white-round-button>
+          <white-round-button @click="scrollToId('contact')"
+            >contact me</white-round-button
+          >
         </div>
       </div>
     </div>
@@ -169,11 +178,11 @@ export default {
     BaseSection,
     SkillContentWithIcon,
     WhiteRoundButton,
-    SkillGauge
+    SkillGauge,
   },
   methods: {
-    scrollToId
-  }
+    scrollToId,
+  },
 };
 </script>
 
@@ -186,6 +195,8 @@ export default {
   ::v-deep .section__subtitle {
     color: global.$primary-white;
   }
+  @include global.fixed-background-overlay;
+
   .skills {
     &__list {
       &__skill {
