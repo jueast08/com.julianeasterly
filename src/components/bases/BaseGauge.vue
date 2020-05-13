@@ -5,7 +5,10 @@
       <span class="base-gauge__label-group__end">{{ goalLabel }}</span>
     </div>
     <div class="base-gauge__container">
-      <div class="base-gauge__container__fluid" :style="masteryPercentageWidth"></div>
+      <div
+        class="base-gauge__container__fluid"
+        :style="masteryPercentageWidth"
+      ></div>
     </div>
   </div>
 </template>
@@ -30,22 +33,22 @@ export default {
         return (
           !isNaN(possibleNumber) && possibleNumber <= 100 && possibleNumber >= 0
         );
-      }
+      },
     },
     title: {
       type: String,
       required: false,
-      default: ""
+      default: "",
     },
     goalLabel: {
       type: String,
       required: false,
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {
-      observerIterator: null
+      observerIterator: null,
     };
   },
   computed: {
@@ -55,11 +58,11 @@ export default {
         width += "%";
       }
       return { width: width };
-    }
+    },
   },
   mounted() {
     this.observerIterator = new IntersectObserverHelpersIterator(
-      [this.$el.childNodes[2].childNodes[0], this.$el],
+      [this.$el.childNodes[2].childNodes[0], this.$el.childNodes[2]],
       "--in-view",
       {},
       true,
@@ -69,17 +72,15 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  }
+  },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @use 'global';
 
 .base-gauge {
   width: 100%;
-  @include global.expand-from-left-class-modifier($transform-delay: 1s);
 
   &__label-group {
     text-align: right;
@@ -95,6 +96,7 @@ export default {
     height: 10px;
     width: 100%;
     border-radius: 7px;
+    @include global.expand-from-left-class-modifier($transform-delay: 1s);
 
     &__fluid {
       height: 100%;
