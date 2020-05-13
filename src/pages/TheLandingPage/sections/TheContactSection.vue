@@ -164,7 +164,7 @@ export default {
     width: 100%;
     height: 100%;
     opacity: 1;
-    background-image: url("~Assets/portrait_semaine_intensive.jpg");
+    background-image: url("~Assets/contact_background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -312,23 +312,37 @@ export default {
     display: flex;
     flex-direction: row;
 
-    &:before {
-      background-attachment: scroll;
+    &:before,
+    &:after {
+      display: none;
     }
 
     ::v-deep .section__title-box {
       padding-top: 100px;
       width: 60%;
+      background-image: url("~Assets/contact_background_desktop.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      &:after {
+        content: " ";
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(global.$primary-black, 0.8);
+      }
     }
 
     ::v-deep .section__container {
       min-height: 100%;
-      padding: 0 50px;
     }
 
     .contact {
       width: 100%;
-
+      padding: 25px 75px;
       &__form {
         grid-template-areas:
           "name name name email email email"

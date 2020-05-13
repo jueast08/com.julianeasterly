@@ -6,7 +6,9 @@
         <h1 class="home__container__titles__title">Easterly</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">Collaborate. Learn. Evolve.</p>
+        <p class="home__container__subtitles__subtitle">
+          Collaborate. Learn. Evolve.
+        </p>
       </section>
     </div>
     <div class="home__background col-12 col-xl-6"></div>
@@ -15,7 +17,6 @@
 </template>
 
 <script>
-import ProfileImage from "Assets/portrait_bridge_saint-entienne.jpg";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
@@ -23,12 +24,11 @@ export default {
   name: "TheHomeSection",
   data() {
     return {
-      profileImage: ProfileImage,
-      observerIterator: null
+      observerIterator: null,
     };
   },
   methods: {
-    scrollToId
+    scrollToId,
   },
   mounted() {
     let element = document.querySelector(".home__container");
@@ -43,7 +43,7 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  }
+  },
 };
 </script>
 
@@ -55,6 +55,7 @@ export default {
   height: 100vh;
   background: global.$primary-black;
   overflow: hidden;
+  @include global.fixed-background-overlay;
 
   &__container {
     display: flex;
@@ -124,7 +125,7 @@ export default {
       height: 100%;
       z-index: 1;
       opacity: 0.46;
-      background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
+      background-image: url("~Assets/portrait_home.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -195,18 +196,7 @@ export default {
 
       &:before {
         content: " ";
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        opacity: 0.46;
-        background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
-        background-repeat: no-repeat;
         background-attachment: scroll;
-        background-size: cover;
         background-position: right;
       }
     }
