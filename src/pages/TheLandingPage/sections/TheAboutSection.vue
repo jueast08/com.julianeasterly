@@ -1,5 +1,9 @@
 <template>
-  <base-section id="about" title="Hi. I'm Julian." subtitle="Business Analyst - IT Consultant">
+  <base-section
+    id="about"
+    title="Hi. I'm Julian."
+    subtitle="Business Analyst - IT Consultant"
+  >
     <div class="about">
       <section class="about__section">
         <!-- @TODO add something about my MBTI tests like "I'm a Protagonist !!! with a link and another to my personality file https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwig9LXJ4q7pAhWrDmMBHcAqCggQFjAAegQIBRAB&url=https%3A%2F%2Fapp.assessfirst.com%2F_%2Fprofile%2Fhnnndvm0-julian-easterly&usg=AOvVaw3he2NfdS3npV7hKbdGTTFu" -->
@@ -10,25 +14,21 @@
             &#8226; Living in
             <span class="bold-primary">Alsace, France</span>
           </div>
-          <h3 class="about__section__titles__title">From Detroit to Strasbourg</h3>
+          <h3 class="about__section__titles__title">
+            From Detroit to Strasbourg
+          </h3>
           <p>
-            I am an American citizen - born, raised, and,
-            for the most part, educated in the U.S.A. I
-            played (American) football at the Indiana
-            State University where I completed a degree
-            in English. My last semester of college, I
-            studied abroad in Montpellier, France. My
-            goal was to become fluent in French. I did
-            not completely achieve this goal during my
-            trip, but it inspired me to return to France
-            and establish new and more ambitious goals
-            for myself.
+            I am an American citizen - born, raised, and, for the most part,
+            educated in the U.S.A. I played (American) football at the Indiana
+            State University where I completed a degree in English. My last
+            semester of college, I studied abroad in Montpellier, France. My
+            goal was to become fluent in French. I did not completely achieve
+            this goal during my trip, but it inspired me to return to France and
+            establish new and more ambitious goals for myself.
           </p>
           <p>
             I've lived in France since 2013 and I currently reside in
-            <span
-              class="bold-primary"
-            >Strasbourg, Alsace, France.</span>
+            <span class="bold-primary">Strasbourg, Alsace, France.</span>
           </p>
         </div>
       </section>
@@ -43,8 +43,18 @@
             and
             <span class="bold-primary">Computers</span>
           </div>
-          <h3 class="about__section__titles__title">From Literature Student to Software Engineer</h3>
-          <p>Despite a Literature degree, I decided to switch to Computer Science in France as a way to acquire new skills, discover new challenges, and rapidly improve my language skills. I've since obtained a Master's degree and have collaborated on various IT projects privately and with professionally. I have worked as a full-stack web developer, a DevOps engineer, and most recently, as an IT consultant and Business Analyst.</p>
+          <h3 class="about__section__titles__title">
+            From Literature Student to Software Engineer
+          </h3>
+          <p>
+            Despite a Literature degree, I decided to switch to Computer Science
+            in France as a way to acquire new skills, discover new challenges,
+            and rapidly improve my language skills. I've since obtained a
+            Master's degree and have collaborated on various IT projects
+            privately and with professionally. I have worked as a full-stack web
+            developer, a DevOps engineer, and most recently, as an IT consultant
+            and Business Analyst.
+          </p>
         </div>
       </section>
     </div>
@@ -59,11 +69,11 @@ export default {
   name: "TheAboutSection",
   data() {
     return {
-      observerIterator: null
+      observerIterator: null,
     };
   },
   components: {
-    BaseSection
+    BaseSection,
   },
   methods: {},
   mounted() {
@@ -81,7 +91,7 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  }
+  },
 };
 </script>
 
@@ -153,8 +163,7 @@ export default {
           top: 0;
           width: 100%;
           height: 100%;
-          opacity: 0.8;
-          background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
+          background-image: url("~Assets/portrait_about.jpg");
           background-repeat: no-repeat;
           background-attachment: fixed;
           background-size: cover;

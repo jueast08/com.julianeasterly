@@ -164,7 +164,7 @@ export default {
     width: 100%;
     height: 100%;
     opacity: 1;
-    background-image: url("~Assets/portrait_semaine_intensive.jpg");
+    background-image: url("~Assets/contact_background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -311,10 +311,6 @@ export default {
     padding: 0;
     display: flex;
     flex-direction: row;
-
-    &:before {
-      background-attachment: scroll;
-    }
 
     ::v-deep .section__title-box {
       padding-top: 100px;
