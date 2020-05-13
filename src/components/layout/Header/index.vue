@@ -38,7 +38,7 @@
 <script>
 import TheHeaderLogo from "./TheHeaderLogo";
 import TheHeaderBurger from "./TheHeaderBurger";
-import IntersectObserverHelpers from "Utility/IntersectObserverHelpers";
+import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
@@ -70,7 +70,7 @@ export default {
     scrollToId,
     createThemeObserver() {
       try {
-        this.themeObserver = new IntersectObserverHelpers(
+        this.themeObserver = new ScrollIntoViewObserver(
           document.querySelector(".header__bar"),
           "header__bar--light"
         );
@@ -88,7 +88,7 @@ export default {
     },
     createFixedHeaderObserver() {
       try {
-        this.fixedPositionObserver = new IntersectObserverHelpers(
+        this.fixedPositionObserver = new ScrollIntoViewObserver(
           document.querySelector(".header"),
           "header--fixed"
         );

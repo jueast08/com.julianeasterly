@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import IntersectObserverHelpers from "Utility/IntersectObserverHelpers";
+import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
 import { scrollToQuerySelector } from "Utility/ScrollHelper";
 
 export default {
@@ -56,7 +56,7 @@ export default {
   mounted() {
     if (this.querySelectorThatTriggersShowButton) {
       try {
-        this.scrollObserver = new IntersectObserverHelpers(
+        this.scrollObserver = new ScrollIntoViewObserver(
           document.querySelector(".scroll-to-section-button"),
           "scroll-to-section-button--hidden"
         );
