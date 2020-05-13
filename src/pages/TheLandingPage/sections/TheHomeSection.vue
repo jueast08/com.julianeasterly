@@ -124,7 +124,7 @@ export default {
       height: 100%;
       z-index: 1;
       opacity: 0.46;
-      background-image: url("~Assets/portrait_bridge_saint-entienne.jpg");
+      background-image: url("~Assets/portrait_home.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
