@@ -312,19 +312,37 @@ export default {
     display: flex;
     flex-direction: row;
 
+    &:before,
+    &:after {
+      display: none;
+    }
+
     ::v-deep .section__title-box {
       padding-top: 100px;
       width: 60%;
+      background-image: url("~Assets/portrait_contact.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      &:after {
+        content: " ";
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(global.$primary-black, 0.8);
+      }
     }
 
     ::v-deep .section__container {
       min-height: 100%;
-      padding: 0 50px;
     }
 
     .contact {
       width: 100%;
-
+      padding: 25px 75px;
       &__form {
         grid-template-areas:
           "name name name email email email"

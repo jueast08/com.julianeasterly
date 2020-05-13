@@ -1,6 +1,6 @@
 @mixin fixed-background-overlay(
   $image: "~Assets/abstract_background.png",
-  $opacity: 0.02
+  $opacity: 0.03
 ) {
   &:before {
     content: " ";
