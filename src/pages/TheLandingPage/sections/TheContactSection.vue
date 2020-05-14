@@ -5,63 +5,108 @@
     subtitle="Opportunity, idea for a project, or just want to say hi?"
   >
     <div class="contact">
-      <!-- col-m-6 -->
-      <div class="contact__social-links">
-        <div class="contact__social-links__channel">
-          <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
-          <a href="mailto:contact@julianeasterly.com"
-            >contact@julianeasterly.com</a
-          >
-        </div>
-        <div class="contact__social-links__channel">
-          <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
-          <a href="https://www.linkedin.com/in/julianeasterly/"
-            >linkedin.com/in/julianeasterly/</a
-          >
-        </div>
-      </div>
       <form class="contact__form" @submit.prevent="onSubmit">
-        <!-- @TODO change to a verification functionto be changed -->
         <section class="contact__form__section">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(name)"
+            :class="addValidationModifier(this.formHelpMessages.name.status)"
           >
             <label for="name">Name</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
+            <span>{{ this.formHelpMessages.name.message}}</span>
           </div>
-          <input type="text" name="name" v-model="name" required />
+          <input type="text" name="name" v-model="form.name" />
         </section>
         <section class="contact__form__section">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(email)"
+            :class="addValidationModifier(this.formHelpMessages.email.status)"
           >
             <label for="email">Email</label>
             <span>
-              <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+              <font-awesome-icon
+                v-if="isIncorrect(formHelpMessages.email.status)"
+                :icon="['fas', 'exclamation-circle']"
+                fixed-width
+              />
+              <font-awesome-icon v-else :icon="['fas', 'check-circle']" fixed-width />
             </span>
+            <span>{{ this.formHelpMessages.email.message}}</span>
           </div>
-          <input type="email" name="email" v-model="email" required />
+          <input type="text" name="email" v-model="form.email" />
         </section>
         <section class="contact__form__section textarea">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(message)"
+            :class="addValidationModifier(this.formHelpMessages.message.status)"
           >
             <label for="message">Message</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
+            <span>{{ this.formHelpMessages.message.message}}</span>
           </div>
-          <textarea name="message" v-model="message" minlength="50" required />
+          <textarea name="message" v-model="form.message" />
         </section>
         <div class="contact__form__send">
-          <primary-color-round-button>Send</primary-color-round-button>
+          <vue-recaptcha
+            :sitekey="recaptchaKey"
+            size="invisible"
+            :loadRecaptchaScript="true"
+            @verify="onVerify"
+            @expired="onCaptchaExpired"
+            ref="recaptcha"
+          >
+            <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
+          </vue-recaptcha>
         </div>
       </form>
+      <transition name="fade">
+        <div
+          v-if="showLoaderOverlay"
+          class="contact__form-overlay"
+          :class="!sendSuccess && 'contact__form-overlay--failure'"
+        >
+          <div class="contact__form-overlay__wrapper" ref="contact__form-overlay__wrapper">
+            <div class="contact__form-overlay__wrapper__finished-messsage">
+              <div
+                v-if="sendSuccess"
+                class="contact__form-overlay__wrapper__finished-messsage__content"
+              >
+                <div class="contact__form-overlay__wrapper__finished-messsage__content__icon">
+                  <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+                </div>
+                <br />Message Sent!
+              </div>
+              <div
+                v-else
+                class="contact__form-overlay__wrapper__finished-messsage__content contact__form-overlay__wrapper__finished-messsage__content--failure"
+              >
+                <div class="contact__form-overlay__wrapper__finished-messsage__content__icon">
+                  <font-awesome-icon :icon="['fas', 'exclamation-circle']" fixed-width />
+                </div>
+                <br />Message Not Sent!
+                <div
+                  class="contact__form-overlay__wrapper__finished-messsage__content__retry"
+                  @click="showLoaderOverlay = false"
+                >Try Again?</div>
+              </div>
+            </div>
+            <div class="contact__form-overlay__wrapper__loader">
+              <div class="contact__form-overlay__wrapper__loader__animation">
+                <div class="contact__form-overlay__wrapper__loader__animation__wind">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </base-section>
 </template>
@@ -70,53 +115,170 @@
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-// @TODO clean up how I handle sending mails. this is just a quick temp solution
-import querystring from "querystring"; //@TODO don't forget to uninstall
+import VueRecaptcha from "vue-recaptcha";
+import querystring from "querystring";
 import axios from "axios";
 
+const inputStatusCodes = {
+  EMPTY: 1,
+  INCORRECT: 2,
+  CORRECT: 3
+};
 export default {
   name: "TheContactSection",
   data() {
     return {
-      name: "Julian",
-      email: "julianeasterly@gmail.com",
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum turpis eget eros mattis pretium. Vivamus interdum sed sem a fringilla. Quisque vel molestie libero. Curabitur in pharetra nulla, vel dapibus lorem. Phasellus posuere consequat scelerisque. Nam id lectus tortor. Nullam lacinia urna lorem, pulvinar euismod elit lobortis in. Proin ullamcorper lacus ac varius tempus. Nam vel est risus. Proin mollis suscipit augue ut tincidunt. Nunc pellentesque lorem in sem malesuada, vitae iaculis risus iaculis. Phasellus quis molestie nisl. Vivamus et ultrices metus. Etiam dolor nunc, convallis et sem quis, rhoncus dignissim eros. Integer sed volutpat ex, at iaculis quam. ",
-      scrollObserver: null,
+      recaptchaKey: process.env.VUE_APP_RECAPTCHA,
+      showLoaderOverlay: false,
+      sendSuccess: true,
+      form:
+        process.env.NODE_ENV === "development"
+          ? {
+              name: "Test",
+              email: "test@test.com",
+              message:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum mi tempus gravida elementum. Duis sollicitudin neque sit amet malesuada egestas. Aenean iaculis lectus in turpis egestas congue. Maecenas at neque orci. Nulla elementum rhoncus elementum. Nunc porttitor rhoncus sodales. Curabitur orci ex, interdum ac justo eget, rutrum sagittis augue. Morbi metus purus, fermentum in urna sed, gravida pulvinar odio. Etiam consequat euismod interdum. Suspendisse eleifend eros id leo ullamcorper, tempor fringilla metus bibendum. Etiam facilisis velit nec blandit rutrum. Morbi vehicula scelerisque risus non tincidunt. Sed egestas imperdiet condimentum. Praesent volutpat sagittis sapien, sit amet fermentum leo aliquet ac. ",
+              recaptcha: null
+            }
+          : {
+              name: "",
+              email: "",
+              message: "",
+              recaptcha: null
+            },
+      formHelpMessages: {
+        name: {
+          status: inputStatusCodes.EMPTY,
+          message: "Be sure to add your name"
+        },
+        email: {
+          status: inputStatusCodes.EMPTY,
+          message: "Make sure to double check your email"
+        },
+        message: {
+          status: inputStatusCodes.EMPTY,
+          message: "Let me know what you want to say!"
+        }
+      },
+      scrollObserver: null
     };
   },
-  components: { BaseSection, PrimaryColorRoundButton },
+  components: { BaseSection, PrimaryColorRoundButton, VueRecaptcha },
   methods: {
-    addClassModifierIfStringNotEmpty(string) {
-      return string.trim() !== "" && "contact__form__section__label--filled";
+    addValidationModifier(code) {
+      let root = "contact__form__section__label";
+      if (code === inputStatusCodes.INCORRECT) {
+        return root + "--invalid";
+      }
+      if (code === inputStatusCodes.CORRECT) {
+        return root + "--valid";
+      }
+      return "";
     },
-    onSubmit() {
-      //@TODO finish the email portion of the mail
-      axios
-        .post("http://localhost/sendmail.php", querystring.stringify(this.form))
-        .then((res) => {
-          console.log("here", res.status);
-        })
-        .catch((error) => {
-          console.log("here", error);
-        })
-        .then(function() {
-          console.log("finally");
-        });
+    isIncorrect(code) {
+      return code === inputStatusCodes.INCORRECT;
     },
-    showContactFormIfAvailable() {
-      if (process.env.VUE_APP_SHOW_CONTACT_FORM === "true") {
-        document.getElementsByClassName(
-          "contact__social-links"
-        )[0].style.display = "none";
+    validate() {
+      this.validateName();
+      this.validateEmail();
+      this.validateMessage();
+
+      return (
+        this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.message.status === inputStatusCodes.CORRECT
+      );
+    },
+    validateName() {
+      if (this.form.name.trim() === "") {
+        this.formHelpMessages.name.message = "Be sure to add your name";
+        this.formHelpMessages.name.status = inputStatusCodes.EMPTY;
       } else {
-        document.getElementsByClassName("contact__form")[0].style.display =
-          "none";
+        this.formHelpMessages.name.message = "Name looks good!";
+        this.formHelpMessages.name.status = inputStatusCodes.CORRECT;
       }
     },
+    validateMessage() {
+      if (this.form.message.trim() === "") {
+        this.formHelpMessages.message.message =
+          "Let me know what you want to say!";
+        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+      } else if (this.form.message.trim().length < 50) {
+        this.formHelpMessages.message.message =
+          "Write " +
+          (50 - this.form.message.trim().length) +
+          " more characters!";
+        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+      } else {
+        this.formHelpMessages.message.message = "Message looks good!";
+        this.formHelpMessages.message.status = inputStatusCodes.CORRECT;
+      }
+    },
+    validateEmail() {
+      var re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (this.form.email.trim() === "") {
+        this.formHelpMessages.email.message =
+          "Make sure to double check your email";
+        this.formHelpMessages.email.status = inputStatusCodes.EMPTY;
+      } else if (!re.test(this.form.email.trim())) {
+        this.formHelpMessages.email.message =
+          "Oh, oh. Be sure to check your email.";
+        this.formHelpMessages.email.status = inputStatusCodes.INCORRECT;
+      } else {
+        this.formHelpMessages.email.message = "Email looks good!";
+        this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
+      }
+    },
+    onVerify(response) {
+      this.form.recaptcha = response;
+      if (process.env.NODE_ENV === "development") {
+        console.log(response);
+      }
+      this.onSubmit();
+    },
+    onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
+    },
+    onSubmit() {
+      this.showLoaderOverlay = true;
+      if (process.env.NODE_ENV === "development") {
+        console.log("sending to", process.env.VUE_APP_API + "/send");
+      }
+      axios
+        .post(
+          process.env.VUE_APP_API + "/send",
+          querystring.stringify(this.form)
+        )
+        .then(res => {
+          if (res.request.status === 200) {
+            if (process.env.NODE_ENV === "development") {
+              console.log(res);
+            }
+            this.sendSuccess = true;
+          }
+        })
+        .catch(error => {
+          if (process.env.NODE_ENV === "development") {
+            console.log(error);
+          }
+          this.sendSuccess = false;
+          this.$refs["contact__form-overlay__wrapper"].classList.add(
+            "contact__form-overlay__wrapper--finished"
+          );
+        })
+        .then(() => {
+          this.onCaptchaExpired();
+          this.$refs["contact__form-overlay__wrapper"].classList.add(
+            "contact__form-overlay__wrapper--finished"
+          );
+        });
+    },
+
+    hideShowLowerOverlay() {
+      this.showLoaderOverlay = false;
+    }
   },
   mounted() {
-    this.showContactFormIfAvailable();
     let element = document.querySelector(".contact");
     this.observers = new IntersectObserverHelpersIterator(
       element,
@@ -129,7 +291,7 @@ export default {
   },
   beforeDestroy() {
     this.observers.disconnectAll();
-  },
+  }
 };
 </script>
 
@@ -184,128 +346,242 @@ export default {
       z-index: 3;
     }
   }
+}
 
-  .contact {
-    flex-grow: 1;
-    background-color: global.$primary-white;
-    padding: 25px;
-    margin: 0 auto;
-    @include global.border-box;
+.contact {
+  flex-grow: 1;
+  background-color: global.$primary-white;
+  padding: 25px;
+  margin: 0 auto;
+  @include global.border-box;
+  height: 100%;
+  @include global.fade-in-from-bottom-class-modifier;
+
+  &__form {
+    position: relative;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+      "name "
+      "email "
+      "message "
+      "button ";
     height: 100%;
-    @include global.fade-in-from-bottom-class-modifier;
+    max-width: 100%;
+    width: 100%;
 
-    &__social-links {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      height: 100%;
-      &__channel {
-        border-bottom: 1px solid rgba(global.$primary-black, 0.5);
-        font-size: 25px;
-        color: global.$primary-color;
-
-        a {
+    &__section {
+      &__label {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        label {
+          @include global.p-font($weight: 700);
           color: global.$primary-black;
-          margin-left: 10px;
-          text-decoration: none;
-          @include global.p-font(
-            $size-s: 12px,
-            $size-m: 18px,
-            $size-l: 18px,
-            $size-xl: 18px
-          );
+          margin-right: 5px;
         }
-        line-height: 50px;
+        span {
+          color: rgba(global.$primary-black, 0.25);
+          font-size: 15px;
+          transition: color 0.5s ease-in-out;
+          &:last-child {
+            @include global.p-font($weight: 500);
+          }
+        }
+
+        &--invalid {
+          span {
+            color: global.$error-color;
+          }
+        }
+
+        &--valid {
+          span {
+            color: global.$primary-color;
+          }
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border-width: 1px;
+        border-radius: 2px;
+        border-style: solid;
+        border-color: rgba(global.$primary-black, 0.25);
+        padding: 10px;
+        @include global.border-box;
+        @include global.p-font(
+          $size-s: 12px,
+          $size-m: 12px,
+          $size-l: 12px,
+          $size-xl: 12px
+        );
+        color: global.$primary-gray;
+        transition: border 0.5s ease-in-out;
+
+        &:focus {
+          outline: none;
+          border-color: global.$primary-color;
+          border-width: 2px;
+        }
+      }
+
+      input {
+        height: 50px;
+      }
+
+      &:nth-child(1) {
+        grid-area: name;
+      }
+      &:nth-child(2) {
+        grid-area: email;
+      }
+      &:nth-child(3) {
+        grid-area: message;
       }
     }
-    &__form {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-areas:
-        "name "
-        "email "
-        "message "
-        "button ";
-      height: 100%;
-      max-width: 100%;
-      width: 100%;
 
-      &__section {
-        &__label {
+    .textarea {
+      textarea {
+        height: 150px;
+      }
+    }
+    &__send {
+      text-align: center;
+      grid-area: button;
+    }
+  }
+
+  //@TODO refactor
+  &__form-overlay {
+    position: absolute;
+    z-index: 98;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: global.$primary-color;
+    transition: background 0.5s ease-in-out;
+
+    overflow: hidden;
+
+    &--failure {
+      background: global.$error-color;
+    }
+    &__wrapper {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      white-space: nowrap;
+      @include global.border-box;
+      transition: transform 1s ease-in-out;
+      transform: translateX(-100%);
+
+      &__finished-messsage {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        vertical-align: top;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: transform 1s ease-in-out, opacity 2s ease-in-out;
+        transition-delay: 1s;
+        &__content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          height: 100%;
+          text-align: center;
+          @include global.h3-font;
+          color: global.$primary-white;
+
+          &__icon {
+            font-size: 2em;
+          }
+          &__retry {
+            margin-top: 50px;
+            cursor: pointer;
+            @include global.p-font;
+          }
+        }
+      }
+
+      &__loader {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        transition: opacity 1s ease-in-out;
+
+        &__animation {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+          height: 80px;
+          font-size: 80px;
           display: flex;
           align-items: center;
-          label {
-            @include global.p-font($weight: 700);
-            color: global.$primary-black;
-            margin-right: 5px;
-          }
-          span {
-            color: rgba(global.$primary-black, 0.25);
-            font-size: 15px;
-            transition: color 0.5s ease-in-out;
-          }
+          justify-content: center;
+          color: global.$primary-white;
 
-          &--filled {
-            svg {
-              color: global.$primary-color;
+          &__wind {
+            width: 50px;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-end;
+            div {
+              height: 5px;
+              background: white;
+              width: 25px;
+              border-radius: 5px;
+              animation: flying-email_outer-wind 0.75s linear infinite alternate;
+              &:nth-child(2) {
+                animation-direction: alternate-reverse;
+                width: 50px;
+                background: white;
+              }
+            }
+          }
+          @include global.keyframes(flying-email_outer-wind) {
+            0% {
+              width: 25px;
+            }
+            100% {
+              width: 100%;
             }
           }
         }
-
-        input,
-        textarea {
-          width: 100%;
-          border-width: 1px;
-          border-radius: 2px;
-          border-style: solid;
-          border-color: rgba(global.$primary-black, 0.25);
-          padding: 10px;
-          @include global.border-box;
-          @include global.p-font(
-            $size-s: 12px,
-            $size-m: 12px,
-            $size-l: 12px,
-            $size-xl: 12px
-          );
-          color: global.$primary-gray;
-          transition: border 0.5s ease-in-out;
-
-          &:focus {
-            outline: none;
-            border-color: global.$primary-color;
-            border-width: 2px;
-          }
-        }
-
-        input {
-          height: 50px;
-        }
-
-        &:nth-child(1) {
-          grid-area: name;
-        }
-        &:nth-child(2) {
-          grid-area: email;
-        }
-        &:nth-child(3) {
-          grid-area: message;
-        }
       }
 
-      .textarea {
-        textarea {
-          height: 150px;
-        }
+      &--finished {
+        transform: translateX(0);
       }
-      &__send {
-        text-align: center;
-        grid-area: button;
+      &--finished & {
+        &__finished-messsage {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        &__loader {
+          opacity: 0;
+        }
       }
     }
   }
 }
 
-@include global.adapt-to-screen("m") {
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@include global.adapt-to-screen("l") {
   #contact {
     padding: 0;
     display: flex;
@@ -342,24 +618,6 @@ export default {
     .contact {
       width: 100%;
       padding: 25px 75px;
-      &__form {
-        grid-template-areas:
-          "name name name email email email"
-          "message message message message message message"
-          "button button button button button button";
-
-        &__section {
-          &__label {
-          }
-        }
-
-        .textarea {
-          textarea {
-            flex-grow: 1;
-            max-height: 150px;
-          }
-        }
-      }
     }
   }
 }
