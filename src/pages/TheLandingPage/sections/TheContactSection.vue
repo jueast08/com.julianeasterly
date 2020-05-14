@@ -9,15 +9,11 @@
       <div class="contact__social-links">
         <div class="contact__social-links__channel">
           <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
-          <a href="mailto:contact@julianeasterly.com"
-            >contact@julianeasterly.com</a
-          >
+          <a href="mailto:contact@julianeasterly.com">contact@julianeasterly.com</a>
         </div>
         <div class="contact__social-links__channel">
           <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
-          <a href="https://www.linkedin.com/in/julianeasterly/"
-            >linkedin.com/in/julianeasterly/</a
-          >
+          <a href="https://www.linkedin.com/in/julianeasterly/">linkedin.com/in/julianeasterly/</a>
         </div>
       </div>
       <form class="contact__form" @submit.prevent="onSubmit">
@@ -25,43 +21,58 @@
         <section class="contact__form__section">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(name)"
+            :class="addClassModifierIfStringNotEmpty(form.name)"
           >
             <label for="name">Name</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
           </div>
-          <input type="text" name="name" v-model="name" required />
+          <input type="text" name="name" v-model="form.name" required />
         </section>
         <section class="contact__form__section">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(email)"
+            :class="addClassModifierIfStringNotEmpty(form.email)"
           >
             <label for="email">Email</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
           </div>
-          <input type="email" name="email" v-model="email" required />
+          <input type="email" name="email" v-model="form.email" required />
         </section>
         <section class="contact__form__section textarea">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(message)"
+            :class="addClassModifierIfStringNotEmpty(form.message)"
           >
             <label for="message">Message</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
           </div>
-          <textarea name="message" v-model="message" minlength="50" required />
+          <textarea name="message" v-model="form.message" minlength="50" required />
         </section>
         <div class="contact__form__send">
           <primary-color-round-button>Send</primary-color-round-button>
         </div>
       </form>
+      <div class="contact__form-overlay">
+        <div class="contact__form-overlay__wrapper">
+          <div class="contact__form-overlay__wrapper__finished-messsage">Hello</div>
+          <div class="contact__form-overlay__wrapper__loader">
+            <div class="contact__form-overlay__wrapper__loader__animation">
+              <div class="contact__form-overlay__wrapper__loader__animation__wind">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </base-section>
 </template>
@@ -78,11 +89,13 @@ export default {
   name: "TheContactSection",
   data() {
     return {
-      name: "Julian",
-      email: "julianeasterly@gmail.com",
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum turpis eget eros mattis pretium. Vivamus interdum sed sem a fringilla. Quisque vel molestie libero. Curabitur in pharetra nulla, vel dapibus lorem. Phasellus posuere consequat scelerisque. Nam id lectus tortor. Nullam lacinia urna lorem, pulvinar euismod elit lobortis in. Proin ullamcorper lacus ac varius tempus. Nam vel est risus. Proin mollis suscipit augue ut tincidunt. Nunc pellentesque lorem in sem malesuada, vitae iaculis risus iaculis. Phasellus quis molestie nisl. Vivamus et ultrices metus. Etiam dolor nunc, convallis et sem quis, rhoncus dignissim eros. Integer sed volutpat ex, at iaculis quam. ",
-      scrollObserver: null,
+      form: {
+        name: "Julian",
+        email: "julianeasterly@gmail.com",
+        message:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum turpis eget eros mattis pretium. Vivamus interdum sed sem a fringilla. Quisque vel molestie libero. Curabitur in pharetra nulla, vel dapibus lorem. Phasellus posuere consequat scelerisque. Nam id lectus tortor. Nullam lacinia urna lorem, pulvinar euismod elit lobortis in. Proin ullamcorper lacus ac varius tempus. Nam vel est risus. Proin mollis suscipit augue ut tincidunt. Nunc pellentesque lorem in sem malesuada, vitae iaculis risus iaculis. Phasellus quis molestie nisl. Vivamus et ultrices metus. Etiam dolor nunc, convallis et sem quis, rhoncus dignissim eros. Integer sed volutpat ex, at iaculis quam. "
+      },
+      scrollObserver: null
     };
   },
   components: { BaseSection, PrimaryColorRoundButton },
@@ -93,11 +106,14 @@ export default {
     onSubmit() {
       //@TODO finish the email portion of the mail
       axios
-        .post("http://localhost/sendmail.php", querystring.stringify(this.form))
-        .then((res) => {
-          console.log("here", res.status);
+        .post(
+          process.env.VUE_APP_API + "/send",
+          querystring.stringify(this.form)
+        )
+        .then(res => {
+          console.log("here", res);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log("here", error);
         })
         .then(function() {
@@ -113,7 +129,7 @@ export default {
         document.getElementsByClassName("contact__form")[0].style.display =
           "none";
       }
-    },
+    }
   },
   mounted() {
     this.showContactFormIfAvailable();
@@ -129,7 +145,7 @@ export default {
   },
   beforeDestroy() {
     this.observers.disconnectAll();
-  },
+  }
 };
 </script>
 
@@ -219,6 +235,7 @@ export default {
       }
     }
     &__form {
+      position: relative;
       display: grid;
       grid-gap: 10px;
       grid-template-areas:
@@ -300,6 +317,94 @@ export default {
       &__send {
         text-align: center;
         grid-area: button;
+      }
+    }
+
+    &__form-overlay {
+      position: absolute;
+      z-index: 98;
+      top: 0;
+      left: 0;
+      //display: flex;
+      //justify-content: center;
+      //align-items: center;
+      //width: auto;
+      height: 100%;
+      width: 100%;
+      background: global.$primary-color;
+      overflow: hidden;
+      &__wrapper {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        white-space: nowrap;
+        @include global.border-box;
+        transition: transform 1s ease-in-out;
+        transform: translateX(-100%);
+        &--exit {
+          transform: translateX(0);
+          &__loader {
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+          }
+        }
+
+        &__finished-messsage {
+          display: inline-block;
+          background: red;
+          height: 100%;
+          width: 100%;
+          vertical-align: top;
+        }
+
+        &__loader {
+          display: inline-block;
+          height: 100%;
+          width: 100%;
+
+          &__animation {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 80px;
+            font-size: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: global.$primary-white;
+
+            &__wind {
+              width: 50px;
+              height: 50%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-around;
+              align-items: flex-end;
+              div {
+                height: 5px;
+                background: white;
+                width: 25px;
+                border-radius: 5px;
+                animation: flying-email_outer-wind 0.75s linear infinite
+                  alternate;
+                &:nth-child(2) {
+                  animation-direction: alternate-reverse;
+                  width: 50px;
+                  background: white;
+                }
+              }
+            }
+            @include global.keyframes(flying-email_outer-wind) {
+              0% {
+                width: 25px;
+              }
+              100% {
+                width: 100%;
+              }
+            }
+          }
+        }
       }
     }
   }
