@@ -14,8 +14,8 @@
             <label for="name">Name</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
-              {{ this.formHelpMessages.name.message}}
             </span>
+            <span>{{ this.formHelpMessages.name.message}}</span>
           </div>
           <input type="text" name="name" v-model="form.name" />
         </section>
@@ -32,8 +32,8 @@
                 fixed-width
               />
               <font-awesome-icon v-else :icon="['fas', 'check-circle']" fixed-width />
-              {{ this.formHelpMessages.email.message}}
             </span>
+            <span>{{ this.formHelpMessages.email.message}}</span>
           </div>
           <input type="text" name="email" v-model="form.email" />
         </section>
@@ -45,12 +45,19 @@
             <label for="message">Message</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
-              {{ this.formHelpMessages.message.message}}
             </span>
+            <span>{{ this.formHelpMessages.message.message}}</span>
           </div>
           <textarea name="message" v-model="form.message" />
         </section>
         <div class="contact__form__send">
+          <div
+            class="g-recaptcha"
+            data-sitekey="_your_site_key_"
+            data-callback="onSubmit"
+            data-size="invisible"
+          ></div>
+
           <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
         </div>
       </form>
@@ -160,10 +167,12 @@ export default {
       this.validateName();
       this.validateEmail();
       this.validateMessage();
-      
-      return (this.formHelpMessages.name.status === inputStatusCodes.CORRECT) && 
-      (this.formHelpMessages.email.status === inputStatusCodes.CORRECT) && 
-      (this.formHelpMessages.message.status === inputStatusCodes.CORRECT);
+
+      return (
+        this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.message.status === inputStatusCodes.CORRECT
+      );
     },
     validateName() {
       if (this.form.name.trim() === "") {
@@ -339,6 +348,7 @@ export default {
       &__label {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         label {
           @include global.p-font($weight: 700);
           color: global.$primary-black;
@@ -346,9 +356,11 @@ export default {
         }
         span {
           color: rgba(global.$primary-black, 0.25);
-          @include global.p-font($weight: 500);
           font-size: 15px;
           transition: color 0.5s ease-in-out;
+          &:last-child {
+            @include global.p-font($weight: 500);
+          }
         }
 
         &--invalid {
@@ -543,7 +555,7 @@ export default {
   opacity: 0;
 }
 
-@include global.adapt-to-screen("m") {
+@include global.adapt-to-screen("l") {
   #contact {
     padding: 0;
     display: flex;
@@ -580,24 +592,6 @@ export default {
     .contact {
       width: 100%;
       padding: 25px 75px;
-      &__form {
-        grid-template-areas:
-          "name name name email email email"
-          "message message message message message message"
-          "button button button button button button";
-
-        &__section {
-          &__label {
-          }
-        }
-
-        .textarea {
-          textarea {
-            flex-grow: 1;
-            max-height: 150px;
-          }
-        }
-      }
     }
   }
 }
