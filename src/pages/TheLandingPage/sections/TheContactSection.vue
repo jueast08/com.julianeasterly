@@ -51,7 +51,16 @@
           <textarea name="message" v-model="form.message" />
         </section>
         <div class="contact__form__send">
-          <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
+          <vue-recaptcha
+            :sitekey="recaptchaKey"
+            size="invisible"
+            :loadRecaptchaScript="true"
+            @verify="onVerify"
+            @expired="onCaptchaExpired"
+            ref="recaptcha"
+          >
+            <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
+          </vue-recaptcha>
         </div>
       </form>
       <transition name="fade">
@@ -106,8 +115,10 @@
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import VueRecaptcha from "vue-recaptcha";
 import querystring from "querystring";
 import axios from "axios";
+
 const inputStatusCodes = {
   EMPTY: 1,
   INCORRECT: 2,
@@ -117,13 +128,24 @@ export default {
   name: "TheContactSection",
   data() {
     return {
+      recaptchaKey: process.env.VUE_APP_RECAPTCHA,
       showLoaderOverlay: false,
       sendSuccess: true,
-      form: {
-        name: "",
-        email: "",
-        message: ""
-      },
+      form:
+        process.env.NODE_ENV === "development"
+          ? {
+              name: "Test",
+              email: "test@test.com",
+              message:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum mi tempus gravida elementum. Duis sollicitudin neque sit amet malesuada egestas. Aenean iaculis lectus in turpis egestas congue. Maecenas at neque orci. Nulla elementum rhoncus elementum. Nunc porttitor rhoncus sodales. Curabitur orci ex, interdum ac justo eget, rutrum sagittis augue. Morbi metus purus, fermentum in urna sed, gravida pulvinar odio. Etiam consequat euismod interdum. Suspendisse eleifend eros id leo ullamcorper, tempor fringilla metus bibendum. Etiam facilisis velit nec blandit rutrum. Morbi vehicula scelerisque risus non tincidunt. Sed egestas imperdiet condimentum. Praesent volutpat sagittis sapien, sit amet fermentum leo aliquet ac. ",
+              recaptcha: null
+            }
+          : {
+              name: "",
+              email: "",
+              message: "",
+              recaptcha: null
+            },
       formHelpMessages: {
         name: {
           status: inputStatusCodes.EMPTY,
@@ -141,7 +163,7 @@ export default {
       scrollObserver: null
     };
   },
-  components: { BaseSection, PrimaryColorRoundButton },
+  components: { BaseSection, PrimaryColorRoundButton, VueRecaptcha },
   methods: {
     addValidationModifier(code) {
       let root = "contact__form__section__label";
@@ -207,6 +229,16 @@ export default {
         this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
       }
     },
+    onVerify(response) {
+      this.form.recaptcha = response;
+      if (process.env.NODE_ENV === "development") {
+        console.log(response);
+      }
+      this.onSubmit();
+    },
+    onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
+    },
     onSubmit() {
       this.showLoaderOverlay = true;
       if (process.env.NODE_ENV === "development") {
@@ -235,6 +267,7 @@ export default {
           );
         })
         .then(() => {
+          this.onCaptchaExpired();
           this.$refs["contact__form-overlay__wrapper"].classList.add(
             "contact__form-overlay__wrapper--finished"
           );
