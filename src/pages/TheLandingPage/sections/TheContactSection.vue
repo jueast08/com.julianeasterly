@@ -58,21 +58,50 @@
           <primary-color-round-button>Send</primary-color-round-button>
         </div>
       </form>
-      <div class="contact__form-overlay">
-        <div class="contact__form-overlay__wrapper">
-          <div class="contact__form-overlay__wrapper__finished-messsage">Hello</div>
-          <div class="contact__form-overlay__wrapper__loader">
-            <div class="contact__form-overlay__wrapper__loader__animation">
-              <div class="contact__form-overlay__wrapper__loader__animation__wind">
-                <div></div>
-                <div></div>
-                <div></div>
+      <transition name="fade">
+        <div
+          v-if="showLoaderOverlay"
+          class="contact__form-overlay"
+          :class="!sendSuccess && 'contact__form-overlay--failure'"
+        >
+          <div class="contact__form-overlay__wrapper" ref="contact__form-overlay__wrapper">
+            <div class="contact__form-overlay__wrapper__finished-messsage">
+              <div
+                v-if="sendSuccess"
+                class="contact__form-overlay__wrapper__finished-messsage__content"
+              >
+                <div class="contact__form-overlay__wrapper__finished-messsage__content__icon">
+                  <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+                </div>
+                <br />Message Sent!
               </div>
-              <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
+              <div
+                v-else
+                class="contact__form-overlay__wrapper__finished-messsage__content contact__form-overlay__wrapper__finished-messsage__content--failure"
+              >
+                <div class="contact__form-overlay__wrapper__finished-messsage__content__icon">
+                  <font-awesome-icon :icon="['fas', 'exclamation-circle']" fixed-width />
+                </div>
+                <br />Message Not Sent!
+                <div
+                  class="contact__form-overlay__wrapper__finished-messsage__content__retry"
+                  @click="showLoaderOverlay = false"
+                >Try Again?</div>
+              </div>
+            </div>
+            <div class="contact__form-overlay__wrapper__loader">
+              <div class="contact__form-overlay__wrapper__loader__animation">
+                <div class="contact__form-overlay__wrapper__loader__animation__wind">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </base-section>
 </template>
@@ -81,14 +110,15 @@
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-// @TODO clean up how I handle sending mails. this is just a quick temp solution
-import querystring from "querystring"; //@TODO don't forget to uninstall
+import querystring from "querystring";
 import axios from "axios";
 
 export default {
   name: "TheContactSection",
   data() {
     return {
+      showLoaderOverlay: false,
+      sendSuccess: true,
       form: {
         name: "Julian",
         email: "julianeasterly@gmail.com",
@@ -104,20 +134,27 @@ export default {
       return string.trim() !== "" && "contact__form__section__label--filled";
     },
     onSubmit() {
-      //@TODO finish the email portion of the mail
+      this.showLoaderOverlay = true;
       axios
         .post(
           process.env.VUE_APP_API + "/send",
           querystring.stringify(this.form)
         )
         .then(res => {
-          console.log("here", res);
+          if (res.request.status === 200) {
+            this.sendSuccess = true;
+          }
         })
-        .catch(error => {
-          console.log("here", error);
+        .catch(() => {
+          this.sendSuccess = false;
+          this.$refs["contact__form-overlay__wrapper"].classList.add(
+            "contact__form-overlay__wrapper--finished"
+          );
         })
-        .then(function() {
-          console.log("finally");
+        .then(() => {
+          this.$refs["contact__form-overlay__wrapper"].classList.add(
+            "contact__form-overlay__wrapper--finished"
+          );
         });
     },
     showContactFormIfAvailable() {
@@ -129,6 +166,9 @@ export default {
         document.getElementsByClassName("contact__form")[0].style.display =
           "none";
       }
+    },
+    hideShowLowerOverlay() {
+      this.showLoaderOverlay = false;
     }
   },
   mounted() {
@@ -200,214 +240,253 @@ export default {
       z-index: 3;
     }
   }
+}
 
-  .contact {
-    flex-grow: 1;
-    background-color: global.$primary-white;
-    padding: 25px;
-    margin: 0 auto;
-    @include global.border-box;
+.contact {
+  flex-grow: 1;
+  background-color: global.$primary-white;
+  padding: 25px;
+  margin: 0 auto;
+  @include global.border-box;
+  height: 100%;
+  @include global.fade-in-from-bottom-class-modifier;
+
+  &__social-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     height: 100%;
-    @include global.fade-in-from-bottom-class-modifier;
+    &__channel {
+      border-bottom: 1px solid rgba(global.$primary-black, 0.5);
+      font-size: 25px;
+      color: global.$primary-color;
 
-    &__social-links {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      height: 100%;
-      &__channel {
-        border-bottom: 1px solid rgba(global.$primary-black, 0.5);
-        font-size: 25px;
-        color: global.$primary-color;
+      a {
+        color: global.$primary-black;
+        margin-left: 10px;
+        text-decoration: none;
+        @include global.p-font(
+          $size-s: 12px,
+          $size-m: 18px,
+          $size-l: 18px,
+          $size-xl: 18px
+        );
+      }
+      line-height: 50px;
+    }
+  }
+  &__form {
+    position: relative;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+      "name "
+      "email "
+      "message "
+      "button ";
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
 
-        a {
+    &__section {
+      &__label {
+        display: flex;
+        align-items: center;
+        label {
+          @include global.p-font($weight: 700);
           color: global.$primary-black;
-          margin-left: 10px;
-          text-decoration: none;
-          @include global.p-font(
-            $size-s: 12px,
-            $size-m: 18px,
-            $size-l: 18px,
-            $size-xl: 18px
-          );
+          margin-right: 5px;
         }
-        line-height: 50px;
+        span {
+          color: rgba(global.$primary-black, 0.25);
+          font-size: 15px;
+          transition: color 0.5s ease-in-out;
+        }
+
+        &--filled {
+          svg {
+            color: global.$primary-color;
+          }
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border-width: 1px;
+        border-radius: 2px;
+        border-style: solid;
+        border-color: rgba(global.$primary-black, 0.25);
+        padding: 10px;
+        @include global.border-box;
+        @include global.p-font(
+          $size-s: 12px,
+          $size-m: 12px,
+          $size-l: 12px,
+          $size-xl: 12px
+        );
+        color: global.$primary-gray;
+        transition: border 0.5s ease-in-out;
+
+        &:focus {
+          outline: none;
+          border-color: global.$primary-color;
+          border-width: 2px;
+        }
+      }
+
+      input {
+        height: 50px;
+      }
+
+      &:nth-child(1) {
+        grid-area: name;
+      }
+      &:nth-child(2) {
+        grid-area: email;
+      }
+      &:nth-child(3) {
+        grid-area: message;
       }
     }
-    &__form {
+
+    .textarea {
+      textarea {
+        height: 150px;
+      }
+    }
+    &__send {
+      text-align: center;
+      grid-area: button;
+    }
+  }
+
+  //@TODO refactor
+  &__form-overlay {
+    position: absolute;
+    z-index: 98;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: global.$primary-color;
+    transition: background 0.5s ease-in-out;
+
+    overflow: hidden;
+
+    &--failure {
+      background: global.$error-color;
+    }
+    &__wrapper {
       position: relative;
-      display: grid;
-      grid-gap: 10px;
-      grid-template-areas:
-        "name "
-        "email "
-        "message "
-        "button ";
-      height: 100%;
-      max-width: 100%;
-      width: 100%;
-
-      &__section {
-        &__label {
-          display: flex;
-          align-items: center;
-          label {
-            @include global.p-font($weight: 700);
-            color: global.$primary-black;
-            margin-right: 5px;
-          }
-          span {
-            color: rgba(global.$primary-black, 0.25);
-            font-size: 15px;
-            transition: color 0.5s ease-in-out;
-          }
-
-          &--filled {
-            svg {
-              color: global.$primary-color;
-            }
-          }
-        }
-
-        input,
-        textarea {
-          width: 100%;
-          border-width: 1px;
-          border-radius: 2px;
-          border-style: solid;
-          border-color: rgba(global.$primary-black, 0.25);
-          padding: 10px;
-          @include global.border-box;
-          @include global.p-font(
-            $size-s: 12px,
-            $size-m: 12px,
-            $size-l: 12px,
-            $size-xl: 12px
-          );
-          color: global.$primary-gray;
-          transition: border 0.5s ease-in-out;
-
-          &:focus {
-            outline: none;
-            border-color: global.$primary-color;
-            border-width: 2px;
-          }
-        }
-
-        input {
-          height: 50px;
-        }
-
-        &:nth-child(1) {
-          grid-area: name;
-        }
-        &:nth-child(2) {
-          grid-area: email;
-        }
-        &:nth-child(3) {
-          grid-area: message;
-        }
-      }
-
-      .textarea {
-        textarea {
-          height: 150px;
-        }
-      }
-      &__send {
-        text-align: center;
-        grid-area: button;
-      }
-    }
-
-    &__form-overlay {
-      position: absolute;
-      z-index: 98;
-      top: 0;
-      left: 0;
-      //display: flex;
-      //justify-content: center;
-      //align-items: center;
-      //width: auto;
       height: 100%;
       width: 100%;
-      background: global.$primary-color;
-      overflow: hidden;
-      &__wrapper {
-        position: relative;
+      white-space: nowrap;
+      @include global.border-box;
+      transition: transform 1s ease-in-out;
+      transform: translateX(-100%);
+
+      &__finished-messsage {
+        display: inline-block;
         height: 100%;
         width: 100%;
-        white-space: nowrap;
-        @include global.border-box;
-        transition: transform 1s ease-in-out;
-        transform: translateX(-100%);
-        &--exit {
-          transform: translateX(0);
-          &__loader {
-            transition: opacity 1s ease-in-out;
-            opacity: 0;
+        vertical-align: top;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: transform 1s ease-in-out, opacity 2s ease-in-out;
+        transition-delay: 1s;
+        &__content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          height: 100%;
+          text-align: center;
+          @include global.h3-font;
+          color: global.$primary-white;
+
+          &__icon {
+            font-size: 2em;
+          }
+          &__retry {
+            margin-top: 50px;
+            cursor: pointer;
+            @include global.p-font;
           }
         }
+      }
 
-        &__finished-messsage {
-          display: inline-block;
-          background: red;
-          height: 100%;
+      &__loader {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        transition: opacity 1s ease-in-out;
+
+        &__animation {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
           width: 100%;
-          vertical-align: top;
-        }
+          height: 80px;
+          font-size: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: global.$primary-white;
 
-        &__loader {
-          display: inline-block;
-          height: 100%;
-          width: 100%;
-
-          &__animation {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            height: 80px;
-            font-size: 80px;
+          &__wind {
+            width: 50px;
+            height: 50%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: global.$primary-white;
-
-            &__wind {
-              width: 50px;
-              height: 50%;
-              display: flex;
-              flex-direction: column;
-              justify-content: space-around;
-              align-items: flex-end;
-              div {
-                height: 5px;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-end;
+            div {
+              height: 5px;
+              background: white;
+              width: 25px;
+              border-radius: 5px;
+              animation: flying-email_outer-wind 0.75s linear infinite alternate;
+              &:nth-child(2) {
+                animation-direction: alternate-reverse;
+                width: 50px;
                 background: white;
-                width: 25px;
-                border-radius: 5px;
-                animation: flying-email_outer-wind 0.75s linear infinite
-                  alternate;
-                &:nth-child(2) {
-                  animation-direction: alternate-reverse;
-                  width: 50px;
-                  background: white;
-                }
-              }
-            }
-            @include global.keyframes(flying-email_outer-wind) {
-              0% {
-                width: 25px;
-              }
-              100% {
-                width: 100%;
               }
             }
           }
+          @include global.keyframes(flying-email_outer-wind) {
+            0% {
+              width: 25px;
+            }
+            100% {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      &--finished {
+        transform: translateX(0);
+      }
+      &--finished & {
+        &__finished-messsage {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        &__loader {
+          opacity: 0;
         }
       }
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @include global.adapt-to-screen("m") {
