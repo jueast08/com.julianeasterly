@@ -20,7 +20,7 @@ export default {
       if (this.isInternalPageElementWithId) {
         scrollToId(this.href.substring(1));
       } else {
-        window.location.href = this.href;
+        window.open(this.href, "_blank");
       }
     },
     scrollToElement() {
