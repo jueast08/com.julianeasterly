@@ -1,12 +1,19 @@
 <template>
-  <button @click="$emit('click', $event)">
+  <button @click="$emit('click', $event)" :disabled="disabled">
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: "BaseRoundButton"
+  name: "BaseRoundButton",
+  props: {
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  }
 };
 </script>
 

@@ -5,57 +5,53 @@
     subtitle="Opportunity, idea for a project, or just want to say hi?"
   >
     <div class="contact">
-      <!-- col-m-6 -->
-      <div class="contact__social-links">
-        <div class="contact__social-links__channel">
-          <font-awesome-icon :icon="['fas', 'envelope']" fixed-width />
-          <a href="mailto:contact@julianeasterly.com">contact@julianeasterly.com</a>
-        </div>
-        <div class="contact__social-links__channel">
-          <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
-          <a href="https://www.linkedin.com/in/julianeasterly/">linkedin.com/in/julianeasterly/</a>
-        </div>
-      </div>
       <form class="contact__form" @submit.prevent="onSubmit">
-        <!-- @TODO change to a verification functionto be changed -->
         <section class="contact__form__section">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(form.name)"
+            :class="addValidationModifier(this.formHelpMessages.name.status)"
           >
             <label for="name">Name</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+              {{ this.formHelpMessages.name.message}}
             </span>
           </div>
-          <input type="text" name="name" v-model="form.name" required />
+          <input type="text" name="name" v-model="form.name" />
         </section>
         <section class="contact__form__section">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(form.email)"
+            :class="addValidationModifier(this.formHelpMessages.email.status)"
           >
             <label for="email">Email</label>
             <span>
-              <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+              <font-awesome-icon
+                v-if="isIncorrect(formHelpMessages.email.status)"
+                :icon="['fas', 'exclamation-circle']"
+                fixed-width
+              />
+              <font-awesome-icon v-else :icon="['fas', 'check-circle']" fixed-width />
+              {{ this.formHelpMessages.email.message}}
             </span>
           </div>
-          <input type="email" name="email" v-model="form.email" required />
+          <input type="text" name="email" v-model="form.email" />
         </section>
         <section class="contact__form__section textarea">
           <div
             class="contact__form__section__label"
-            :class="addClassModifierIfStringNotEmpty(form.message)"
+            :class="addValidationModifier(this.formHelpMessages.message.status)"
           >
             <label for="message">Message</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
+              {{ this.formHelpMessages.message.message}}
             </span>
           </div>
-          <textarea name="message" v-model="form.message" minlength="50" required />
+          <textarea name="message" v-model="form.message" />
         </section>
         <div class="contact__form__send">
-          <primary-color-round-button>Send</primary-color-round-button>
+          <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -112,7 +108,11 @@ import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
 import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 import querystring from "querystring";
 import axios from "axios";
-
+const inputStatusCodes = {
+  EMPTY: 1,
+  INCORRECT: 2,
+  CORRECT: 3
+};
 export default {
   name: "TheContactSection",
   data() {
@@ -120,21 +120,96 @@ export default {
       showLoaderOverlay: false,
       sendSuccess: true,
       form: {
-        name: "Julian",
-        email: "julianeasterly@gmail.com",
-        message:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum turpis eget eros mattis pretium. Vivamus interdum sed sem a fringilla. Quisque vel molestie libero. Curabitur in pharetra nulla, vel dapibus lorem. Phasellus posuere consequat scelerisque. Nam id lectus tortor. Nullam lacinia urna lorem, pulvinar euismod elit lobortis in. Proin ullamcorper lacus ac varius tempus. Nam vel est risus. Proin mollis suscipit augue ut tincidunt. Nunc pellentesque lorem in sem malesuada, vitae iaculis risus iaculis. Phasellus quis molestie nisl. Vivamus et ultrices metus. Etiam dolor nunc, convallis et sem quis, rhoncus dignissim eros. Integer sed volutpat ex, at iaculis quam. "
+        name: "",
+        email: "",
+        message: ""
+      },
+      formHelpMessages: {
+        name: {
+          status: inputStatusCodes.EMPTY,
+          message: "Be sure to add your name"
+        },
+        email: {
+          status: inputStatusCodes.EMPTY,
+          message: "Make sure to double check your email"
+        },
+        message: {
+          status: inputStatusCodes.EMPTY,
+          message: "Let me know what you want to say!"
+        }
       },
       scrollObserver: null
     };
   },
   components: { BaseSection, PrimaryColorRoundButton },
   methods: {
-    addClassModifierIfStringNotEmpty(string) {
-      return string.trim() !== "" && "contact__form__section__label--filled";
+    addValidationModifier(code) {
+      let root = "contact__form__section__label";
+      if (code === inputStatusCodes.INCORRECT) {
+        return root + "--invalid";
+      }
+      if (code === inputStatusCodes.CORRECT) {
+        return root + "--valid";
+      }
+      return "";
+    },
+    isIncorrect(code) {
+      return code === inputStatusCodes.INCORRECT;
+    },
+    validate() {
+      this.validateName();
+      this.validateEmail();
+      this.validateMessage();
+      
+      return (this.formHelpMessages.name.status === inputStatusCodes.CORRECT) && 
+      (this.formHelpMessages.email.status === inputStatusCodes.CORRECT) && 
+      (this.formHelpMessages.message.status === inputStatusCodes.CORRECT);
+    },
+    validateName() {
+      if (this.form.name.trim() === "") {
+        this.formHelpMessages.name.message = "Be sure to add your name";
+        this.formHelpMessages.name.status = inputStatusCodes.EMPTY;
+      } else {
+        this.formHelpMessages.name.message = "Name looks good!";
+        this.formHelpMessages.name.status = inputStatusCodes.CORRECT;
+      }
+    },
+    validateMessage() {
+      if (this.form.message.trim() === "") {
+        this.formHelpMessages.message.message =
+          "Let me know what you want to say!";
+        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+      } else if (this.form.message.trim().length < 50) {
+        this.formHelpMessages.message.message =
+          "Write " +
+          (50 - this.form.message.trim().length) +
+          " more characters!";
+        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+      } else {
+        this.formHelpMessages.message.message = "Message looks good!";
+        this.formHelpMessages.message.status = inputStatusCodes.CORRECT;
+      }
+    },
+    validateEmail() {
+      var re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (this.form.email.trim() === "") {
+        this.formHelpMessages.email.message =
+          "Make sure to double check your email";
+        this.formHelpMessages.email.status = inputStatusCodes.EMPTY;
+      } else if (!re.test(this.form.email.trim())) {
+        this.formHelpMessages.email.message =
+          "Oh, oh. Be sure to check your email.";
+        this.formHelpMessages.email.status = inputStatusCodes.INCORRECT;
+      } else {
+        this.formHelpMessages.email.message = "Email looks good!";
+        this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
+      }
     },
     onSubmit() {
       this.showLoaderOverlay = true;
+      if (process.env.NODE_ENV === "development") {
+        console.log("sending to", process.env.VUE_APP_API + "/send");
+      }
       axios
         .post(
           process.env.VUE_APP_API + "/send",
@@ -142,10 +217,16 @@ export default {
         )
         .then(res => {
           if (res.request.status === 200) {
+            if (process.env.NODE_ENV === "development") {
+              console.log(res);
+            }
             this.sendSuccess = true;
           }
         })
-        .catch(() => {
+        .catch(error => {
+          if (process.env.NODE_ENV === "development") {
+            console.log(error);
+          }
           this.sendSuccess = false;
           this.$refs["contact__form-overlay__wrapper"].classList.add(
             "contact__form-overlay__wrapper--finished"
@@ -157,22 +238,12 @@ export default {
           );
         });
     },
-    showContactFormIfAvailable() {
-      if (process.env.VUE_APP_SHOW_CONTACT_FORM === "true") {
-        document.getElementsByClassName(
-          "contact__social-links"
-        )[0].style.display = "none";
-      } else {
-        document.getElementsByClassName("contact__form")[0].style.display =
-          "none";
-      }
-    },
+
     hideShowLowerOverlay() {
       this.showLoaderOverlay = false;
     }
   },
   mounted() {
-    this.showContactFormIfAvailable();
     let element = document.querySelector(".contact");
     this.observers = new IntersectObserverHelpersIterator(
       element,
@@ -251,30 +322,6 @@ export default {
   height: 100%;
   @include global.fade-in-from-bottom-class-modifier;
 
-  &__social-links {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
-    &__channel {
-      border-bottom: 1px solid rgba(global.$primary-black, 0.5);
-      font-size: 25px;
-      color: global.$primary-color;
-
-      a {
-        color: global.$primary-black;
-        margin-left: 10px;
-        text-decoration: none;
-        @include global.p-font(
-          $size-s: 12px,
-          $size-m: 18px,
-          $size-l: 18px,
-          $size-xl: 18px
-        );
-      }
-      line-height: 50px;
-    }
-  }
   &__form {
     position: relative;
     display: grid;
@@ -299,12 +346,19 @@ export default {
         }
         span {
           color: rgba(global.$primary-black, 0.25);
+          @include global.p-font($weight: 500);
           font-size: 15px;
           transition: color 0.5s ease-in-out;
         }
 
-        &--filled {
-          svg {
+        &--invalid {
+          span {
+            color: global.$error-color;
+          }
+        }
+
+        &--valid {
+          span {
             color: global.$primary-color;
           }
         }
