@@ -51,13 +51,6 @@
           <textarea name="message" v-model="form.message" />
         </section>
         <div class="contact__form__send">
-          <div
-            class="g-recaptcha"
-            data-sitekey="_your_site_key_"
-            data-callback="onSubmit"
-            data-size="invisible"
-          ></div>
-
           <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
         </div>
       </form>
