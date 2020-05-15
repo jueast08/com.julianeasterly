@@ -85,7 +85,7 @@ export default {
         if (this.themeObserver) {
           this.themeObserver.disconnect();
         }
-        document.getElementById("header").classList.add("header__bar--light");
+        this.$el.classList.add("header__bar--light");
       }
     },
     createFixedHeaderObserver() {
@@ -107,8 +107,8 @@ export default {
         if (this.fixedPositionObserver) {
           this.fixedPositionObserver.disconnect();
         }
-        document.getElementById("header").classList.add("header--fixed");
-        document.getElementById("header").classList.add("header__bar--light");
+        this.$refs.bar.classList.add("header__bar--light");
+        this.$el.classList.add("header--fixed");
       }
     }
   },
