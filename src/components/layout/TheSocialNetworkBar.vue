@@ -10,6 +10,9 @@
       <social-network-button href="https://github.com/jueast08">
         <font-awesome-icon :icon="['fab', 'github']" fixed-width />
       </social-network-button>
+      <social-network-button href="https://twitter.com/jueast08">
+        <font-awesome-icon :icon="['fab', 'twitter']" fixed-width />
+      </social-network-button>
     </div>
   </div>
 </template>

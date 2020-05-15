@@ -4,9 +4,7 @@
       <div class="footer__container__logo-group col-12">
         <div class="footer__container__logo-group__logo">
           <logo-icon />
-          <div class="footer__container__logo-group__logo__text">
-            JULIAN EASTERLY
-          </div>
+          <div class="footer__container__logo-group__logo__text">JULIAN EASTERLY</div>
         </div>
       </div>
       <div class="footer__container__link-group col-12">
@@ -15,27 +13,27 @@
           v-for="(link, index) in links"
           :key="link + index"
           @click="scrollToId(link.toLowerCase())"
-        >
-          {{ link }}
-        </div>
+        >{{ link }}</div>
       </div>
     </div>
     <div class="footer__social-network-group col-12">
       <div class="footer__social-network-group__wrapper col-12 col-s-6 col-m-4">
-        <social-network-button
-          href="https://www.linkedin.com/in/julianeasterly/"
-        >
+        <social-network-button href="https://www.linkedin.com/in/julianeasterly/">
           <font-awesome-icon :icon="['fab', 'linkedin']" fixed-width />
         </social-network-button>
         <social-network-button href="https://github.com/jueast08">
           <font-awesome-icon :icon="['fab', 'github']" fixed-width />
+        </social-network-button>
+        <social-network-button href="https://twitter.com/jueast08">
+          <font-awesome-icon :icon="['fab', 'twitter']" fixed-width />
         </social-network-button>
       </div>
     </div>
     <div class="footer__credits col-12 col-s-10 col-m-10 col-l-8 col-xl-8">
       <div class="footer__credits__credit col-12">
         Design by Julian EASTERLY
-        <br />Made with <span>&#10084;</span> in Strasbourg, France during the
+        <br />Made with
+        <span>&#10084;</span> in Strasbourg, France during the
         2020 Coronavirus lockdown
       </div>
     </div>
@@ -51,13 +49,13 @@ export default {
   name: "TheFooter",
   data() {
     return {
-      links: ["About", "Skills", "Experience", "Education", "Contact"], //@TODO refactor. this data is repeated in the header
+      links: ["About", "Skills", "Experience", "Education", "Contact"] //@TODO refactor. this data is repeated in the header
     };
   },
   components: { LogoIcon, SocialNetworkButton },
   methods: {
-    scrollToId,
-  },
+    scrollToId
+  }
 };
 </script>
 
