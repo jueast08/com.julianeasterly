@@ -66,7 +66,6 @@ export default {
   position: relative;
   padding: 100px 0 50px;
   @include global.border-box;
-
   &__subtitle {
     @include global.subtitle-font;
     @include global.border-box;
@@ -76,6 +75,7 @@ export default {
   }
 
   &__title-box {
+    position: relative;
     overflow: hidden;
     @include global.fade-in-class-modifier;
   }
@@ -97,7 +97,7 @@ export default {
       left: 50%;
       transform-origin: center center;
       transform: translate(-50%, -10%);
-      z-index: 1;
+      z-index: 0;
       opacity: 0.1;
       text-overflow: clip;
       white-space: nowrap;
@@ -106,6 +106,8 @@ export default {
   }
 
   &__container {
+    position: relative;
+    z-index: 2;
     min-height: 100%;
     padding: 0 25px;
     margin: 0 auto;
