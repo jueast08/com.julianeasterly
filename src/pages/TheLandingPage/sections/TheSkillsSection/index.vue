@@ -156,8 +156,7 @@
               <a
                 href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
                 target="__blank"
-                >here.
-              </a>
+              >here.</a>
             </p>
           </template>
         </skill-content-with-icon>
@@ -165,9 +164,7 @@
       <div class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
         <div class="skills__contact-me__button">
-          <white-round-button @click="scrollToId('contact')"
-            >contact me</white-round-button
-          >
+          <white-round-button @click="scrollToId('contact')">contact me</white-round-button>
         </div>
       </div>
     </div>
@@ -187,11 +184,11 @@ export default {
     BaseSection,
     SkillContentWithIcon,
     WhiteRoundButton,
-    SkillGauge,
+    SkillGauge
   },
   methods: {
-    scrollToId,
-  },
+    scrollToId
+  }
 };
 </script>
 
@@ -238,6 +235,12 @@ export default {
   }
 }
 
+a {
+  color: global.$primary-white;
+  text-decoration: underline;
+  transition: all 10s linear;
+}
+
 @include global.adapt-to-screen("m") {
   #skills {
     .skills {
@@ -249,15 +252,10 @@ export default {
             flex-wrap: wrap;
             &__group {
               width: 30%;
-              // max-width: 1/3;
               &__gauge {
                 margin: 10px 15px;
               }
             }
-            // &__gauge {
-            //   max-width: 45%;
-            //   margin: 10px 15px;
-            // }
           }
         }
       }

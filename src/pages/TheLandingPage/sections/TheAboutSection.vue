@@ -5,12 +5,8 @@
       <section class="about__section">
         <!-- @TODO add something about my MBTI tests like "I'm a Protagonist !!! with a link and another to my personality file https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwig9LXJ4q7pAhWrDmMBHcAqCggQFjAAegQIBRAB&url=https%3A%2F%2Fapp.assessfirst.com%2F_%2Fprofile%2Fhnnndvm0-julian-easterly&usg=AOvVaw3he2NfdS3npV7hKbdGTTFu" -->
         <div class="about__section__titles">
-          <div class="about__section__titles__subtitle">
-            To France from the USA
-          </div>
-          <h3 class="about__section__titles__title">
-            Becoming a Citizen of the World
-          </h3>
+          <div class="about__section__titles__subtitle">To France from the USA</div>
+          <h3 class="about__section__titles__title">Becoming a Citizen of the World</h3>
           <p>
             I am an American citizen, raised in Detroit, Michigan. In college, I
             studied abroad in Montpellier, France &mdash; trying to become
@@ -21,7 +17,9 @@
           <p>
             I've lived in France since 2013. As a citizen of the world, I reside
             in
-            <span class="bold-primary">Strasbourg, Alsace, France.</span>
+            <span
+              class="bold-primary"
+            >Strasbourg, Alsace, France.</span>
           </p>
         </div>
       </section>
@@ -31,9 +29,9 @@
       <div class="about__spacer"></div>
       <section class="about__section">
         <div class="about__section__titles">
-          <h3 class="about__section__titles__title">
-            I have English Literature and Computer Science Degrees.
-          </h3>
+          <h3
+            class="about__section__titles__title"
+          >I have English Literature and Computer Science Degrees.</h3>
           <p>
             I recieved an Bachelor's degree in English in 2012, but decided to
             go back to school when arriving in France. This switch was motivated
@@ -48,17 +46,13 @@
       </section>
       <section class="about__section">
         <div class="about__section__titles">
-          <div class="about__section__titles__subtitle">
-            Personality Test Results
-          </div>
+          <div class="about__section__titles__subtitle">Personality Test Results</div>
           <p>
             I'm a
             <a
               href="https://www.16personalities.com/enfj-personality"
               target="__blank"
-            >
-              Protagonist (ENFJ)
-            </a>
+            >Protagonist (ENFJ)</a>
             according to my MTBI Results.
           </p>
           <p>
@@ -66,8 +60,7 @@
             <a
               href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
               target="__blank"
-              >here.</a
-            >
+            >here.</a>
           </p>
         </div>
       </section>
@@ -83,11 +76,11 @@ export default {
   name: "TheAboutSection",
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   components: {
-    BaseSection,
+    BaseSection
   },
   methods: {},
   mounted() {
@@ -105,7 +98,7 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  },
+  }
 };
 </script>
 
@@ -187,6 +180,12 @@ export default {
       }
     }
   }
+}
+
+a {
+  color: global.$primary-color;
+  text-decoration: none;
+  transition: all 10s linear;
 }
 
 @include global.adapt-to-screen("s") {
