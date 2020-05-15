@@ -93,7 +93,7 @@ export default {
         transition: color 0.25s ease-in-out;
 
         &:hover {
-          color: rgba(global.$primary-black, 1);
+          color: rgba(global.$primary-color, 1);
         }
       }
     }
