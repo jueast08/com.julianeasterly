@@ -4,7 +4,7 @@
     title="Send Me a Message"
     subtitle="Opportunity, idea for a project, or just want to say hi?"
   >
-    <div class="contact">
+    <div ref="contact" class="contact">
       <form class="contact__form" @submit.prevent="onSubmit">
         <section class="contact__form__section">
           <div
@@ -283,7 +283,7 @@ export default {
     }
   },
   mounted() {
-    let element = document.querySelector(".contact");
+    let element = this.$refs.contact;
     this.observers = new IntersectObserverHelpersIterator(
       element,
       "--in-view",

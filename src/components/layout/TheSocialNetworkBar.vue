@@ -22,15 +22,14 @@ export default {
   name: "TheSocialNetworkBar",
   data() {
     return {
-      exitObserver: null,
+      exitObserver: null
     };
   },
   components: {
-    SocialNetworkButton,
+    SocialNetworkButton
   },
   mounted() {
-    let element = document.querySelector(".sn-bar");
-    this.exitObserver = new ScrollIntoViewObserver(element, "sn-bar--in-view");
+    this.exitObserver = new ScrollIntoViewObserver(this.$el, "sn-bar--in-view");
     this.exitObserver.observe(
       document.querySelector("#contact"),
       false,
@@ -50,7 +49,7 @@ export default {
     if (this.exitObserver) {
       this.exitObserver.disconnect();
     }
-  },
+  }
 };
 </script>
 

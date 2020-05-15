@@ -57,9 +57,11 @@ export default {
     if (this.querySelectorThatTriggersShowButton) {
       try {
         this.scrollObserver = new ScrollIntoViewObserver(
-          document.querySelector(".scroll-to-section-button"),
+          this.$el,
+          //document.querySelector(".scroll-to-section-button"),
           "scroll-to-section-button--hidden"
         );
+
         this.scrollObserver.observe(
           document.querySelector(this.querySelectorThatTriggersShowButton),
           this.hideOnTriggerEnter,

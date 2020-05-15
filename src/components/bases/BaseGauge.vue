@@ -4,11 +4,8 @@
     <div class="base-gauge__label-group" :style="masteryPercentageWidth">
       <span class="base-gauge__label-group__end">{{ goalLabel }}</span>
     </div>
-    <div class="base-gauge__container">
-      <div
-        class="base-gauge__container__fluid"
-        :style="masteryPercentageWidth"
-      ></div>
+    <div ref="container" class="base-gauge__container">
+      <div ref="fluid" class="base-gauge__container__fluid" :style="masteryPercentageWidth"></div>
     </div>
   </div>
 </template>
@@ -33,22 +30,22 @@ export default {
         return (
           !isNaN(possibleNumber) && possibleNumber <= 100 && possibleNumber >= 0
         );
-      },
+      }
     },
     title: {
       type: String,
       required: false,
-      default: "",
+      default: ""
     },
     goalLabel: {
       type: String,
       required: false,
-      default: "",
-    },
+      default: ""
+    }
   },
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   computed: {
@@ -58,11 +55,11 @@ export default {
         width += "%";
       }
       return { width: width };
-    },
+    }
   },
   mounted() {
     this.observerIterator = new IntersectObserverHelpersIterator(
-      [this.$el.childNodes[2].childNodes[0], this.$el.childNodes[2]],
+      [this.$refs.container, this.$refs.fluid],
       "--in-view",
       {},
       true,
@@ -72,7 +69,7 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  },
+  }
 };
 </script>
 

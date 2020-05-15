@@ -1,14 +1,12 @@
 <template>
   <div id="home" class="home col-12">
-    <div class="home__container col-12 col-l-6">
+    <div ref="container" class="home__container col-12 col-l-6">
       <section class="home__container__titles col-12">
         <h1 class="home__container__titles__title">Julian</h1>
         <h1 class="home__container__titles__title">Easterly</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">
-          Collaborate. Learn. Evolve.
-        </p>
+        <p class="home__container__subtitles__subtitle">Collaborate. Learn. Evolve.</p>
       </section>
     </div>
     <div class="home__background col-12 col-xl-6"></div>
@@ -24,14 +22,14 @@ export default {
   name: "TheHomeSection",
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   methods: {
-    scrollToId,
+    scrollToId
   },
   mounted() {
-    let element = document.querySelector(".home__container");
+    let element = this.$refs.container;
     this.observerIterator = new IntersectObserverHelpersIterator(
       element,
       "--in-view",
@@ -43,7 +41,7 @@ export default {
   },
   beforeDestroy() {
     this.observerIterator.disconnectAll();
-  },
+  }
 };
 </script>
 

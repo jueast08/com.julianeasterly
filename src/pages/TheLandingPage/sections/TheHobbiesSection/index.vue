@@ -1,6 +1,6 @@
 <template>
   <base-section id="hobbies" title="A Few of My Hobbies">
-    <div class="hobbies">
+    <div ref="hobbies" class="hobbies">
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
           <font-awesome-icon :icon="['fas', 'laptop-code']" fixed-width />
@@ -49,9 +49,8 @@ export default {
   },
   components: { BaseSection, HobbyContentWithIcon },
   mounted() {
-    let elements = document.querySelectorAll(".hobbies__hobby");
     this.observerIterator = new IntersectObserverHelpersIterator(
-      elements,
+      this.$refs.hobbies.childNodes,
       "--in-view",
       {},
       true,
@@ -86,7 +85,7 @@ export default {
     }
   }
   ::v-deep .base-content-with-icon {
-    @include global.fade-in-and-expand-class-modifier;
+    @include global.fade-in-and-expand-class-modifier; //@TODO maybe the modifier name should be a parameter with "--in-view" by default
   }
 }
 

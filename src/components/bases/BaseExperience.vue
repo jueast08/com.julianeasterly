@@ -1,6 +1,6 @@
 <template>
   <section class="base-exp col-12">
-    <div class="base-exp__vital-info">
+    <div ref="vital-info" class="base-exp__vital-info">
       <div class="base-exp__vital-info__wrapper">
         <div class="base-exp__vital-info__wrapper__icon">
           <slot name="img" />
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="base-exp__details">
+    <div ref="details" class="base-exp__details">
       <slot name="details" />
     </div>
   </section>
@@ -71,7 +71,7 @@ export default {
   },
   mounted() {
     this.vitalInfoObserverIterator = new IntersectObserverHelpersIterator(
-      this.$el.childNodes[0],
+      this.$refs["vital-info"],
       "--in-view",
       {},
       true,
@@ -79,7 +79,7 @@ export default {
       true
     );
     this.detailsObserver = new IntersectObserverHelpersIterator(
-      this.$el.childNodes[1],
+      this.$refs.details,
       "--in-view",
       {},
       true,
@@ -88,7 +88,12 @@ export default {
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    if (this.vitalInfoObserverIterator) {
+      this.vitalInfoObserverIterator.disconnectAll();
+    }
+    if (this.detailsObserver) {
+      this.vitalInfoObserverIterator.disconnectAll();
+    }
   }
 };
 </script>
