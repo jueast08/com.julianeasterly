@@ -29,9 +29,8 @@ export default {
     scrollToId
   },
   mounted() {
-    let element = this.$refs.container;
     this.observerIterator = new IntersectObserverHelpersIterator(
-      element,
+      this.$refs.container,
       "--in-view",
       {},
       true,
