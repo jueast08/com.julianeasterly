@@ -1,6 +1,6 @@
 <template>
   <header id="header" class="header col-12">
-    <div id="header__bar" class="header__bar col-12">
+    <div ref="bar" id="header__bar" class="header__bar col-12">
       <div class="header__bar__container col-12">
         <div class="header__bar__container__logo col-xl-2">
           <the-header-logo />
@@ -71,7 +71,7 @@ export default {
     createThemeObserver() {
       try {
         this.themeObserver = new ScrollIntoViewObserver(
-          document.querySelector(".header__bar"),
+          this.$refs.bar,
           "header__bar--light"
         );
         this.themeObserver.triggerCritera = entry => {
@@ -79,7 +79,9 @@ export default {
         };
         this.themeObserver.observe(document.querySelector("#top-anchor-pixel"));
       } catch (error) {
-        console.error(error);
+        if (process.env.NODE_ENV === "development") {
+          console.error(error);
+        }
         if (this.themeObserver) {
           this.themeObserver.disconnect();
         }
@@ -89,7 +91,7 @@ export default {
     createFixedHeaderObserver() {
       try {
         this.fixedPositionObserver = new ScrollIntoViewObserver(
-          document.querySelector(".header"),
+          this.$el,
           "header--fixed"
         );
         this.fixedPositionObserver.triggerCritera = entry => {
@@ -99,7 +101,9 @@ export default {
           document.querySelector("#top-anchor-pixel")
         );
       } catch (error) {
-        console.error(error);
+        if (process.env.NODE_ENV === "development") {
+          console.error(error);
+        }
         if (this.fixedPositionObserver) {
           this.fixedPositionObserver.disconnect();
         }
