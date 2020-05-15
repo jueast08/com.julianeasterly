@@ -55,7 +55,7 @@
             :sitekey="recaptchaKey"
             size="invisible"
             :loadRecaptchaScript="true"
-            @verify="onVerifyCapthca"
+            @verify="onVerifyCapctha"
             @expired="onCaptchaExpired"
             ref="recaptcha"
           >
@@ -90,7 +90,7 @@
                 <br />Message Not Sent!
                 <div
                   class="contact__form-overlay__wrapper__finished-messsage__content__retry"
-                  @click="showLoaderOverlay = false"
+                  @click="hideShowLowerOverlay()"
                 >Try Again?</div>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default {
         this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
       }
     },
-    onVerifyCapthca(response) {
+    onVerifyCapctha(response) {
       this.form.recaptcha = response;
       if (process.env.NODE_ENV === "development") {
         console.log(response);
@@ -239,10 +239,11 @@ export default {
     onCaptchaExpired() {
       this.$refs.recaptcha.reset();
     },
-    onSubmit() {
+    async onSubmit() {
       this.showLoaderOverlay = true;
       if (process.env.NODE_ENV === "development") {
         console.log("sending to", process.env.VUE_APP_API + "/send");
+        await new Promise(r => setTimeout(r, 2000));
       }
       axios
         .post(
