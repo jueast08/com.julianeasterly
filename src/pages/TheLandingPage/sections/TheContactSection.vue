@@ -55,7 +55,7 @@
             :sitekey="recaptchaKey"
             size="invisible"
             :loadRecaptchaScript="true"
-            @verify="onVerify"
+            @verify="onVerifyCapthca"
             @expired="onCaptchaExpired"
             ref="recaptcha"
           >
@@ -229,7 +229,7 @@ export default {
         this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
       }
     },
-    onVerify(response) {
+    onVerifyCapthca(response) {
       this.form.recaptcha = response;
       if (process.env.NODE_ENV === "development") {
         console.log(response);
@@ -273,9 +273,12 @@ export default {
           );
         });
     },
-
     hideShowLowerOverlay() {
       this.showLoaderOverlay = false;
+      this.resetOverlayBackgroundColor();
+    },
+    resetOverlayBackgroundColor() {
+      this.sendSuccess = true;
     }
   },
   mounted() {
@@ -463,7 +466,6 @@ export default {
     width: 100%;
     background: global.$primary-color;
     transition: background 0.5s ease-in-out;
-
     overflow: hidden;
 
     &--failure {
