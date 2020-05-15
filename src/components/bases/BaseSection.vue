@@ -89,6 +89,7 @@ export default {
       padding: 0 25px;
       margin: 0 auto;
       margin-bottom: 50px;
+      opacity: 1;
       @include global.border-box;
 
       &:before {
@@ -98,7 +99,7 @@ export default {
         left: 50%;
         transform-origin: center center;
         transform: translate(-50%, -10%);
-        z-index: 0;
+        z-index: -1;
         opacity: 0.1;
         text-overflow: clip;
         white-space: nowrap;
