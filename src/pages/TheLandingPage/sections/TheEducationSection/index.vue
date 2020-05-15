@@ -143,14 +143,24 @@ export default {
 
 #education {
   background-color: global.$primary-white;
-  ::v-deep .section__title {
-    color: global.$primary-color;
-    text-align: left;
+  ::v-deep .section {
+    &__title-box {
+      &__subtitle {
+        text-align: left;
+        color: global.$primary-black;
+      }
+      &__title {
+        color: global.$primary-color;
+        text-align: left;
 
-    &:before {
-      color: global.$primary-black;
+        &:before {
+          color: global.$primary-black;
+        }
+      }
     }
   }
+  // ::v-deep .section__title {
+  // }
 
   ::v-deep .section__subtitle {
     text-align: left;

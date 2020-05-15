@@ -70,6 +70,19 @@ export default {
 #hobbies {
   padding-top: 50px;
   background-color: global.$primary-white;
+  ::v-deep .section {
+    &__title-box {
+      &__title {
+        color: global.$primary-color;
+        @include global.subtitle-font($weight: 700);
+        text-transform: uppercase;
+        text-align: center;
+        &:before {
+          content: "";
+        }
+      }
+    }
+  }
   ::v-deep .section__title {
     color: global.$primary-color;
     @include global.subtitle-font($weight: 700);

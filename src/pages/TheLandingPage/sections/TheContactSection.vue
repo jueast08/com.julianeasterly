@@ -337,11 +337,13 @@ export default {
   }
 
   ::v-deep .section {
-    &__title,
-    &__subtitle {
-      position: relative;
-      color: global.$primary-white;
-      z-index: 3;
+    &__title-box {
+      &__title,
+      &__subtitle {
+        position: relative;
+        color: global.$primary-white;
+        z-index: 3;
+      }
     }
 
     &__container {

@@ -197,6 +197,14 @@ export default {
 
 #skills {
   background-color: global.$primary-color;
+  ::v-deep .section {
+    &__title-box {
+      &__subtitle,
+      &__title {
+        color: global.$primary-white;
+      }
+    }
+  }
   ::v-deep .section__title,
   ::v-deep .section__subtitle {
     color: global.$primary-white;

@@ -110,18 +110,20 @@ export default {
   background-color: global.$background-gray;
   @include global.fixed-background-overlay;
 
-  ::v-deep .section__title-box {
-    display: flex;
-    flex-direction: column-reverse;
-    margin-bottom: 50px;
-    color: global.$primary-color;
-  }
+  ::v-deep .section {
+    &__title-box {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-bottom: 50px;
+      color: global.$primary-color;
 
-  ::v-deep .section__title {
-    color: global.$primary-black;
+      &__title {
+        color: global.$primary-black;
 
-    &:before {
-      color: global.$primary-black;
+        &:before {
+          color: global.$primary-black;
+        }
+      }
     }
   }
 

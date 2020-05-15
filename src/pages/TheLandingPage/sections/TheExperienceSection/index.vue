@@ -243,14 +243,17 @@ export default {
   background-color: global.$primary-black;
   @include global.fixed-background-overlay;
 
-  ::v-deep .section__title {
-    color: global.$primary-color;
-    text-align: left;
-  }
-
-  ::v-deep .section__subtitle {
-    text-align: left;
-    color: global.$primary-white;
+  ::v-deep .section {
+    &__title-box {
+      &__subtitle {
+        text-align: left;
+        color: global.$primary-white;
+      }
+      &__title {
+        color: global.$primary-color;
+        text-align: left;
+      }
+    }
   }
 
   .experience {
