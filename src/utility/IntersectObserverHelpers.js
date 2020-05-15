@@ -3,23 +3,24 @@
  */
 export class ScrollIntoViewObserver {
   /**
-   * @param {Array} elements : an array of DOM elements. you should be passing document.querySelector('[query]')
-   * @param {String} _classToAdd: String representing the animation class to add
+   * @param {Array} element : an DOM element. You should be passing document.querySelector('[query]')
+   * @param {String} classToAdd: String representing the animation class to add
    * @param {Object} intersectionObserverOptions: Objet representing options as described here : https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
    */
-  constructor(elements, modifierClass, intersectionObserverOptions = {}) {
+  constructor(elements, classToAdd, intersectionObserverOptions = {}) {
     this._elements = elements;
-    this._modifierClass = modifierClass;
+    this._modifierClass = classToAdd;
     this._intersectionObserverOptions = intersectionObserverOptions;
     this._observer = null;
-    this._actionArray = [];
+    this._actions = null;
     this._triggerCritera = null;
+    this._temp;
     this._createObserver();
   }
 
   /**
    *@TODo the elements parameter is incorrect
-   * @param {DOMElement} elements : a Single DOMElement. you should be passing document.querySelector
+   * @param {DOMElement} element : a Single DOMElement. you should be passing document.querySelector
    * @param {Boolean} addOnInView : determines whether the class modifier should be added when the querySelector comes into view
    * @param {Boolean} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
    * @param {Boolean} addOnOutOfView : determines whether the class modifier should be added when the querySelector leaves view
@@ -27,7 +28,7 @@ export class ScrollIntoViewObserver {
 
    */
   observe(
-    elements,
+    element,
     addOnInView = true,
     removeOnOutOfView = true,
     removeOnInView = false,
@@ -36,13 +37,13 @@ export class ScrollIntoViewObserver {
     if (this._observer === null) {
       throw "Observer has not been initiated";
     }
-    this._observer.observe(elements);
-    this._actionArray.push({
+    this._observer.observe(element);
+    this._actions = {
       addOnInView,
       removeOnOutOfView,
       addOnOutOfView,
       removeOnInView,
-    });
+    };
   }
 
   /**
@@ -59,27 +60,28 @@ export class ScrollIntoViewObserver {
 
     if (this._observer === null) {
       this._observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => this._handleOnScroll(entry, index));
+        this._temp = entries;
+        entries.forEach((entry) => this._handleOnScroll(entry));
       }, this._intersectionObserverOptions);
     }
     return this._observer;
   }
 
-  _handleOnScroll(entry, index) {
+  _handleOnScroll(entry) {
     if (this._triggerEvent(entry)) {
-      if (this._actionArray[index].addOnInView) {
+      if (this._actions.addOnInView) {
         this._addAnimationClasses();
       }
 
-      if (this._actionArray[index].removeOnInView) {
+      if (this._actions.removeOnInView) {
         this._removeAnimationClasses();
       }
     } else {
-      if (this._actionArray[index].removeOnOutOfView) {
+      if (this._actions.removeOnOutOfView) {
         this._removeAnimationClasses();
       }
 
-      if (this._actionArray[index].addOnOutOfView) {
+      if (this._actions.addOnOutOfView) {
         this._addAnimationClasses();
       }
     }
