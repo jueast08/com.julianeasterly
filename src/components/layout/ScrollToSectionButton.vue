@@ -58,7 +58,6 @@ export default {
       try {
         this.scrollObserver = new ScrollIntoViewObserver(
           this.$el,
-          //document.querySelector(".scroll-to-section-button"),
           "scroll-to-section-button--hidden"
         );
 
