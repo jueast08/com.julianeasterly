@@ -115,7 +115,7 @@ export default {
       }
     },
     createLinkObserver() {
-      if (this.shouldShowMobileHeader) {
+      if (!this.shouldShowMobileHeader) {
         this.linkObserver = new IntersectionObserver(
           entries => {
             entries.forEach(entry => {
@@ -137,7 +137,10 @@ export default {
               }
             });
           },
-          { threshold: [0.2], root: document.querySelector(".body") }
+          {
+            threshold: [0.2],
+            root: document.querySelector(".body")
+          }
         );
 
         this.links.forEach(link =>
