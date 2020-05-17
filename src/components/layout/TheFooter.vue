@@ -31,7 +31,7 @@
     </div>
     <div class="footer__credits col-12 col-s-10 col-m-10 col-l-8 col-xl-8">
       <div class="footer__credits__credit col-12">
-        Design by Julian EASTERLY
+        Designed and Coded Julian EASTERLY with Gravit.io and VueJS
         <br />Made with
         <span>&#10084;</span> in Strasbourg, France during the
         2020 Coronavirus lockdown
