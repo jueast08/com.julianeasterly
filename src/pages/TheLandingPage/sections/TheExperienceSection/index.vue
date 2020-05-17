@@ -224,11 +224,11 @@ export default {
         this.$refs["other-experience"].childNodes
       ],
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

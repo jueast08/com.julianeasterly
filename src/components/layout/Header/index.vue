@@ -86,7 +86,7 @@ export default {
             this.$el.classList.remove("header--fixed");
           }
         },
-        this._uid
+        this
       );
     },
     createLinkObserver() {
@@ -137,7 +137,7 @@ export default {
     this.createLinkObserver();
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
     if (this.linkObserver) {
       this.linkObserver.disconnect();
     }

@@ -194,11 +194,11 @@ export default {
     InViewportObserver.observe(
       this.$refs["contact-me"],
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

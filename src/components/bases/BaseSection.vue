@@ -48,11 +48,11 @@ export default {
     InViewportObserver.observe(
       this.$refs["title-box"],
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

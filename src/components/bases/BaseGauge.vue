@@ -61,11 +61,11 @@ export default {
     InViewportObserver.observe(
       [this.$refs.container, this.$refs.fluid],
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

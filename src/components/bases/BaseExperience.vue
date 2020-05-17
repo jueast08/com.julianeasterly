@@ -72,11 +72,11 @@ export default {
     InViewportObserver.observe(
       [this.$refs["vital-info"], this.$refs.details],
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

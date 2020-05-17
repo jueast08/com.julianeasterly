@@ -64,12 +64,12 @@ export default {
             this.$el.classList.add("scroll-to-section-button--in-view");
           }
         },
-        this._uid
+        this
       );
     }
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

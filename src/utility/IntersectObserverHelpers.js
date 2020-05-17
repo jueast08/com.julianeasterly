@@ -35,7 +35,7 @@ export class InViewportObserver {
   }
 
   /**
-   * Observe an element, an Array of Elements and/or NodeLists, or NodeList with the IntersectionObserver
+   * Observe an element, an Array of Elements and/or NodeLists, or NodeList with the IntersectionObserver //
    * @param {Array[HTMLElement|NodeList], HTMLElement, NodeList} observables : an element, an Array of Elements and/or NodeLists, or NodeList
    * @param {Function} callback : a funciton that takes entry as a parameter (ex. entry => {})
    * @param {*} context : the Vue Component context
@@ -97,7 +97,7 @@ export class InViewportObserver {
     });
     delete this.#observedContexts.delete(context);
 
-    if (this.#observedElements === {}) {
+    if (this.#observedContexts.size === 0) {
       this.#intersectionObserver.disconnect();
     }
   }

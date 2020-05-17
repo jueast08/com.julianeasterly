@@ -303,7 +303,7 @@ export default {
     InViewportObserver.observe(
       this.$refs.contact,
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
     //
     // this.observerIterator = new IntersectObserverHelpersIterator(
@@ -318,7 +318,7 @@ export default {
   beforeDestroy() {
     //this.observerIterator.disconnectAll();
 
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

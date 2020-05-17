@@ -41,11 +41,11 @@ export default {
           this.$el.classList.add("sn-bar--in-view");
         }
       },
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

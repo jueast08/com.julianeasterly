@@ -26,11 +26,11 @@ export default {
     InViewportObserver.observe(
       [this.$el.childNodes, this.$el.childNodes[0].childNodes],
       InViewportObserver.addAnimationModifierOnEntry,
-      this._uid
+      this
     );
   },
   beforeDestroy() {
-    InViewportObserver.disconnect(this._uid);
+    InViewportObserver.disconnect(this);
   }
 };
 </script>
