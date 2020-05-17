@@ -121,9 +121,8 @@ export default {
   }
 
   &__credits {
-    margin-bottom: 25px;
     &__credit {
-      margin: 10px 0 50px 0;
+      margin: 10px 0 75px 0;
       text-align: center;
       color: global.$primary-white;
       @include global.p-font(
@@ -168,12 +167,16 @@ export default {
     &__container {
       flex-direction: row;
       justify-content: space-between;
+
       &__logo-group,
       &__link-group {
-        padding-top: 85px;
+        margin-bottom: 50px;
       }
 
       &__logo-group {
+        display: flex;
+        align-items: flex-start;
+
         &__logo {
           flex-direction: row;
           ::v-deep .logo-icon {
@@ -187,16 +190,26 @@ export default {
       }
 
       &__link-group {
+        padding-top: 50px;
+        flex-direction: row;
         justify-content: flex-start;
+        flex-wrap: wrap;
         &:before {
           content: "Navigation";
           @include global.link-font($weight: 700);
           color: global.$primary-white;
+          width: 100%;
+          margin: 0 0 15px 0;
         }
         &__link {
           text-align: left;
-          margin: 20px 0;
+          margin: 5px;
         }
+      }
+    }
+    &__credits {
+      &__credit {
+        margin-bottom: 25px;
       }
     }
   }
