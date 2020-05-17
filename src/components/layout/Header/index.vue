@@ -138,7 +138,7 @@ export default {
             });
           },
           {
-            threshold: [0, 0.2],
+            threshold: [0.2],
             root: document.querySelector(".body")
           }
         );
