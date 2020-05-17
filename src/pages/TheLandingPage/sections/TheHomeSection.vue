@@ -15,7 +15,10 @@
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import {
+  //IntersectObserverHelpersIterator,
+  InViewportObserver
+} from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
@@ -29,17 +32,25 @@ export default {
     scrollToId
   },
   mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
+    InViewportObserver.observe(
       this.$refs.container,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
+
+    // this.observerIterator = new IntersectObserverHelpersIterator(
+    //   this.$refs.container,
+    //   "--in-view",
+    //   {},
+    //   true,
+    //   false,
+    //   true
+    // );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    //this.observerIterator.disconnectAll();
+
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

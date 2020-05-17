@@ -19,7 +19,7 @@
 
 <script>
 import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
-import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSocialNetworkBar",
@@ -32,26 +32,20 @@ export default {
     SocialNetworkButton
   },
   mounted() {
-    this.exitObserver = new ScrollIntoViewObserver(this.$el, "sn-bar--in-view");
-    this.exitObserver.observe(
-      document.querySelector("#contact"),
-      false,
-      false,
-      true,
-      true
-    );
-    this.exitObserver.observe(
-      document.querySelector("#footer"),
-      false,
-      false,
-      true,
-      true
+    InViewportObserver.observe(
+      document.querySelectorAll("#contact,#footer"),
+      entry => {
+        if (entry.isIntersecting) {
+          this.$el.classList.remove("sn-bar--in-view");
+        } else {
+          this.$el.classList.add("sn-bar--in-view");
+        }
+      },
+      this._uid
     );
   },
   beforeDestroy() {
-    if (this.exitObserver) {
-      this.exitObserver.disconnect();
-    }
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

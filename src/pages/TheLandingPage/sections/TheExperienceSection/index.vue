@@ -128,7 +128,7 @@
           </template>
         </professional-experience-item>
       </div>
-      <div class="experience__others">
+      <div ref="other-experience" class="experience__others">
         <div class="experience__others__title">My Other Experiences</div>
         <section class="experience__others__description">
           <div class="experience__others__description__title">From 2012</div>
@@ -176,7 +176,7 @@
           </p>
         </section>
       </div>
-      <section class="experience__resume">
+      <section ref="experience__resume" class="experience__resume">
         <white-round-button @click="openResume()">Download my Resume</white-round-button>
       </section>
     </div>
@@ -191,7 +191,7 @@ import ActimageLogo from "Assets/actimage_logo.png";
 import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
 import SoyhuceLogo from "Assets/soyhuce_logo.png";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheExperienceSection",
@@ -211,7 +211,6 @@ export default {
   },
   methods: {
     openResume() {
-      //@BUG this is not working. look if button is disabled
       window.open(
         process.env.BASE_URL + "julian_easterly_resume.pdf",
         "_blank"
@@ -219,19 +218,17 @@ export default {
     }
   },
   mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      this.$el.querySelectorAll(
-        ".experience__others__title, .experience__others__description, .experience__others__description__content"
-      ),
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      [
+        this.$refs["experience__resume"],
+        this.$refs["other-experience"].childNodes
+      ],
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>
@@ -283,7 +280,6 @@ export default {
 
         &__content {
           margin-top: 25px;
-          @include global.fade-in-class-modifier;
 
           &__company {
             margin: 5px 0;
@@ -304,6 +300,8 @@ export default {
     }
 
     &__resume {
+      @include global.fade-in-class-modifier;
+
       text-align: center;
       margin-top: 50px;
     }

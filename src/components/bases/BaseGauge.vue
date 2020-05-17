@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 export default {
   name: "BaseGauge",
   props: {
@@ -57,18 +56,16 @@ export default {
       return { width: width };
     }
   },
+
   mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
+    InViewportObserver.observe(
       [this.$refs.container, this.$refs.fluid],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

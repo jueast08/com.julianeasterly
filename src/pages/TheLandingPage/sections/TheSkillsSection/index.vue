@@ -161,7 +161,7 @@
           </template>
         </skill-content-with-icon>
       </div>
-      <div class="skills__contact-me">
+      <div ref="contact-me" class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
         <div class="skills__contact-me__button">
           <white-round-button @click="scrollToId('contact')">contact me</white-round-button>
@@ -177,6 +177,7 @@ import SkillContentWithIcon from "./SkillContentWithIcon";
 import SkillGauge from "./SkillGauge";
 import WhiteRoundButton from "UI/WhiteRoundButton";
 import scrollToId from "Utility/ScrollHelper";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSkillsSection",
@@ -188,6 +189,16 @@ export default {
   },
   methods: {
     scrollToId
+  },
+  mounted() {
+    InViewportObserver.observe(
+      this.$refs["contact-me"],
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
+    );
+  },
+  beforeDestroy() {
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>
@@ -235,6 +246,7 @@ export default {
       text-align: center;
       @include global.subtitle-font;
       color: global.$primary-white;
+      @include global.fade-in-class-modifier;
 
       &__button {
         margin-top: 25px;

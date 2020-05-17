@@ -69,7 +69,11 @@
 
 <script>
 import BaseSection from "Bases/BaseSection";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+//import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import {
+  //IntersectObserverHelpersIterator,
+  InViewportObserver
+} from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheAboutSection",
@@ -82,23 +86,49 @@ export default {
     BaseSection
   },
   methods: {},
+  // mounted() {
+  //   this.observerIterator = new IntersectObserverHelpersIterator(
+  //     [
+  //       this.$refs.section1,
+  //       this.$refs.section2,
+  //       this.$refs.section3,
+  //       this.$refs.photo
+  //     ],
+  //     "--in-view",
+  //     {},
+  //     true,
+  //     false,
+  //     true
+  //   );
+  // },
+  // beforeDestroy() {
+  //   this.observerIterator.disconnectAll();
+  // }
   mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
+    InViewportObserver.observe(
       [
         this.$refs.section1,
         this.$refs.section2,
         this.$refs.section3,
         this.$refs.photo
       ],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
+    //
+    // this.observerIterator = new IntersectObserverHelpersIterator(
+    //   this.$refs.container,
+    //   "--in-view",
+    //   {},
+    //   true,
+    //   false,
+    //   true
+    // );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    //this.observerIterator.disconnectAll();
+
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

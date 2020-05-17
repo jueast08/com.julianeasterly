@@ -114,11 +114,14 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+// import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 import VueRecaptcha from "vue-recaptcha";
 import querystring from "querystring";
 import axios from "axios";
-
+import {
+  //IntersectObserverHelpersIterator,
+  InViewportObserver
+} from "Utility/IntersectObserverHelpers";
 const inputStatusCodes = {
   EMPTY: 1,
   INCORRECT: 2,
@@ -282,19 +285,40 @@ export default {
       this.sendSuccess = true;
     }
   },
+  // mounted() {
+  //   let element = this.$refs.contact;
+  //   this.observers = new IntersectObserverHelpersIterator(
+  //     element,
+  //     "--in-view",
+  //     {},
+  //     true,
+  //     false,
+  //     true
+  //   );
+  // },
+  // beforeDestroy() {
+  //   this.observers.disconnectAll();
+  // },
   mounted() {
-    let element = this.$refs.contact;
-    this.observers = new IntersectObserverHelpersIterator(
-      element,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      this.$refs.contact,
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
+    //
+    // this.observerIterator = new IntersectObserverHelpersIterator(
+    //   this.$refs.container,
+    //   "--in-view",
+    //   {},
+    //   true,
+    //   false,
+    //   true
+    // );
   },
   beforeDestroy() {
-    this.observers.disconnectAll();
+    //this.observerIterator.disconnectAll();
+
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

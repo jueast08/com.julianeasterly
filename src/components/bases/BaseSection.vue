@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "BaseSection",
@@ -44,19 +44,15 @@ export default {
   },
   mounted() {
     this.$refs.title.setAttribute("data-content", this.title);
-    this.observerIterator = new IntersectObserverHelpersIterator(
+
+    InViewportObserver.observe(
       this.$refs["title-box"],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
   },
   beforeDestroy() {
-    if (this.observerIterator) {
-      this.observerIterator.disconnectAll();
-    }
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

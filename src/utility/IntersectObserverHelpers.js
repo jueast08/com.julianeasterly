@@ -1,4 +1,89 @@
 /**
+ * Observes obects in relation to the viewport (document). As soon as a pixel of an observed element is triggered,
+ * all the registered callbacks linked to the object are triggered.
+ * Only one of these can exist in the application. If you need to change the root or the thresholds,
+ * use a regular IntersectionObserver.
+ */
+export class InViewportObserver {
+  static #intersectionObserver = null;
+  static #observedElements = new Map();
+  static #observedContexts = new Map();
+
+  static createObserver() {
+    this.#intersectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        let callbacks = this.#observedElements.get(entry.target);
+        callbacks.forEach((callback) => callback(entry));
+      });
+    });
+  }
+
+  static animateAndStayOnEntry(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add(entry.target.classList[0] + "--in-view");
+    }
+  }
+
+  static observe(observables, callback, uniqueId) {
+    if (!this.#intersectionObserver) {
+      this.createObserver();
+    }
+    if (observables instanceof Array) {
+      observables.forEach((observable) =>
+        this.observeNodeListAndSingleElements(observable, callback, uniqueId)
+      );
+    } else {
+      this.observeNodeListAndSingleElements(observables, callback, uniqueId);
+    }
+  }
+
+  static observeNodeListAndSingleElements(observables, callback, uniqueId) {
+    if (observables instanceof NodeList) {
+      observables.forEach((observable) =>
+        this.observeElement(observable, callback, uniqueId)
+      );
+    } else if (observables instanceof HTMLElement) {
+      this.observeElement(observables, callback, uniqueId);
+    }
+  }
+
+  static observeElement(observable, callback, uniqueId) {
+    let element = observable;
+    if (!this.#observedElements.get(element)) {
+      this.#observedElements.set(element, []);
+    }
+
+    let position = this.#observedElements.get(element).length;
+    this.#observedElements.get(element).push(callback);
+
+    if (!this.#observedContexts.get(uniqueId)) {
+      this.#observedContexts.set(uniqueId, []);
+    }
+    this.#observedContexts.get(uniqueId).push({
+      element,
+      index: position,
+    });
+
+    this.#intersectionObserver.observe(observable);
+  }
+
+  static disconnect(uniqueId) {
+    this.#observedContexts.get(uniqueId).forEach((object) => {
+      if (this.#observedElements.get(object.element).length === 1) {
+        delete this.#observedElements.delete(object.element);
+      } else {
+        this.#observedElements.get(object.element).splice(object.index, 1);
+      }
+    });
+    delete this.#observedContexts.delete(uniqueId);
+
+    if (this.#observedElements === {}) {
+      this.#intersectionObserver.disconnect();
+    }
+  }
+}
+
+/**
  * @brief This class is envolopes the IntersectionObserver for the project which primarily uses this tool to animate imtems once a root has come into view
  */
 export class ScrollIntoViewObserver {

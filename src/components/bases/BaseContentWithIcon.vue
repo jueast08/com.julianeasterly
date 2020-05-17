@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "BaseContentWithIcon",
@@ -23,17 +23,14 @@ export default {
     };
   },
   mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
+    InViewportObserver.observe(
       [this.$el.childNodes, this.$el.childNodes[0].childNodes],
-      "--in-view",
-      { threshold: 0 },
-      true,
-      false,
-      true
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>

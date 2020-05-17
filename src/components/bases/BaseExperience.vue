@@ -42,8 +42,7 @@
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 export default {
   name: "BaseSection",
   data() {
@@ -70,30 +69,14 @@ export default {
     }
   },
   mounted() {
-    this.vitalInfoObserverIterator = new IntersectObserverHelpersIterator(
-      this.$refs["vital-info"],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
-    );
-    this.detailsObserver = new IntersectObserverHelpersIterator(
-      this.$refs.details,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      [this.$refs["vital-info"], this.$refs.details],
+      InViewportObserver.animateAndStayOnEntry,
+      this._uid
     );
   },
   beforeDestroy() {
-    if (this.vitalInfoObserverIterator) {
-      this.vitalInfoObserverIterator.disconnectAll();
-    }
-    if (this.detailsObserver) {
-      this.vitalInfoObserverIterator.disconnectAll();
-    }
+    InViewportObserver.disconnect(this._uid);
   }
 };
 </script>
