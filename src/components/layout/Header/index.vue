@@ -40,10 +40,7 @@
 <script>
 import TheHeaderLogo from "./TheHeaderLogo";
 import TheHeaderBurger from "./TheHeaderBurger";
-import {
-  //  ScrollIntoViewObserver,
-  InViewportObserver
-} from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
