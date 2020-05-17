@@ -193,7 +193,7 @@ export default {
   mounted() {
     InViewportObserver.observe(
       this.$refs["contact-me"],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
   },

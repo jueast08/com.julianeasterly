@@ -40,7 +40,10 @@
 <script>
 import TheHeaderLogo from "./TheHeaderLogo";
 import TheHeaderBurger from "./TheHeaderBurger";
-import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
+import {
+  //  ScrollIntoViewObserver,
+  InViewportObserver
+} from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
@@ -71,48 +74,20 @@ export default {
       window.removeEventListener("scroll", this.closeMenuRemoveListener);
     },
     scrollToId,
-    createThemeObserver() {
-      try {
-        this.themeObserver = new ScrollIntoViewObserver(
-          this.$refs.bar,
-          "header__bar--light"
-        );
-        this.themeObserver.triggerCritera = entry => {
-          return entry.boundingClientRect.y < 0;
-        };
-        this.themeObserver.observe(document.querySelector("#top-anchor-pixel"));
-      } catch (error) {
-        if (process.env.NODE_ENV === "development") {
-          console.error(error);
-        }
-        if (this.themeObserver) {
-          this.themeObserver.disconnect();
-        }
-        this.$el.classList.add("header__bar--light");
-      }
-    },
-    createFixedHeaderObserver() {
-      try {
-        this.fixedPositionObserver = new ScrollIntoViewObserver(
-          this.$el,
-          "header--fixed"
-        );
-        this.fixedPositionObserver.triggerCritera = entry => {
-          return entry.boundingClientRect.y < 0;
-        };
-        this.fixedPositionObserver.observe(
-          document.querySelector("#top-anchor-pixel")
-        );
-      } catch (error) {
-        if (process.env.NODE_ENV === "development") {
-          console.error(error);
-        }
-        if (this.fixedPositionObserver) {
-          this.fixedPositionObserver.disconnect();
-        }
-        this.$refs.bar.classList.add("header__bar--light");
-        this.$el.classList.add("header--fixed");
-      }
+    createHeaderObserver() {
+      InViewportObserver.observe(
+        document.querySelector("#top-anchor-pixel"),
+        entry => {
+          if (entry.boundingClientRect.y < 0) {
+            this.$refs.bar.classList.add("header__bar--light");
+            this.$el.classList.add("header--fixed");
+          } else {
+            this.$refs.bar.classList.remove("header__bar--light");
+            this.$el.classList.remove("header--fixed");
+          }
+        },
+        this._uid
+      );
     },
     createLinkObserver() {
       if (!this.shouldShowMobileHeader) {
@@ -158,17 +133,11 @@ export default {
     }
   },
   mounted() {
-    this.createThemeObserver();
-    this.createFixedHeaderObserver();
+    this.createHeaderObserver();
     this.createLinkObserver();
   },
   beforeDestroy() {
-    if (this.themeObserver) {
-      this.themeObserver.disconnect();
-    }
-    if (this.fixedPositionObserver) {
-      this.fixedPositionObserver.disconnect();
-    }
+    InViewportObserver.disconnect(this._uid);
     if (this.linkObserver) {
       this.linkObserver.disconnect();
     }

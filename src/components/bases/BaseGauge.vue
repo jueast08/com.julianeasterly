@@ -60,7 +60,7 @@ export default {
   mounted() {
     InViewportObserver.observe(
       [this.$refs.container, this.$refs.fluid],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
   },

@@ -47,7 +47,7 @@ export default {
 
     InViewportObserver.observe(
       this.$refs["title-box"],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
   },

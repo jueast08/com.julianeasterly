@@ -71,7 +71,7 @@ export default {
   mounted() {
     InViewportObserver.observe(
       [this.$refs["vital-info"], this.$refs.details],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
   },

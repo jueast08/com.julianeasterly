@@ -223,7 +223,7 @@ export default {
         this.$refs["experience__resume"],
         this.$refs["other-experience"].childNodes
       ],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
   },

@@ -112,7 +112,7 @@ export default {
         this.$refs.section3,
         this.$refs.photo
       ],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
     //

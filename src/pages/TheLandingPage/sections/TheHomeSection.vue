@@ -34,7 +34,7 @@ export default {
   mounted() {
     InViewportObserver.observe(
       this.$refs.container,
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
 

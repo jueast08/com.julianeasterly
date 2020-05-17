@@ -25,7 +25,7 @@ export default {
   mounted() {
     InViewportObserver.observe(
       [this.$el.childNodes, this.$el.childNodes[0].childNodes],
-      InViewportObserver.animateAndStayOnEntry,
+      InViewportObserver.addAnimationModifierOnEntry,
       this._uid
     );
   },

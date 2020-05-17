@@ -9,7 +9,13 @@ export class InViewportObserver {
   static #observedElements = new Map();
   static #observedContexts = new Map();
 
+  /**
+   * @private
+   */
   static createObserver() {
+    if (this.#intersectionObserver) {
+      return;
+    }
     this.#intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         let callbacks = this.#observedElements.get(entry.target);
@@ -18,36 +24,46 @@ export class InViewportObserver {
     });
   }
 
-  static animateAndStayOnEntry(entry) {
+  /**
+   * Adds the --in-view BEM modifier to the entries.target's first class name
+   * @param {IntersectionObserverEntry} entry : an entry provided by the IntersectionObserver
+   */
+  static addAnimationModifierOnEntry(entry) {
     if (entry.isIntersecting) {
       entry.target.classList.add(entry.target.classList[0] + "--in-view");
     }
   }
 
-  static observe(observables, callback, uniqueId) {
+  /**
+   * Observe an element, an Array of Elements and/or NodeLists, or NodeList with the IntersectionObserver
+   * @param {Array[HTMLElement|NodeList], HTMLElement, NodeList} observables : an element, an Array of Elements and/or NodeLists, or NodeList
+   * @param {Function} callback : a funciton that takes entry as a parameter (ex. entry => {})
+   * @param {*} context : the Vue Component context
+   */
+  static observe(observables, callback, context) {
     if (!this.#intersectionObserver) {
       this.createObserver();
     }
     if (observables instanceof Array) {
       observables.forEach((observable) =>
-        this.observeNodeListAndSingleElements(observable, callback, uniqueId)
+        this.observeNodeListAndSingleElements(observable, callback, context)
       );
     } else {
-      this.observeNodeListAndSingleElements(observables, callback, uniqueId);
+      this.observeNodeListAndSingleElements(observables, callback, context);
     }
   }
 
-  static observeNodeListAndSingleElements(observables, callback, uniqueId) {
+  static observeNodeListAndSingleElements(observables, callback, context) {
     if (observables instanceof NodeList) {
       observables.forEach((observable) =>
-        this.observeElement(observable, callback, uniqueId)
+        this.observeElement(observable, callback, context)
       );
     } else if (observables instanceof HTMLElement) {
-      this.observeElement(observables, callback, uniqueId);
+      this.observeElement(observables, callback, context);
     }
   }
 
-  static observeElement(observable, callback, uniqueId) {
+  static observeElement(observable, callback, context) {
     let element = observable;
     if (!this.#observedElements.get(element)) {
       this.#observedElements.set(element, []);
@@ -56,10 +72,10 @@ export class InViewportObserver {
     let position = this.#observedElements.get(element).length;
     this.#observedElements.get(element).push(callback);
 
-    if (!this.#observedContexts.get(uniqueId)) {
-      this.#observedContexts.set(uniqueId, []);
+    if (!this.#observedContexts.get(context)) {
+      this.#observedContexts.set(context, []);
     }
-    this.#observedContexts.get(uniqueId).push({
+    this.#observedContexts.get(context).push({
       element,
       index: position,
     });
@@ -67,15 +83,19 @@ export class InViewportObserver {
     this.#intersectionObserver.observe(observable);
   }
 
-  static disconnect(uniqueId) {
-    this.#observedContexts.get(uniqueId).forEach((object) => {
+  /**
+   *
+   * @param {*} uniqueId
+   */
+  static disconnect(context) {
+    this.#observedContexts.get(context).forEach((object) => {
       if (this.#observedElements.get(object.element).length === 1) {
         delete this.#observedElements.delete(object.element);
       } else {
         this.#observedElements.get(object.element).splice(object.index, 1);
       }
     });
-    delete this.#observedContexts.delete(uniqueId);
+    delete this.#observedContexts.delete(context);
 
     if (this.#observedElements === {}) {
       this.#intersectionObserver.disconnect();
@@ -84,6 +104,7 @@ export class InViewportObserver {
 }
 
 /**
+ * @deprecated
  * @brief This class is envolopes the IntersectionObserver for the project which primarily uses this tool to animate imtems once a root has come into view
  */
 export class ScrollIntoViewObserver {
@@ -234,6 +255,9 @@ export class ScrollIntoViewObserver {
   }
 }
 
+/**
+ * @@deprecated
+ */
 export class IntersectObserverHelpersIterator {
   /**
    *
