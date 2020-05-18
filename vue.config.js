@@ -15,7 +15,7 @@ module.exports = {
   pages: {
     index: {
       entry: "src/main.js",
-      title: "Julian EASTERLY - IT Business Analyst and Developer",
+      title: "Julian EASTERLY - IT Business Analyst and Software Developer",
       description:
         "Julian EASTERLY is an American IT Business Analyst and Software Developer based in Strasbourg, France.",
     },
