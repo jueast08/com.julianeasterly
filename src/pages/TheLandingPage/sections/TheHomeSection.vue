@@ -15,10 +15,7 @@
 </template>
 
 <script>
-import {
-  //IntersectObserverHelpersIterator,
-  InViewportObserver
-} from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {

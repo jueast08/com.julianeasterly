@@ -114,14 +114,11 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
-// import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 import VueRecaptcha from "vue-recaptcha";
 import querystring from "querystring";
 import axios from "axios";
-import {
-  //IntersectObserverHelpersIterator,
-  InViewportObserver
-} from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
+
 const inputStatusCodes = {
   EMPTY: 1,
   INCORRECT: 2,

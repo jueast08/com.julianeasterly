@@ -38,7 +38,6 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import HobbyContentWithIcon from "./HobbyContentWithIcon";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheHobbiesSection",
@@ -47,20 +46,7 @@ export default {
       observerIterator: null
     };
   },
-  components: { BaseSection, HobbyContentWithIcon },
-  mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      this.$refs.hobbies.childNodes,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
-    );
-  },
-  beforeDestroy() {
-    this.observerIterator.disconnectAll();
-  }
+  components: { BaseSection, HobbyContentWithIcon }
 };
 </script>
 
@@ -96,9 +82,6 @@ export default {
     &__hobby {
       margin-top: 30px;
     }
-  }
-  ::v-deep .base-content-with-icon {
-    @include global.fade-in-and-expand-class-modifier; //@TODO maybe the modifier name should be a parameter with "--in-view" by default
   }
 }
 
