@@ -1,6 +1,6 @@
 <template>
   <section class="base-exp col-12">
-    <div class="base-exp__vital-info">
+    <div ref="vital-info" class="base-exp__vital-info">
       <div class="base-exp__vital-info__wrapper">
         <div class="base-exp__vital-info__wrapper__icon">
           <slot name="img" />
@@ -35,15 +35,14 @@
       </div>
     </div>
 
-    <div class="base-exp__details">
+    <div ref="details" class="base-exp__details">
       <slot name="details" />
     </div>
   </section>
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 export default {
   name: "BaseSection",
   data() {
@@ -70,25 +69,14 @@ export default {
     }
   },
   mounted() {
-    this.vitalInfoObserverIterator = new IntersectObserverHelpersIterator(
-      this.$el.childNodes[0],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
-    );
-    this.detailsObserver = new IntersectObserverHelpersIterator(
-      this.$el.childNodes[1],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      [this.$refs["vital-info"], this.$refs.details],
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
+    InViewportObserver.disconnect(this);
   }
 };
 </script>

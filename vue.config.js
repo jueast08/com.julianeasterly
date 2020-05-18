@@ -1,12 +1,29 @@
 const path = require("path");
+const PrerenderSpaPlugin = require("prerender-spa-plugin");
+
+const productionPlugins = [
+  new PrerenderSpaPlugin({
+    staticDir: path.join(__dirname, "dist"),
+    routes: ["/"],
+    renderer: new PrerenderSpaPlugin.PuppeteerRenderer({
+      inject: {},
+    }),
+  }),
+];
 
 module.exports = {
   pages: {
     index: {
       entry: "src/main.js",
       title: "Julian EASTERLY - IT Business Analyst and Developer",
-      description: "Julian EASTERLY - IT Business Analyst and Developer", //@TODO add a description for SEO optimisation 120 à 140 caractères
+      description:
+        "Julian EASTERLY is an American IT Business Analyst and Software Developer based in Strasbourg, France.",
     },
+  },
+  configureWebpack: (config) => {
+    if (process.env.NODE_ENV === "production") {
+      config.plugins.push(...productionPlugins);
+    }
   },
   chainWebpack: (config) => {
     let alias = config.resolve.alias;

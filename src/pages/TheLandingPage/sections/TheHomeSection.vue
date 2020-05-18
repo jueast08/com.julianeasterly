@@ -1,14 +1,12 @@
 <template>
   <div id="home" class="home col-12">
-    <div class="home__container col-12 col-l-6">
+    <div ref="container" class="home__container col-12 col-l-6">
       <section class="home__container__titles col-12">
         <h1 class="home__container__titles__title">Julian</h1>
         <h1 class="home__container__titles__title">Easterly</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">
-          Collaborate. Learn. Evolve.
-        </p>
+        <p class="home__container__subtitles__subtitle">Collaborate. Learn. Evolve.</p>
       </section>
     </div>
     <div class="home__background col-12 col-xl-6"></div>
@@ -17,33 +15,29 @@
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
   name: "TheHomeSection",
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   methods: {
-    scrollToId,
+    scrollToId
   },
   mounted() {
-    let element = document.querySelector(".home__container");
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      element,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      this.$refs.container,
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
-  },
+    InViewportObserver.disconnect(this);
+  }
 };
 </script>
 
@@ -124,12 +118,11 @@ export default {
       width: 100%;
       height: 100%;
       z-index: 1;
-      opacity: 0.46;
       background-image: url("~Assets/portrait_home.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
-      background-position: center;
+      background-position: center 100px;
     }
   }
 

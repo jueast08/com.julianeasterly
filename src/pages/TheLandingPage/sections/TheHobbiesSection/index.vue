@@ -1,6 +1,6 @@
 <template>
   <base-section id="hobbies" title="A Few of My Hobbies">
-    <div class="hobbies">
+    <div ref="hobbies" class="hobbies">
       <hobby-content-with-icon class="hobbies__hobby">
         <template #icon>
           <font-awesome-icon :icon="['fas', 'laptop-code']" fixed-width />
@@ -38,7 +38,6 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import HobbyContentWithIcon from "./HobbyContentWithIcon";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheHobbiesSection",
@@ -47,21 +46,7 @@ export default {
       observerIterator: null
     };
   },
-  components: { BaseSection, HobbyContentWithIcon },
-  mounted() {
-    let elements = document.querySelectorAll(".hobbies__hobby");
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      elements,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
-    );
-  },
-  beforeDestroy() {
-    this.observerIterator.disconnectAll();
-  }
+  components: { BaseSection, HobbyContentWithIcon }
 };
 </script>
 
@@ -71,6 +56,19 @@ export default {
 #hobbies {
   padding-top: 50px;
   background-color: global.$primary-white;
+  ::v-deep .section {
+    &__title-box {
+      &__title {
+        color: global.$primary-color;
+        @include global.subtitle-font($weight: 700);
+        text-transform: uppercase;
+        text-align: center;
+        &:before {
+          content: "";
+        }
+      }
+    }
+  }
   ::v-deep .section__title {
     color: global.$primary-color;
     @include global.subtitle-font($weight: 700);
@@ -84,9 +82,6 @@ export default {
     &__hobby {
       margin-top: 30px;
     }
-  }
-  ::v-deep .base-content-with-icon {
-    @include global.fade-in-and-expand-class-modifier;
   }
 }
 

@@ -4,18 +4,14 @@
     <div class="base-gauge__label-group" :style="masteryPercentageWidth">
       <span class="base-gauge__label-group__end">{{ goalLabel }}</span>
     </div>
-    <div class="base-gauge__container">
-      <div
-        class="base-gauge__container__fluid"
-        :style="masteryPercentageWidth"
-      ></div>
+    <div ref="container" class="base-gauge__container">
+      <div ref="fluid" class="base-gauge__container__fluid" :style="masteryPercentageWidth"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 export default {
   name: "BaseGauge",
   props: {
@@ -33,22 +29,22 @@ export default {
         return (
           !isNaN(possibleNumber) && possibleNumber <= 100 && possibleNumber >= 0
         );
-      },
+      }
     },
     title: {
       type: String,
       required: false,
-      default: "",
+      default: ""
     },
     goalLabel: {
       type: String,
       required: false,
-      default: "",
-    },
+      default: ""
+    }
   },
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   computed: {
@@ -58,21 +54,19 @@ export default {
         width += "%";
       }
       return { width: width };
-    },
+    }
   },
+
   mounted() {
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      [this.$el.childNodes[2].childNodes[0], this.$el.childNodes[2]],
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      [this.$refs.container, this.$refs.fluid],
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
-  },
+    InViewportObserver.disconnect(this);
+  }
 };
 </script>
 

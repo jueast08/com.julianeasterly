@@ -20,20 +20,7 @@ export default {
       if (this.isInternalPageElementWithId) {
         scrollToId(this.href.substring(1));
       } else {
-        window.location.href = this.href;
-      }
-    },
-    scrollToElement() {
-      let id = this.href.substring(1);
-      let target = document.getElementById(id);
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "center"
-        });
-      } else {
-        console.warn("There is no element with the id " + id);
+        window.open(this.href, "_blank");
       }
     }
   },

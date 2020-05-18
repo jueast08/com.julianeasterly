@@ -156,18 +156,15 @@
               <a
                 href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
                 target="__blank"
-                >here.
-              </a>
+              >here.</a>
             </p>
           </template>
         </skill-content-with-icon>
       </div>
-      <div class="skills__contact-me">
+      <div ref="contact-me" class="skills__contact-me">
         <div>Want to work together on a project or opportunity?</div>
         <div class="skills__contact-me__button">
-          <white-round-button @click="scrollToId('contact')"
-            >contact me</white-round-button
-          >
+          <white-round-button @click="scrollToId('contact')">contact me</white-round-button>
         </div>
       </div>
     </div>
@@ -180,6 +177,7 @@ import SkillContentWithIcon from "./SkillContentWithIcon";
 import SkillGauge from "./SkillGauge";
 import WhiteRoundButton from "UI/WhiteRoundButton";
 import scrollToId from "Utility/ScrollHelper";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSkillsSection",
@@ -187,11 +185,21 @@ export default {
     BaseSection,
     SkillContentWithIcon,
     WhiteRoundButton,
-    SkillGauge,
+    SkillGauge
   },
   methods: {
-    scrollToId,
+    scrollToId
   },
+  mounted() {
+    InViewportObserver.observe(
+      this.$refs["contact-me"],
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
+    );
+  },
+  beforeDestroy() {
+    InViewportObserver.disconnect(this);
+  }
 };
 </script>
 
@@ -200,6 +208,14 @@ export default {
 
 #skills {
   background-color: global.$primary-color;
+  ::v-deep .section {
+    &__title-box {
+      &__subtitle,
+      &__title {
+        color: global.$primary-white;
+      }
+    }
+  }
   ::v-deep .section__title,
   ::v-deep .section__subtitle {
     color: global.$primary-white;
@@ -230,12 +246,19 @@ export default {
       text-align: center;
       @include global.subtitle-font;
       color: global.$primary-white;
+      @include global.fade-in-class-modifier;
 
       &__button {
         margin-top: 25px;
       }
     }
   }
+}
+
+a {
+  color: global.$primary-white;
+  text-decoration: underline;
+  transition: all 10s linear;
 }
 
 @include global.adapt-to-screen("m") {
@@ -249,15 +272,10 @@ export default {
             flex-wrap: wrap;
             &__group {
               width: 30%;
-              // max-width: 1/3;
               &__gauge {
                 margin: 10px 15px;
               }
             }
-            // &__gauge {
-            //   max-width: 45%;
-            //   margin: 10px 15px;
-            // }
           }
         }
       }

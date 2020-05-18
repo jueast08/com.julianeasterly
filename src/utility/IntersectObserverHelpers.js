@@ -1,25 +1,132 @@
 /**
+ * Observes obects in relation to the viewport (document). As soon as a pixel of an observed element is triggered,
+ * all the registered callbacks linked to the object are triggered.
+ * Only one of these can exist in the application. If you need to change the root or the thresholds,
+ * use a regular IntersectionObserver.
+ */
+export class InViewportObserver {
+  static #intersectionObserver = null;
+  static #observedElements = new Map();
+  static #observedContexts = new Map();
+
+  /**
+   * @private
+   */
+  static createObserver() {
+    if (this.#intersectionObserver) {
+      return;
+    }
+    this.#intersectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        let callbacks = this.#observedElements.get(entry.target);
+        callbacks.forEach((callback) => callback(entry));
+      });
+    });
+  }
+
+  /**
+   * Adds the --in-view BEM modifier to the entries.target's first class name
+   * @param {IntersectionObserverEntry} entry : an entry provided by the IntersectionObserver
+   */
+  static addAnimationModifierOnEntry(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add(entry.target.classList[0] + "--in-view");
+    }
+  }
+
+  /**
+   * Observe an element, an Array of Elements and/or NodeLists, or NodeList with the IntersectionObserver //
+   * @param {Array[HTMLElement|NodeList], HTMLElement, NodeList} observables : an element, an Array of Elements and/or NodeLists, or NodeList
+   * @param {Function} callback : a funciton that takes entry as a parameter (ex. entry => {})
+   * @param {*} context : the Vue Component context
+   */
+  static observe(observables, callback, context) {
+    if (!this.#intersectionObserver) {
+      this.createObserver();
+    }
+    if (observables instanceof Array) {
+      observables.forEach((observable) =>
+        this.observeNodeListAndSingleElements(observable, callback, context)
+      );
+    } else {
+      this.observeNodeListAndSingleElements(observables, callback, context);
+    }
+  }
+
+  static observeNodeListAndSingleElements(observables, callback, context) {
+    if (observables instanceof NodeList) {
+      observables.forEach((observable) =>
+        this.observeElement(observable, callback, context)
+      );
+    } else if (observables instanceof HTMLElement) {
+      this.observeElement(observables, callback, context);
+    }
+  }
+
+  static observeElement(observable, callback, context) {
+    let element = observable;
+    if (!this.#observedElements.get(element)) {
+      this.#observedElements.set(element, []);
+    }
+
+    let position = this.#observedElements.get(element).length;
+    this.#observedElements.get(element).push(callback);
+
+    if (!this.#observedContexts.get(context)) {
+      this.#observedContexts.set(context, []);
+    }
+    this.#observedContexts.get(context).push({
+      element,
+      index: position,
+    });
+
+    this.#intersectionObserver.observe(observable);
+  }
+
+  /**
+   *
+   * @param {*} uniqueId
+   */
+  static disconnect(context) {
+    this.#observedContexts.get(context).forEach((object) => {
+      if (this.#observedElements.get(object.element).length === 1) {
+        delete this.#observedElements.delete(object.element);
+      } else {
+        this.#observedElements.get(object.element).splice(object.index, 1);
+      }
+    });
+    delete this.#observedContexts.delete(context);
+
+    if (this.#observedContexts.size === 0) {
+      this.#intersectionObserver.disconnect();
+    }
+  }
+}
+
+/**
+ * @deprecated
  * @brief This class is envolopes the IntersectionObserver for the project which primarily uses this tool to animate imtems once a root has come into view
  */
 export class ScrollIntoViewObserver {
   /**
-   * @param {Array} elements : an array of DOM elements. you should be passing document.querySelector('[query]')
-   * @param {String} _classToAdd: String representing the animation class to add
+   * @param {Array} element : an DOM element. You should be passing document.querySelector('[query]')
+   * @param {String} classToAdd: String representing the animation class to add
    * @param {Object} intersectionObserverOptions: Objet representing options as described here : https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
    */
-  constructor(elements, modifierClass, intersectionObserverOptions = {}) {
+  constructor(elements, classToAdd, intersectionObserverOptions = {}) {
     this._elements = elements;
-    this._modifierClass = modifierClass;
+    this._modifierClass = classToAdd;
     this._intersectionObserverOptions = intersectionObserverOptions;
     this._observer = null;
-    this._actionArray = [];
+    this._actions = null;
     this._triggerCritera = null;
+    this._temp;
     this._createObserver();
   }
 
   /**
    *@TODo the elements parameter is incorrect
-   * @param {DOMElement} elements : a Single DOMElement. you should be passing document.querySelector
+   * @param {DOMElement} element : a Single DOMElement. you should be passing document.querySelector
    * @param {Boolean} addOnInView : determines whether the class modifier should be added when the querySelector comes into view
    * @param {Boolean} removeOnOutOfView : determines whether the class modifier should be removed when the querySelector leaves view
    * @param {Boolean} addOnOutOfView : determines whether the class modifier should be added when the querySelector leaves view
@@ -27,7 +134,7 @@ export class ScrollIntoViewObserver {
 
    */
   observe(
-    elements,
+    element,
     addOnInView = true,
     removeOnOutOfView = true,
     removeOnInView = false,
@@ -36,13 +143,13 @@ export class ScrollIntoViewObserver {
     if (this._observer === null) {
       throw "Observer has not been initiated";
     }
-    this._observer.observe(elements);
-    this._actionArray.push({
+    this._observer.observe(element);
+    this._actions = {
       addOnInView,
       removeOnOutOfView,
       addOnOutOfView,
       removeOnInView,
-    });
+    };
   }
 
   /**
@@ -59,27 +166,28 @@ export class ScrollIntoViewObserver {
 
     if (this._observer === null) {
       this._observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => this._handleOnScroll(entry, index));
+        this._temp = entries;
+        entries.forEach((entry) => this._handleOnScroll(entry));
       }, this._intersectionObserverOptions);
     }
     return this._observer;
   }
 
-  _handleOnScroll(entry, index) {
+  _handleOnScroll(entry) {
     if (this._triggerEvent(entry)) {
-      if (this._actionArray[index].addOnInView) {
+      if (this._actions.addOnInView) {
         this._addAnimationClasses();
       }
 
-      if (this._actionArray[index].removeOnInView) {
+      if (this._actions.removeOnInView) {
         this._removeAnimationClasses();
       }
     } else {
-      if (this._actionArray[index].removeOnOutOfView) {
+      if (this._actions.removeOnOutOfView) {
         this._removeAnimationClasses();
       }
 
-      if (this._actionArray[index].addOnOutOfView) {
+      if (this._actions.addOnOutOfView) {
         this._addAnimationClasses();
       }
     }
@@ -147,6 +255,9 @@ export class ScrollIntoViewObserver {
   }
 }
 
+/**
+ * @@deprecated
+ */
 export class IntersectObserverHelpersIterator {
   /**
    *
