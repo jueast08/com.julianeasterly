@@ -249,9 +249,9 @@ export default {
         }
         return;
       }
+      this.$refs.recaptcha.execute();
 
       this.showLoaderOverlay = true;
-      this.$refs.recaptcha.execute();
       if (process.env.NODE_ENV === "development") {
         console.log("sending to", process.env.VUE_APP_API + "/send");
         await new Promise(r => setTimeout(r, 2000));
@@ -620,6 +620,9 @@ export default {
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       &:after {
         content: " ";
         position: absolute;
