@@ -168,17 +168,6 @@ export default {
     isIncorrect(code) {
       return code === inputStatusCodes.INCORRECT;
     },
-    // validate(errorOnEmpty) {
-    //   this.validateName(errorOnEmpty);
-    //   this.validateEmail(errorOnEmpty);
-    //   this.validateMessage(errorOnEmpty);
-
-    //   return (
-    //     this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
-    //     this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
-    //     this.formHelpMessages.message.status === inputStatusCodes.CORRECT
-    //   );
-    // },
     validateName(errorOnEmpty = false) {
       if (this.form.name.trim() === "") {
         this.formHelpMessages.name.message = "Be sure to add your name";
