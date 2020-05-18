@@ -123,7 +123,7 @@
                 />
                 <ul class="skills__list__skill__gauge-wrapper__group__list">
                   <li>English (Native)</li>
-                  <li>French</li>
+                  <li>French (Bilingual)</li>
                   <li>Public Speaking</li>
                 </ul>
               </div>
