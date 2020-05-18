@@ -17,7 +17,7 @@
             </span>
             <span>{{ this.formHelpMessages.name.message}}</span>
           </div>
-          <input type="text" name="name" v-model="form.name" />
+          <input type="text" name="name" @input="validateName()" v-model="form.name" />
         </section>
         <section class="contact__form__section">
           <div
@@ -35,7 +35,7 @@
             </span>
             <span>{{ this.formHelpMessages.email.message}}</span>
           </div>
-          <input type="text" name="email" v-model="form.email" />
+          <input type="text" name="email" @input="validateEmail()" v-model="form.email" />
         </section>
         <section class="contact__form__section textarea">
           <div
@@ -48,7 +48,7 @@
             </span>
             <span>{{ this.formHelpMessages.message.message}}</span>
           </div>
-          <textarea name="message" v-model="form.message" />
+          <textarea name="message" @input="validateMessage()" v-model="form.message" />
         </section>
         <div class="contact__form__send">
           <vue-recaptcha
@@ -59,7 +59,7 @@
             :loadRecaptchaScript="true"
             ref="recaptcha"
           />
-          <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
+          <primary-color-round-button :disabled="true" :allowClickOnDisabled="true">Send</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -168,48 +168,56 @@ export default {
     isIncorrect(code) {
       return code === inputStatusCodes.INCORRECT;
     },
-    validate() {
-      this.validateName();
-      this.validateEmail();
-      this.validateMessage();
+    // validate(errorOnEmpty) {
+    //   this.validateName(errorOnEmpty);
+    //   this.validateEmail(errorOnEmpty);
+    //   this.validateMessage(errorOnEmpty);
 
-      return (
-        this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
-        this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
-        this.formHelpMessages.message.status === inputStatusCodes.CORRECT
-      );
-    },
-    validateName() {
+    //   return (
+    //     this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
+    //     this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
+    //     this.formHelpMessages.message.status === inputStatusCodes.CORRECT
+    //   );
+    // },
+    validateName(errorOnEmpty = false) {
       if (this.form.name.trim() === "") {
         this.formHelpMessages.name.message = "Be sure to add your name";
-        this.formHelpMessages.name.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.name.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else {
         this.formHelpMessages.name.message = "Name looks good!";
         this.formHelpMessages.name.status = inputStatusCodes.CORRECT;
       }
     },
-    validateMessage() {
+    validateMessage(errorOnEmpty = false) {
       if (this.form.message.trim() === "") {
         this.formHelpMessages.message.message =
           "Let me know what you want to say!";
-        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.message.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else if (this.form.message.trim().length < 50) {
         this.formHelpMessages.message.message =
           "Write " +
           (50 - this.form.message.trim().length) +
           " more characters!";
-        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.message.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else {
         this.formHelpMessages.message.message = "Message looks good!";
         this.formHelpMessages.message.status = inputStatusCodes.CORRECT;
       }
     },
-    validateEmail() {
+    validateEmail(errorOnEmpty = false) {
       var re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       if (this.form.email.trim() === "") {
         this.formHelpMessages.email.message =
           "Make sure to double check your email";
-        this.formHelpMessages.email.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.email.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else if (!re.test(this.form.email.trim())) {
         this.formHelpMessages.email.message =
           "Oh, oh. Be sure to check your email.";
@@ -228,7 +236,20 @@ export default {
     onCaptchaExpired() {
       this.$refs.recaptcha.reset();
     },
+    changeToErrorStatusIfNotCorrect(field) {
+      this.formHelpMessages[field].status =
+        this.formHelpMessages[field].status === inputStatusCodes.CORRECT
+          ? inputStatusCodes.CORRECT
+          : inputStatusCodes.INCORRECT;
+    },
     async onSubmit() {
+      if (!this.isValidForm) {
+        for (let field in this.formHelpMessages) {
+          this.changeToErrorStatusIfNotCorrect(field);
+        }
+        return;
+      }
+
       this.showLoaderOverlay = true;
       this.$refs.recaptcha.execute();
       if (process.env.NODE_ENV === "development") {
@@ -270,6 +291,15 @@ export default {
     },
     resetOverlayBackgroundColor() {
       this.sendSuccess = true;
+    }
+  },
+  computed: {
+    isValidForm() {
+      return (
+        this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.message.status === inputStatusCodes.CORRECT
+      );
     }
   },
   mounted() {
