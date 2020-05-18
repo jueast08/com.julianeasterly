@@ -168,17 +168,6 @@ export default {
     isIncorrect(code) {
       return code === inputStatusCodes.INCORRECT;
     },
-    // validate(errorOnEmpty) {
-    //   this.validateName(errorOnEmpty);
-    //   this.validateEmail(errorOnEmpty);
-    //   this.validateMessage(errorOnEmpty);
-
-    //   return (
-    //     this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
-    //     this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
-    //     this.formHelpMessages.message.status === inputStatusCodes.CORRECT
-    //   );
-    // },
     validateName(errorOnEmpty = false) {
       if (this.form.name.trim() === "") {
         this.formHelpMessages.name.message = "Be sure to add your name";
@@ -227,31 +216,17 @@ export default {
         this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
       }
     },
-    onVerifyCapctha(response) {
+    async onVerifyCapctha(response) {
       this.form.recaptcha = response;
-      if (process.env.NODE_ENV === "development") {
-        console.log(response);
-      }
-    },
-    onCaptchaExpired() {
-      this.$refs.recaptcha.reset();
-    },
-    changeToErrorStatusIfNotCorrect(field) {
-      this.formHelpMessages[field].status =
-        this.formHelpMessages[field].status === inputStatusCodes.CORRECT
-          ? inputStatusCodes.CORRECT
-          : inputStatusCodes.INCORRECT;
-    },
-    async onSubmit() {
       if (!this.isValidForm) {
         for (let field in this.formHelpMessages) {
           this.changeToErrorStatusIfNotCorrect(field);
         }
         return;
       }
-      this.$refs.recaptcha.execute();
-
+      this.onCaptchaExpired();
       this.showLoaderOverlay = true;
+
       if (process.env.NODE_ENV === "development") {
         console.log("sending to", process.env.VUE_APP_API + "/send");
         await new Promise(r => setTimeout(r, 2000));
@@ -279,11 +254,22 @@ export default {
           );
         })
         .then(() => {
-          this.onCaptchaExpired();
           this.$refs["contact__form-overlay__wrapper"].classList.add(
             "contact__form-overlay__wrapper--finished"
           );
         });
+    },
+    onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
+    },
+    changeToErrorStatusIfNotCorrect(field) {
+      this.formHelpMessages[field].status =
+        this.formHelpMessages[field].status === inputStatusCodes.CORRECT
+          ? inputStatusCodes.CORRECT
+          : inputStatusCodes.INCORRECT;
+    },
+    onSubmit() {
+      this.$refs.recaptcha.execute();
     },
     hideShowLowerOverlay() {
       this.showLoaderOverlay = false;
