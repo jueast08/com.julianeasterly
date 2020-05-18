@@ -54,13 +54,12 @@
           <vue-recaptcha
             :sitekey="recaptchaKey"
             size="invisible"
-            :loadRecaptchaScript="true"
             @verify="onVerifyCapctha"
             @expired="onCaptchaExpired"
+            :loadRecaptchaScript="true"
             ref="recaptcha"
-          >
-            <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
-          </vue-recaptcha>
+          />
+          <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -131,21 +130,12 @@ export default {
       recaptchaKey: process.env.VUE_APP_RECAPTCHA,
       showLoaderOverlay: false,
       sendSuccess: true,
-      form:
-        process.env.NODE_ENV === "development"
-          ? {
-              name: "Test",
-              email: "test@test.com",
-              message:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum mi tempus gravida elementum. Duis sollicitudin neque sit amet malesuada egestas. Aenean iaculis lectus in turpis egestas congue. Maecenas at neque orci. Nulla elementum rhoncus elementum. Nunc porttitor rhoncus sodales. Curabitur orci ex, interdum ac justo eget, rutrum sagittis augue. Morbi metus purus, fermentum in urna sed, gravida pulvinar odio. Etiam consequat euismod interdum. Suspendisse eleifend eros id leo ullamcorper, tempor fringilla metus bibendum. Etiam facilisis velit nec blandit rutrum. Morbi vehicula scelerisque risus non tincidunt. Sed egestas imperdiet condimentum. Praesent volutpat sagittis sapien, sit amet fermentum leo aliquet ac. ",
-              recaptcha: null
-            }
-          : {
-              name: "",
-              email: "",
-              message: "",
-              recaptcha: null
-            },
+      form: {
+        name: "",
+        email: "",
+        message: "",
+        recaptcha: null
+      },
       formHelpMessages: {
         name: {
           status: inputStatusCodes.EMPTY,
@@ -234,13 +224,13 @@ export default {
       if (process.env.NODE_ENV === "development") {
         console.log(response);
       }
-      this.onSubmit();
     },
     onCaptchaExpired() {
       this.$refs.recaptcha.reset();
     },
     async onSubmit() {
       this.showLoaderOverlay = true;
+      this.$refs.recaptcha.execute();
       if (process.env.NODE_ENV === "development") {
         console.log("sending to", process.env.VUE_APP_API + "/send");
         await new Promise(r => setTimeout(r, 2000));
