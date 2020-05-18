@@ -159,8 +159,6 @@ export default {
       }
     }
   }
-  // ::v-deep .section__title {
-  // }
 
   ::v-deep .section__subtitle {
     text-align: left;
