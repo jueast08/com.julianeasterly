@@ -37,19 +37,8 @@ export default {
       InViewportObserver.addAnimationModifierOnEntry,
       this
     );
-
-    // this.observerIterator = new IntersectObserverHelpersIterator(
-    //   this.$refs.container,
-    //   "--in-view",
-    //   {},
-    //   true,
-    //   false,
-    //   true
-    // );
   },
   beforeDestroy() {
-    //this.observerIterator.disconnectAll();
-
     InViewportObserver.disconnect(this);
   }
 };
@@ -132,12 +121,11 @@ export default {
       width: 100%;
       height: 100%;
       z-index: 1;
-      opacity: 0.46;
       background-image: url("~Assets/portrait_home.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
-      background-position: center;
+      background-position: center 100px;
     }
   }
 

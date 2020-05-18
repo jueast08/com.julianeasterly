@@ -69,11 +69,7 @@
 
 <script>
 import BaseSection from "Bases/BaseSection";
-//import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
-import {
-  //IntersectObserverHelpersIterator,
-  InViewportObserver
-} from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheAboutSection",
@@ -86,24 +82,7 @@ export default {
     BaseSection
   },
   methods: {},
-  // mounted() {
-  //   this.observerIterator = new IntersectObserverHelpersIterator(
-  //     [
-  //       this.$refs.section1,
-  //       this.$refs.section2,
-  //       this.$refs.section3,
-  //       this.$refs.photo
-  //     ],
-  //     "--in-view",
-  //     {},
-  //     true,
-  //     false,
-  //     true
-  //   );
-  // },
-  // beforeDestroy() {
-  //   this.observerIterator.disconnectAll();
-  // }
+
   mounted() {
     InViewportObserver.observe(
       [
@@ -115,19 +94,8 @@ export default {
       InViewportObserver.addAnimationModifierOnEntry,
       this
     );
-    //
-    // this.observerIterator = new IntersectObserverHelpersIterator(
-    //   this.$refs.container,
-    //   "--in-view",
-    //   {},
-    //   true,
-    //   false,
-    //   true
-    // );
   },
   beforeDestroy() {
-    //this.observerIterator.disconnectAll();
-
     InViewportObserver.disconnect(this);
   }
 };

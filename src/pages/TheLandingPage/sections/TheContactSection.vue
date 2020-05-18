@@ -285,39 +285,14 @@ export default {
       this.sendSuccess = true;
     }
   },
-  // mounted() {
-  //   let element = this.$refs.contact;
-  //   this.observers = new IntersectObserverHelpersIterator(
-  //     element,
-  //     "--in-view",
-  //     {},
-  //     true,
-  //     false,
-  //     true
-  //   );
-  // },
-  // beforeDestroy() {
-  //   this.observers.disconnectAll();
-  // },
   mounted() {
     InViewportObserver.observe(
       this.$refs.contact,
       InViewportObserver.addAnimationModifierOnEntry,
       this
     );
-    //
-    // this.observerIterator = new IntersectObserverHelpersIterator(
-    //   this.$refs.container,
-    //   "--in-view",
-    //   {},
-    //   true,
-    //   false,
-    //   true
-    // );
   },
   beforeDestroy() {
-    //this.observerIterator.disconnectAll();
-
     InViewportObserver.disconnect(this);
   }
 };
@@ -624,10 +599,10 @@ export default {
     ::v-deep .section__title-box {
       padding-top: 100px;
       width: 60%;
-      background-image: url("~Assets/contact_background_desktop.jpg");
+      background-image: url("~Assets/contact_background.jpg");
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center center;
+      background-position: center 40%;
       &:after {
         content: " ";
         position: absolute;
