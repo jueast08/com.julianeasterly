@@ -165,7 +165,6 @@ export default {
         height: 100%;
 
         &:before {
-          /** @TODO Don't attach this background on starting on small screens 's' (maybe base this choice on the picture chosen*/
           content: " ";
           display: block;
           position: absolute;
