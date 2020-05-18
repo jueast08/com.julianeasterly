@@ -14,13 +14,13 @@
           </template>
           <template #details>
             <p>
-              As a consultant, I am currently Product Owner for the "Luxury
+              As a consultant, I have a Product Owner role in the "Luxury
               Services" aspects of the Bentley Network Application, a private
-              social networkk for Bentley Vehicle owners. I work on the
+              social network for Bentley Vehicle owners. I work on the
               functional conception of new products and services, orchestrate
               the development of these services and products, and carry out
               testing. I also carry out market studies and propose innovative IT
-              ideas for the company.
+              ideas.
               <br />
               <b>Programing Languages and Tools:</b> Javascript, NightwatchJS,
               Sonarqube
@@ -62,10 +62,10 @@
               <br />
               <span class="primary-font-color">Oct. 2018 - Mar. 2019</span>
               <br />My collobration with the Société Générale Bank started with
-              a student project the restrictions that can be deduced from ATM
-              legislation. This project required understanding EMV
+              a student project on the restrictions that can be concluded from studing ATM
+              legislation. This project required understanding EMV (Eurocard Mastercard Visa)
               specfifications, as well as French standards like the the Manuel
-              de Retraits sur Automate (Manual on ATM Withrawals in English) and
+              de Retraits sur Automate (Manual on ATM Withrawals) and
               the Manuel de Paiements Electroniques (Manaul on Electronique
               Payments)
               <br />
@@ -87,7 +87,7 @@
             <p>
               As a DevOps engineer, I put created a testing tool combining
               Python 2.7 and Kubernetes in order to boost end-to-end test
-              execution time. Thanks to this tool, end-to-end tests say a 83%
+              execution time. Thanks to this tool, end-to-end tests saw a 83%
               decrease in runtime.
               <br />
               <b>Programing Languages and Tools:</b> Python, Javascript, Docker,
@@ -109,21 +109,24 @@
               <span class="bold-primary">Full-Stack Developer</span>
               <br />As a developer, I worked on projects heavily reliant on web
               technology such as ReactJs and Laravel. I also had the opportunity
-              to work occasionally as Product Owner. My bigget challenge was
-              seting up and suervising a system of tests (unit, integration, and
-              end-to-end tests) for iStoryPath using Jest, Enzyme, Nockk and
+              to work occasionally as a Project Leader. My biggest challenge was
+              setting up and supervising a system of tests (unit, integration, and
+              end-to-end tests) for
+              <a
+                href="https://pathinterest.com/"
+              >iStoryPath</a> using Jest, Enzyme, Nock and
               Nightwatch.
               <br />
-              <b>Programing Languages and Tools:</b> ReactJs, PHP, Golang, Java,
+              <b>Programing Languages and Tools:</b> ReactJS, Larvel, Golang, Java,
               Git & Git-Flow, Docker
             </p>
             <p>
               <span class="bold-primary">Internship &mdash; Full-Stack Developer</span>
-              <br />Development of a React and Laravel application that
+              <br />Development of a full-stack application in React and Laravel application that
               facilitates the utilization of Wiremock, an API HTTP simulator
               written in Java.
               <br />
-              <b>Programing Languages and Tools:</b> ReactJs, Laravel
+              <b>Programing Languages and Tools:</b> ReactJS, Laravel, Wiremock, Java
             </p>
           </template>
         </professional-experience-item>
@@ -161,14 +164,16 @@
         <section class="experience__others__description">
           <div class="experience__others__description__title">From 2008 to 2012</div>
           <p>
-            I believe in working hard and from the age of 18, I've worked
+            I believe in working hard, and from the age of 18, I've worked
             various jobs while in school. Between the moment that I started
-            university classes and the moment I recieved my first degee, I've
+            university classes and the moment I received my first degee, I've
             worked as a
             <span
               class="bold-primary"
-            >tutor/mentor</span>, I've
-            <span class="bold-primary">driven a forklift in a beer depot</span>,
+            >tutor/mentor for students at Indiana State University</span>, I've
+            <span
+              class="bold-primary"
+            >driven a forklift for Dever Budweiser Distribution Company</span>,
             and
             <span
               class="bold-primary"
@@ -306,6 +311,12 @@ export default {
       margin-top: 50px;
     }
   }
+}
+
+a {
+  color: global.$primary-color;
+  text-decoration: underline;
+  transition: all 10s linear;
 }
 
 @include global.adapt-to-screen("s") {
