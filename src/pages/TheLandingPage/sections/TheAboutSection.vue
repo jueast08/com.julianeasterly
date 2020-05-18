@@ -1,16 +1,11 @@
 <template>
-  <base-section id="about" title="Hi. I'm Julian.">
-    <!-- subtitle="Business Analyst - IT Consultant" -->
+  <base-section ref="about" id="about" title="Hi. I'm Julian.">
     <div class="about">
-      <section class="about__section">
+      <section ref="section1" class="about__section">
         <!-- @TODO add something about my MBTI tests like "I'm a Protagonist !!! with a link and another to my personality file https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwig9LXJ4q7pAhWrDmMBHcAqCggQFjAAegQIBRAB&url=https%3A%2F%2Fapp.assessfirst.com%2F_%2Fprofile%2Fhnnndvm0-julian-easterly&usg=AOvVaw3he2NfdS3npV7hKbdGTTFu" -->
         <div class="about__section__titles">
-          <div class="about__section__titles__subtitle">
-            To France from the USA
-          </div>
-          <h3 class="about__section__titles__title">
-            Becoming a Citizen of the World
-          </h3>
+          <div class="about__section__titles__subtitle">To France from the USA</div>
+          <h3 class="about__section__titles__title">Becoming a Citizen of the World</h3>
           <p>
             I am an American citizen, raised in Detroit, Michigan. In college, I
             studied abroad in Montpellier, France &mdash; trying to become
@@ -21,19 +16,21 @@
           <p>
             I've lived in France since 2013. As a citizen of the world, I reside
             in
-            <span class="bold-primary">Strasbourg, Alsace, France.</span>
+            <span
+              class="bold-primary"
+            >Strasbourg, Alsace, France.</span>
           </p>
         </div>
       </section>
-      <div class="about__photo col-12">
+      <div ref="photo" class="about__photo col-12">
         <div class="about__photo__wrapper col-12"></div>
       </div>
       <div class="about__spacer"></div>
-      <section class="about__section">
+      <section ref="section2" class="about__section">
         <div class="about__section__titles">
-          <h3 class="about__section__titles__title">
-            I have English Literature and Computer Science Degrees.
-          </h3>
+          <h3
+            class="about__section__titles__title"
+          >I have English Literature and Computer Science Degrees.</h3>
           <p>
             I recieved an Bachelor's degree in English in 2012, but decided to
             go back to school when arriving in France. This switch was motivated
@@ -46,19 +43,15 @@
           </p>
         </div>
       </section>
-      <section class="about__section">
+      <section ref="section3" class="about__section">
         <div class="about__section__titles">
-          <div class="about__section__titles__subtitle">
-            Personality Test Results
-          </div>
+          <div class="about__section__titles__subtitle">Personality Test Results</div>
           <p>
             I'm a
             <a
               href="https://www.16personalities.com/enfj-personality"
               target="__blank"
-            >
-              Protagonist (ENFJ)
-            </a>
+            >Protagonist (ENFJ)</a>
             according to my MTBI Results.
           </p>
           <p>
@@ -66,8 +59,7 @@
             <a
               href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
               target="__blank"
-              >here.</a
-            >
+            >here.</a>
           </p>
         </div>
       </section>
@@ -77,35 +69,35 @@
 
 <script>
 import BaseSection from "Bases/BaseSection";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheAboutSection",
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   components: {
-    BaseSection,
+    BaseSection
   },
   methods: {},
+
   mounted() {
-    let elements = document.querySelectorAll(
-      ".about__section, .about__photo, #about .section__title"
-    );
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      elements,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      [
+        this.$refs.section1,
+        this.$refs.section2,
+        this.$refs.section3,
+        this.$refs.photo
+      ],
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
-  },
+    InViewportObserver.disconnect(this);
+  }
 };
 </script>
 
@@ -116,18 +108,20 @@ export default {
   background-color: global.$background-gray;
   @include global.fixed-background-overlay;
 
-  ::v-deep .section__title-box {
-    display: flex;
-    flex-direction: column-reverse;
-    margin-bottom: 50px;
-    color: global.$primary-color;
-  }
+  ::v-deep .section {
+    &__title-box {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-bottom: 50px;
+      color: global.$primary-color;
 
-  ::v-deep .section__title {
-    color: global.$primary-black;
+      &__title {
+        color: global.$primary-black;
 
-    &:before {
-      color: global.$primary-black;
+        &:before {
+          color: global.$primary-black;
+        }
+      }
     }
   }
 
@@ -171,7 +165,6 @@ export default {
         height: 100%;
 
         &:before {
-          /** @TODO Don't attach this background on starting on small screens 's' (maybe base this choice on the picture chosen*/
           content: " ";
           display: block;
           position: absolute;
@@ -187,6 +180,12 @@ export default {
       }
     }
   }
+}
+
+a {
+  color: global.$primary-color;
+  text-decoration: none;
+  transition: all 10s linear;
 }
 
 @include global.adapt-to-screen("s") {

@@ -1,6 +1,5 @@
 <template>
   <base-round-button @click="$emit('click', $event)">
-    <!-- TODO make this button work -->
     <slot />
   </base-round-button>
 </template>

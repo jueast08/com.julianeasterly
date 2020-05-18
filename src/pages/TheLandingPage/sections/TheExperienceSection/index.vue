@@ -25,9 +25,7 @@
               <b>Programing Languages and Tools:</b> Javascript, NightwatchJS,
               Sonarqube
               <br />
-              <b
-                >Project and Client Management, Response to calls for tenders</b
-              >
+              <b>Project and Client Management, Response to calls for tenders</b>
             </p>
           </template>
         </professional-experience-item>
@@ -43,9 +41,7 @@
           </template>
           <template #details>
             <p>
-              <span class="bold-primary"
-                >Internship &mdash; Product Owner - E-Payment Expert</span
-              >
+              <span class="bold-primary">Internship &mdash; Product Owner - E-Payment Expert</span>
               <br />
               <span class="primary-font-color">Mar. - Sept. 2019</span>
               <br />With the Front Office ATM team at Société Générales
@@ -56,15 +52,13 @@
               banks and ATMS, as well as the ability to read and understand
               complex technical documents.
               <br />
-              <b
-                >Risk Assessment, Specification Drafting, Meeting Hosting, EMV,
-                TR-34</b
-              >
+              <b>
+                Risk Assessment, Specification Drafting, Meeting Hosting, EMV,
+                TR-34
+              </b>
             </p>
             <p>
-              <span class="bold-primary"
-                >Student Project &mdash; E-Payment Analyst</span
-              >
+              <span class="bold-primary">Student Project &mdash; E-Payment Analyst</span>
               <br />
               <span class="primary-font-color">Oct. 2018 - Mar. 2019</span>
               <br />My collobration with the Société Générale Bank started with
@@ -124,9 +118,7 @@
               Git & Git-Flow, Docker
             </p>
             <p>
-              <span class="bold-primary"
-                >Internship &mdash; Full-Stack Developer</span
-              >
+              <span class="bold-primary">Internship &mdash; Full-Stack Developer</span>
               <br />Development of a React and Laravel application that
               facilitates the utilization of Wiremock, an API HTTP simulator
               written in Java.
@@ -136,66 +128,56 @@
           </template>
         </professional-experience-item>
       </div>
-      <div class="experience__others">
+      <div ref="other-experience" class="experience__others">
         <div class="experience__others__title">My Other Experiences</div>
         <section class="experience__others__description">
           <div class="experience__others__description__title">From 2012</div>
           <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Bilingual (French/English) Tour Guide &mdash; D-Day and WWII
-            </div>
-            <div class="experience__others__description__content__company">
-              Mémorial de Caen &mdash; Caen, Normandy, France
-            </div>
-            <div class="experience__others__description__content__dates">
-              May 2014 - Dec. 2017
-            </div>
+            <div
+              class="experience__others__description__content__job-title"
+            >Bilingual (French/English) Tour Guide &mdash; D-Day and WWII</div>
+            <div
+              class="experience__others__description__content__company"
+            >Mémorial de Caen &mdash; Caen, Normandy, France</div>
+            <div class="experience__others__description__content__dates">May 2014 - Dec. 2017</div>
           </div>
           <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Exchange Teacher &mdash; English as a Second Language (TESL)
-            </div>
-            <div class="experience__others__description__content__company">
-              Lycée Camille Claudel &mdash; Caen, Normandy, France
-            </div>
-            <div class="experience__others__description__content__dates">
-              Oct. 2013 - May 2014
-            </div>
+            <div
+              class="experience__others__description__content__job-title"
+            >Exchange Teacher &mdash; English as a Second Language (TESL)</div>
+            <div
+              class="experience__others__description__content__company"
+            >Lycée Camille Claudel &mdash; Caen, Normandy, France</div>
+            <div class="experience__others__description__content__dates">Oct. 2013 - May 2014</div>
           </div>
           <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Teaching Assistant
-            </div>
-            <div class="experience__others__description__content__company">
-              American Montessori Academy &mdash; Redford, Michigan, USA
-            </div>
-            <div class="experience__others__description__content__dates">
-              Oct. 2012 - July. 2013
-            </div>
+            <div class="experience__others__description__content__job-title">Teaching Assistant</div>
+            <div
+              class="experience__others__description__content__company"
+            >American Montessori Academy &mdash; Redford, Michigan, USA</div>
+            <div class="experience__others__description__content__dates">Oct. 2012 - July. 2013</div>
           </div>
         </section>
         <section class="experience__others__description">
-          <div class="experience__others__description__title">
-            From 2008 to 2012
-          </div>
+          <div class="experience__others__description__title">From 2008 to 2012</div>
           <p>
             I believe in working hard and from the age of 18, I've worked
             various jobs while in school. Between the moment that I started
             university classes and the moment I recieved my first degee, I've
             worked as a
-            <span class="bold-primary">tutor/mentor</span>, I've
+            <span
+              class="bold-primary"
+            >tutor/mentor</span>, I've
             <span class="bold-primary">driven a forklift in a beer depot</span>,
             and
-            <span class="bold-primary"
-              >I've worked in a kitchen at the Detroit City Zoo</span
-            >.
+            <span
+              class="bold-primary"
+            >I've worked in a kitchen at the Detroit City Zoo</span>.
           </p>
         </section>
       </div>
-      <section class="experience__resume">
-        <white-round-button @click="openResume()"
-          >Download my Resume</white-round-button
-        >
+      <section ref="experience__resume" class="experience__resume">
+        <white-round-button @click="openResume()">Download my Resume</white-round-button>
       </section>
     </div>
   </base-section>
@@ -209,7 +191,7 @@ import ActimageLogo from "Assets/actimage_logo.png";
 import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
 import SoyhuceLogo from "Assets/soyhuce_logo.png";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheExperienceSection",
@@ -219,13 +201,13 @@ export default {
       sgLogo: SocieteGenerale,
       canalPlusLogo: CanalPlusLogo,
       soyhuceLogo: SoyhuceLogo,
-      observerIterator: null,
+      observerIterator: null
     };
   },
   components: {
     BaseSection,
     ProfessionalExperienceItem,
-    WhiteRoundButton,
+    WhiteRoundButton
   },
   methods: {
     openResume() {
@@ -233,24 +215,21 @@ export default {
         process.env.BASE_URL + "julian_easterly_resume.pdf",
         "_blank"
       );
-    },
+    }
   },
   mounted() {
-    let elements = document.querySelectorAll(
-      ".experience__others__title, .experience__others__description, .experience__others__description__content"
-    );
-    this.observerIterator = new IntersectObserverHelpersIterator(
-      elements,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      [
+        this.$refs["experience__resume"],
+        this.$refs["other-experience"].childNodes
+      ],
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
     );
   },
   beforeDestroy() {
-    this.observerIterator.disconnectAll();
-  },
+    InViewportObserver.disconnect(this);
+  }
 };
 </script>
 
@@ -261,14 +240,17 @@ export default {
   background-color: global.$primary-black;
   @include global.fixed-background-overlay;
 
-  ::v-deep .section__title {
-    color: global.$primary-color;
-    text-align: left;
-  }
-
-  ::v-deep .section__subtitle {
-    text-align: left;
-    color: global.$primary-white;
+  ::v-deep .section {
+    &__title-box {
+      &__subtitle {
+        text-align: left;
+        color: global.$primary-white;
+      }
+      &__title {
+        color: global.$primary-color;
+        text-align: left;
+      }
+    }
   }
 
   .experience {
@@ -298,7 +280,6 @@ export default {
 
         &__content {
           margin-top: 25px;
-          @include global.fade-in-class-modifier;
 
           &__company {
             margin: 5px 0;
@@ -319,6 +300,8 @@ export default {
     }
 
     &__resume {
+      @include global.fade-in-class-modifier;
+
       text-align: center;
       margin-top: 50px;
     }

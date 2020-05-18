@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 import { scrollToQuerySelector } from "Utility/ScrollHelper";
 
 export default {
@@ -55,25 +55,21 @@ export default {
   },
   mounted() {
     if (this.querySelectorThatTriggersShowButton) {
-      try {
-        this.scrollObserver = new ScrollIntoViewObserver(
-          document.querySelector(".scroll-to-section-button"),
-          "scroll-to-section-button--hidden"
-        );
-        this.scrollObserver.observe(
-          document.querySelector(this.querySelectorThatTriggersShowButton),
-          this.hideOnTriggerEnter,
-          this.showOnTriggerExit
-        );
-      } catch (error) {
-        console.error(error);
-      }
+      InViewportObserver.observe(
+        document.querySelector(this.querySelectorThatTriggersShowButton),
+        entry => {
+          if (entry.isIntersecting && this.hideOnTriggerEnter) {
+            this.$el.classList.remove("scroll-to-section-button--in-view");
+          } else if (this.showOnTriggerExit) {
+            this.$el.classList.add("scroll-to-section-button--in-view");
+          }
+        },
+        this
+      );
     }
   },
   beforeDestroy() {
-    if (this.scrollObserver) {
-      this.scrollObserver.disconnect();
-    }
+    InViewportObserver.disconnect(this);
   }
 };
 </script>
@@ -98,10 +94,7 @@ export default {
   transition: (background ease-in-out 0.25s), (bottom ease-in-out 0.25s);
   bottom: 30px;
 
-  &--hidden {
-    bottom: -50px;
-  }
-
+  @include global.fade-in-from-bottom-class-modifier;
   &__arrow {
     height: 10px;
     width: 10px;

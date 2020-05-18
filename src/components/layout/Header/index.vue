@@ -1,6 +1,6 @@
 <template>
   <header id="header" class="header col-12">
-    <div id="header__bar" class="header__bar col-12">
+    <div ref="bar" id="header__bar" class="header__bar col-12">
       <div class="header__bar__container col-12">
         <div class="header__bar__container__logo col-xl-2">
           <the-header-logo />
@@ -10,11 +10,13 @@
             <span
               class="header__bar__container__menu__link"
               v-for="(link, index) in links"
-              :key="link + index"
-              :id="'menu-header-link__' + link"
+              :class="(activeLink === link.toLowerCase()) && 'header__bar__container__menu__link--active'"
+              :key="link.toLowerCase() + index"
+              :ref="'menu_' + link.toLowerCase()"
               @click="scrollToId(link.toLowerCase())"
             >{{ link }}</span>
           </nav>
+          <div ref="follower" class="header__bar__container__menu__follower"></div>
           <div class="header__bar__container__burger">
             <the-header-burger :open="mobileMenuOpen" @onBurgerClick="onBurgerClick()" />
           </div>
@@ -38,7 +40,7 @@
 <script>
 import TheHeaderLogo from "./TheHeaderLogo";
 import TheHeaderBurger from "./TheHeaderBurger";
-import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 import scrollToId from "Utility/ScrollHelper";
 
 export default {
@@ -49,7 +51,8 @@ export default {
       mobileMenuOpen: false,
       themeObserver: null,
       fixedPositionObserver: null,
-      linkObservers: []
+      linkObserver: null,
+      activeLink: null
     };
   },
   components: {
@@ -68,56 +71,72 @@ export default {
       window.removeEventListener("scroll", this.closeMenuRemoveListener);
     },
     scrollToId,
-    createThemeObserver() {
-      try {
-        this.themeObserver = new ScrollIntoViewObserver(
-          document.querySelector(".header__bar"),
-          "header__bar--light"
-        );
-        this.themeObserver.triggerCritera = entry => {
-          return entry.boundingClientRect.y < 0;
-        };
-        this.themeObserver.observe(document.querySelector("#top-anchor-pixel"));
-      } catch (error) {
-        console.error(error);
-        if (this.themeObserver) {
-          this.themeObserver.disconnect();
-        }
-        document.getElementById("header").classList.add("header__bar--light");
-      }
+    createHeaderObserver() {
+      InViewportObserver.observe(
+        document.querySelector("#top-anchor-pixel"),
+        entry => {
+          if (entry.boundingClientRect.y < 0) {
+            this.$refs.bar.classList.add("header__bar--light");
+            this.$el.classList.add("header--fixed");
+          } else {
+            this.$refs.bar.classList.remove("header__bar--light");
+            this.$el.classList.remove("header--fixed");
+          }
+        },
+        this
+      );
     },
-    createFixedHeaderObserver() {
-      try {
-        this.fixedPositionObserver = new ScrollIntoViewObserver(
-          document.querySelector(".header"),
-          "header--fixed"
+    createLinkObserver() {
+      if (!this.shouldShowMobileHeader) {
+        this.linkObserver = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              let follower = this.$refs.follower;
+              if (entry.intersectionRatio >= 0.2) {
+                if (entry.target.id === "home") {
+                  follower.classList.remove(
+                    follower.classList[0] + "--in-view"
+                  );
+                  this.activeLink = null;
+                  return;
+                }
+                let link = this.$refs["menu_" + entry.target.id][0];
+                follower.classList.add(follower.classList[0] + "--in-view");
+                follower.style.width =
+                  link.getBoundingClientRect().width + "px";
+                follower.style.left = link.getBoundingClientRect().left + "px";
+                this.activeLink = entry.target.id;
+              }
+            });
+          },
+          {
+            threshold: [0.2],
+            root: document.querySelector(".body")
+          }
         );
-        this.fixedPositionObserver.triggerCritera = entry => {
-          return entry.boundingClientRect.y < 0;
-        };
-        this.fixedPositionObserver.observe(
-          document.querySelector("#top-anchor-pixel")
+
+        this.links.forEach(link =>
+          this.linkObserver.observe(
+            document.querySelector("#" + link.toLowerCase())
+          )
         );
-      } catch (error) {
-        console.error(error);
-        if (this.fixedPositionObserver) {
-          this.fixedPositionObserver.disconnect();
-        }
-        document.getElementById("header").classList.add("header--fixed");
-        document.getElementById("header").classList.add("header__bar--light");
+        this.linkObserver.observe(document.querySelector("#home"));
       }
+    }
+  },
+  computed: {
+    shouldShowMobileHeader() {
+      return this.$el.getBoundingClientRect().width < 992;
     }
   },
   mounted() {
-    this.createThemeObserver();
-    this.createFixedHeaderObserver();
+    this.createHeaderObserver();
+    this.createLinkObserver();
   },
   beforeDestroy() {
-    if (this.themeObserver) {
-      this.themeObserver.disconnect();
-    }
-    if (this.fixedPositionObserver) {
-      this.fixedPositionObserver.disconnect();
+    InViewportObserver.disconnect(this);
+    if (this.linkObserver) {
+      this.linkObserver.disconnect();
     }
   }
 };
@@ -236,26 +255,39 @@ export default {
         padding: 25px 0;
 
         &__menu {
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
+          &__follower {
+            position: absolute;
+            opacity: 0;
+            height: 5px;
+            border-radius: 1px;
+            background: global.$primary-color;
+            transition: width 0.25s ease-in-out, left 0.25s ease-in-out,
+              opacity 1s ease-in-out;
+            margin-top: 5px;
+            &--in-view {
+              opacity: 1;
+            }
+          }
           &__link {
             margin: 0 10px;
             @include global.link-font;
             color: global.$primary-white;
             cursor: pointer;
             transition: border 0.25s ease-in-out;
-            &--light {
-              color: global.$primary-black;
+            &--active {
+              transition: border 0.25s ease-in-out, color 0.25s ease-in-out;
+              color: global.$primary-color;
             }
-
             &:hover {
-              color: lighten(global.$primary-color, 25%);
-              //opacity: 0.6;
+              color: global.$primary-color;
             }
 
             &:active {
-              color: global.$primary-color;
+              color: lighten(global.$primary-color, 25%);
             }
           }
         }
@@ -276,6 +308,16 @@ export default {
           &__menu {
             &__link {
               color: global.$primary-black;
+              &--active {
+                color: global.$primary-color;
+              }
+              &:hover {
+                color: global.$primary-color;
+              }
+
+              &:active {
+                color: lighten(global.$primary-color, 25%);
+              }
             }
           }
 

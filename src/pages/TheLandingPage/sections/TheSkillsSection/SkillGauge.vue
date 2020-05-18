@@ -29,7 +29,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 @use 'global';
 
@@ -41,11 +40,11 @@ export default {
 
   &__container {
     height: 5px;
-    background: global.$primary-white;
+    background: global.$primary-color;
     border: 2px solid global.$primary-white;
 
     &__fluid {
-      background: global.$primary-color;
+      background: global.$primary-white;
     }
   }
 }

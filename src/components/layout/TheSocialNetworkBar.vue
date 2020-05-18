@@ -10,47 +10,43 @@
       <social-network-button href="https://github.com/jueast08">
         <font-awesome-icon :icon="['fab', 'github']" fixed-width />
       </social-network-button>
+      <social-network-button href="https://twitter.com/jueast08">
+        <font-awesome-icon :icon="['fab', 'twitter']" fixed-width />
+      </social-network-button>
     </div>
   </div>
 </template>
 
 <script>
 import SocialNetworkButton from "Bases/BaseSocialNetworkButton";
-import { ScrollIntoViewObserver } from "Utility/IntersectObserverHelpers";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheSocialNetworkBar",
   data() {
     return {
-      exitObserver: null,
+      exitObserver: null
     };
   },
   components: {
-    SocialNetworkButton,
+    SocialNetworkButton
   },
   mounted() {
-    let element = document.querySelector(".sn-bar");
-    this.exitObserver = new ScrollIntoViewObserver(element, "sn-bar--in-view");
-    this.exitObserver.observe(
-      document.querySelector("#contact"),
-      false,
-      false,
-      true,
-      true
-    );
-    this.exitObserver.observe(
-      document.querySelector("#footer"),
-      false,
-      false,
-      true,
-      true
+    InViewportObserver.observe(
+      document.querySelectorAll("#contact,#footer"),
+      entry => {
+        if (entry.isIntersecting) {
+          this.$el.classList.remove("sn-bar--in-view");
+        } else {
+          this.$el.classList.add("sn-bar--in-view");
+        }
+      },
+      this
     );
   },
   beforeDestroy() {
-    if (this.exitObserver) {
-      this.exitObserver.disconnect();
-    }
-  },
+    InViewportObserver.disconnect(this);
+  }
 };
 </script>
 
@@ -85,13 +81,12 @@ export default {
       box-shadow: -10px 0px 20px 2px rgba(0, 0, 0, 0.2);
 
       ::v-deep button {
-        width: 50%;
         font-size: 25px;
         color: rgba(global.$primary-black, 0.6);
         transition: color 0.25s ease-in-out;
 
         &:hover {
-          color: rgba(global.$primary-black, 1);
+          color: rgba(global.$primary-color, 1);
         }
       }
     }

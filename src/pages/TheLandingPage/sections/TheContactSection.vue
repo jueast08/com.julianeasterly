@@ -4,7 +4,7 @@
     title="Send Me a Message"
     subtitle="Opportunity, idea for a project, or just want to say hi?"
   >
-    <div class="contact">
+    <div ref="contact" class="contact">
       <form class="contact__form" @submit.prevent="onSubmit">
         <section class="contact__form__section">
           <div
@@ -17,7 +17,7 @@
             </span>
             <span>{{ this.formHelpMessages.name.message}}</span>
           </div>
-          <input type="text" name="name" v-model="form.name" />
+          <input type="text" name="name" @input="validateName()" v-model="form.name" />
         </section>
         <section class="contact__form__section">
           <div
@@ -35,7 +35,7 @@
             </span>
             <span>{{ this.formHelpMessages.email.message}}</span>
           </div>
-          <input type="text" name="email" v-model="form.email" />
+          <input type="text" name="email" @input="validateEmail()" v-model="form.email" />
         </section>
         <section class="contact__form__section textarea">
           <div
@@ -48,19 +48,18 @@
             </span>
             <span>{{ this.formHelpMessages.message.message}}</span>
           </div>
-          <textarea name="message" v-model="form.message" />
+          <textarea name="message" @input="validateMessage()" v-model="form.message" />
         </section>
         <div class="contact__form__send">
           <vue-recaptcha
             :sitekey="recaptchaKey"
             size="invisible"
-            :loadRecaptchaScript="true"
-            @verify="onVerify"
+            @verify="onVerifyCapctha"
             @expired="onCaptchaExpired"
+            :loadRecaptchaScript="true"
             ref="recaptcha"
-          >
-            <primary-color-round-button :disabled="!validate()">Send</primary-color-round-button>
-          </vue-recaptcha>
+          />
+          <primary-color-round-button :disabled="true" :allowClickOnDisabled="true">Send</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -90,7 +89,7 @@
                 <br />Message Not Sent!
                 <div
                   class="contact__form-overlay__wrapper__finished-messsage__content__retry"
-                  @click="showLoaderOverlay = false"
+                  @click="hideShowLowerOverlay()"
                 >Try Again?</div>
               </div>
             </div>
@@ -114,10 +113,10 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import PrimaryColorRoundButton from "UI/PrimaryColorRoundButton";
-import { IntersectObserverHelpersIterator } from "Utility/IntersectObserverHelpers";
 import VueRecaptcha from "vue-recaptcha";
 import querystring from "querystring";
 import axios from "axios";
+import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 const inputStatusCodes = {
   EMPTY: 1,
@@ -131,21 +130,12 @@ export default {
       recaptchaKey: process.env.VUE_APP_RECAPTCHA,
       showLoaderOverlay: false,
       sendSuccess: true,
-      form:
-        process.env.NODE_ENV === "development"
-          ? {
-              name: "Test",
-              email: "test@test.com",
-              message:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum mi tempus gravida elementum. Duis sollicitudin neque sit amet malesuada egestas. Aenean iaculis lectus in turpis egestas congue. Maecenas at neque orci. Nulla elementum rhoncus elementum. Nunc porttitor rhoncus sodales. Curabitur orci ex, interdum ac justo eget, rutrum sagittis augue. Morbi metus purus, fermentum in urna sed, gravida pulvinar odio. Etiam consequat euismod interdum. Suspendisse eleifend eros id leo ullamcorper, tempor fringilla metus bibendum. Etiam facilisis velit nec blandit rutrum. Morbi vehicula scelerisque risus non tincidunt. Sed egestas imperdiet condimentum. Praesent volutpat sagittis sapien, sit amet fermentum leo aliquet ac. ",
-              recaptcha: null
-            }
-          : {
-              name: "",
-              email: "",
-              message: "",
-              recaptcha: null
-            },
+      form: {
+        name: "",
+        email: "",
+        message: "",
+        recaptcha: null
+      },
       formHelpMessages: {
         name: {
           status: inputStatusCodes.EMPTY,
@@ -178,48 +168,56 @@ export default {
     isIncorrect(code) {
       return code === inputStatusCodes.INCORRECT;
     },
-    validate() {
-      this.validateName();
-      this.validateEmail();
-      this.validateMessage();
+    // validate(errorOnEmpty) {
+    //   this.validateName(errorOnEmpty);
+    //   this.validateEmail(errorOnEmpty);
+    //   this.validateMessage(errorOnEmpty);
 
-      return (
-        this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
-        this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
-        this.formHelpMessages.message.status === inputStatusCodes.CORRECT
-      );
-    },
-    validateName() {
+    //   return (
+    //     this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
+    //     this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
+    //     this.formHelpMessages.message.status === inputStatusCodes.CORRECT
+    //   );
+    // },
+    validateName(errorOnEmpty = false) {
       if (this.form.name.trim() === "") {
         this.formHelpMessages.name.message = "Be sure to add your name";
-        this.formHelpMessages.name.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.name.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else {
         this.formHelpMessages.name.message = "Name looks good!";
         this.formHelpMessages.name.status = inputStatusCodes.CORRECT;
       }
     },
-    validateMessage() {
+    validateMessage(errorOnEmpty = false) {
       if (this.form.message.trim() === "") {
         this.formHelpMessages.message.message =
           "Let me know what you want to say!";
-        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.message.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else if (this.form.message.trim().length < 50) {
         this.formHelpMessages.message.message =
           "Write " +
           (50 - this.form.message.trim().length) +
           " more characters!";
-        this.formHelpMessages.message.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.message.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else {
         this.formHelpMessages.message.message = "Message looks good!";
         this.formHelpMessages.message.status = inputStatusCodes.CORRECT;
       }
     },
-    validateEmail() {
+    validateEmail(errorOnEmpty = false) {
       var re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       if (this.form.email.trim() === "") {
         this.formHelpMessages.email.message =
           "Make sure to double check your email";
-        this.formHelpMessages.email.status = inputStatusCodes.EMPTY;
+        this.formHelpMessages.email.status = errorOnEmpty
+          ? inputStatusCodes.INCORRECT
+          : inputStatusCodes.EMPTY;
       } else if (!re.test(this.form.email.trim())) {
         this.formHelpMessages.email.message =
           "Oh, oh. Be sure to check your email.";
@@ -229,20 +227,34 @@ export default {
         this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
       }
     },
-    onVerify(response) {
+    onVerifyCapctha(response) {
       this.form.recaptcha = response;
       if (process.env.NODE_ENV === "development") {
         console.log(response);
       }
-      this.onSubmit();
     },
     onCaptchaExpired() {
       this.$refs.recaptcha.reset();
     },
-    onSubmit() {
+    changeToErrorStatusIfNotCorrect(field) {
+      this.formHelpMessages[field].status =
+        this.formHelpMessages[field].status === inputStatusCodes.CORRECT
+          ? inputStatusCodes.CORRECT
+          : inputStatusCodes.INCORRECT;
+    },
+    async onSubmit() {
+      if (!this.isValidForm) {
+        for (let field in this.formHelpMessages) {
+          this.changeToErrorStatusIfNotCorrect(field);
+        }
+        return;
+      }
+      this.$refs.recaptcha.execute();
+
       this.showLoaderOverlay = true;
       if (process.env.NODE_ENV === "development") {
         console.log("sending to", process.env.VUE_APP_API + "/send");
+        await new Promise(r => setTimeout(r, 2000));
       }
       axios
         .post(
@@ -273,24 +285,32 @@ export default {
           );
         });
     },
-
     hideShowLowerOverlay() {
       this.showLoaderOverlay = false;
+      this.resetOverlayBackgroundColor();
+    },
+    resetOverlayBackgroundColor() {
+      this.sendSuccess = true;
+    }
+  },
+  computed: {
+    isValidForm() {
+      return (
+        this.formHelpMessages.name.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
+        this.formHelpMessages.message.status === inputStatusCodes.CORRECT
+      );
     }
   },
   mounted() {
-    let element = document.querySelector(".contact");
-    this.observers = new IntersectObserverHelpersIterator(
-      element,
-      "--in-view",
-      {},
-      true,
-      false,
-      true
+    InViewportObserver.observe(
+      this.$refs.contact,
+      InViewportObserver.addAnimationModifierOnEntry,
+      this
     );
   },
   beforeDestroy() {
-    this.observers.disconnectAll();
+    InViewportObserver.disconnect(this);
   }
 };
 </script>
@@ -333,11 +353,13 @@ export default {
   }
 
   ::v-deep .section {
-    &__title,
-    &__subtitle {
-      position: relative;
-      color: global.$primary-white;
-      z-index: 3;
+    &__title-box {
+      &__title,
+      &__subtitle {
+        position: relative;
+        color: global.$primary-white;
+        z-index: 3;
+      }
     }
 
     &__container {
@@ -463,7 +485,6 @@ export default {
     width: 100%;
     background: global.$primary-color;
     transition: background 0.5s ease-in-out;
-
     overflow: hidden;
 
     &--failure {
@@ -595,10 +616,13 @@ export default {
     ::v-deep .section__title-box {
       padding-top: 100px;
       width: 60%;
-      background-image: url("~Assets/contact_background_desktop.jpg");
+      background-image: url("~Assets/contact_background.jpg");
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center center;
+      background-position: center 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       &:after {
         content: " ";
         position: absolute;

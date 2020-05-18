@@ -22,19 +22,6 @@ export default {
       } else {
         window.open(this.href, "_blank");
       }
-    },
-    scrollToElement() {
-      let id = this.href.substring(1);
-      let target = document.getElementById(id);
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "center"
-        });
-      } else {
-        console.warn("There is no element with the id " + id);
-      }
     }
   },
   computed: {
