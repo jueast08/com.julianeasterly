@@ -59,7 +59,7 @@
             :loadRecaptchaScript="true"
             ref="recaptcha"
           />
-          <primary-color-round-button :disabled="true" :allowClickOnDisabled="true">Send</primary-color-round-button>
+          <primary-color-round-button :disabled="!isValidForm" :allowClickOnDisabled="true">Send</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -216,33 +216,29 @@ export default {
         this.formHelpMessages.email.status = inputStatusCodes.CORRECT;
       }
     },
-    async onVerifyCapctha(response) {
+    onVerifyCapctha(response) {
       this.form.recaptcha = response;
+
       if (!this.isValidForm) {
         for (let field in this.formHelpMessages) {
           this.changeToErrorStatusIfNotCorrect(field);
         }
+        this.$refs.recaptcha.reset();
         return;
       }
-      this.onCaptchaExpired();
+
       this.showLoaderOverlay = true;
 
-      if (process.env.NODE_ENV === "development") {
-        console.log("sending to", process.env.VUE_APP_API + "/send");
-        await new Promise(r => setTimeout(r, 2000));
-      }
       axios
         .post(
           process.env.VUE_APP_API + "/send",
           querystring.stringify(this.form)
         )
         .then(res => {
-          if (res.request.status === 200) {
-            if (process.env.NODE_ENV === "development") {
-              console.log(res);
-            }
-            this.sendSuccess = true;
+          if (process.env.NODE_ENV === "development") {
+            console.log(res);
           }
+          this.sendSuccess = true;
         })
         .catch(error => {
           if (process.env.NODE_ENV === "development") {
@@ -254,6 +250,7 @@ export default {
           );
         })
         .then(() => {
+          this.$refs.recaptcha.reset();
           this.$refs["contact__form-overlay__wrapper"].classList.add(
             "contact__form-overlay__wrapper--finished"
           );
@@ -361,6 +358,7 @@ export default {
   background-color: global.$primary-white;
   padding: 25px;
   margin: 0 auto;
+  overflow-x: hidden;
   @include global.border-box;
   height: 100%;
   @include global.fade-in-from-bottom-class-modifier;

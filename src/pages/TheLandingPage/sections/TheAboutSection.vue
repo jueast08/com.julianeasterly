@@ -2,7 +2,6 @@
   <base-section ref="about" id="about" title="Hi. I'm Julian.">
     <div class="about">
       <section ref="section1" class="about__section">
-        <!-- @TODO add something about my MBTI tests like "I'm a Protagonist !!! with a link and another to my personality file https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwig9LXJ4q7pAhWrDmMBHcAqCggQFjAAegQIBRAB&url=https%3A%2F%2Fapp.assessfirst.com%2F_%2Fprofile%2Fhnnndvm0-julian-easterly&usg=AOvVaw3he2NfdS3npV7hKbdGTTFu" -->
         <div class="about__section__titles">
           <div class="about__section__titles__subtitle">To France from the USA</div>
           <h3 class="about__section__titles__title">Becoming a Citizen of the World</h3>
@@ -33,12 +32,11 @@
           >I have English Literature and Computer Science Degrees.</h3>
           <p>
             I recieved an Bachelor's degree in English in 2012, but decided to
-            go back to school when arriving in France. This switch was motivated
-            not only by a need for new opportunities, but also a need to
-            challenge myself and learn the language. I since earned a Master's
-            in Computer Science and have collaborated on various IT projects
-            privately and with professionally. I have worked as a full-stack web
-            developer, a DevOps engineer, and most recently, as an IT consultant
+            go back to school when arriving in France. This switch was motivated,
+            not only by a need for fresh opportunities, but also a need to
+            challenge myself and learn the language. I've since earned a Master's
+            in Computer Science and have collaborated on various personal and professional IT projects.
+            I have worked as a full-stack web developer, a DevOps engineer, and most recently, as an IT consultant
             and Business Analyst.
           </p>
         </div>
