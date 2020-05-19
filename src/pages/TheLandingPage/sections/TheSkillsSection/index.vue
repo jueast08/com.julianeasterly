@@ -9,8 +9,8 @@
           <template #title>Development and Tech</template>
           <template #description>
             <p>
-              As a software engineer, I have techinical experience in
-              professional and education settings.
+              As a software engineer, I have techinical experience in both
+              professional and educational settings.
             </p>
             <div class="skills__list__skill__gauge-wrapper">
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -34,7 +34,6 @@
                 <ul class="skills__list__skill__gauge-wrapper__group__list">
                   <li>Python</li>
                   <li>Docker & Kubernetes</li>
-                  <li>Git & Git-flow</li>
                 </ul>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -60,7 +59,7 @@
           <template #title>Project and Product Management</template>
           <template #description>
             <p>
-              I've acquired skills to accurately assess needs and comunicate
+              I've acquired skills to accurately assess a client's needs and communicate
               them to a team.
             </p>
 
@@ -110,9 +109,13 @@
           <template #title>Soft Skills</template>
           <template #description>
             <p>
-              As a literature student and tour guide, I'm confident in my
-              communication and organisation skills. Check out my personality
-              and soft skills according to Assess First,
+              As a literature student and tour guide, I am confident in my
+              communication and organization skills.
+              <br />Check out what Assess First has to say about my soft skills here
+              <a
+                href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
+                target="__blank"
+              >here.</a>
             </p>
             <div class="skills__list__skill__gauge-wrapper">
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -135,7 +138,7 @@
                 />
                 <ul class="skills__list__skill__gauge-wrapper__group__list">
                   <li>Meeting Management</li>
-                  <li>Organisation</li>
+                  <li>Organization</li>
                 </ul>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -151,13 +154,6 @@
                 </ul>
               </div>
             </div>
-            <p>
-              Check out what Assess First has to say about my soft skills
-              <a
-                href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
-                target="__blank"
-              >here.</a>
-            </p>
           </template>
         </skill-content-with-icon>
       </div>
