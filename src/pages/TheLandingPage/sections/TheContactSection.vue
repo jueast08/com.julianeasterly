@@ -361,6 +361,7 @@ export default {
   background-color: global.$primary-white;
   padding: 25px;
   margin: 0 auto;
+  overflow-x: hidden;
   @include global.border-box;
   height: 100%;
   @include global.fade-in-from-bottom-class-modifier;
