@@ -110,7 +110,7 @@
           <template #description>
             <p>
               As a literature student and tour guide, I am confident in my
-              communication and organisation skills.
+              communication and organization skills.
               <br />Check out what Assess First has to say about my soft skills here
               <a
                 href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
@@ -138,7 +138,7 @@
                 />
                 <ul class="skills__list__skill__gauge-wrapper__group__list">
                   <li>Meeting Management</li>
-                  <li>Organisation</li>
+                  <li>Organization</li>
                 </ul>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
