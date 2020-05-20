@@ -28,7 +28,9 @@ export default {
       .forEach(
         element => (element.style.animationDuration = this.animationDuration)
       );
-
+    this.$refs[
+      "logo-icon"
+    ].$el.style.animationDuration = this.animationDuration;
     this.$refs.message.style.animationDuration = this.animationDuration;
   }
 };
@@ -50,18 +52,44 @@ export default {
     align-items: center;
     ::v-deep .logo-icon {
       width: 25%;
+      animation: compass_rotate 2s infinite;
+      @include global.keyframes(compass_rotate) {
+        0% {
+          transform: rotate(-180deg);
+        }
+        25% {
+          transform: rotate(-90deg);
+        }
+        50% {
+          transform: rotate(-160deg);
+        }
+
+        100% {
+          transform: rotate(0deg);
+        }
+      }
       &__secondary {
         fill: global.$primary-white;
       }
       &__main {
-        fill: global.$primary-white;
         &__arrow {
           transform-origin: center;
           animation: arrow_rotate 2s infinite;
           @include global.keyframes(arrow_rotate) {
             0% {
-              transform: rotate(-180deg);
+              transform: rotate(100deg);
               fill: global.$primary-white;
+            }
+            25% {
+              transform: rotate(-60deg);
+              fill: global.$primary-white;
+            }
+            50% {
+              transform: rotate(100deg);
+              fill: global.$primary-white;
+            }
+            75% {
+              transform: rotate(-60deg);
             }
             100% {
               transform: rotate(0deg);
@@ -75,6 +103,14 @@ export default {
           @include global.keyframes(to-green) {
             0% {
               fill: global.$primary-white;
+            }
+            25% {
+              fill: global.$primary-white;
+            }
+            50% {
+              fill: global.$primary-white;
+            }
+            75% {
             }
             100% {
               fill: global.$primary-color;

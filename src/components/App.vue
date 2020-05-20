@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loader-overlay :animation-delay="'5s'" v-if="!loaded || !timeup" />
+    <loader-overlay :animation-delay="'3s'" v-if="!loaded || !timeup" />
     <the-landing-page ref="landing-page" v-else />
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
       window.removeEventListener("load", closeLoader);
     };
     window.addEventListener("load", closeLoader);
-    await new Promise(r => setTimeout(r, 2000)).then(
+    await new Promise(r => setTimeout(r, 3000)).then(
       () => (this.timeup = true)
     );
   }
