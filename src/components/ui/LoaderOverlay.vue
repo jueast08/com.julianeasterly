@@ -72,50 +72,26 @@ export default {
         fill: global.$primary-white;
       }
       &__main {
-        &__arrow {
-          transform-origin: center;
-          animation: arrow_rotate 2s infinite;
-          @include global.keyframes(arrow_rotate) {
-            0% {
-              transform: rotate(100deg);
-              fill: global.$primary-white;
-            }
-            25% {
-              transform: rotate(-60deg);
-              fill: global.$primary-white;
-            }
-            50% {
-              transform: rotate(100deg);
-              fill: global.$primary-white;
-            }
-            75% {
-              transform: rotate(-60deg);
-            }
-            100% {
-              transform: rotate(0deg);
-              fill: global.$primary-color;
-            }
+        @include global.keyframes(to-green) {
+          0% {
+            fill: global.$primary-white;
+          }
+          25% {
+            fill: global.$primary-white;
+          }
+          50% {
+            fill: global.$primary-white;
+          }
+          75% {
+          }
+          100% {
+            fill: global.$primary-color;
           }
         }
+        &__arrow,
         &__direction {
-          transform-origin: center;
+          fill: global.$primary-white;
           animation: to-green 2s infinite;
-          @include global.keyframes(to-green) {
-            0% {
-              fill: global.$primary-white;
-            }
-            25% {
-              fill: global.$primary-white;
-            }
-            50% {
-              fill: global.$primary-white;
-            }
-            75% {
-            }
-            100% {
-              fill: global.$primary-color;
-            }
-          }
         }
       }
     }
