@@ -118,7 +118,7 @@ export default {
       width: 100%;
       height: 100%;
       z-index: 1;
-      background-image: url("~Assets/portrait_home.jpg");
+      background-image: url("~Assets/portrait_home-blurred.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
