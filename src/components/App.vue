@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loader-overlay :animation-delay="'5s'" v-if="!loaded || !timeup" />
+    <loader-overlay :animation-duration="'2s'" v-if="!loaded || !timeup" />
     <the-landing-page ref="landing-page" v-else />
   </div>
 </template>
