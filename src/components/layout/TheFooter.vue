@@ -84,16 +84,15 @@ export default {
 
         ::v-deep .logo-icon {
           width: 50px;
+
+          &__main {
+            fill: global.$primary-color;
+          }
+          &__secondary {
+            fill: global.$primary-white;
+          }
         }
 
-        ::v-deep .arrow-class,
-        ::v-deep .direction-class {
-          fill: global.$primary-color;
-        }
-
-        ::v-deep .compass-class {
-          fill: global.$primary-white;
-        }
         &__text {
           margin-top: 10px;
           text-align: center;
