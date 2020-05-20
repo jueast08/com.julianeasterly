@@ -1,6 +1,6 @@
 <template>
   <div class="loader col-s-12">
-    <div class="loader__wrapper col-s-2">
+    <div class="loader__wrapper col-s-4 col-m-6 col-l-4 col-xl-3">
       <logo-icon ref="logo-icon" />
       <div ref="message" class="loader__wrapper__message">Loading</div>
     </div>
