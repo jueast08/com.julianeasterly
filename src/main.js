@@ -22,6 +22,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+import VueApollo from "vue-apollo";
+import apolloClient from "./vue-apollo";
+
 library.add(
   faEnvelope,
   faTerminal,
@@ -41,9 +44,14 @@ library.add(
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
-
+Vue.use(VueApollo);
 Vue.config.productionTip = false;
 
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+});
+
 new Vue({
+  apolloProvider,
   render: (h) => h(App),
 }).$mount("#app");
