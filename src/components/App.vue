@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loader-overlay :animation-delay="'2s'" v-if="!loaded || !timeup" />
+    <loader-overlay :animation-delay="'2s'" v-if="!loaded || !timeup || this.$apollo.loading" />
     <the-landing-page ref="landing-page" v-else />
   </div>
 </template>
@@ -27,18 +27,19 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.$apollo.loading);
     const closeLoader = () => {
       if (process.env.NODE_ENV === "development") {
         console.log(
-          "fully loaded",
-          this.timeup ? "" : "and awaiting animation timer"
+          "page fully loaded",
+          this.timeup ? "" : "and awaiting animation timer."
         );
       }
       this.loaded = true;
       window.removeEventListener("load", closeLoader);
     };
     window.addEventListener("load", closeLoader);
-    await new Promise(r => setTimeout(r, 2000)).then(
+    await new Promise(r => setTimeout(r, 1000)).then(
       () => (this.timeup = true)
     );
   }
