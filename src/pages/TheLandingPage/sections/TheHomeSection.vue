@@ -1,15 +1,18 @@
 <template>
   <div id="home" class="home col-12">
+    <div class="home__background" :style="background"></div>
     <div ref="container" class="home__container col-12 col-l-6">
       <section class="home__container__titles col-12">
-        <h1 class="home__container__titles__title">Julian</h1>
-        <h1 class="home__container__titles__title">Easterly</h1>
+        <h1 class="home__container__titles__title">{{ content.title }}</h1>
+        <h1 class="home__container__titles__title">{{ content.title2 }}</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">Collaborate. Learn. Evolve.</p>
+        <p class="home__container__subtitles__subtitle">{{ content.subtitle }}</p>
       </section>
     </div>
-    <div class="home__background col-12 col-xl-6"></div>
+    <div class="home__portrait col-12 col-xl-6">
+      <div class="home__portrait__image" :style="portrait"></div>
+    </div>
     <div class="home__down-arrow" @click="scrollToId('about')"></div>
   </div>
 </template>
@@ -20,6 +23,12 @@ import scrollToId from "Utility/ScrollHelper";
 
 export default {
   name: "TheHomeSection",
+  props: {
+    content: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       observerIterator: null
@@ -27,6 +36,31 @@ export default {
   },
   methods: {
     scrollToId
+  },
+  computed: {
+    portrait() {
+      return {
+        backgroundImage: this.content.portrait
+          ? "url(" +
+            process.env.VUE_APP_STRAPI_API_URL +
+            this.content.portrait.url +
+            ")"
+          : ""
+      };
+    },
+    background() {
+      return {
+        opacity: this.content.background_overlay_opacity
+          ? this.content.background_overlay_opacity
+          : 0.03,
+        backgroundImage: this.content.background_overlay
+          ? "url(" +
+            process.env.VUE_APP_STRAPI_API_URL +
+            this.content.background_overlay.url +
+            ")"
+          : ""
+      };
+    }
   },
   mounted() {
     InViewportObserver.observe(
@@ -49,7 +83,24 @@ export default {
   height: 100vh;
   background: global.$primary-black;
   overflow: hidden;
-  @include global.fixed-background-overlay;
+  //@include global.fixed-background-overlay;
+
+  &__background {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    //opacity: 0.02;
+    z-index: 0;
+    //background-image: url("~Assets/abstract_background.png");
+    //background-color: global.$primary-black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
 
   &__container {
     display: flex;
@@ -105,12 +156,11 @@ export default {
     }
   }
 
-  &__background {
+  &__portrait {
     position: relative;
     height: 50%;
 
-    &:before {
-      content: " ";
+    &__image {
       display: block;
       position: absolute;
       left: 0;
@@ -118,7 +168,7 @@ export default {
       width: 100%;
       height: 100%;
       z-index: 1;
-      background-image: url("~Assets/portrait_home-blurred.jpg");
+      //background-image: url("~Assets/portrait_home-blurred.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -183,12 +233,11 @@ export default {
       }
     }
 
-    &__background {
+    &__portrait {
       clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
       height: 100vh;
 
-      &:before {
-        content: " ";
+      &__image {
         background-attachment: scroll;
         background-position: right;
       }

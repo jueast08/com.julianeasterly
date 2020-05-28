@@ -3,7 +3,7 @@
     <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
     <the-header />
     <the-social-network-bar />
-    <the-home-section />
+    <the-home-section :content="homeSection[lang] ? homeSection[lang] : {}" />
     <the-about-section />
     <the-hobbies-section />
     <the-skills-section />
@@ -27,6 +27,7 @@ import TheExperienceSection from "./sections/TheExperienceSection";
 import TheEducationSection from "./sections/TheEducationSection";
 import TheContactSection from "./sections/TheContactSection";
 import TheFooter from "Layout/TheFooter";
+import { queries } from "Store";
 
 export default {
   name: "TheLandingPage",
@@ -42,6 +43,23 @@ export default {
     TheEducationSection,
     TheContactSection,
     TheFooter
+  },
+  data() {
+    return {
+      lang: "en",
+      homeSection: {}
+    };
+  },
+  apollo: {
+    lang: {
+      query: queries.lang
+    },
+    homeSection: {
+      query: queries.home
+    }
+  },
+  mounted() {
+    console.log(this.$apollo.loading);
   }
 };
 </script>
