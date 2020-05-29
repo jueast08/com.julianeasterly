@@ -7,7 +7,9 @@
     <the-about-section
       :content="aboutSection[lang] ? aboutSection[lang] : {}"
     />
-    <the-hobbies-section />
+    <the-hobbies-section
+      :content="hobbiesSection[lang] ? hobbiesSection[lang] : {}"
+    />
     <the-skills-section />
     <the-experience-section />
     <the-education-section />
@@ -51,6 +53,7 @@ export default {
       lang: "en",
       homeSection: {},
       aboutSection: {},
+      hobbiesSection: {},
     };
   },
   apollo: {
@@ -62,6 +65,9 @@ export default {
     },
     aboutSection: {
       query: queries.about,
+    },
+    hobbiesSection: {
+      query: queries.hobbies,
     },
   },
 };

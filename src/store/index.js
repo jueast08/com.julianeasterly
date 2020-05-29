@@ -49,6 +49,19 @@ const queries = {
       }
     }
   `,
+  hobbies: gql`
+    query {
+      hobbiesSection {
+        en {
+          title
+          hobbies {
+            title
+            font_awesome_code
+          }
+        }
+      }
+    }
+  `,
 };
 
 cache.writeData({
