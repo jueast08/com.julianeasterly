@@ -4,11 +4,15 @@
       <div
         ref="subtitle"
         class="section__title-box__subtitle col-10 col-s-10 col-m-10 col-l-8 col-xl-6"
-      >{{ subtitle }}</div>
+      >
+        <slot name="subtitle">{{ subtitle }}</slot>
+      </div>
       <h2
         ref="title"
         class="section__title-box__title col-10 col-s-10 col-m-10 col-l-8 col-xl-6"
-      >{{ title }}</h2>
+      >
+        <slot name="title">{{ title }}</slot>
+      </h2>
     </div>
     <div class="section__container col-12 col-s-10 col-m-10 col-l-8 col-xl-6">
       <slot />
@@ -23,27 +27,36 @@ export default {
   name: "BaseSection",
   data() {
     return {
-      observerIterator: null
+      observerIterator: null,
     };
   },
   props: {
     id: {
       type: String,
-      required: true
+      required: true,
     },
     title: {
       type: String,
       required: false,
-      default: ""
+      default: "",
     },
     subtitle: {
       type: String,
       required: false,
-      default: ""
-    }
+      default: "",
+    },
+  },
+  methods: {
+    setTitleShadow() {
+      const attr = this.title === "" ? this.$refs.title.innerHTML : this.title;
+      this.$refs.title.setAttribute("data-content", attr);
+    },
+  },
+  updated() {
+    this.setTitleShadow();
   },
   mounted() {
-    this.$refs.title.setAttribute("data-content", this.title);
+    this.setTitleShadow();
 
     InViewportObserver.observe(
       this.$refs["title-box"],
@@ -53,7 +66,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 

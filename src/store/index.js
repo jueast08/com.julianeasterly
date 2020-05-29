@@ -34,6 +34,21 @@ const queries = {
       }
     }
   `,
+  about: gql`
+    query {
+      aboutSection {
+        en {
+          title
+          subtitle
+          articles {
+            title
+            subtitle
+            content
+          }
+        }
+      }
+    }
+  `,
 };
 
 cache.writeData({

@@ -21,7 +21,6 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
 import VueApollo from "vue-apollo";
 import apolloClient from "./vue-apollo";
 

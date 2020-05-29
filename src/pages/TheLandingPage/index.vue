@@ -4,7 +4,9 @@
     <the-header />
     <the-social-network-bar />
     <the-home-section :content="homeSection[lang] ? homeSection[lang] : {}" />
-    <the-about-section />
+    <the-about-section
+      :content="aboutSection[lang] ? aboutSection[lang] : {}"
+    />
     <the-hobbies-section />
     <the-skills-section />
     <the-experience-section />
@@ -42,29 +44,32 @@ export default {
     TheExperienceSection,
     TheEducationSection,
     TheContactSection,
-    TheFooter
+    TheFooter,
   },
   data() {
     return {
       lang: "en",
-      homeSection: {}
+      homeSection: {},
+      aboutSection: {},
     };
   },
   apollo: {
     lang: {
-      query: queries.lang
+      query: queries.lang,
     },
     homeSection: {
-      query: queries.home
-    }
+      query: queries.home,
+    },
+    aboutSection: {
+      query: queries.about,
+    },
   },
-  mounted() {
-    console.log(this.$apollo.loading);
-  }
 };
 </script>
 
 <style lang="scss">
+@use 'global';
+
 body {
   height: 100vh;
   max-width: 100%;
