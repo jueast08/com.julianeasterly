@@ -39,26 +39,31 @@ export default {
   },
   computed: {
     portrait() {
+      if (!this.content.portrait) {
+        return {};
+      }
+
       return {
-        backgroundImage: this.content.portrait
-          ? "url(" +
-            process.env.VUE_APP_STRAPI_API_URL +
-            this.content.portrait.url +
-            ")"
-          : ""
+        opacity: this.content.portrait.opacity,
+        backgroundImage:
+          "url(" +
+          process.env.VUE_APP_STRAPI_API_URL +
+          this.content.portrait.image.url +
+          ")"
       };
     },
     background() {
+      if (!this.content.background_overlay) {
+        return {};
+      }
+
       return {
-        opacity: this.content.background_overlay_opacity
-          ? this.content.background_overlay_opacity
-          : 0.03,
-        backgroundImage: this.content.background_overlay
-          ? "url(" +
-            process.env.VUE_APP_STRAPI_API_URL +
-            this.content.background_overlay.url +
-            ")"
-          : ""
+        opacity: this.content.background_overlay.opacity,
+        backgroundImage:
+          "url(" +
+          process.env.VUE_APP_STRAPI_API_URL +
+          this.content.background_overlay.image.url +
+          ")"
       };
     }
   },

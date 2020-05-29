@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <loader-overlay :animation-delay="'2s'" v-if="!loaded || !timeup || this.$apollo.loading" />
+    <loader-overlay
+      :animation-delay="'2s'"
+      v-if="!loaded || !timeup || this.$apollo.loading"
+    />
     <the-landing-page ref="landing-page" v-else />
   </div>
 </template>
@@ -13,21 +16,15 @@ export default {
   name: "App",
   components: {
     TheLandingPage,
-    LoaderOverlay
+    LoaderOverlay,
   },
   data() {
     return {
       loaded: false,
-      timeup: false
+      timeup: false,
     };
   },
-  computed: {
-    isUnderConstruction() {
-      return process.env.VUE_APP_UNDER_CONSTRUCTION === "true";
-    }
-  },
   async mounted() {
-    console.log(this.$apollo.loading);
     const closeLoader = () => {
       if (process.env.NODE_ENV === "development") {
         console.log(
@@ -39,9 +36,9 @@ export default {
       window.removeEventListener("load", closeLoader);
     };
     window.addEventListener("load", closeLoader);
-    await new Promise(r => setTimeout(r, 1000)).then(
+    await new Promise((r) => setTimeout(r, 1000)).then(
       () => (this.timeup = true)
     );
-  }
+  },
 };
 </script>

@@ -14,18 +14,22 @@ const queries = {
   home: gql`
     query {
       homeSection {
-        description
         en {
           title
           title2
           subtitle
           portrait {
-            url
+            image {
+              url
+            }
+            opacity
           }
           background_overlay {
-            url
+            image {
+              url
+            }
+            opacity
           }
-          background_overlay_opacity
         }
       }
     }
