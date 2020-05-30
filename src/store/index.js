@@ -65,9 +65,9 @@ const queries = {
   experiences: gql`
     query {
       experienceSection {
-        title
-        subtitle
         en {
+          title
+          subtitle
           experiences {
             logo {
               url
@@ -80,6 +80,7 @@ const queries = {
             location
             content
           }
+          other_experiences
         }
       }
     }
