@@ -24,7 +24,7 @@ export default {
     const className = "about-article__content__elements";
 
     elements.forEach(el => {
-      el.classList.add("about-article_elements");
+      el.classList.add(className);
     });
     InViewportObserver.observe(
       elements,
