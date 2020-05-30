@@ -81,6 +81,10 @@ const queries = {
             content
           }
           other_experiences
+          resume_button_text
+          resume {
+            url
+          }
         }
       }
     }

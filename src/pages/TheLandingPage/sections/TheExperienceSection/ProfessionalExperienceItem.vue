@@ -94,6 +94,10 @@ export default {
 
   &__details {
     color: global.$primary-white;
+    a {
+      color: global.$primary-color;
+      text-decoration: underline;
+    }
   }
 }
 </style>
