@@ -1,6 +1,6 @@
 <template>
   <base-section id="hobbies">
-    <template v-slot:title v-if="content.title">{{ content.title }}</template>
+    <template #title v-if="content.title">{{ content.title }}</template>
     <div class="hobbies" v-if="content.hobbies">
       <hobby-content-with-icon
         v-for="(hobby, index) in content.hobbies"
@@ -23,10 +23,10 @@ export default {
   props: {
     content: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
-  components: { BaseSection, HobbyContentWithIcon },
+  components: { BaseSection, HobbyContentWithIcon }
 };
 </script>
 
