@@ -20,12 +20,13 @@ export default {
   name: "AboutArticle",
   mounted() {
     const selectors = "*";
-    this.$el.querySelectorAll(selectors).forEach((el) => {
+    let elements = this.$el.querySelectorAll(selectors);
+    elements.forEach(el => {
       el.classList.add("about-article_elements");
     });
     InViewportObserver.observe(
-      this.$el.querySelectorAll(selectors),
-      (entry) => {
+      elements,
+      entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("about-article_elements--in-view");
         } else {
@@ -37,7 +38,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  },
+  }
 };
 </script>
 

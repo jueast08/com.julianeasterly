@@ -1,11 +1,11 @@
 <template>
   <base-section ref="about" id="about">
-    <template v-slot:title v-if="content.title">{{ content.title }}</template>
+    <template #title v-if="content.title">{{ content.title }}</template>
     <div class="about" v-if="content.articles">
       <about-article v-for="(article, index) in content.articles" v-bind:key="index">
-        <template v-slot:title>{{ article.title }}</template>
-        <template v-slot:subtitle>{{ article.subtitle }}</template>
-        <template v-slot:content>
+        <template #title>{{ article.title }}</template>
+        <template #subtitle>{{ article.subtitle }}</template>
+        <template #content>
           <vue-markdown>{{ injectStrapiMediaRoot(article.content) }}</vue-markdown>
         </template>
       </about-article>
