@@ -1,9 +1,48 @@
 <template>
-  <base-section id="experience" title="Experience" subtitle="Professional">
+  <base-section id="experience">
+    <template v-slot:title v-if="content.title">{{ content.title }}</template>
+    <template v-slot:subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
+
     <div class="experience">
-      <div class="experience__list">
-        <!-- @TODO export data to a json -->
+      <div class="experience__list" v-if="content.experiences">
+        <professional-experience-item v-for="(exp, index) in content.expriences" v-bind:key="index"></professional-experience-item>
         <professional-experience-item
+          jobTitle="Full-Stack Web Developer"
+          companyName="SoyHuCe"
+          workDates="Mar. 2016 - Jan. 2018"
+          location="Colombelles, Lower-Normandy, France"
+        >
+          <template #img>
+            <img :src="soyhuceLogo" alt="SoyHuCe" />
+          </template>
+          <template #details>
+            <p>
+              <span class="bold-primary">Full-Stack Developer</span>
+              <br />As a developer, I worked on projects heavily reliant on web
+              technology such as ReactJs and Laravel. I also had the opportunity
+              to work occasionally as a Project Leader. My biggest challenge was
+              setting up and supervising a system of tests (unit, integration,
+              and end-to-end tests) for
+              <a
+                href="https://pathinterest.com/"
+              >iStoryPath</a> using Jest,
+              Enzyme, Nock and Nightwatch.
+              <br />
+              <b>Programing Languages and Tools:</b> ReactJS, Larvel, Golang,
+              Java, Git & Git-Flow, Docker
+            </p>
+            <p>
+              <span class="bold-primary">Internship &mdash; Full-Stack Developer</span>
+              <br />Development of a full-stack application in React and Laravel
+              application that facilitates the utilization of Wiremock, an API
+              HTTP simulator written in Java.
+              <br />
+              <b>Programing Languages and Tools:</b> ReactJS, Laravel, Wiremock,
+              Java
+            </p>
+          </template>
+        </professional-experience-item>
+        <!-- <professional-experience-item
           job-title="IT Consultant"
           company-name="Actimage"
           work-dates="Since Sept. 2019"
@@ -25,9 +64,7 @@
               <b>Programing Languages and Tools:</b> Javascript, NightwatchJS,
               Sonarqube
               <br />
-              <b
-                >Project and Client Management, Response to calls for tenders</b
-              >
+              <b>Project and Client Management, Response to calls for tenders</b>
             </p>
           </template>
         </professional-experience-item>
@@ -43,9 +80,7 @@
           </template>
           <template #details>
             <p>
-              <span class="bold-primary"
-                >Internship &mdash; Product Owner - E-Payment Expert</span
-              >
+              <span class="bold-primary">Internship &mdash; Product Owner - E-Payment Expert</span>
               <br />
               <span class="primary-font-color">Mar. - Sept. 2019</span>
               <br />With the Front Office ATM team at Société Générales
@@ -62,9 +97,7 @@
               </b>
             </p>
             <p>
-              <span class="bold-primary"
-                >Student Project &mdash; E-Payment Analyst</span
-              >
+              <span class="bold-primary">Student Project &mdash; E-Payment Analyst</span>
               <br />
               <span class="primary-font-color">Oct. 2018 - Mar. 2019</span>
               <br />My collobration with the Société Générale Bank started with
@@ -118,16 +151,16 @@
               to work occasionally as a Project Leader. My biggest challenge was
               setting up and supervising a system of tests (unit, integration,
               and end-to-end tests) for
-              <a href="https://pathinterest.com/">iStoryPath</a> using Jest,
+              <a
+                href="https://pathinterest.com/"
+              >iStoryPath</a> using Jest,
               Enzyme, Nock and Nightwatch.
               <br />
               <b>Programing Languages and Tools:</b> ReactJS, Larvel, Golang,
               Java, Git & Git-Flow, Docker
             </p>
             <p>
-              <span class="bold-primary"
-                >Internship &mdash; Full-Stack Developer</span
-              >
+              <span class="bold-primary">Internship &mdash; Full-Stack Developer</span>
               <br />Development of a full-stack application in React and Laravel
               application that facilitates the utilization of Wiremock, an API
               HTTP simulator written in Java.
@@ -136,71 +169,57 @@
               Java
             </p>
           </template>
-        </professional-experience-item>
+        </professional-experience-item>-->
       </div>
       <div ref="other-experience" class="experience__others">
         <div class="experience__others__title">My Other Experiences</div>
         <section class="experience__others__description">
           <div class="experience__others__description__title">From 2012</div>
           <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Bilingual (French/English) Tour Guide &mdash; D-Day and WWII
-            </div>
-            <div class="experience__others__description__content__company">
-              Mémorial de Caen &mdash; Caen, Normandy, France
-            </div>
-            <div class="experience__others__description__content__dates">
-              May 2014 - Dec. 2017
-            </div>
+            <div
+              class="experience__others__description__content__job-title"
+            >Bilingual (French/English) Tour Guide &mdash; D-Day and WWII</div>
+            <div
+              class="experience__others__description__content__company"
+            >Mémorial de Caen &mdash; Caen, Normandy, France</div>
+            <div class="experience__others__description__content__dates">May 2014 - Dec. 2017</div>
           </div>
           <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Exchange Teacher &mdash; English as a Second Language (TESL)
-            </div>
-            <div class="experience__others__description__content__company">
-              Lycée Camille Claudel &mdash; Caen, Normandy, France
-            </div>
-            <div class="experience__others__description__content__dates">
-              Oct. 2013 - May 2014
-            </div>
+            <div
+              class="experience__others__description__content__job-title"
+            >Exchange Teacher &mdash; English as a Second Language (TESL)</div>
+            <div
+              class="experience__others__description__content__company"
+            >Lycée Camille Claudel &mdash; Caen, Normandy, France</div>
+            <div class="experience__others__description__content__dates">Oct. 2013 - May 2014</div>
           </div>
           <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Teaching Assistant
-            </div>
-            <div class="experience__others__description__content__company">
-              American Montessori Academy &mdash; Redford, Michigan, USA
-            </div>
-            <div class="experience__others__description__content__dates">
-              Oct. 2012 - July. 2013
-            </div>
+            <div class="experience__others__description__content__job-title">Teaching Assistant</div>
+            <div
+              class="experience__others__description__content__company"
+            >American Montessori Academy &mdash; Redford, Michigan, USA</div>
+            <div class="experience__others__description__content__dates">Oct. 2012 - July. 2013</div>
           </div>
         </section>
         <section class="experience__others__description">
-          <div class="experience__others__description__title">
-            From 2008 to 2012
-          </div>
+          <div class="experience__others__description__title">From 2008 to 2012</div>
           <p>
             I believe in working hard, and from the age of 18, I've worked
             various jobs while in school. Between the moment that I started
             university classes and the moment I received my first degree, I've
             worked as a
-            <span class="bold-primary"
-              >tutor/mentor for students at Indiana State University</span
-            >, I've
-            <span class="bold-primary"
-              >driven a forklift for Dever Budweiser Distribution Company</span
-            >, and
-            <span class="bold-primary"
-              >I've worked in a kitchen at the Detroit City Zoo</span
-            >.
+            <span
+              class="bold-primary"
+            >tutor/mentor for students at Indiana State University</span>, I've
+            <span
+              class="bold-primary"
+            >driven a forklift for Dever Budweiser Distribution Company</span>, and
+            <span class="bold-primary">I've worked in a kitchen at the Detroit City Zoo</span>.
           </p>
         </section>
       </div>
       <section ref="experience__resume" class="experience__resume">
-        <white-round-button @click="openResume()"
-          >Download my Resume</white-round-button
-        >
+        <white-round-button @click="openResume()">Download my Resume</white-round-button>
       </section>
     </div>
   </base-section>
@@ -215,22 +234,31 @@ import SocieteGenerale from "Assets/sg_logo.png";
 import CanalPlusLogo from "Assets/canalplus_logo.png";
 import SoyhuceLogo from "Assets/soyhuce_logo.png";
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
+import VueMarkdown from "vue-markdown";
+import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
 
 export default {
   name: "TheExperienceSection",
+  props: {
+    content: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       actimageLogo: ActimageLogo,
       sgLogo: SocieteGenerale,
       canalPlusLogo: CanalPlusLogo,
       soyhuceLogo: SoyhuceLogo,
-      observerIterator: null,
+      observerIterator: null
     };
   },
   components: {
     BaseSection,
     ProfessionalExperienceItem,
     WhiteRoundButton,
+    VueMarkdown
   },
   methods: {
     openResume() {
@@ -239,12 +267,13 @@ export default {
         "_blank"
       );
     },
+    injectStrapiMediaRoot
   },
   mounted() {
     InViewportObserver.observe(
       [
         this.$refs["experience__resume"],
-        this.$refs["other-experience"].childNodes,
+        this.$refs["other-experience"].childNodes
       ],
       InViewportObserver.addAnimationModifierOnEntry,
       this
@@ -252,7 +281,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  },
+  }
 };
 </script>
 

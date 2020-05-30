@@ -62,6 +62,28 @@ const queries = {
       }
     }
   `,
+  experiences: gql`
+    query {
+      experienceSection {
+        title
+        subtitle
+        en {
+          experiences {
+            logo {
+              url
+            }
+            title
+            establishment
+            subtitle
+            start_date
+            end_date
+            location
+            content
+          }
+        }
+      }
+    }
+  `,
 };
 
 cache.writeData({

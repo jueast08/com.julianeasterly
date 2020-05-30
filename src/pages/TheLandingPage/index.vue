@@ -4,14 +4,10 @@
     <the-header />
     <the-social-network-bar />
     <the-home-section :content="homeSection[lang] ? homeSection[lang] : {}" />
-    <the-about-section
-      :content="aboutSection[lang] ? aboutSection[lang] : {}"
-    />
-    <the-hobbies-section
-      :content="hobbiesSection[lang] ? hobbiesSection[lang] : {}"
-    />
+    <the-about-section :content="aboutSection[lang] ? aboutSection[lang] : {}" />
+    <the-hobbies-section :content="hobbiesSection[lang] ? hobbiesSection[lang] : {}" />
     <the-skills-section />
-    <the-experience-section />
+    <the-experience-section :content="experienceSection[lang] ? experienceSection[lang] : {}" />
     <the-education-section />
     <the-contact-section />
     <the-footer />
@@ -46,7 +42,7 @@ export default {
     TheExperienceSection,
     TheEducationSection,
     TheContactSection,
-    TheFooter,
+    TheFooter
   },
   data() {
     return {
@@ -54,22 +50,26 @@ export default {
       homeSection: {},
       aboutSection: {},
       hobbiesSection: {},
+      experienceSection: {}
     };
   },
   apollo: {
     lang: {
-      query: queries.lang,
+      query: queries.lang
     },
     homeSection: {
-      query: queries.home,
+      query: queries.home
     },
     aboutSection: {
-      query: queries.about,
+      query: queries.about
     },
     hobbiesSection: {
-      query: queries.hobbies,
+      query: queries.hobbies
     },
-  },
+    experienceSection: {
+      query: queries.experiences
+    }
+  }
 };
 </script>
 
