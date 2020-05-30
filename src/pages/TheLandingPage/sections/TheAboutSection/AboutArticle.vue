@@ -19,8 +19,10 @@ import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 export default {
   name: "AboutArticle",
   mounted() {
-    const selectors = "*";
+    const selectors = "p, img, li, ul, ol, h1, h2,h3, h4, h5, h6";
     let elements = this.$el.querySelectorAll(selectors);
+    const className = "about-article__content__elements";
+
     elements.forEach(el => {
       el.classList.add("about-article_elements");
     });
@@ -28,9 +30,9 @@ export default {
       elements,
       entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("about-article_elements--in-view");
+          entry.target.classList.add(className + "--in-view");
         } else {
-          entry.target.classList.remove("about-article_elements--in-view");
+          entry.target.classList.remove(className + "--in-view");
         }
       },
       this
@@ -45,7 +47,7 @@ export default {
 <style lang="scss">
 @use 'global';
 
-.about-article_elements {
+.about-article__elements {
   @include global.fade-in-from-bottom-class-modifier;
 }
 
@@ -71,6 +73,9 @@ export default {
   }
 
   &__content {
+    &__elements {
+      @include global.fade-in-from-bottom-class-modifier;
+    }
     img {
       max-width: 100%;
     }

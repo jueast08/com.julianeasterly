@@ -69,8 +69,27 @@ export default {
     }
   },
   mounted() {
+    const selectors = "p, img, li, ul, ol, h1, h2,h3, h4, h5, h6";
+    let elements = this.$refs.details.querySelectorAll(selectors);
+    const className = "base-exp__details__elements";
+    this.$refs.details
+      .querySelectorAll(selectors)
+      .forEach(el => el.classList.add(className));
+
     InViewportObserver.observe(
-      [this.$refs["vital-info"], this.$refs.details],
+      elements,
+      entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(className + "--in-view");
+        } else {
+          entry.target.classList.remove(className + "--in-view");
+        }
+      },
+      this
+    );
+
+    InViewportObserver.observe(
+      [this.$refs["vital-info"]],
       InViewportObserver.addAnimationModifierOnEntry,
       this
     );
@@ -81,8 +100,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use 'global';
+
+.base-exp__elements__from-top {
+  @include global.fade-in-from-top-class-modifier;
+}
 
 .base-exp {
   &__vital-info {
@@ -132,10 +155,11 @@ export default {
   }
 
   &__details {
-    @include global.fade-in-from-top-class-modifier;
-
     display: none;
     @include global.p-font;
+    &__elements {
+      @include global.fade-in-from-top-class-modifier;
+    }
   }
 }
 

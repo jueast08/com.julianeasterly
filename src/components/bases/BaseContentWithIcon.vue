@@ -60,13 +60,13 @@ export default {
     margin: 0 0 10px 0;
     text-align: center;
     @include global.h4-font;
-    @include global.fade-in-and-expand-class-modifier;
+    @include global.fade-in-class-modifier;
   }
 
   &__description {
     text-align: center;
     @include global.p-font;
-    @include global.fade-in-and-expand-class-modifier;
+    @include global.fade-in-class-modifier;
   }
 }
 </style>
