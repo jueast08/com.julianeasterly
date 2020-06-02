@@ -1,15 +1,12 @@
 <template>
   <div id="home" class="home col-12">
-    <div class="home__background" :style="background"></div>
     <div ref="container" class="home__container col-12 col-l-6">
       <section class="home__container__titles col-12">
         <h1 class="home__container__titles__title">{{ content.title }}</h1>
         <h1 class="home__container__titles__title">{{ content.title2 }}</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">
-          {{ content.subtitle }}
-        </p>
+        <p class="home__container__subtitles__subtitle">{{ content.subtitle }}</p>
       </section>
     </div>
     <div class="home__portrait col-12 col-xl-6">
@@ -27,12 +24,12 @@ export default {
   props: {
     content: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
-      observerIterator: null,
+      observerIterator: null
     };
   },
   computed: {
@@ -47,23 +44,9 @@ export default {
           "url(" +
           process.env.VUE_APP_STRAPI_API_URL +
           this.content.portrait.image.url +
-          ")",
+          ")"
       };
-    },
-    background() {
-      if (!this.content.background_overlay) {
-        return {};
-      }
-
-      return {
-        opacity: this.content.background_overlay.opacity,
-        backgroundImage:
-          "url(" +
-          process.env.VUE_APP_STRAPI_API_URL +
-          this.content.background_overlay.image.url +
-          ")",
-      };
-    },
+    }
   },
   mounted() {
     InViewportObserver.observe(
@@ -74,7 +57,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  },
+  }
 };
 </script>
 
@@ -87,19 +70,7 @@ export default {
   background: global.$primary-black;
   overflow: hidden;
 
-  &__background {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-  }
+  @include global.fixed-background-overlay;
 
   &__container {
     display: flex;

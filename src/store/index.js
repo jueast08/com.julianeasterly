@@ -24,12 +24,6 @@ const queries = {
             }
             opacity
           }
-          background_overlay {
-            image {
-              url
-            }
-            opacity
-          }
         }
       }
     }
@@ -84,6 +78,28 @@ const queries = {
           resume_button_text
           resume {
             url
+          }
+        }
+      }
+    }
+  `,
+  education: gql`
+    query {
+      educationSection {
+        en {
+          title
+          subtitle
+          education {
+            logo {
+              url
+            }
+            title
+            establishment
+            subtitle
+            start_date
+            end_date
+            location
+            content
           }
         }
       }

@@ -10,6 +10,8 @@
         >
           <template #job-title>{{ exp.title }}</template>
           <template #company-name>{{ exp.establishment }}</template>
+          <template #job-type>{{ exp.subtitle }}</template>
+
           <template
             #work-dates
           >{{ exp.start_date }} {{ exp.end_date ? "&mdash; "+exp.end_date : '' }}</template>

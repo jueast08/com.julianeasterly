@@ -8,7 +8,7 @@
     <the-hobbies-section :content="hobbiesSection[lang] ? hobbiesSection[lang] : {}" />
     <the-skills-section />
     <the-experience-section :content="experienceSection[lang] ? experienceSection[lang] : {}" />
-    <the-education-section />
+    <the-education-section :content="educationSection[lang] ? educationSection[lang] : {}" />
     <the-contact-section />
     <the-footer />
     <the-go-to-top-button querySelectorThatTriggersShowButton="#home" />
@@ -50,7 +50,8 @@ export default {
       homeSection: {},
       aboutSection: {},
       hobbiesSection: {},
-      experienceSection: {}
+      experienceSection: {},
+      educationSection: {}
     };
   },
   apollo: {
@@ -68,6 +69,9 @@ export default {
     },
     experienceSection: {
       query: queries.experiences
+    },
+    educationSection: {
+      query: queries.education
     }
   }
 };

@@ -16,7 +16,7 @@
       <template #subtitle>
         <slot name="company-name" />
       </template>
-      <template #subtitle2>
+      <template #subtitle-2>
         <slot name="job-type" />
       </template>
       <template #dates>
