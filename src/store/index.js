@@ -69,8 +69,8 @@ const queries = {
             title
             establishment
             subtitle
-            start_date
-            end_date
+            start_date_v2
+            end_date_v2
             location
             content
           }
@@ -101,6 +101,20 @@ const queries = {
             location
             content
           }
+        }
+      }
+    }
+  `,
+  contact: gql`
+    query {
+      contactSection {
+        en {
+          title
+          subtitle
+          name
+          email
+          message
+          sendbutton
         }
       }
     }

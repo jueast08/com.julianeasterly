@@ -1,17 +1,15 @@
 <template>
-  <base-section
-    id="contact"
-    title="Send Me a Message"
-    subtitle="Opportunity, idea for a project, or just want to say hi?"
-  >
+  <base-section id="contact">
+    <template #title v-if="content.title">{{ content.title }}</template>
+    <template #subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
     <div ref="contact" class="contact">
       <form class="contact__form" @submit.prevent="onSubmit">
-        <section class="contact__form__section">
+        <section class="contact__form__section" v-if="content.name">
           <div
             class="contact__form__section__label"
             :class="addValidationModifier(this.formHelpMessages.name.status)"
           >
-            <label for="name">Name</label>
+            <label for="name">{{content.name}}</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
@@ -24,7 +22,7 @@
             class="contact__form__section__label"
             :class="addValidationModifier(this.formHelpMessages.email.status)"
           >
-            <label for="email">Email</label>
+            <label for="email">{{content.email}}</label>
             <span>
               <font-awesome-icon
                 v-if="isIncorrect(formHelpMessages.email.status)"
@@ -42,7 +40,7 @@
             class="contact__form__section__label"
             :class="addValidationModifier(this.formHelpMessages.message.status)"
           >
-            <label for="message">Message</label>
+            <label for="message">{{content.message}}</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
@@ -59,7 +57,10 @@
             :loadRecaptchaScript="true"
             ref="recaptcha"
           />
-          <primary-color-round-button :disabled="!isValidForm" :allowClickOnDisabled="true">Send</primary-color-round-button>
+          <primary-color-round-button
+            :disabled="!isValidForm"
+            :allowClickOnDisabled="true"
+          >{{content.sendButton}}</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -125,6 +126,12 @@ const inputStatusCodes = {
 };
 export default {
   name: "TheContactSection",
+  props: {
+    content: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       recaptchaKey: process.env.VUE_APP_RECAPTCHA,

@@ -12,9 +12,11 @@
           <template #company-name>{{ exp.establishment }}</template>
           <template #job-type>{{ exp.subtitle }}</template>
 
-          <template
-            #work-dates
-          >{{ exp.start_date }} {{ exp.end_date ? "&mdash; "+exp.end_date : '' }}</template>
+          <template #work-dates>
+            {{getDates(exp.start_date_v2, exp.end_date_v2)}}
+            <br />
+            {{getDuration(exp.start_date_v2, exp.end_date_v2)}}
+          </template>
           <template #location>{{ exp.location }}</template>
           <template #img>
             <img :src="imageRoot+exp.logo.url" :alt="exp.establishment" />
@@ -50,13 +52,13 @@ export default {
   props: {
     content: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       imageRoot: process.env.VUE_APP_STRAPI_API_URL,
-      observerIterator: null
+      observerIterator: null,
     };
   },
   components: {
@@ -64,7 +66,7 @@ export default {
     ProfessionalExperienceItem,
     WhiteRoundButton,
     VueMarkdown,
-    OtherExperience
+    OtherExperience,
   },
   methods: {
     openResume() {
@@ -73,7 +75,60 @@ export default {
         "_blank"
       );
     },
-    injectStrapiMediaRoot
+    getDates(startDate, endDate) {
+      if (!endDate) {
+        return "Since " + this.getMonthYear(new Date(startDate));
+      }
+
+      return (
+        this.getMonthYear(new Date(startDate)) +
+        " - " +
+        this.getMonthYear(new Date(endDate))
+      );
+    },
+    getDuration(startDate, endDate) {
+      if (!endDate) {
+        return "(" + this.monthYearDiff(new Date(startDate), new Date()) + ")";
+      }
+
+      return (
+        "(" + this.monthYearDiff(new Date(startDate), new Date(endDate)) + ")"
+      );
+    },
+    getMonthYear(date) {
+      const MONTHS = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      return MONTHS[date.getMonth()] + ". " + date.getFullYear();
+    },
+    monthYearDiff(dateFrom, dateTo) {
+      let months =
+        dateTo.getMonth() -
+        dateFrom.getMonth() +
+        12 * (dateTo.getFullYear() - dateFrom.getFullYear());
+
+      let years = Math.floor(months / 12);
+
+      months -= years * 12;
+
+      if (years >= 1) {
+        return years + " years, " + months + " months";
+      } else {
+        return months + " months";
+      }
+    },
+    injectStrapiMediaRoot,
   },
   mounted() {
     InViewportObserver.observe(
@@ -84,7 +139,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
