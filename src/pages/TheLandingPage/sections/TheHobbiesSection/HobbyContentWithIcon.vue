@@ -2,7 +2,6 @@
   <base-content-with-icon>
     <template #icon>
       <font-awesome-icon v-if="icon" :icon="icon" fixed-width />
-      <!-- <slot name="icon" /> -->
     </template>
     <template #title>
       <slot name="title" />
@@ -40,6 +39,7 @@ export default {
     },
   },
   mounted() {
+    //@TODO refactor
     if (this.fontAwesomeCode) {
       import("@fortawesome/free-solid-svg-icons").then((obj) => {
         this.icon = obj[this.fontAwesomeLibraryCode];

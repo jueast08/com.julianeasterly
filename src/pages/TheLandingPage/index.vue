@@ -6,7 +6,7 @@
     <the-home-section :content="homeSection[lang] ? homeSection[lang] : {}" />
     <the-about-section :content="aboutSection[lang] ? aboutSection[lang] : {}" />
     <the-hobbies-section :content="hobbiesSection[lang] ? hobbiesSection[lang] : {}" />
-    <the-skills-section />
+    <the-skills-section :content="skillSection[lang] ? skillSection[lang] : {}" />
     <the-experience-section :content="experienceSection[lang] ? experienceSection[lang] : {}" />
     <the-education-section :content="educationSection[lang] ? educationSection[lang] : {}" />
     <the-contact-section :content="contactSection[lang] ? contactSection[lang] : {}" />
@@ -42,7 +42,7 @@ export default {
     TheExperienceSection,
     TheEducationSection,
     TheContactSection,
-    TheFooter
+    TheFooter,
   },
   data() {
     return {
@@ -50,34 +50,38 @@ export default {
       homeSection: {},
       aboutSection: {},
       hobbiesSection: {},
+      skillSection: {},
       experienceSection: {},
       educationSection: {},
-      contactSection: {}
+      contactSection: {},
     };
   },
   apollo: {
     lang: {
-      query: queries.lang
+      query: queries.lang,
     },
     homeSection: {
-      query: queries.home
+      query: queries.home,
     },
     aboutSection: {
-      query: queries.about
+      query: queries.about,
     },
     hobbiesSection: {
-      query: queries.hobbies
+      query: queries.hobbies,
+    },
+    skillSection: {
+      query: queries.skills,
     },
     experienceSection: {
-      query: queries.experiences
+      query: queries.experiences,
     },
     educationSection: {
-      query: queries.education
+      query: queries.education,
     },
     contactSection: {
-      query: queries.contact
-    }
-  }
+      query: queries.contact,
+    },
+  },
 };
 </script>
 

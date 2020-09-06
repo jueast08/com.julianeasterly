@@ -119,6 +119,29 @@ const queries = {
       }
     }
   `,
+  skills: gql`
+    query {
+      skillSection {
+        en {
+          title
+          subtitle
+          comfortable_skills_title
+          less_comfortable_skills_title
+          need_practice_skills_title
+          work_with_me_title
+          work_with_me_button
+          skill_set {
+            title
+            desc
+            font_awesome_code
+            comfortable_skills
+            less_comfortable_skills
+            need_practice_skills
+          }
+        }
+      }
+    }
+  `,
 };
 
 cache.writeData({

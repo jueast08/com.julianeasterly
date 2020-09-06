@@ -60,7 +60,7 @@
           <primary-color-round-button
             :disabled="!isValidForm"
             :allowClickOnDisabled="true"
-          >{{content.sendButton}}</primary-color-round-button>
+          >{{content.sendbutton}}</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -122,15 +122,15 @@ import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 const inputStatusCodes = {
   EMPTY: 1,
   INCORRECT: 2,
-  CORRECT: 3
+  CORRECT: 3,
 };
 export default {
   name: "TheContactSection",
   props: {
     content: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -141,23 +141,23 @@ export default {
         name: "",
         email: "",
         message: "",
-        recaptcha: null
+        recaptcha: null,
       },
       formHelpMessages: {
         name: {
           status: inputStatusCodes.EMPTY,
-          message: "Be sure to add your name"
+          message: "Be sure to add your name",
         },
         email: {
           status: inputStatusCodes.EMPTY,
-          message: "Make sure to double check your email"
+          message: "Make sure to double check your email",
         },
         message: {
           status: inputStatusCodes.EMPTY,
-          message: "Let me know what you want to say!"
-        }
+          message: "Let me know what you want to say!",
+        },
       },
-      scrollObserver: null
+      scrollObserver: null,
     };
   },
   components: { BaseSection, PrimaryColorRoundButton, VueRecaptcha },
@@ -241,13 +241,13 @@ export default {
           process.env.VUE_APP_API + "/send",
           querystring.stringify(this.form)
         )
-        .then(res => {
+        .then((res) => {
           if (process.env.NODE_ENV === "development") {
             console.log(res);
           }
           this.sendSuccess = true;
         })
-        .catch(error => {
+        .catch((error) => {
           if (process.env.NODE_ENV === "development") {
             console.log(error);
           }
@@ -281,7 +281,7 @@ export default {
     },
     resetOverlayBackgroundColor() {
       this.sendSuccess = true;
-    }
+    },
   },
   computed: {
     isValidForm() {
@@ -290,7 +290,7 @@ export default {
         this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
         this.formHelpMessages.message.status === inputStatusCodes.CORRECT
       );
-    }
+    },
   },
   mounted() {
     InViewportObserver.observe(
@@ -301,7 +301,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 

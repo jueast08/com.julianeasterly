@@ -1,166 +1,57 @@
 <template>
-  <base-section id="skills" title="My Skills" subtitle="What I Offer">
+  <base-section id="skills">
+    <template #title v-if="content.title">{{ content.title }}</template>
+    <template #subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
     <div class="skills">
       <div class="skills__list">
-        <skill-content-with-icon class="skills__list__skill">
-          <template #icon>
-            <font-awesome-icon :icon="['fas', 'terminal']" fixed-width />
-          </template>
-          <template #title>Development and Tech</template>
+        <skill-content-with-icon
+          class="skills__list__skill"
+          v-for="(skill, index) in content.skill_set"
+          v-bind:key="index"
+          :fontAwesomeCode="skill.font_awesome_code"
+          :title="skill.title"
+        >
           <template #description>
-            <p>
-              As a software engineer, I have techinical experience in both
-              professional and educational settings.
-            </p>
+            <vue-markdown>{{ injectStrapiMediaRoot(skill.desc) }}</vue-markdown>
             <div class="skills__list__skill__gauge-wrapper">
               <div class="skills__list__skill__gauge-wrapper__group">
                 <skill-gauge
                   class="skills__list__skill__gauge-wrapper__gauge"
                   percentage="100"
-                  goal-label="Comfortable ++"
+                  :goal-label="content.comfortable_skills_title"
                 />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Javascript (VueJS, ReactJS, Vanilla)</li>
-                  <li>HTML/CSS/SCSS</li>
-                  <li>Git & Git-flow</li>
-                </ul>
+                <div class="skills__list__skill__gauge-wrapper__group__list">
+                  <vue-markdown>{{ injectStrapiMediaRoot(skill.comfortable_skills) }}</vue-markdown>
+                </div>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
                 <skill-gauge
                   class="skills__list__skill__gauge-wrapper__gauge"
                   percentage="60"
-                  goal-label="Comfortable +"
+                  :goal-label="content.less_comfortable_skills_title"
                 />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Python</li>
-                  <li>Docker & Kubernetes</li>
-                </ul>
+                <div class="skills__list__skill__gauge-wrapper__group__list">
+                  <vue-markdown>{{ injectStrapiMediaRoot(skill.less_comfortable_skills) }}</vue-markdown>
+                </div>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
                 <skill-gauge
                   class="skills__list__skill__gauge-wrapper__gauge"
                   percentage="25"
-                  goal-label="Practice Needed"
+                  :goal-label="content.need_practice_skills_title"
                 />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>PHP</li>
-                  <li>Java</li>
-                  <li>C/C++</li>
-                  <li>Golang</li>
-                </ul>
-              </div>
-            </div>
-          </template>
-        </skill-content-with-icon>
-        <skill-content-with-icon class="skills__list__skill">
-          <template #icon>
-            <font-awesome-icon :icon="['fas', 'tasks']" fixed-width />
-          </template>
-          <template #title>Project and Product Management</template>
-          <template #description>
-            <p>
-              I've acquired skills to accurately assess a client's needs and communicate
-              them to a team.
-            </p>
-
-            <div class="skills__list__skill__gauge-wrapper">
-              <div class="skills__list__skill__gauge-wrapper__group">
-                <skill-gauge
-                  class="skills__list__skill__gauge-wrapper__gauge"
-                  percentage="100"
-                  goal-label="Comfortable ++"
-                />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Functional UML Diagrams</li>
-                  <li>Database Conception techniques (Merize)</li>
-                </ul>
-              </div>
-              <div class="skills__list__skill__gauge-wrapper__group">
-                <skill-gauge
-                  class="skills__list__skill__gauge-wrapper__gauge"
-                  percentage="60"
-                  goal-label="Comfortable +"
-                />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Design patterns</li>
-                  <li>Project Management</li>
-                  <li>Customer Need Analysis</li>
-                  <li>Technical Analysis</li>
-                </ul>
-              </div>
-              <div class="skills__list__skill__gauge-wrapper__group">
-                <skill-gauge
-                  class="skills__list__skill__gauge-wrapper__gauge"
-                  percentage="25"
-                  goal-label="Practice Needed"
-                />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Agile Method Theory</li>
-                  <li>Risk Assessment</li>
-                </ul>
-              </div>
-            </div>
-          </template>
-        </skill-content-with-icon>
-        <skill-content-with-icon class="skills__list__skill">
-          <template #icon>
-            <font-awesome-icon :icon="['fas', 'globe-europe']" fixed-width />
-          </template>
-          <template #title>Soft Skills</template>
-          <template #description>
-            <p>
-              As a literature student and tour guide, I am confident in my
-              communication and organization skills.
-              <br />Check out what Assess First has to say about my soft skills here
-              <a
-                href="https://app.assessfirst.com/_/profile/hnnndvm0-julian-easterly"
-                target="__blank"
-              >here.</a>
-            </p>
-            <div class="skills__list__skill__gauge-wrapper">
-              <div class="skills__list__skill__gauge-wrapper__group">
-                <skill-gauge
-                  class="skills__list__skill__gauge-wrapper__gauge"
-                  percentage="100"
-                  goal-label="Comfortable ++"
-                />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>English (Native)</li>
-                  <li>French (Bilingual)</li>
-                  <li>Public Speaking</li>
-                </ul>
-              </div>
-              <div class="skills__list__skill__gauge-wrapper__group">
-                <skill-gauge
-                  class="skills__list__skill__gauge-wrapper__gauge"
-                  percentage="60"
-                  goal-label="Comfortable +"
-                />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Meeting Management</li>
-                  <li>Organization</li>
-                </ul>
-              </div>
-              <div class="skills__list__skill__gauge-wrapper__group">
-                <skill-gauge
-                  class="skills__list__skill__gauge-wrapper__gauge"
-                  percentage="25"
-                  goal-label="Practice Needed"
-                />
-                <ul class="skills__list__skill__gauge-wrapper__group__list">
-                  <li>Spanish</li>
-                  <li>German (Self-Taught)</li>
-                  <li>Time Management</li>
-                </ul>
+                <div class="skills__list__skill__gauge-wrapper__group__list">
+                  <vue-markdown>{{ injectStrapiMediaRoot(skill.need_practice_skills) }}</vue-markdown>
+                </div>
               </div>
             </div>
           </template>
         </skill-content-with-icon>
       </div>
       <div ref="contact-me" class="skills__contact-me">
-        <div>Want to work together on a project or opportunity?</div>
+        <div>{{content.work_with_me_title}}</div>
         <div class="skills__contact-me__button">
-          <white-round-button @click="scrollToId('contact')">contact me</white-round-button>
+          <white-round-button @click="scrollToId('contact')">{{content.work_with_me_button}}</white-round-button>
         </div>
       </div>
     </div>
@@ -174,17 +65,34 @@ import SkillGauge from "./SkillGauge";
 import WhiteRoundButton from "UI/WhiteRoundButton";
 import scrollToId from "Utility/ScrollHelper";
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
+import VueMarkdown from "vue-markdown";
+
+import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
 
 export default {
   name: "TheSkillsSection",
+  props: {
+    content: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      imageRoot: process.env.VUE_APP_STRAPI_API_URL,
+      observerIterator: null,
+    };
+  },
   components: {
     BaseSection,
     SkillContentWithIcon,
     WhiteRoundButton,
-    SkillGauge
+    SkillGauge,
+    VueMarkdown,
   },
   methods: {
-    scrollToId
+    scrollToId,
+    injectStrapiMediaRoot,
   },
   mounted() {
     InViewportObserver.observe(
@@ -195,7 +103,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
