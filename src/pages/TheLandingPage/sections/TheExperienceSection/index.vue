@@ -97,6 +97,7 @@ export default {
     },
     getMonthYear(date) {
       const MONTHS = [
+        //@TODO translate
         "Jan",
         "Feb",
         "Mar",
@@ -112,21 +113,32 @@ export default {
       ];
       return MONTHS[date.getMonth()] + ". " + date.getFullYear();
     },
-    monthYearDiff(dateFrom, dateTo) {
-      let months =
-        dateTo.getMonth() -
-        dateFrom.getMonth() +
-        12 * (dateTo.getFullYear() - dateFrom.getFullYear());
-
+    monthYearDiff(endDate, startDate) {
+      let months = this.getNbMonthsBetweenTwoDates(endDate, startDate);
       let years = Math.floor(months / 12);
-
       months -= years * 12;
 
+      return this.createMonthYearDiffString(years, months);
+    },
+    createMonthYearDiffString(years, months) {
+      let returnString = "";
       if (years >= 1) {
-        return years + " years, " + months + " months";
+        returnString = years + " years";
+        if (months > 0) {
+          returnString += ", " + months + " month";
+        }
       } else {
-        return months + " months";
+        returnString = months + " month";
       }
+
+      return returnString + (months > 1 ? "s" : "");
+    },
+    getNbMonthsBetweenTwoDates(endDate, startDate) {
+      return (
+        endDate.getMonth() -
+        startDate.getMonth() +
+        12 * (startDate.getFullYear() - endDate.getFullYear())
+      );
     },
     injectStrapiMediaRoot,
   },
