@@ -6,6 +6,7 @@
       :subtitle2="jobType"
       :dates="workDates"
       :location="location"
+      :grayscale="false"
     >
       <template #img>
         <slot name="img" />
@@ -39,22 +40,22 @@ export default {
   name: "ProfessionalExperienceItem",
   props: {
     jobTitle: {
-      type: String
+      type: String,
     },
     companyName: {
-      type: String
+      type: String,
     },
     jobType: {
-      type: String
+      type: String,
     },
     workDates: {
-      type: String
+      type: String,
     },
     location: {
-      type: String
-    }
+      type: String,
+    },
   },
-  components: { BaseExperience }
+  components: { BaseExperience },
 };
 </script>
 

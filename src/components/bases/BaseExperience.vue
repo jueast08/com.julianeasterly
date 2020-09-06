@@ -2,7 +2,7 @@
   <section class="base-exp col-12">
     <div ref="vital-info" class="base-exp__vital-info">
       <div class="base-exp__vital-info__wrapper">
-        <div class="base-exp__vital-info__wrapper__icon">
+        <div :class="'base-exp__vital-info__wrapper__icon' + grayscaleClass">
           <slot name="img" />
         </div>
         <div class="base-exp__vital-info__wrapper__text">
@@ -48,25 +48,37 @@ export default {
   data() {
     return {
       vitalInfoObserverIterator: null,
-      detailsObserver: null
+      detailsObserver: null,
     };
   },
   props: {
     title: {
-      type: String
+      type: String,
     },
     subtitle: {
-      type: String
+      type: String,
     },
     subtitle2: {
-      type: String
+      type: String,
     },
     dates: {
-      type: String
+      type: String,
     },
     location: {
-      type: String
-    }
+      type: String,
+    },
+    grayscaleIcon: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    grayscaleClass() {
+      if (this.grayscaleIcon) {
+        return "base-exp__vital-info__wrapper__icon--grayscale";
+      }
+      return "";
+    },
   },
   mounted() {
     const selectors = "p, img, li, ul, ol, h1, h2,h3, h4, h5, h6";
@@ -74,11 +86,11 @@ export default {
     const className = "base-exp__details__elements";
     this.$refs.details
       .querySelectorAll(selectors)
-      .forEach(el => el.classList.add(className));
+      .forEach((el) => el.classList.add(className));
 
     InViewportObserver.observe(
       elements,
-      entry => {
+      (entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add(className + "--in-view");
         } else {
@@ -96,7 +108,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
@@ -119,6 +131,10 @@ export default {
         img {
           width: 100%;
           fill: global.$primary-color;
+          //
+        }
+
+        &--grayscale {
           filter: grayscale(1);
         }
       }
@@ -170,12 +186,6 @@ export default {
         &__icon {
           min-width: 50px;
           max-width: 50px;
-          svg,
-          img {
-            width: 100%;
-            fill: global.$primary-color;
-            filter: grayscale(1);
-          }
         }
       }
     }
@@ -206,12 +216,6 @@ export default {
         &__icon {
           min-width: 75px;
           max-width: 75px;
-          svg,
-          img {
-            width: 100%;
-            fill: global.$primary-color;
-            filter: grayscale(1);
-          }
         }
 
         &__text {
