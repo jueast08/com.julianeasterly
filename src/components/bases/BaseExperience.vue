@@ -2,7 +2,7 @@
   <section class="base-exp col-12">
     <div ref="vital-info" class="base-exp__vital-info">
       <div class="base-exp__vital-info__wrapper">
-        <div class="base-exp__vital-info__wrapper__icon">
+        <div :class="'base-exp__vital-info__wrapper__icon' + grayscaleClass">
           <slot name="img" />
         </div>
         <div class="base-exp__vital-info__wrapper__text">
@@ -48,41 +48,76 @@ export default {
   data() {
     return {
       vitalInfoObserverIterator: null,
-      detailsObserver: null
+      detailsObserver: null,
     };
   },
   props: {
     title: {
-      type: String
+      type: String,
     },
     subtitle: {
-      type: String
+      type: String,
     },
     subtitle2: {
-      type: String
+      type: String,
     },
     dates: {
-      type: String
+      type: String,
     },
     location: {
-      type: String
-    }
+      type: String,
+    },
+    grayscaleIcon: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    grayscaleClass() {
+      if (this.grayscaleIcon) {
+        return "base-exp__vital-info__wrapper__icon--grayscale";
+      }
+      return "";
+    },
   },
   mounted() {
+    const selectors = "p, img, li, ul, ol, h1, h2,h3, h4, h5, h6";
+    let elements = this.$refs.details.querySelectorAll(selectors);
+    const className = "base-exp__details__elements";
+    this.$refs.details
+      .querySelectorAll(selectors)
+      .forEach((el) => el.classList.add(className));
+
     InViewportObserver.observe(
-      [this.$refs["vital-info"], this.$refs.details],
+      elements,
+      (entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(className + "--in-view");
+        } else {
+          entry.target.classList.remove(className + "--in-view");
+        }
+      },
+      this
+    );
+
+    InViewportObserver.observe(
+      [this.$refs["vital-info"]],
       InViewportObserver.addAnimationModifierOnEntry,
       this
     );
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use 'global';
+
+.base-exp__elements__from-top {
+  @include global.fade-in-from-top-class-modifier;
+}
 
 .base-exp {
   &__vital-info {
@@ -96,6 +131,10 @@ export default {
         img {
           width: 100%;
           fill: global.$primary-color;
+          //
+        }
+
+        &--grayscale {
           filter: grayscale(1);
         }
       }
@@ -132,10 +171,11 @@ export default {
   }
 
   &__details {
-    @include global.fade-in-from-top-class-modifier;
-
     display: none;
     @include global.p-font;
+    &__elements {
+      @include global.fade-in-from-top-class-modifier;
+    }
   }
 }
 
@@ -146,12 +186,6 @@ export default {
         &__icon {
           min-width: 50px;
           max-width: 50px;
-          svg,
-          img {
-            width: 100%;
-            fill: global.$primary-color;
-            filter: grayscale(1);
-          }
         }
       }
     }
@@ -182,12 +216,6 @@ export default {
         &__icon {
           min-width: 75px;
           max-width: 75px;
-          svg,
-          img {
-            width: 100%;
-            fill: global.$primary-color;
-            filter: grayscale(1);
-          }
         }
 
         &__text {

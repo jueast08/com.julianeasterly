@@ -2,31 +2,37 @@
   <div id="home" class="home col-12">
     <div ref="container" class="home__container col-12 col-l-6">
       <section class="home__container__titles col-12">
-        <h1 class="home__container__titles__title">Julian</h1>
-        <h1 class="home__container__titles__title">Easterly</h1>
+        <h1 class="home__container__titles__title">{{ content.title }}</h1>
+        <h1 class="home__container__titles__title">{{ content.title2 }}</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">Collaborate. Learn. Evolve.</p>
+        <p class="home__container__subtitles__subtitle">
+          {{ content.subtitle }}
+        </p>
       </section>
     </div>
-    <div class="home__background col-12 col-xl-6"></div>
-    <div class="home__down-arrow" @click="scrollToId('about')"></div>
+    <div class="home__portrait col-12 col-xl-6">
+      <div class="home__portrait__image"></div>
+    </div>
+    <div class="home__down-arrow"></div>
   </div>
 </template>
 
 <script>
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
-import scrollToId from "Utility/ScrollHelper";
 
 export default {
   name: "TheHomeSection",
+  props: {
+    content: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      observerIterator: null
+      observerIterator: null,
     };
-  },
-  methods: {
-    scrollToId
   },
   mounted() {
     InViewportObserver.observe(
@@ -37,7 +43,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
@@ -49,6 +55,7 @@ export default {
   height: 100vh;
   background: global.$primary-black;
   overflow: hidden;
+
   @include global.fixed-background-overlay;
 
   &__container {
@@ -68,16 +75,16 @@ export default {
 
       &__title {
         margin: 0;
-        transition: transform ease-in-out 0.75s;
+        transition: transform ease-in-out 0.5s;
         @include global.h1-font;
 
         &:nth-child(1) {
-          transform: translateX(200px);
+          transform: translateX(20px);
           color: global.$primary-white;
         }
 
         &:nth-child(2) {
-          transform: translateX(400px);
+          transform: translateX(40px);
           color: global.$primary-color;
         }
       }
@@ -105,12 +112,11 @@ export default {
     }
   }
 
-  &__background {
+  &__portrait {
     position: relative;
     height: 50%;
 
-    &:before {
-      content: " ";
+    &__image {
       display: block;
       position: absolute;
       left: 0;
@@ -118,11 +124,10 @@ export default {
       width: 100%;
       height: 100%;
       z-index: 1;
-      background-image: url("~Assets/portrait_home-blurred.jpg");
       background-repeat: no-repeat;
-      background-attachment: fixed;
       background-size: cover;
-      background-position: center 100px;
+      background-position: center center;
+      background-image: url("~Assets/portrait_home-blurred.jpg");
     }
   }
 
@@ -133,18 +138,18 @@ export default {
     transform: translateX(-50%) rotate(45deg);
 
     z-index: 99;
-    height: 15px;
-    width: 15px;
-    border-width: 0px 10px 10px 0;
+    height: 10px;
+    width: 10px;
+    border-width: 0px 5px 5px 0;
     border-style: solid;
     border-color: global.$primary-white;
-    animation: moveArrow 1s infinite alternate;
+    animation: moveArrow 0.7s infinite alternate;
     @include global.keyframes(moveArrow) {
       from {
         bottom: 50px;
       }
       to {
-        bottom: 40px;
+        bottom: 45px;
       }
     }
   }
@@ -183,12 +188,11 @@ export default {
       }
     }
 
-    &__background {
+    &__portrait {
       clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
       height: 100vh;
 
-      &:before {
-        content: " ";
+      &__image {
         background-attachment: scroll;
         background-position: right;
       }

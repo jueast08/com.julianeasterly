@@ -1,15 +1,15 @@
 <template>
   <div id="landing-page">
-    <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
+    <div id="top-anchor-pixel" style="position: absolute; top: 70px"></div>
     <the-header />
     <the-social-network-bar />
-    <the-home-section />
-    <the-about-section />
-    <the-hobbies-section />
-    <the-skills-section />
-    <the-experience-section />
-    <the-education-section />
-    <the-contact-section />
+    <the-home-section :content="content.home" />
+    <the-about-section :content="content.about" />
+    <the-hobbies-section :content="content.hobbies" />
+    <the-skills-section :content="content.skills" />
+    <the-experience-section :content="content.experience" />
+    <the-education-section :content="content.education" />
+    <the-contact-section :content="content.contact" />
     <the-footer />
     <the-go-to-top-button querySelectorThatTriggersShowButton="#home" />
   </div>
@@ -27,6 +27,7 @@ import TheExperienceSection from "./sections/TheExperienceSection";
 import TheEducationSection from "./sections/TheEducationSection";
 import TheContactSection from "./sections/TheContactSection";
 import TheFooter from "Layout/TheFooter";
+import LANGS from "Lang";
 
 export default {
   name: "TheLandingPage",
@@ -41,12 +42,19 @@ export default {
     TheExperienceSection,
     TheEducationSection,
     TheContactSection,
-    TheFooter
-  }
+    TheFooter,
+  },
+  data() {
+    return {
+      content: LANGS.en,
+    };
+  },
 };
 </script>
 
 <style lang="scss">
+@use 'global';
+
 body {
   height: 100vh;
   max-width: 100%;

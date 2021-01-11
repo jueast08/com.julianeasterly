@@ -38,6 +38,7 @@ module.exports = {
     alias.set("Pages", path.resolve(__dirname, "src/pages"));
     alias.set("Public", path.resolve(__dirname, "public"));
     alias.set("Source", path.resolve(__dirname, "src"));
+    alias.set("Store", path.resolve(__dirname, "src/store"));
     alias.set("Utility", path.resolve(__dirname, "src/utility"));
     alias.set("UI", path.resolve(__dirname, "src/components/ui"));
 

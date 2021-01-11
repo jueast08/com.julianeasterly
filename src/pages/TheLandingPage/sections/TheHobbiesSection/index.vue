@@ -1,35 +1,14 @@
 <template>
-  <base-section id="hobbies" title="A Few of My Hobbies">
-    <div ref="hobbies" class="hobbies">
-      <hobby-content-with-icon class="hobbies__hobby">
-        <template #icon>
-          <font-awesome-icon :icon="['fas', 'laptop-code']" fixed-width />
-        </template>
-        <template #title>Coding and Design</template>
-      </hobby-content-with-icon>
-      <hobby-content-with-icon class="hobbies__hobby">
-        <template #icon>
-          <font-awesome-icon :icon="['fas', 'dumbbell']" fixed-width />
-        </template>
-        <template #title>Sports</template>
-      </hobby-content-with-icon>
-      <hobby-content-with-icon class="hobbies__hobby">
-        <template #icon>
-          <font-awesome-icon :icon="['fas', 'tools']" fixed-width />
-        </template>
-        <template #title>DIY</template>
-      </hobby-content-with-icon>
-      <hobby-content-with-icon class="hobbies__hobby">
-        <template #icon>
-          <font-awesome-icon :icon="['fas', 'seedling']" fixed-width />
-        </template>
-        <template #title>Gardening</template>
-      </hobby-content-with-icon>
-      <hobby-content-with-icon class="hobbies__hobby">
-        <template #icon>
-          <font-awesome-icon :icon="['fas', 'hamburger']" fixed-width />
-        </template>
-        <template #title>Cooking</template>
+  <base-section id="hobbies">
+    <template #title v-if="content.title">{{ content.title }}</template>
+    <div class="hobbies" v-if="content.hobbies">
+      <hobby-content-with-icon
+        v-for="(hobby, index) in content.hobbies"
+        v-bind:key="index"
+        class="hobbies__hobby"
+        :fontAwesomeCode="hobby.font_awesome_code"
+      >
+        <template #title>{{ hobby.title }}</template>
       </hobby-content-with-icon>
     </div>
   </base-section>
@@ -41,10 +20,11 @@ import HobbyContentWithIcon from "./HobbyContentWithIcon";
 
 export default {
   name: "TheHobbiesSection",
-  data() {
-    return {
-      observerIterator: null
-    };
+  props: {
+    content: {
+      type: Object,
+      required: true
+    }
   },
   components: { BaseSection, HobbyContentWithIcon }
 };

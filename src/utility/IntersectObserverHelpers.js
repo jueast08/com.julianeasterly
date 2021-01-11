@@ -29,8 +29,11 @@ export class InViewportObserver {
    * @param {IntersectionObserverEntry} entry : an entry provided by the IntersectionObserver
    */
   static addAnimationModifierOnEntry(entry) {
+    //@TODO rename
     if (entry.isIntersecting) {
       entry.target.classList.add(entry.target.classList[0] + "--in-view");
+    } else {
+      entry.target.classList.remove(entry.target.classList[0] + "--in-view");
     }
   }
 

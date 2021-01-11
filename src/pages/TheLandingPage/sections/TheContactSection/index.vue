@@ -1,17 +1,15 @@
 <template>
-  <base-section
-    id="contact"
-    title="Send Me a Message"
-    subtitle="Opportunity, idea for a project, or just want to say hi?"
-  >
+  <base-section id="contact">
+    <template #title v-if="content.title">{{ content.title }}</template>
+    <template #subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
     <div ref="contact" class="contact">
       <form class="contact__form" @submit.prevent="onSubmit">
-        <section class="contact__form__section">
+        <section class="contact__form__section" v-if="content.name">
           <div
             class="contact__form__section__label"
             :class="addValidationModifier(this.formHelpMessages.name.status)"
           >
-            <label for="name">Name</label>
+            <label for="name">{{content.name}}</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
@@ -24,7 +22,7 @@
             class="contact__form__section__label"
             :class="addValidationModifier(this.formHelpMessages.email.status)"
           >
-            <label for="email">Email</label>
+            <label for="email">{{content.email}}</label>
             <span>
               <font-awesome-icon
                 v-if="isIncorrect(formHelpMessages.email.status)"
@@ -42,7 +40,7 @@
             class="contact__form__section__label"
             :class="addValidationModifier(this.formHelpMessages.message.status)"
           >
-            <label for="message">Message</label>
+            <label for="message">{{content.message}}</label>
             <span>
               <font-awesome-icon :icon="['fas', 'check-circle']" fixed-width />
             </span>
@@ -59,7 +57,10 @@
             :loadRecaptchaScript="true"
             ref="recaptcha"
           />
-          <primary-color-round-button :disabled="!isValidForm" :allowClickOnDisabled="true">Send</primary-color-round-button>
+          <primary-color-round-button
+            :disabled="!isValidForm"
+            :allowClickOnDisabled="true"
+          >{{content.sendbutton}}</primary-color-round-button>
         </div>
       </form>
       <transition name="fade">
@@ -121,10 +122,16 @@ import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 const inputStatusCodes = {
   EMPTY: 1,
   INCORRECT: 2,
-  CORRECT: 3
+  CORRECT: 3,
 };
 export default {
   name: "TheContactSection",
+  props: {
+    content: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       recaptchaKey: process.env.VUE_APP_RECAPTCHA,
@@ -134,23 +141,23 @@ export default {
         name: "",
         email: "",
         message: "",
-        recaptcha: null
+        recaptcha: null,
       },
       formHelpMessages: {
         name: {
           status: inputStatusCodes.EMPTY,
-          message: "Be sure to add your name"
+          message: "Be sure to add your name",
         },
         email: {
           status: inputStatusCodes.EMPTY,
-          message: "Make sure to double check your email"
+          message: "Make sure to double check your email",
         },
         message: {
           status: inputStatusCodes.EMPTY,
-          message: "Let me know what you want to say!"
-        }
+          message: "Let me know what you want to say!",
+        },
       },
-      scrollObserver: null
+      scrollObserver: null,
     };
   },
   components: { BaseSection, PrimaryColorRoundButton, VueRecaptcha },
@@ -234,13 +241,13 @@ export default {
           process.env.VUE_APP_API + "/send",
           querystring.stringify(this.form)
         )
-        .then(res => {
+        .then((res) => {
           if (process.env.NODE_ENV === "development") {
             console.log(res);
           }
           this.sendSuccess = true;
         })
-        .catch(error => {
+        .catch((error) => {
           if (process.env.NODE_ENV === "development") {
             console.log(error);
           }
@@ -274,7 +281,7 @@ export default {
     },
     resetOverlayBackgroundColor() {
       this.sendSuccess = true;
-    }
+    },
   },
   computed: {
     isValidForm() {
@@ -283,7 +290,7 @@ export default {
         this.formHelpMessages.email.status === inputStatusCodes.CORRECT &&
         this.formHelpMessages.message.status === inputStatusCodes.CORRECT
       );
-    }
+    },
   },
   mounted() {
     InViewportObserver.observe(
@@ -294,7 +301,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
