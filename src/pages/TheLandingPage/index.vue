@@ -1,15 +1,15 @@
 <template>
   <div id="landing-page">
-    <div id="top-anchor-pixel" style="position: absolute; top:70px;"></div>
+    <div id="top-anchor-pixel" style="position: absolute; top: 70px"></div>
     <the-header />
     <the-social-network-bar />
-    <the-home-section :content="homeSection[lang] ? homeSection[lang] : {}" />
-    <the-about-section :content="aboutSection[lang] ? aboutSection[lang] : {}" />
-    <the-hobbies-section :content="hobbiesSection[lang] ? hobbiesSection[lang] : {}" />
-    <the-skills-section :content="skillSection[lang] ? skillSection[lang] : {}" />
-    <the-experience-section :content="experienceSection[lang] ? experienceSection[lang] : {}" />
-    <the-education-section :content="educationSection[lang] ? educationSection[lang] : {}" />
-    <the-contact-section :content="contactSection[lang] ? contactSection[lang] : {}" />
+    <the-home-section :content="content.home" />
+    <the-about-section :content="content.about" />
+    <the-hobbies-section :content="content.hobbies" />
+    <the-skills-section :content="content.skills" />
+    <the-experience-section :content="content.experience" />
+    <the-education-section :content="content.education" />
+    <the-contact-section :content="content.contact" />
     <the-footer />
     <the-go-to-top-button querySelectorThatTriggersShowButton="#home" />
   </div>
@@ -27,7 +27,7 @@ import TheExperienceSection from "./sections/TheExperienceSection";
 import TheEducationSection from "./sections/TheEducationSection";
 import TheContactSection from "./sections/TheContactSection";
 import TheFooter from "Layout/TheFooter";
-import { queries } from "Store";
+import LANGS from "Lang";
 
 export default {
   name: "TheLandingPage",
@@ -46,41 +46,8 @@ export default {
   },
   data() {
     return {
-      lang: "en",
-      homeSection: {},
-      aboutSection: {},
-      hobbiesSection: {},
-      skillSection: {},
-      experienceSection: {},
-      educationSection: {},
-      contactSection: {},
+      content: LANGS.en,
     };
-  },
-  apollo: {
-    lang: {
-      query: queries.lang,
-    },
-    homeSection: {
-      query: queries.home,
-    },
-    aboutSection: {
-      query: queries.about,
-    },
-    hobbiesSection: {
-      query: queries.hobbies,
-    },
-    skillSection: {
-      query: queries.skills,
-    },
-    experienceSection: {
-      query: queries.experiences,
-    },
-    educationSection: {
-      query: queries.education,
-    },
-    contactSection: {
-      query: queries.contact,
-    },
   },
 };
 </script>

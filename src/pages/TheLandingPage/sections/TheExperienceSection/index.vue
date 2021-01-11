@@ -1,7 +1,9 @@
 <template>
   <base-section id="experience">
     <template #title v-if="content.title">{{ content.title }}</template>
-    <template #subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
+    <template #subtitle v-if="content.subtitle">{{
+      content.subtitle
+    }}</template>
     <div class="experience">
       <div class="experience__list" v-if="content.experiences">
         <professional-experience-item
@@ -13,26 +15,32 @@
           <template #job-type>{{ exp.subtitle }}</template>
 
           <template #work-dates>
-            {{getDates(exp.start_date_v2, exp.end_date_v2)}}
+            {{ getDates(exp.start_date_v2, exp.end_date_v2) }}
             <br />
-            {{getDuration(exp.start_date_v2, exp.end_date_v2)}}
+            {{ getDuration(exp.start_date_v2, exp.end_date_v2) }}
           </template>
           <template #location>{{ exp.location }}</template>
           <template #img>
-            <img :src="imageRoot+exp.logo.url" :alt="exp.establishment" />
+            <img v-if="exp.logo" :src="exp.logo.url" :alt="exp.establishment" />
           </template>
           <template #details>
-            <vue-markdown>{{ injectStrapiMediaRoot(exp.content) }}</vue-markdown>
+            <vue-markdown>{{ exp.content }}</vue-markdown>
           </template>
         </professional-experience-item>
       </div>
       <other-experience v-if="content.other_experiences">
         <template #content>
-          <vue-markdown>{{ injectStrapiMediaRoot(content.other_experiences) }}</vue-markdown>
+          <vue-markdown>{{ content.other_experiences }}</vue-markdown>
         </template>
       </other-experience>
-      <section ref="experience__resume" class="experience__resume" v-if="content">
-        <white-round-button @click="openResume()">{{ content.resume_button_text}}</white-round-button>
+      <section
+        ref="experience__resume"
+        class="experience__resume"
+        v-if="content"
+      >
+        <white-round-button @click="openResume()">{{
+          content.resume_button_text
+        }}</white-round-button>
       </section>
     </div>
   </base-section>
@@ -45,7 +53,6 @@ import OtherExperience from "./OtherExperience";
 import WhiteRoundButton from "UI/WhiteRoundButton";
 import VueMarkdown from "vue-markdown";
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
-import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
 
 export default {
   name: "TheExperienceSection",
@@ -57,7 +64,6 @@ export default {
   },
   data() {
     return {
-      imageRoot: process.env.VUE_APP_STRAPI_API_URL,
       observerIterator: null,
     };
   },
@@ -140,7 +146,6 @@ export default {
         12 * (startDate.getFullYear() - endDate.getFullYear())
       );
     },
-    injectStrapiMediaRoot,
   },
   mounted() {
     InViewportObserver.observe(

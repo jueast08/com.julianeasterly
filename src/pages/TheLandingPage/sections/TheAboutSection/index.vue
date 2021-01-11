@@ -2,11 +2,14 @@
   <base-section ref="about" id="about">
     <template #title v-if="content.title">{{ content.title }}</template>
     <div class="about" v-if="content.articles">
-      <about-article v-for="(article, index) in content.articles" v-bind:key="index">
+      <about-article
+        v-for="(article, index) in content.articles"
+        v-bind:key="index"
+      >
         <template #title>{{ article.title }}</template>
         <template #subtitle>{{ article.subtitle }}</template>
         <template #content>
-          <vue-markdown>{{ injectStrapiMediaRoot(article.content) }}</vue-markdown>
+          <vue-markdown>{{ article.content }}</vue-markdown>
         </template>
       </about-article>
     </div>
@@ -18,36 +21,33 @@ import BaseSection from "Bases/BaseSection";
 import AboutArticle from "./AboutArticle";
 import VueMarkdown from "vue-markdown";
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
-import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
 
 export default {
   name: "TheAboutSection",
   data() {
     return {
-      observerIterator: null
+      observerIterator: null,
     };
   },
   props: {
     content: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     BaseSection,
     VueMarkdown,
-    AboutArticle
+    AboutArticle,
   },
-  methods: {
-    injectStrapiMediaRoot
-  },
+
   mounted() {
     InViewportObserver.observe(
       [
         this.$refs.section1,
         this.$refs.section2,
         this.$refs.section3,
-        this.$refs.photo
+        this.$refs.photo,
       ],
       InViewportObserver.addAnimationModifierOnEntry,
       this
@@ -55,7 +55,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 

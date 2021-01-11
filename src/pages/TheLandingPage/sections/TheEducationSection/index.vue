@@ -1,22 +1,32 @@
 <template>
-  <base-section id="education" title="Education" subtitle="The path I've Traveled">
+  <base-section
+    id="education"
+    title="Education"
+    subtitle="The path I've Traveled"
+  >
     <template #title v-if="content.title">{{ content.title }}</template>
-    <template #subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
+    <template #subtitle v-if="content.subtitle">{{
+      content.subtitle
+    }}</template>
     <div class="education">
       <div class="education__list" v-if="content.education">
-        <education-experience-item v-for="(edu, index) in content.education" v-bind:key="index">
+        <education-experience-item
+          v-for="(edu, index) in content.education"
+          v-bind:key="index"
+        >
           <template #degree-title>{{ edu.title }}</template>
           <template #school-name>{{ edu.establishment }}</template>
           <template #rank>{{ edu.subtitle }}</template>
-          <template
-            #work-dates
-          >{{ edu.start_date }} {{ edu.end_date ? "&mdash; "+edu.end_date : '' }}</template>
+          <template #work-dates
+            >{{ edu.start_date }}
+            {{ edu.end_date ? "&mdash; " + edu.end_date : "" }}</template
+          >
           <template #location>{{ edu.location }}</template>
           <template #img>
-            <img :src="imageRoot+edu.logo.url" :alt="edu.establishment" />
+            <img v-if="edu.logo" :src="edu.logo.url" :alt="edu.establishment" />
           </template>
           <template #details>
-            <vue-markdown>{{ injectStrapiMediaRoot(edu.content) }}</vue-markdown>
+            <vue-markdown>{{ edu.content }}</vue-markdown>
           </template>
         </education-experience-item>
       </div>
@@ -29,7 +39,6 @@ import BaseSection from "Bases/BaseSection";
 import VueMarkdown from "vue-markdown";
 
 import EducationExperienceItem from "./EducationExperienceItem";
-import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
 
 export default {
   name: "TheEducationSection",
@@ -37,17 +46,14 @@ export default {
   props: {
     content: {
       type: Object,
-      required: true
-    }
-  },
-  methods: {
-    injectStrapiMediaRoot
+      required: true,
+    },
   },
   data() {
     return {
-      imageRoot: process.env.VUE_APP_STRAPI_API_URL
+      image: null,
     };
-  }
+  },
 };
 </script>
 

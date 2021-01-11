@@ -6,11 +6,13 @@
         <h1 class="home__container__titles__title">{{ content.title2 }}</h1>
       </section>
       <section class="home__container__subtitles col-12">
-        <p class="home__container__subtitles__subtitle">{{ content.subtitle }}</p>
+        <p class="home__container__subtitles__subtitle">
+          {{ content.subtitle }}
+        </p>
       </section>
     </div>
     <div class="home__portrait col-12 col-xl-6">
-      <div class="home__portrait__image" :style="portrait"></div>
+      <div class="home__portrait__image"></div>
     </div>
     <div class="home__down-arrow"></div>
   </div>
@@ -24,29 +26,13 @@ export default {
   props: {
     content: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      observerIterator: null
+      observerIterator: null,
     };
-  },
-  computed: {
-    portrait() {
-      if (!this.content.portrait) {
-        return {};
-      }
-
-      return {
-        opacity: this.content.portrait.opacity,
-        backgroundImage:
-          "url(" +
-          process.env.VUE_APP_STRAPI_API_URL +
-          this.content.portrait.image.url +
-          ")"
-      };
-    }
   },
   mounted() {
     InViewportObserver.observe(
@@ -57,7 +43,7 @@ export default {
   },
   beforeDestroy() {
     InViewportObserver.disconnect(this);
-  }
+  },
 };
 </script>
 
@@ -141,6 +127,7 @@ export default {
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
+      background-image: url("~Assets/portrait_home-blurred.jpg");
     }
   }
 

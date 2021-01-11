@@ -1,7 +1,9 @@
 <template>
   <base-section id="skills">
     <template #title v-if="content.title">{{ content.title }}</template>
-    <template #subtitle v-if="content.subtitle">{{ content.subtitle }}</template>
+    <template #subtitle v-if="content.subtitle">{{
+      content.subtitle
+    }}</template>
     <div class="skills">
       <div class="skills__list">
         <skill-content-with-icon
@@ -12,7 +14,7 @@
           :title="skill.title"
         >
           <template #description>
-            <vue-markdown>{{ injectStrapiMediaRoot(skill.desc) }}</vue-markdown>
+            <vue-markdown>{{ skill.desc }}</vue-markdown>
             <div class="skills__list__skill__gauge-wrapper">
               <div class="skills__list__skill__gauge-wrapper__group">
                 <skill-gauge
@@ -21,7 +23,7 @@
                   :goal-label="content.comfortable_skills_title"
                 />
                 <div class="skills__list__skill__gauge-wrapper__group__list">
-                  <vue-markdown>{{ injectStrapiMediaRoot(skill.comfortable_skills) }}</vue-markdown>
+                  <vue-markdown>{{ skill.comfortable_skills }}</vue-markdown>
                 </div>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -31,7 +33,9 @@
                   :goal-label="content.less_comfortable_skills_title"
                 />
                 <div class="skills__list__skill__gauge-wrapper__group__list">
-                  <vue-markdown>{{ injectStrapiMediaRoot(skill.less_comfortable_skills) }}</vue-markdown>
+                  <vue-markdown>{{
+                    skill.less_comfortable_skills
+                  }}</vue-markdown>
                 </div>
               </div>
               <div class="skills__list__skill__gauge-wrapper__group">
@@ -41,7 +45,7 @@
                   :goal-label="content.need_practice_skills_title"
                 />
                 <div class="skills__list__skill__gauge-wrapper__group__list">
-                  <vue-markdown>{{ injectStrapiMediaRoot(skill.need_practice_skills) }}</vue-markdown>
+                  <vue-markdown>{{ skill.need_practice_skills }}</vue-markdown>
                 </div>
               </div>
             </div>
@@ -49,9 +53,11 @@
         </skill-content-with-icon>
       </div>
       <div ref="contact-me" class="skills__contact-me">
-        <div>{{content.work_with_me_title}}</div>
+        <div>{{ content.work_with_me_title }}</div>
         <div class="skills__contact-me__button">
-          <white-round-button @click="scrollToId('contact')">{{content.work_with_me_button}}</white-round-button>
+          <white-round-button @click="scrollToId('contact')">{{
+            content.work_with_me_button
+          }}</white-round-button>
         </div>
       </div>
     </div>
@@ -67,7 +73,7 @@ import scrollToId from "Utility/ScrollHelper";
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 import VueMarkdown from "vue-markdown";
 
-import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
+//import { injectStrapiMediaRoot } from "Utility/StrapiHelper";
 
 export default {
   name: "TheSkillsSection",
@@ -92,7 +98,6 @@ export default {
   },
   methods: {
     scrollToId,
-    injectStrapiMediaRoot,
   },
   mounted() {
     InViewportObserver.observe(
