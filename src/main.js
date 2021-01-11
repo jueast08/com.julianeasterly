@@ -2,17 +2,13 @@ import Vue from "vue";
 import App from "Components/App.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faEnvelope,
+  //@TODO use local declarations rather than declaring this in the main.js
   faTerminal,
-  faDumbbell,
-  faTools,
-  faSeedling,
+  faEnvelope,
   faTasks,
   faGlobeEurope,
-  faLaptopCode,
   faMapMarkerAlt,
   faCheckCircle,
-  faHamburger,
   faExclamationCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -23,25 +19,19 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(
-  faEnvelope,
   faTerminal,
-  faDumbbell,
-  faTools,
-  faSeedling,
+  faEnvelope,
   faLinkedin,
   faGithub,
   faTasks,
   faGlobeEurope,
-  faLaptopCode,
   faMapMarkerAlt,
   faCheckCircle,
-  faHamburger,
   faExclamationCircle,
   faTwitter
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
-
 Vue.config.productionTip = false;
 
 new Vue({

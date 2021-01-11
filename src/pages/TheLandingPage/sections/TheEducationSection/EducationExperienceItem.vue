@@ -6,6 +6,7 @@
       :subtitle="schoolName"
       :dates="dates"
       :location="location"
+      :grayscale="false"
     >
       <template #img>
         <slot name="img" />
@@ -39,22 +40,22 @@ export default {
   name: "EducationExperienceItem",
   props: {
     degreeTitle: {
-      type: String
+      type: String,
     },
     rank: {
-      type: String
+      type: String,
     },
     schoolName: {
-      type: String
+      type: String,
     },
     dates: {
-      type: String
+      type: String,
     },
     location: {
-      type: String
-    }
+      type: String,
+    },
   },
-  components: { BaseExperience }
+  components: { BaseExperience },
 };
 </script>
 

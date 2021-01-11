@@ -1,206 +1,46 @@
 <template>
-  <base-section id="experience" title="Experience" subtitle="Professional">
+  <base-section id="experience">
+    <template #title v-if="content.title">{{ content.title }}</template>
+    <template #subtitle v-if="content.subtitle">{{
+      content.subtitle
+    }}</template>
     <div class="experience">
-      <div class="experience__list">
-        <!-- @TODO export data to a json -->
+      <div class="experience__list" v-if="content.experiences">
         <professional-experience-item
-          job-title="IT Consultant"
-          company-name="Actimage"
-          work-dates="Since Sept. 2019"
-          location="Colmar, Alsace, France"
+          v-for="(exp, index) in content.experiences"
+          v-bind:key="index"
         >
+          <template #job-title>{{ exp.title }}</template>
+          <template #company-name>{{ exp.establishment }}</template>
+          <template #job-type>{{ exp.subtitle }}</template>
+
+          <template #work-dates>
+            {{ getDates(exp.start_date_v2, exp.end_date_v2) }}
+            <br />
+            {{ getDuration(exp.start_date_v2, exp.end_date_v2) }}
+          </template>
+          <template #location>{{ exp.location }}</template>
           <template #img>
-            <img :src="actimageLogo" alt="Actimage" />
+            <img v-if="exp.logo" :src="exp.logo.url" :alt="exp.establishment" />
           </template>
           <template #details>
-            <p>
-              As a consultant, I have a Product Owner role in the "Luxury
-              Services" aspects of the Bentley Network Application, a private
-              social network for Bentley Vehicle owners. I work on the
-              functional conception of new products and services, orchestrate
-              the development of these services and products, and carry out
-              testing. I also carry out market studies and propose innovative IT
-              ideas.
-              <br />
-              <b>Programing Languages and Tools:</b> Javascript, NightwatchJS,
-              Sonarqube
-              <br />
-              <b
-                >Project and Client Management, Response to calls for tenders</b
-              >
-            </p>
-          </template>
-        </professional-experience-item>
-        <professional-experience-item
-          job-title="Product Owner - Business Analyst"
-          company-name="Société Générale"
-          jobType="Internship and Student Project"
-          workDates="Oct. 2018 - Sept. 2019"
-          location="Schiltigheim, Alsace, France"
-        >
-          <template #img>
-            <img :src="sgLogo" alt="Société Générale" />
-          </template>
-          <template #details>
-            <p>
-              <span class="bold-primary"
-                >Internship &mdash; Product Owner - E-Payment Expert</span
-              >
-              <br />
-              <span class="primary-font-color">Mar. - Sept. 2019</span>
-              <br />With the Front Office ATM team at Société Générales
-              E-Payment Center in Schiltigheim, France, I worked on the NAC2020
-              project &mdash; a project to assure that the entirety of the
-              bank's ATMs were in compliance with the new NAC2020 IT security
-              norms. This project required precise understanding of aquiring
-              banks and ATMS, as well as the ability to read and understand
-              complex technical documents.
-              <br />
-              <b>
-                Risk Assessment, Specification Drafting, Meeting Hosting, EMV,
-                TR-34
-              </b>
-            </p>
-            <p>
-              <span class="bold-primary"
-                >Student Project &mdash; E-Payment Analyst</span
-              >
-              <br />
-              <span class="primary-font-color">Oct. 2018 - Mar. 2019</span>
-              <br />My collobration with the Société Générale Bank started with
-              a student project on the restrictions that can be concluded from
-              studing ATM legislation. This project required understanding EMV
-              (Eurocard Mastercard Visa) specfifications, as well as French
-              standards like the the Manuel de Retraits sur Automate (Manual on
-              ATM Withrawals) and the Manuel de Paiements Electroniques (Manaul
-              on Electronique Payments)
-              <br />
-              <b>Specification Drafting, EMV, MPE, MRA</b>
-            </p>
-          </template>
-        </professional-experience-item>
-        <professional-experience-item
-          jobTitle="DevOps Engineer"
-          companyName="Canal+"
-          jobType="Internship"
-          workDates="Apr. 2018 - Aug. 2018"
-          location="Issy-les-Moulineaux, Ile-de-France, France"
-        >
-          <template #img>
-            <img :src="canalPlusLogo" alt="Canal+" />
-          </template>
-          <template #details>
-            <p>
-              As a DevOps engineer, I put created a testing tool combining
-              Python 2.7 and Kubernetes in order to boost end-to-end test
-              execution time. Thanks to this tool, end-to-end tests saw a 83%
-              decrease in runtime.
-              <br />
-              <b>Programing Languages and Tools:</b> Python, Javascript, Docker,
-              Kubernetes
-            </p>
-          </template>
-        </professional-experience-item>
-        <professional-experience-item
-          jobTitle="Full-Stack Web Developer"
-          companyName="SoyHuCe"
-          workDates="Mar. 2016 - Jan. 2018"
-          location="Colombelles, Lower-Normandy, France"
-        >
-          <template #img>
-            <img :src="soyhuceLogo" alt="SoyHuCe" />
-          </template>
-          <template #details>
-            <p>
-              <span class="bold-primary">Full-Stack Developer</span>
-              <br />As a developer, I worked on projects heavily reliant on web
-              technology such as ReactJs and Laravel. I also had the opportunity
-              to work occasionally as a Project Leader. My biggest challenge was
-              setting up and supervising a system of tests (unit, integration,
-              and end-to-end tests) for
-              <a href="https://pathinterest.com/">iStoryPath</a> using Jest,
-              Enzyme, Nock and Nightwatch.
-              <br />
-              <b>Programing Languages and Tools:</b> ReactJS, Larvel, Golang,
-              Java, Git & Git-Flow, Docker
-            </p>
-            <p>
-              <span class="bold-primary"
-                >Internship &mdash; Full-Stack Developer</span
-              >
-              <br />Development of a full-stack application in React and Laravel
-              application that facilitates the utilization of Wiremock, an API
-              HTTP simulator written in Java.
-              <br />
-              <b>Programing Languages and Tools:</b> ReactJS, Laravel, Wiremock,
-              Java
-            </p>
+            <vue-markdown>{{ exp.content }}</vue-markdown>
           </template>
         </professional-experience-item>
       </div>
-      <div ref="other-experience" class="experience__others">
-        <div class="experience__others__title">My Other Experiences</div>
-        <section class="experience__others__description">
-          <div class="experience__others__description__title">From 2012</div>
-          <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Bilingual (French/English) Tour Guide &mdash; D-Day and WWII
-            </div>
-            <div class="experience__others__description__content__company">
-              Mémorial de Caen &mdash; Caen, Normandy, France
-            </div>
-            <div class="experience__others__description__content__dates">
-              May 2014 - Dec. 2017
-            </div>
-          </div>
-          <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Exchange Teacher &mdash; English as a Second Language (TESL)
-            </div>
-            <div class="experience__others__description__content__company">
-              Lycée Camille Claudel &mdash; Caen, Normandy, France
-            </div>
-            <div class="experience__others__description__content__dates">
-              Oct. 2013 - May 2014
-            </div>
-          </div>
-          <div class="experience__others__description__content">
-            <div class="experience__others__description__content__job-title">
-              Teaching Assistant
-            </div>
-            <div class="experience__others__description__content__company">
-              American Montessori Academy &mdash; Redford, Michigan, USA
-            </div>
-            <div class="experience__others__description__content__dates">
-              Oct. 2012 - July. 2013
-            </div>
-          </div>
-        </section>
-        <section class="experience__others__description">
-          <div class="experience__others__description__title">
-            From 2008 to 2012
-          </div>
-          <p>
-            I believe in working hard, and from the age of 18, I've worked
-            various jobs while in school. Between the moment that I started
-            university classes and the moment I received my first degree, I've
-            worked as a
-            <span class="bold-primary"
-              >tutor/mentor for students at Indiana State University</span
-            >, I've
-            <span class="bold-primary"
-              >driven a forklift for Dever Budweiser Distribution Company</span
-            >, and
-            <span class="bold-primary"
-              >I've worked in a kitchen at the Detroit City Zoo</span
-            >.
-          </p>
-        </section>
-      </div>
-      <section ref="experience__resume" class="experience__resume">
-        <white-round-button @click="openResume()"
-          >Download my Resume</white-round-button
-        >
+      <other-experience v-if="content.other_experiences">
+        <template #content>
+          <vue-markdown>{{ content.other_experiences }}</vue-markdown>
+        </template>
+      </other-experience>
+      <section
+        ref="experience__resume"
+        class="experience__resume"
+        v-if="content"
+      >
+        <white-round-button @click="openResume()">{{
+          content.resume_button_text
+        }}</white-round-button>
       </section>
     </div>
   </base-section>
@@ -209,21 +49,21 @@
 <script>
 import BaseSection from "Bases/BaseSection";
 import ProfessionalExperienceItem from "./ProfessionalExperienceItem";
+import OtherExperience from "./OtherExperience";
 import WhiteRoundButton from "UI/WhiteRoundButton";
-import ActimageLogo from "Assets/actimage_logo.png";
-import SocieteGenerale from "Assets/sg_logo.png";
-import CanalPlusLogo from "Assets/canalplus_logo.png";
-import SoyhuceLogo from "Assets/soyhuce_logo.png";
+import VueMarkdown from "vue-markdown";
 import { InViewportObserver } from "Utility/IntersectObserverHelpers";
 
 export default {
   name: "TheExperienceSection",
+  props: {
+    content: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      actimageLogo: ActimageLogo,
-      sgLogo: SocieteGenerale,
-      canalPlusLogo: CanalPlusLogo,
-      soyhuceLogo: SoyhuceLogo,
       observerIterator: null,
     };
   },
@@ -231,21 +71,85 @@ export default {
     BaseSection,
     ProfessionalExperienceItem,
     WhiteRoundButton,
+    VueMarkdown,
+    OtherExperience,
   },
   methods: {
     openResume() {
       window.open(
-        process.env.BASE_URL + "julian_easterly_resume.pdf",
+        process.env.VUE_APP_STRAPI_API_URL + this.content.resume.url,
         "_blank"
+      );
+    },
+    getDates(startDate, endDate) {
+      if (!endDate) {
+        return "Since " + this.getMonthYear(new Date(startDate));
+      }
+
+      return (
+        this.getMonthYear(new Date(startDate)) +
+        " - " +
+        this.getMonthYear(new Date(endDate))
+      );
+    },
+    getDuration(startDate, endDate) {
+      if (!endDate) {
+        return "(" + this.monthYearDiff(new Date(startDate), new Date()) + ")";
+      }
+
+      return (
+        "(" + this.monthYearDiff(new Date(startDate), new Date(endDate)) + ")"
+      );
+    },
+    getMonthYear(date) {
+      const MONTHS = [
+        //@TODO translate
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      return MONTHS[date.getMonth()] + ". " + date.getFullYear();
+    },
+    monthYearDiff(endDate, startDate) {
+      let months = this.getNbMonthsBetweenTwoDates(endDate, startDate);
+      let years = Math.floor(months / 12);
+      months -= years * 12;
+
+      return this.createMonthYearDiffString(years, months);
+    },
+    createMonthYearDiffString(years, months) {
+      let returnString = "";
+      if (years >= 1) {
+        returnString = years + " years";
+        if (months > 0) {
+          returnString += ", " + months + " month";
+        }
+      } else {
+        returnString = months + " month";
+      }
+
+      return returnString + (months > 1 ? "s" : "");
+    },
+    getNbMonthsBetweenTwoDates(endDate, startDate) {
+      return (
+        endDate.getMonth() -
+        startDate.getMonth() +
+        12 * (startDate.getFullYear() - endDate.getFullYear())
       );
     },
   },
   mounted() {
     InViewportObserver.observe(
-      [
-        this.$refs["experience__resume"],
-        this.$refs["other-experience"].childNodes,
-      ],
+      [this.$refs["experience__resume"]],
       InViewportObserver.addAnimationModifierOnEntry,
       this
     );

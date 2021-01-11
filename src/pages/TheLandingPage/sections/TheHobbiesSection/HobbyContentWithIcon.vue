@@ -1,7 +1,7 @@
 <template>
   <base-content-with-icon>
     <template #icon>
-      <slot name="icon" />
+      <font-awesome-icon v-if="icon" :icon="icon" fixed-width />
     </template>
     <template #title>
       <slot name="title" />
@@ -17,7 +17,35 @@ import BaseContentWithIcon from "Bases/BaseContentWithIcon";
 
 export default {
   name: "HobbyContentWithIcon",
+  props: {
+    fontAwesomeCode: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      icon: null,
+    };
+  },
   components: { BaseContentWithIcon },
+  computed: {
+    fontAwesomeLibraryCode() {
+      return "fa-"
+        .concat(this.fontAwesomeCode)
+        .split("-")
+        .reduce(
+          (code, el) => code + el.substr(0, 1).toUpperCase() + el.substring(1)
+        );
+    },
+  },
+  mounted() {
+    //@TODO refactor
+    if (this.fontAwesomeCode) {
+      import("@fortawesome/free-solid-svg-icons").then((obj) => {
+        this.icon = obj[this.fontAwesomeLibraryCode];
+      });
+    }
+  },
 };
 </script>
 
