@@ -170,7 +170,7 @@ export const EN = {
       '### My Other Experiences\n\n#### From 2012 to 2017\n\nBilingual (French/English) Tour Guide — D-Day and WWII\n<span class="primary-font-color">Mémorial de Caen — Caen, Normandy, France</span>\nMay 2014 - Dec. 2017\n\nExchange Teacher — English as a Second Language (TESL)\n<span class="primary-font-color">Lycée Camille Claudel — Caen, Normandy, France</span>\nOct. 2013 - May 2014\n\nTeaching Assistant\n<span class="primary-font-color">American Montessori Academy — Redford, Michigan, USA</span>\nOct. 2012 - July. 2013\n\n#### From 2008 to 2012\n\nI believe in working hard, and from the age of 18, I\'ve worked various jobs while in school. Between the moment that I started university classes and the moment I received my first degree, I\'ve worked as a <b class="bold-primary">tutor/mentor for students at Indiana State University</b>, I\'ve <b class="bold-primary">driven a forklift for Dever Budweiser Distribution Company</b>, and <b class="bold-primary">I\'ve worked in a kitchen at the Detroit City Zoo</b>. ',
     resume_button_text: "My Resume",
     resume: {
-      url: "/julian_easterly_resume.pdf", //@TODO update
+      url: "julian_easterly_resume.pdf", //@TODO update
     },
   },
   education: {
