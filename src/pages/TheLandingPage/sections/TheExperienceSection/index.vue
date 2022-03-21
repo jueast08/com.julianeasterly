@@ -77,7 +77,7 @@ export default {
   methods: {
     openResume() {
       window.open(
-        process.env.VUE_APP_STRAPI_API_URL + this.content.resume.url,
+        process.env.BASE_URL + this.content.resume.url,
         "_blank"
       );
     },
